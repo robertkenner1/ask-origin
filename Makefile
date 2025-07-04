@@ -1,7 +1,7 @@
 # AI Frontend Development Makefile
 # Streamlined workflow for frontend prototyping
 
-.PHONY: help prereqs install new start deploy clean list build default
+.PHONY: help prereqs install new start stop deploy clean list build default
 
 # Default target - full setup (runs when just "make" is typed)
 default: prereqs install new
@@ -18,6 +18,7 @@ help:
 	@echo "  make new         - Create new project (interactive)"
 	@echo "  make build       - Build projects from source to public"
 	@echo "  make start       - Build and start development server"
+	@echo "  make stop        - Stop development server"
 	@echo "  make list        - List all projects"
 	@echo ""
 	@echo "Deployment:"
@@ -179,8 +180,17 @@ build:
 	@printf "%-40s" "Building projects"; \
 	npm run build:sitemap >/dev/null 2>&1 && printf "✅\n" || printf "❌\n"
 
+# Stop development server
+stop:
+	@printf "%-40s" "Stopping development server"; \
+	if lsof -t -i:8181 >/dev/null 2>&1; then \
+		kill -9 $$(lsof -t -i:8181) >/dev/null 2>&1 && printf "✅\n"; \
+	else \
+		printf "⚠️  (not running)\n"; \
+	fi
+
 # Start development server
-start:
+start: stop
 	@printf "%-40s" "Building projects"; \
 	npm run build:sitemap >/dev/null 2>&1 && printf "✅\n" || printf "❌\n"
 	@printf "%-40s" "Starting development server"; \
