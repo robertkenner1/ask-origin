@@ -1,0 +1,34 @@
+{
+  "generated": "2025-07-04T09:11:23.901Z",
+  "count": 2,
+  "projects": [
+    {
+      "name": "my-first-gr-design",
+      "title": "Grammarly Style Text Interaction",
+      "description": "No description available",
+      "path": "./my-first-gr-design/",
+      "files": [
+        "index.html",
+        "styles.css",
+        "script.js"
+      ],
+      "icon": "G",
+      "lastModified": "2025-07-03T16:45:32.002Z",
+      "type": "UI Component"
+    },
+    {
+      "name": "test-button-component",
+      "title": "Ltest button component",
+      "description": "No description available",
+      "path": "./test-button-component/",
+      "files": [
+        "index.html",
+        "styles.css",
+        "script.js"
+      ],
+      "icon": "L",
+      "lastModified": "2025-07-04T09:11:23.900Z",
+      "type": "JavaScript App"
+    }
+  ]
+}

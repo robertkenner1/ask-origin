@@ -1,0 +1,20 @@
+# Build and deploy GitLab Pages
+pages:
+  stage: build
+  image: $ARTIFACTORY_DOCKER_REPO/node:20-alpine
+  script:
+    - echo "Building GitLab Pages..."
+    - echo "Installing dependencies..."
+    - npm install
+    - echo "Building projects from source to public..."
+    - npm run build:sitemap
+    - echo "Verifying public directory..."
+    - ls -la public/
+  artifacts:
+    paths:
+      - public
+    expire_in: 1 year
+  environment:
+    name: production
+    url: $CI_PAGES_URL
+

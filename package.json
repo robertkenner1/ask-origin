@@ -1,0 +1,14 @@
+{
+  "name": "ai-frontend",
+  "version": "1.0.0",
+  "description": "AI Frontend Projects Directory",
+  "main": "index.js",
+  "scripts": {
+    "build:sitemap": "node build-sitemap.js",
+    "dev": "python -m http.server 8000 --directory public",
+    "serve": "npm run build:sitemap && npm run dev"
+  },
+  "keywords": ["frontend", "projects", "directory"],
+  "author": "",
+  "license": "ISC"
+}
