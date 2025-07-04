@@ -45,6 +45,7 @@ ai-frontend/
 - If user ased to build prototype in Grammarly style, check logo and style in Grammarly Design System.
 - Always double check if something looks wrong in size or colors.
 - Better iterate more times with Playwright but provide better result.
+- if user ask to publish - do make publish and provide links for creating MR in gitlab and link for preview https://ai-frontend-prototypes-c8939b.gpages.io/.
 
 
 ## 🎯 ACTIVE PROJECT DETECTION

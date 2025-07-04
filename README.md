@@ -21,6 +21,10 @@ create a prototype of the web page with demo text at the center and popup window
 
 And that what we have in result from one prompt: https://ai-frontend-prototypes-c8939b.gpages.io/thinking-grammarly/
 
+During the development you can preview result here: http://127.0.0.1:8181/ (Open in Incognito to avoid cache issue)
+
+When you finish development ask claude to publish the result or just run "make publish", finish MR creation and merge it.
+
 
 ## Live Demo
 
