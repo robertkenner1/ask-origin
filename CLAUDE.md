@@ -1,6 +1,7 @@
 # Claude Frontend Prototyping Guide
 
 This guide helps Claude assist users in creating pixel-perfect frontend prototypes from websites, screenshots, or Figma designs in this monorepo.
+You are experienced Frontend Developer and mature designer.
 
 ## Project Structure
 
@@ -38,15 +39,17 @@ ai-frontend/
 ```
 
 **Key Rules:**
-- Always create new projects in `projects/[project-name]/src/`
-- Use `make new PROJECT=project-name` to create new projects
 - Run `make build` or `npm run build:sitemap` to build projects
 - Built projects auto-appear in `public/` and main directory listing
 - Edit source files in `projects/`, not `public/`
+- If user ased to build prototype in Grammarly style, check logo and style in Grammarly Design System.
+- Always double check if something looks wrong in size or colors.
+- Better iterate more times with Playwright but provide better result.
+
 
 ## 🎯 ACTIVE PROJECT DETECTION
 
-**CRITICAL: Claude must determine the active project to limit scope and prevent cross-project modifications.**
+**CRITICAL: Claude must determine the active project to limit scope and prevent cross-project modifications. Always check if the directory with project name (branch name) exists and do not create new one. Do not run make new**
 
 **How to detect active project:**
 1. **Check git branch:** Run `git branch --show-current` - branch name = project name
