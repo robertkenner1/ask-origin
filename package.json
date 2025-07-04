@@ -5,10 +5,13 @@
   "main": "index.js",
   "scripts": {
     "build:sitemap": "node build-sitemap.js",
-    "dev": "python -m http.server 8000 --directory public",
+    "dev": "http-server public -p 8181",
     "serve": "npm run build:sitemap && npm run dev"
   },
   "keywords": ["frontend", "projects", "directory"],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
 }

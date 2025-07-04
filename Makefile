@@ -1,9 +1,12 @@
 # AI Frontend Development Makefile
 # Streamlined workflow for frontend prototyping
 
-.PHONY: help prereqs install new start deploy clean list build
+.PHONY: help prereqs install new start deploy clean list build default
 
-# Default target
+# Default target - full setup (runs when just "make" is typed)
+default: prereqs install new
+
+# Help target
 help:
 	@echo "🚀 AI Frontend Development Commands"
 	@echo ""
@@ -28,61 +31,88 @@ help:
 
 # Check prerequisites
 prereqs:
-	@echo "🔍 Checking prerequisites..."
-	@echo ""
-	@echo "1. Checking Claude MCP servers..."
-	@if command -v claude >/dev/null 2>&1; then \
-		echo "✅ Claude CLI found"; \
-		claude mcp list; \
+	@printf "%-40s" "Checking Homebrew"; \
+	if command -v brew >/dev/null 2>&1; then \
+		printf "✅\n"; \
 	else \
-		echo "❌ Claude CLI not found. Please install Claude Desktop first."; \
-		exit 1; \
+		printf "❌\n"; \
+		printf "%-40s" "Installing Homebrew"; \
+		/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" >/dev/null 2>&1 && printf "✅\n" || printf "❌\n"; \
 	fi
-	@echo ""
-	@echo "2. Checking Node.js..."
-	@if command -v node >/dev/null 2>&1; then \
-		echo "✅ Node.js found: $$(node --version)"; \
+	@printf "%-40s" "Checking Node.js"; \
+	if command -v node >/dev/null 2>&1; then \
+		printf "✅\n"; \
 	else \
-		echo "❌ Node.js not found. Please install Node.js 16+"; \
-		exit 1; \
+		printf "❌\n"; \
+		printf "%-40s" "Installing Node.js"; \
+		brew install node >/dev/null 2>&1 && printf "✅\n" || printf "❌\n"; \
 	fi
-	@echo ""
-	@echo "3. Checking Git..."
-	@if command -v git >/dev/null 2>&1; then \
-		echo "✅ Git found: $$(git --version)"; \
+	@printf "%-40s" "Checking Git"; \
+	if command -v git >/dev/null 2>&1; then \
+		printf "✅\n"; \
 	else \
-		echo "❌ Git not found. Please install Git"; \
-		exit 1; \
+		printf "❌\n"; \
+		printf "%-40s" "Installing Git"; \
+		brew install git >/dev/null 2>&1 && printf "✅\n" || printf "❌\n"; \
 	fi
-	@echo ""
-	@echo "✅ Prerequisites check complete!"
+	@printf "%-40s" "Checking Claude Code CLI"; \
+	if command -v claude >/dev/null 2>&1; then \
+		printf "✅\n"; \
+	else \
+		printf "❌\n"; \
+		printf "%-40s" "Installing Claude Code CLI"; \
+		npm install -g @anthropic-ai/claude-code >/dev/null 2>&1 && printf "✅\n" || printf "❌\n"; \
+	fi
+	@printf "%-40s" "Installing project dependencies"; \
+	npm install >/dev/null 2>&1 && printf "✅\n" || printf "❌\n"
 
 # Install required MCP servers
 install:
-	@echo "🔧 Installing required MCP servers..."
-	@echo ""
-	@echo "1. Installing Playwright MCP server..."
-	@if command -v claude >/dev/null 2>&1; then \
-		claude mcp add playwright npx "@playwright/mcp@latest" || echo "⚠️  Playwright MCP may already be installed"; \
+	@printf "%-40s" "Checking Claude CLI"; \
+	if command -v claude >/dev/null 2>&1; then \
+		printf "✅\n"; \
 	else \
-		echo "❌ Claude CLI not found. Please install Claude Desktop first."; \
+		printf "❌\n"; \
+		echo "Claude CLI not found. Please install Claude Code first."; \
 		exit 1; \
 	fi
-	@echo ""
-	@echo "2. Figma MCP server setup:"
-	@echo "   📋 Manual installation required:"
-	@echo "   🔗 Follow guide: https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Dev-Mode-MCP-Server"
-	@echo "   💡 This requires Figma account and manual configuration"
-	@echo ""
-	@echo "3. Installing project dependencies..."
-	@npm install
-	@echo ""
-	@echo "✅ MCP server installation complete!"
-	@echo "⚠️  Remember to restart Claude Desktop after MCP changes"
+	@printf "%-40s" "Installing Playwright MCP"; \
+	if claude mcp list 2>/dev/null | grep -q "playwright"; then \
+		printf "✅\n"; \
+	else \
+		if claude mcp add playwright npx "@playwright/mcp@latest" >/dev/null 2>&1; then \
+			printf "✅\n"; \
+		else \
+			printf "⚠️\n"; \
+		fi; \
+	fi
+	@printf "%-40s" "Installing Sourcegraph MCP"; \
+	if claude mcp list 2>/dev/null | grep -q "sourcegraph"; then \
+		printf "✅\n"; \
+	else \
+		if claude mcp add --transport http sourcegraph https://apigw.prod-platform-plane.grammarlyaws.com/sourcegraph-mcp-server/mcp/ >/dev/null 2>&1; then \
+			printf "✅\n"; \
+		else \
+			printf "⚠️\n"; \
+		fi; \
+	fi
+	@printf "%-40s" "Checking Figma MCP"; \
+	if claude mcp list 2>/dev/null | grep -q "figma"; then \
+		printf "✅\n"; \
+	else \
+		printf "⚠️\n"; \
+		echo ""; \
+		echo "⚠️  FIGMA MCP NOT INSTALLED"; \
+		echo "   Manual installation required:"; \
+		echo "   🔗 Follow: https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Dev-Mode-MCP-Server"; \
+		echo "   💡 Requires Figma account and manual configuration"; \
+		echo ""; \
+	fi
+	@printf "%-40s" "Installing project dependencies"; \
+	npm install >/dev/null 2>&1 && printf "✅\n" || printf "❌\n"
 
 # Create new project
 new:
-	@echo "🎨 Creating new project..."
 	@if [ -z "$(PROJECT)" ]; then \
 		echo "Please provide a project name:"; \
 		read -p "Project name (kebab-case): " PROJECT_NAME; \
@@ -101,12 +131,21 @@ new:
 		echo "❌ Templates directory not found"; \
 		exit 1; \
 	fi; \
-	echo "📁 Creating project structure: projects/$$PROJECT_NAME"; \
-	mkdir -p "projects/$$PROJECT_NAME/src"; \
-	mkdir -p "projects/$$PROJECT_NAME/prompts"; \
-	echo "📄 Creating files from templates..."; \
-	PROJECT_TITLE=$$(echo $$PROJECT_NAME | sed 's/-/ /g' | sed 's/.*/\L&/' | sed 's/\b\w/\u&/g'); \
-	PROJECT_CLASS=$$(echo $$PROJECT_NAME | sed 's/-//g' | sed 's/.*/\L&/' | sed 's/\b\w/\u&/g'); \
+	printf "%-40s" "Stashing current changes"; \
+	git stash push -m "Auto-stash before creating $$PROJECT_NAME" >/dev/null 2>&1 && printf "✅\n" || printf "⚠️\n"; \
+	printf "%-40s" "Switching to main branch"; \
+	git checkout main >/dev/null 2>&1 && printf "✅\n" || printf "❌\n"; \
+	printf "%-40s" "Pulling latest changes"; \
+	git pull origin main >/dev/null 2>&1 && printf "✅\n" || printf "⚠️\n"; \
+	printf "%-40s" "Creating new branch from main"; \
+	git checkout -b "$$PROJECT_NAME" >/dev/null 2>&1 && printf "✅\n" || printf "❌\n"; \
+	printf "%-40s" "Restoring stashed changes"; \
+	git stash pop >/dev/null 2>&1 && printf "✅\n" || printf "⚠️\n"; \
+	printf "%-40s" "Creating project structure"; \
+	mkdir -p "projects/$$PROJECT_NAME/src" "projects/$$PROJECT_NAME/prompts" && printf "✅\n" || printf "❌\n"; \
+	printf "%-40s" "Creating files from templates"; \
+	PROJECT_TITLE=$$(echo $$PROJECT_NAME | sed 's/-/ /g' | awk '{for(i=1;i<=NF;i++) $$i=toupper(substr($$i,1,1)) tolower(substr($$i,2)); print}'); \
+	PROJECT_CLASS=$$(echo $$PROJECT_NAME | sed 's/-//g' | awk '{print toupper(substr($$0,1,1)) tolower(substr($$0,2))}'); \
 	PROJECT_VAR=$$(echo $$PROJECT_NAME | sed 's/-//g' | tr '[:upper:]' '[:lower:]'); \
 	PROJECT_TYPE="Frontend Prototype"; \
 	PROJECT_DESCRIPTION="Frontend prototype for $$PROJECT_NAME"; \
@@ -128,34 +167,26 @@ new:
 		    -e "s/{{PROJECT_DESCRIPTION}}/$$PROJECT_DESCRIPTION/g" \
 		    -e "s/{{PROJECT_NOTES}}/$$PROJECT_NOTES/g" \
 		    "$$template" > "$$target"; \
-		echo "   ✅ Created $$target"; \
-	done; \
-	echo "🔄 Building project..."; \
-	npm run build:sitemap; \
-	echo "✅ Project '$$PROJECT_NAME' created successfully!"; \
-	echo "🌐 View at: http://localhost:8000/$$PROJECT_NAME/"; \
-	echo "📂 Files created:"; \
-	echo "   - projects/$$PROJECT_NAME/src/index.html"; \
-	echo "   - projects/$$PROJECT_NAME/src/styles.css"; \
-	echo "   - projects/$$PROJECT_NAME/src/script.js"; \
-	echo "   - projects/$$PROJECT_NAME/CLAUDE.md"; \
-	echo "   - projects/$$PROJECT_NAME/prompts/initial-prompt.md"
+	done && printf "✅\n" || printf "❌\n"; \
+	printf "%-40s" "Building project"; \
+	npm run build:sitemap >/dev/null 2>&1 && printf "✅\n" || printf "❌\n"; \
+	npm run dev >/dev/null 2>&1 &
+	echo "✅ Project '$$PROJECT_NAME' created at: http://localhost:8181/$$PROJECT_NAME/"; \
+	claude
 
 # Build projects from source to public
 build:
-	@echo "🔧 Building projects..."
-	@npm run build:sitemap
-	@echo "✅ Build complete!"
+	@printf "%-40s" "Building projects"; \
+	npm run build:sitemap >/dev/null 2>&1 && printf "✅\n" || printf "❌\n"
 
 # Start development server
 start:
-	@echo "🚀 Starting development server..."
-	@echo "🔄 Building projects..."
-	@npm run build:sitemap
-	@echo "🌐 Server will be available at: http://localhost:8000"
-	@echo "📁 Main directory: http://localhost:8000/index.html"
-	@echo ""
-	@echo "Press Ctrl+C to stop the server"
+	@printf "%-40s" "Building projects"; \
+	npm run build:sitemap >/dev/null 2>&1 && printf "✅\n" || printf "❌\n"
+	@printf "%-40s" "Starting development server"; \
+	printf "🚀\n"
+	@echo "🌐 Server: http://localhost:8181"
+	@echo "Press Ctrl+C to stop"
 	@echo "────────────────────────────────────"
 	@npm run dev
 
@@ -168,7 +199,7 @@ list:
 			if [ -d "$$dir" ]; then \
 				project_name=$$(basename "$$dir"); \
 				echo "  🎨 $$project_name"; \
-				echo "     📁 http://localhost:8000/$$project_name/"; \
+				echo "     📁 http://localhost:8181/$$project_name/"; \
 				if [ -f "$$dir/CLAUDE.md" ]; then \
 					echo "     📋 Has project settings"; \
 				fi; \
@@ -178,23 +209,16 @@ list:
 		echo "  No projects found"; \
 	fi
 	@echo ""
-	@echo "🌐 Main directory: http://localhost:8000/index.html"
+	@echo "🌐 Main directory: http://localhost:8181/index.html"
 
 # Deploy changes
 deploy:
-	@echo "🚀 Deploying changes..."
-	@echo ""
-	@echo "1. Building projects..."
-	@npm run build:sitemap
-	@echo ""
-	@echo "2. Checking git status..."
-	@git status --porcelain
-	@echo ""
-	@echo "3. Adding all changes..."
-	@git add .
-	@echo ""
-	@echo "4. Creating commit..."
-	@if [ -z "$(MESSAGE)" ]; then \
+	@printf "%-40s" "Building projects"; \
+	npm run build:sitemap >/dev/null 2>&1 && printf "✅\n" || printf "❌\n"
+	@printf "%-40s" "Adding changes"; \
+	git add . >/dev/null 2>&1 && printf "✅\n" || printf "❌\n"
+	@printf "%-40s" "Creating commit"; \
+	if [ -z "$(MESSAGE)" ]; then \
 		echo "Please provide a commit message:"; \
 		read -p "Commit message: " COMMIT_MSG; \
 	else \
@@ -204,29 +228,21 @@ deploy:
 		echo "❌ Commit message cannot be empty"; \
 		exit 1; \
 	fi; \
-	git commit -m "$$COMMIT_MSG"; \
-	echo ""
-	@echo "5. Pushing to remote..."
-	@git push
-	@echo ""
-	@echo "✅ Deploy complete!"
-	@echo "🌐 Live at: https://ai-frontend-030595.gpages.io/index.html"
+	git commit -m "$$COMMIT_MSG" >/dev/null 2>&1 && printf "✅\n" || printf "❌\n"
+	@printf "%-40s" "Pushing to remote"; \
+	git push >/dev/null 2>&1 && printf "✅\n" || printf "❌\n"
+	@echo "🌐 Live: https://ai-frontend-prototypes-c8939b.gpages.io/"
 
 # Clean build artifacts
 clean:
-	@echo "🧹 Cleaning build artifacts..."
-	@if [ -f "public/projects.json" ]; then \
-		rm public/projects.json; \
-		echo "✅ Removed projects.json"; \
-	fi
-	@if [ -d "node_modules" ]; then \
-		rm -rf node_modules; \
-		echo "✅ Removed node_modules"; \
-	fi
-	@echo "🔄 Rebuilding..."
-	@npm install
-	@npm run build:sitemap
-	@echo "✅ Clean complete!"
+	@printf "%-40s" "Cleaning projects.json"; \
+	rm -f public/projects.json && printf "✅\n" || printf "⚠️\n"
+	@printf "%-40s" "Cleaning node_modules"; \
+	rm -rf node_modules && printf "✅\n" || printf "⚠️\n"
+	@printf "%-40s" "Reinstalling dependencies"; \
+	npm install >/dev/null 2>&1 && printf "✅\n" || printf "❌\n"
+	@printf "%-40s" "Rebuilding projects"; \
+	npm run build:sitemap >/dev/null 2>&1 && printf "✅\n" || printf "❌\n"
 
 # Development shortcuts
 .PHONY: dev serve open
