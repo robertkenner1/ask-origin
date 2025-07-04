@@ -107,6 +107,9 @@ install:
 		echo "   Manual installation required:"; \
 		echo "   🔗 Follow: https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Dev-Mode-MCP-Server"; \
 		echo "   💡 Requires Figma account and manual configuration"; \
+		echo "   📝 Note: If you don't see the option to enable MCP, you should upgrade"; \
+		echo "         your user to Dev (Home>Your User>Settings>Your Spaces>Upgrade to Dev)"; \
+		echo "         and restart Figma"; \
 		echo ""; \
 	fi
 	@printf "%-40s" "Installing project dependencies"; \
@@ -171,6 +174,12 @@ new:
 	done && printf "✅\n" || printf "❌\n"; \
 	printf "%-40s" "Building project"; \
 	npm run build:sitemap >/dev/null 2>&1 && printf "✅\n" || printf "❌\n"; \
+	printf "%-40s" "Stopping existing dev server"; \
+	if lsof -t -i:8181 >/dev/null 2>&1; then \
+		kill -9 $$(lsof -t -i:8181) >/dev/null 2>&1 && printf "✅\n"; \
+	else \
+		printf "⚠️  (not running)\n"; \
+	fi; \
 	npm run dev >/dev/null 2>&1 &
 	echo "✅ Project '$$PROJECT_NAME' created at: http://localhost:8181/$$PROJECT_NAME/"; \
 	claude
