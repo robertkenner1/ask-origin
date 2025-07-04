@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects Directory</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #4c4c4c;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #15c39a 0%, #12a085 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header-logo {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .projects-grid {
+            padding: 40px 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .project-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border-color: #15c39a;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #15c39a, #12a085);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .project-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #15c39a, #12a085);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .project-title {
+            font-size: 1.4em;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #4c4c4c;
+        }
+
+        .project-description {
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85em;
+            color: #a0aec0;
+        }
+
+        .project-files {
+            display: flex;
+            gap: 8px;
+        }
+
+        .file-badge {
+            background: #f8f9fa;
+            color: #4c4c4c;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.75em;
+            border: 1px solid #e9ecef;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 30px;
+            color: #718096;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #4a5568;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #718096;
+        }
+
+        .search-bar {
+            padding: 20px 30px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #15c39a;
+        }
+
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-logo">
+                <!-- Official Grammarly Logo from Design System -->
+                <svg width="149" height="32" viewBox="0 0 149 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M73.3452 11.131V12.2971C72.4254 11.4003 71.2148 10.8618 69.8462 10.8618C66.7738 10.8618 64.418 13.3964 64.418 16.5363C64.418 19.6762 66.7723 22.1663 69.8462 22.1663C71.2148 22.1663 72.4254 21.6278 73.3452 20.731V21.8978H75.543V11.1318H73.3452V11.131ZM72.8437 18.255C71.7941 19.9269 69.8099 20.4291 68.2336 19.4389C66.6574 18.4493 66.2353 16.4629 67.2849 14.7917C68.3345 13.1197 70.3299 12.5982 71.9069 13.5885C73.4831 14.578 73.8926 16.5838 72.8437 18.255Z" fill="white" />
+                    <path d="M120.422 11.131V12.2971C119.503 11.4003 118.292 10.8618 116.923 10.8618C113.851 10.8618 111.495 13.3964 111.495 16.5363C111.495 19.6762 113.849 22.1663 116.923 22.1663C118.292 22.1663 119.503 21.6278 120.422 20.731V21.8978H122.62V11.1318H120.422V11.131ZM119.922 18.255C118.872 19.9269 116.888 20.4291 115.312 19.4389C113.735 18.4493 113.313 16.4629 114.363 14.7917C115.412 13.1197 117.409 12.5982 118.985 13.5885C120.561 14.578 120.97 16.5838 119.922 18.255Z" fill="white"/>
+                    <path d="M84.2456 15.4775C84.2456 14.4687 84.0216 13.9747 83.6848 13.6157C83.348 13.2567 82.8325 13.0549 82.2717 13.0549C81.7109 13.0549 81.1954 13.2567 80.8586 13.6157C80.5226 13.9747 80.2979 14.468 80.2979 15.4775V21.8916H78.0103V11.1256H80.1629V11.8881C80.7681 11.2598 81.6427 10.8563 82.6522 10.8563C83.8858 10.8563 84.9851 11.4393 85.6801 12.3361C86.4204 11.4393 87.5642 10.8563 88.8876 10.8563C90.2109 10.8563 91.2427 11.4393 91.96 12.3814C92.4532 13.0542 92.767 13.9065 92.767 15.275V21.8916H90.4794V15.4775C90.4794 14.4687 90.2554 13.9747 89.9186 13.6157C89.5818 13.2567 89.0663 13.0549 88.5055 13.0549C87.9448 13.0549 87.4292 13.2567 87.0925 13.6157C86.7565 13.9747 86.5317 14.468 86.5317 15.4775V21.8916H84.2441V15.4775H84.2456Z" fill="white"/>
+                    <path d="M101.351 15.4775C101.351 14.4687 101.127 13.9747 100.79 13.6157C100.453 13.2567 99.9375 13.0549 99.3767 13.0549C98.8159 13.0549 98.3004 13.2567 97.9636 13.6157C97.6276 13.9747 97.4028 14.468 97.4028 15.4775V21.8916H95.1152V11.1256H97.2679V11.8881C97.8731 11.2598 98.7477 10.8563 99.7572 10.8563C100.991 10.8563 102.09 11.4393 102.785 12.3361C103.525 11.4393 104.669 10.8563 105.993 10.8563C107.316 10.8563 108.348 11.4393 109.065 12.3814C109.558 13.0542 109.872 13.9065 109.872 15.275V21.8916H107.584V15.4775C107.584 14.4687 107.36 13.9747 107.024 13.6157C106.687 13.2567 106.171 13.0549 105.611 13.0549C105.05 13.0549 104.534 13.2567 104.197 13.6157C103.861 13.9747 103.637 14.468 103.637 15.4775V21.8916H101.349V15.4775H101.351Z" fill="white"/>
+                    <path d="M133.483 4.44635H135.771V21.8958H133.483V4.44635Z" fill="white"/>
+                    <path d="M51.9697 11.131V12.2971C51.0499 11.4003 49.8393 10.8618 48.4708 10.8618C45.3983 10.8618 43.0425 13.3511 43.0425 16.4918C43.0425 19.6325 45.3976 22.1663 48.4708 22.1663C49.8163 22.1663 51.0276 21.6501 51.9244 20.7755V21.8971C51.9244 23.7374 50.7784 25.1253 49.0694 25.3515C47.7342 25.5281 46.267 25.146 45.3316 24.3776C45.2188 24.2841 45.115 24.1854 45.0193 24.0823L43.8184 26.0376C43.848 26.0629 43.877 26.0881 43.9059 26.1126C45.092 27.0873 46.755 27.6391 48.4129 27.6391C48.7311 27.6391 49.0486 27.6191 49.3631 27.5768C52.1937 27.203 54.1661 24.8664 54.1661 21.8971V11.131H51.9682H51.9697ZM48.6955 19.9677C46.8337 19.9677 45.4213 18.4649 45.4213 16.4918C45.4213 14.5187 46.8344 13.0596 48.6955 13.0596C50.5566 13.0596 51.9697 14.5395 51.9697 16.5141C51.9697 18.4886 50.5566 19.9677 48.6955 19.9677Z" fill="white"/>
+                    <path d="M146.08 11.0929L142.69 18.7828L139.564 11.0929H137.27L141.496 21.491L138.829 27.5402H141.153L142.611 24.2326L143.805 21.5244L148.403 11.0929H146.08Z" fill="white"/>
+                    <path d="M63.6304 11.3921C62.8367 11.042 61.9636 10.8966 61.1084 11.0716C60.3503 11.2274 59.6478 11.6087 59.1019 12.1553C58.9891 12.2681 58.8779 12.3794 58.7874 12.5144V11.1235H56.6348V21.8896H58.9224V16.5288C58.9224 15.273 59.2369 14.555 59.7517 14.0394C60.2902 13.5009 61.0298 13.1872 61.8828 13.1872C62.1476 13.1872 62.83 13.2613 63.5703 13.7405L64.6577 11.9699C64.3343 11.7474 63.9894 11.5501 63.6304 11.3921Z" fill="white"/>
+                    <path d="M129.562 11.0542C128.804 11.21 128.102 11.5912 127.556 12.1379C127.443 12.2507 127.331 12.3619 127.241 12.4962V11.1054H125.088V21.8714H127.376V16.5107C127.376 15.2549 127.69 14.5368 128.206 14.0213C128.744 13.4828 129.483 13.169 130.337 13.169C130.601 13.169 131.23 13.1749 132.018 13.4805V11.3509C131.242 11.0216 130.395 10.8821 129.562 11.0527V11.0542Z" fill="white"/>
+                    <path d="M0 16.0001C0 7.16195 7.16253 -0.000595093 16.0007 -0.000595093C24.8389 -0.000595093 31.9999 7.16195 31.9999 16.0001C31.9999 23.7324 26.5183 30.1821 19.2274 31.6753C18.186 31.8889 17.1067 31.9994 16.0052 31.9994H0V16.0001Z" fill="#15c39a"/>
+                    <path d="M19.8624 14.4842L18.1645 17.4253H24.1098C23.1781 22.5406 17.4895 26.0232 11.8045 23.0776C10.5821 22.4449 9.58664 21.4665 8.94353 20.244C5.67306 14.0176 10.1407 7.75336 16.0363 7.75336C18.4671 7.75336 20.6561 8.8178 22.1596 10.5053L23.6832 7.86611C21.5128 5.81141 18.5168 4.61493 15.2501 4.84488C9.68826 5.22837 5.17905 9.83848 4.9083 15.4055C4.59972 21.7973 9.70903 27.0928 16.0326 27.0928C22.3562 27.0928 27.1725 22.094 27.1725 15.9522C27.1725 15.4529 27.1347 14.9634 27.0716 14.4842H19.8624Z" fill="white" />
+                </svg>
+            </div>
+            <h1>📁 Projects Directory</h1>
+            <p>Explore and navigate through all available frontend prototypes</p>
+        </div>
+
+        <div class="search-bar">
+            <input type="text" class="search-input" placeholder="Search projects..." id="searchInput">
+        </div>
+
+        <div class="projects-grid" id="projectsGrid">
+            <div class="loading">
+                <p>Loading projects...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class ProjectsDirectory {
+            constructor() {
+                this.projects = [];
+                this.filteredProjects = [];
+                this.searchInput = document.getElementById('searchInput');
+                this.projectsGrid = document.getElementById('projectsGrid');
+                
+                this.init();
+            }
+
+            async init() {
+                await this.discoverProjects();
+                this.setupEventListeners();
+                this.renderProjects();
+            }
+
+            async discoverProjects() {
+                try {
+                    // Fetch projects from generated sitemap
+                    const response = await fetch('./projects.json');
+                    if (response.ok) {
+                        const data = await response.json();
+                        this.projects = data.projects || [];
+                        console.log(`Loaded ${this.projects.length} projects from sitemap`);
+                    } else {
+                        console.warn('Could not load projects.json, using fallback');
+                        this.projects = await this.getFallbackProjects();
+                    }
+                } catch (error) {
+                    console.warn('Error loading projects.json:', error);
+                    this.projects = await this.getFallbackProjects();
+                }
+
+                this.filteredProjects = [...this.projects];
+            }
+
+            async getFallbackProjects() {
+                // Fallback projects if sitemap fails to load
+                return [
+                    {
+                        name: 'my-first-gr-design',
+                        title: 'Grammarly Style Text Interaction',
+                        description: 'A pixel-perfect replica of Grammarly\'s text correction popup with hover interactions, sophisticated gradients, and professional polish.',
+                        path: './my-first-gr-design/',
+                        files: ['index.html', 'styles.css', 'script.js'],
+                        icon: 'G',
+                        lastModified: new Date('2024-07-03').toISOString(),
+                        type: 'UI Component'
+                    }
+                ];
+            }
+
+            async scanForProjects() {
+                // This would require server-side API in a real implementation
+                // For now, return empty array but structure is ready for extension
+                return [];
+            }
+
+            setupEventListeners() {
+                this.searchInput.addEventListener('input', (e) => {
+                    this.filterProjects(e.target.value);
+                });
+
+                // Handle keyboard navigation
+                this.searchInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' && this.filteredProjects.length > 0) {
+                        this.openProject(this.filteredProjects[0]);
+                    }
+                });
+            }
+
+            filterProjects(searchTerm) {
+                const term = searchTerm.toLowerCase().trim();
+                
+                if (!term) {
+                    this.filteredProjects = [...this.projects];
+                } else {
+                    this.filteredProjects = this.projects.filter(project => 
+                        project.name.toLowerCase().includes(term) ||
+                        project.title.toLowerCase().includes(term) ||
+                        project.description.toLowerCase().includes(term) ||
+                        project.type.toLowerCase().includes(term)
+                    );
+                }
+                
+                this.renderProjects();
+            }
+
+            renderProjects() {
+                if (this.filteredProjects.length === 0) {
+                    this.projectsGrid.innerHTML = `
+                        <div class="empty-state">
+                            <h3>No projects found</h3>
+                            <p>Try adjusting your search terms or check back later for new projects.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const projectCards = this.filteredProjects.map(project => 
+                    this.createProjectCard(project)
+                ).join('');
+
+                this.projectsGrid.innerHTML = projectCards;
+
+                // Add click listeners to project cards
+                document.querySelectorAll('.project-card').forEach((card, index) => {
+                    card.addEventListener('click', () => {
+                        this.openProject(this.filteredProjects[index]);
+                    });
+                });
+            }
+
+            createProjectCard(project) {
+                const formatDate = (date) => {
+                    const dateObj = typeof date === 'string' ? new Date(date) : date;
+                    return dateObj.toLocaleDateString('en-US', { 
+                        year: 'numeric', 
+                        month: 'short', 
+                        day: 'numeric' 
+                    });
+                };
+
+                const filesBadges = project.files.map(file => 
+                    `<span class="file-badge">${file}</span>`
+                ).join('');
+
+                return `
+                    <div class="project-card" data-project="${project.name}">
+                        <div class="project-icon">${project.icon}</div>
+                        <div class="project-title">${project.title}</div>
+                        <div class="project-description">${project.description}</div>
+                        <div class="project-meta">
+                            <div class="project-files">${filesBadges}</div>
+                            <div class="project-date">${formatDate(project.lastModified)}</div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            openProject(project) {
+                // Navigate to the project
+                window.location.href = project.path;
+            }
+
+            // Method to add new projects dynamically
+            addProject(projectData) {
+                this.projects.push(projectData);
+                this.filteredProjects = [...this.projects];
+                this.renderProjects();
+            }
+
+            // Method to refresh project list
+            async refresh() {
+                await this.discoverProjects();
+                this.renderProjects();
+            }
+        }
+
+        // Initialize the projects directory when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            window.projectsDirectory = new ProjectsDirectory();
+        });
+
+        // Expose global functions for easy extension
+        window.addProject = (projectData) => {
+            if (window.projectsDirectory) {
+                window.projectsDirectory.addProject(projectData);
+            }
+        };
+
+        window.refreshProjects = () => {
+            if (window.projectsDirectory) {
+                window.projectsDirectory.refresh();
+            }
+        };
+    </script>
+</body>
+</html>
