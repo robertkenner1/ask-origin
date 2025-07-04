@@ -1,7 +1,21 @@
 {
-  "generated": "2025-07-04T09:11:23.901Z",
+  "generated": "2025-07-04T12:44:20.976Z",
   "count": 2,
   "projects": [
+    {
+      "name": "golden-path-redesign",
+      "title": "Golden Path - Step 2",
+      "description": "No description available",
+      "path": "./golden-path-redesign/",
+      "files": [
+        "index.html",
+        "styles.css",
+        "script.js"
+      ],
+      "icon": "G",
+      "lastModified": "2025-07-04T10:31:43.150Z",
+      "type": "UI Component"
+    },
     {
       "name": "my-first-gr-design",
       "title": "Grammarly Style Text Interaction",
@@ -13,22 +27,8 @@
         "script.js"
       ],
       "icon": "G",
-      "lastModified": "2025-07-03T16:45:32.002Z",
+      "lastModified": "2025-07-04T10:31:43.151Z",
       "type": "UI Component"
-    },
-    {
-      "name": "test-button-component",
-      "title": "Ltest button component",
-      "description": "No description available",
-      "path": "./test-button-component/",
-      "files": [
-        "index.html",
-        "styles.css",
-        "script.js"
-      ],
-      "icon": "L",
-      "lastModified": "2025-07-04T09:11:23.900Z",
-      "type": "JavaScript App"
     }
   ]
 }

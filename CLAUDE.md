@@ -4,27 +4,60 @@ This guide helps Claude assist users in creating pixel-perfect frontend prototyp
 
 ## Project Structure
 
-This is a **monorepo** for frontend experiments with automatic project discovery:
+This is a **monorepo** for frontend experiments with automatic project discovery and build system:
 
 ```
 ai-frontend/
-├── public/                    # 🎯 All new projects go here
-│   ├── index.html            # Main directory (auto-generated)
-│   ├── projects.json         # Auto-generated sitemap
-│   ├── my-first-gr-design/   # Example project
+├── projects/                     # 🎯 Source files for all projects
+│   ├── golden-path-redesign/     # Example project
+│   │   ├── src/                  # Source files (HTML, CSS, JS)
+│   │   │   ├── index.html
+│   │   │   ├── styles.css
+│   │   │   └── script.js
+│   │   ├── prompts/              # Initial prompt and documentation
+│   │   │   └── initial-prompt.md
+│   │   └── CLAUDE.md             # Project-specific settings
+│   └── [your-new-project]/       # Create new projects here
+├── public/                       # 🔨 Built/deployed versions (auto-generated)
+│   ├── index.html               # Main directory (auto-generated)
+│   ├── projects.json            # Auto-generated sitemap
+│   ├── golden-path-redesign/    # Built from projects/golden-path-redesign/src/
 │   │   ├── index.html
 │   │   ├── styles.css
 │   │   └── script.js
-│   └── [your-new-project]/   # Create new projects here
-├── build-sitemap.js          # Sitemap generator
-└── package.json             # Build scripts
+│   └── [built-projects]/        # Auto-generated from source
+├── templates/                   # Project templates
+│   ├── CLAUDE.md               # Project template
+│   ├── index.html              # HTML template
+│   ├── styles.css              # CSS template
+│   ├── script.js               # JS template
+│   └── initial-prompt.md       # Prompt template
+├── build-sitemap.js            # Sitemap generator & build system
+├── Makefile                    # Build automation
+└── package.json                # Build scripts
 ```
 
 **Key Rules:**
-- Always create new projects in `public/[project-name]/`
-- Each project must have `index.html` at minimum
-- Run `npm run build:sitemap` after creating new projects
-- Projects auto-appear in the main directory listing
+- Always create new projects in `projects/[project-name]/src/`
+- Use `make new PROJECT=project-name` to create new projects
+- Run `make build` or `npm run build:sitemap` to build projects
+- Built projects auto-appear in `public/` and main directory listing
+- Edit source files in `projects/`, not `public/`
+
+## 🎯 ACTIVE PROJECT DETECTION
+
+**CRITICAL: Claude must determine the active project to limit scope and prevent cross-project modifications.**
+
+**How to detect active project:**
+1. **Check git branch:** Run `git branch --show-current` - branch name = project name
+2. **If no branch match:** Ask user which project they want to work on
+3. **Project scope:** Only modify files within `projects/[active-project]/` directory
+
+**Example:**
+- Git branch: `my-button-component` → Active project: `projects/my-button-component/`
+- Only edit files in `projects/my-button-component/src/`
+- Stay in root directory to access make commands
+- Read `projects/my-button-component/CLAUDE.md` for project-specific instructions
 
 ## Available Tools & Resources
 
@@ -110,9 +143,13 @@ When user provides a reference (website, screenshot, or Figma):
 
 ### Step 2: Project Setup
 ```bash
-# Create new project directory
-mkdir public/[descriptive-project-name]
-cd public/[descriptive-project-name]
+# Create new project using Makefile (recommended)
+make new PROJECT=descriptive-project-name
+
+# Or create manually:
+mkdir -p projects/[descriptive-project-name]/src
+mkdir -p projects/[descriptive-project-name]/prompts
+cd projects/[descriptive-project-name]/src
 
 # Create basic structure
 touch index.html styles.css script.js
@@ -142,13 +179,17 @@ Create pixel-perfect replicas with these priorities:
 - ✅ Accessibility features
 - ✅ Clean, maintainable code
 
-### Step 4: Validation
+### Step 4: Validation & Build
 ```bash
-# Update sitemap
-npm run build:sitemap
+# Build projects from source to public
+make build
 
-# Test locally
-npm run serve
+# Start development server
+make start
+
+# Or use npm commands directly
+npm run build:sitemap
+npm run dev
 ```
 
 Use Playwright to:
@@ -209,14 +250,14 @@ body { ... }
 ### 1. Project Naming
 ```bash
 # Good examples
-public/grammarly-tooltip-replica/
-public/github-navigation-clone/
-public/stripe-pricing-page/
+projects/grammarly-tooltip-replica/
+projects/github-navigation-clone/
+projects/stripe-pricing-page/
 
 # Avoid
-public/project1/
-public/test/
-public/new-thing/
+projects/project1/
+projects/test/
+projects/new-thing/
 ```
 
 ### 2. Figma Integration
@@ -244,7 +285,8 @@ When user provides a website URL:
 
 ### 4. Design System Usage
 For Grammarly-style projects:
-1. Reference: https://uifoundation.gpages.io/grammarly-design-system/
+1. Reference: https://gitlab.grammarly.io/uifoundation/grammarly-design-system/-/tree/main/packages/design-system/src/components
+Icons: https://gitlab.grammarly.io/uifoundation/grammarly-design-system/-/tree/main/packages/icons/assets  and https://gitlab.grammarly.io/uifoundation/grammarly-design-system/-/tree/main/packages/icons/generated/all
 2. Extract exact colors, fonts, spacing
 3. Use authentic interaction patterns
 4. Maintain brand consistency
@@ -259,9 +301,9 @@ Process:
 1. Navigate with Playwright
 2. Take screenshot
 3. Analyze layout and components
-4. Create project folder
-5. Implement pixel-perfect replica
-6. Compare with original
+4. Create project folder: make new PROJECT=website-clone
+5. Implement pixel-perfect replica in projects/website-clone/src/
+6. Build and compare with original: make build
 ```
 
 ### Scenario 2: Figma Component
@@ -272,8 +314,9 @@ Process:
 1. Extract nodeId from URL
 2. Use Figma MCP server to get code
 3. Get component image for reference
-4. Create project folder
-5. Implement with exact specifications
+4. Create project folder: make new PROJECT=figma-component
+5. Implement with exact specifications in projects/figma-component/src/
+6. Build and test: make build
 ```
 
 ### Scenario 3: Screenshot Recreation
@@ -284,8 +327,9 @@ Process:
 1. Analyze screenshot visually
 2. Identify components and patterns
 3. Estimate dimensions and spacing
-4. Create project folder
-5. Build responsive replica
+4. Create project folder: make new PROJECT=screenshot-recreation
+5. Build responsive replica in projects/screenshot-recreation/src/
+6. Build and validate: make build
 ```
 
 ## Validation Checklist
@@ -300,12 +344,39 @@ Before completing any prototype:
 - [ ] Accessibility features are included
 - [ ] Performance is optimized
 
+## Development Workflow
+
+### Quick Start
+```bash
+# 1. Create new project
+make new PROJECT=my-awesome-component
+
+# 2. Edit source files
+cd projects/my-awesome-component/src/
+# Edit index.html, styles.css, script.js
+
+# 3. Build and test
+make build
+make start
+
+# 4. Deploy (optional)
+make deploy MESSAGE="Add awesome component"
+```
+
+### Available Make Commands
+- `make new PROJECT=name` - Create new project from templates
+- `make build` - Build all projects from source to public
+- `make start` - Build and start development server
+- `make list` - List all projects
+- `make deploy` - Git add, commit, and push
+- `make clean` - Clean build artifacts
+
 ## Remember
 
 - **Pixel-perfect accuracy is the goal** - "close enough" is not acceptable
 - **Use available tools** - Figma MCP, Playwright, design system
-- **Follow monorepo structure** - always create in `public/` folder
-- **Update sitemap** - run `npm run build:sitemap` after creation
+- **Follow monorepo structure** - always create in `projects/` folder
+- **Build before testing** - run `make build` to copy source to public
 - **Test thoroughly** - use Playwright for validation
 
 The final result should be indistinguishable from the original in terms of visual appearance and user interaction.
