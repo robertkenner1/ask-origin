@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grammarly Ping Pong</title>
+    <meta name="description" content="Interactive ping pong game with Grammarly design system styling">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <header class="game-header">
+            <h1 class="game-title">Grammarly Ping Pong</h1>
+            <div class="score-display">
+                <div class="score-item">
+                    <span class="score-label">Player</span>
+                    <span class="score-value" id="playerScore">0</span>
+                </div>
+                <div class="score-divider">:</div>
+                <div class="score-item">
+                    <span class="score-label">Computer</span>
+                    <span class="score-value" id="computerScore">0</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="game-area">
+            <canvas id="gameCanvas" width="800" height="400"></canvas>
+            <div class="game-overlay" id="gameOverlay">
+                <div class="game-message" id="gameMessage">
+                    <h2>Press Space to Start</h2>
+                    <p>Use W/S or ↑/↓ to move your paddle</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-controls">
+            <button class="control-btn primary" id="startBtn">Start Game</button>
+            <button class="control-btn secondary" id="pauseBtn">Pause</button>
+            <button class="control-btn secondary" id="resetBtn">Reset</button>
+        </div>
+
+        <div class="game-info">
+            <div class="info-section">
+                <h3>Controls</h3>
+                <div class="controls-grid">
+                    <div class="control-item">
+                        <kbd>W</kbd><kbd>S</kbd>
+                        <span>Move paddle up/down</span>
+                    </div>
+                    <div class="control-item">
+                        <kbd>↑</kbd><kbd>↓</kbd>
+                        <span>Alternative controls</span>
+                    </div>
+                    <div class="control-item">
+                        <kbd>Space</kbd>
+                        <span>Start/Pause game</span>
+                    </div>
+                </div>
+            </div>
+            <div class="info-section">
+                <h3>Game Settings</h3>
+                <div class="settings-grid">
+                    <label class="setting-item">
+                        <span>Difficulty</span>
+                        <select id="difficulty">
+                            <option value="easy">Easy</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                    </label>
+                    <label class="setting-item">
+                        <span>Ball Speed</span>
+                        <input type="range" id="ballSpeed" min="3" max="10" value="6">
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
