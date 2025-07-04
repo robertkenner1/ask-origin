@@ -10,11 +10,17 @@ cd ./ai-frontend-prototypes
 make
 ```
 
-That's it! This will:
-- Check prerequisites
-- Install MCP servers
-- Create your first project
-- Start the development server
+That's it! Now you can ask Claude to help you with your prototype.
+For example:
+```
+create a prototype of the web page with demo text at the center and popup window that appear when user hovering cursor over the text. Popup window should be 100% the same like in figma:
+  https://www.figma.com/design/JqBLpfjQnFwef7BiXzMA2u/Clean-UX-UI?node-id=2028-891&t=3xIpuQ8XOUW2Pg1L-4, with excatly the same grammarly logo svg and fonts that you can find in desygn systems.
+  iterate how many times you need and use Playwright mcp to compare result and original.
+  After that modify the popup window, so it will look like the thinking cloud.
+```
+
+And that what we have in result from one prompt: https://ai-frontend-prototypes-c8939b.gpages.io/thinking-grammarly/
+
 
 ## Live Demo
 
