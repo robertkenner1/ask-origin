@@ -1,0 +1,8 @@
+include:
+  - project: 'platform/scaffolder-templates/gitlab-ci-templates'
+    ref: test/sonarqube/0.0.1
+    file: '/Test/SonarQube.default.gitlab-ci.yml'
+
+
+sonarqube-check:
+  extends: .sonarqube-check

@@ -1,0 +1,3 @@
+# Please note that we encourage adding more entries to the CODEOWNERS file after the initial code generation
+cortex.yaml @platform artur.kiryiak@grammarly.com
+* @platform-automation @security-automation @eng-shared artur.kiryiak@grammarly.com

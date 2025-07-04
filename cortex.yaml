@@ -1,0 +1,30 @@
+openapi: 3.0.1
+info:
+  title: ai-frontend-prototypes
+  description: Monorepo for rapid frontend prototyping with AI integration and seamless deployment
+  x-cortex-git:
+    gitlab:
+      repository: "eng-shared/ai-frontend-prototypes"
+  x-cortex-tag: ai-frontend-prototypes
+  x-cortex-owners:
+  - email: artur.kiryiak@grammarly.com
+    type: EMAIL
+    description: Technical Owner
+  x-cortex-service-groups:
+  - template
+  x-cortex-static-analysis:
+    sonarqube:
+      project: "eng-shared_ai-frontend-prototypes"
+  x-cortex-custom-metadata:
+    programming-language:
+      value: other
+      description: Primary programming language used in this service
+    entity-type:
+      value: template
+      description: Entity classification based on functionality
+    creation-date:
+      value: 2025-07-04
+      description: Date when service was created and registred
+    creation-user:
+      value: artur.kiryiak@grammarly.com
+      description: User that initially created the service
