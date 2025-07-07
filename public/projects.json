@@ -1,6 +1,6 @@
 {
-  "generated": "2025-07-04T13:42:22.635Z",
-  "count": 4,
+  "generated": "2025-07-07T14:36:15.982Z",
+  "count": 6,
   "projects": [
     {
       "name": "golden-path-redesign",
@@ -13,7 +13,7 @@
         "script.js"
       ],
       "icon": "G",
-      "lastModified": "2025-07-04T13:00:20.364Z",
+      "lastModified": "2025-07-04T15:07:32.496Z",
       "type": "UI Component"
     },
     {
@@ -27,8 +27,36 @@
         "script.js"
       ],
       "icon": "G",
-      "lastModified": "2025-07-04T13:35:39.963Z",
+      "lastModified": "2025-07-04T15:07:32.497Z",
       "type": "UI Component"
+    },
+    {
+      "name": "mobile-app-prototype",
+      "title": "Mobile App Prototype",
+      "description": "No description available",
+      "path": "./mobile-app-prototype/",
+      "files": [
+        "index.html",
+        "styles.css",
+        "script.js"
+      ],
+      "icon": "M",
+      "lastModified": "2025-07-04T16:52:46.602Z",
+      "type": "JavaScript App"
+    },
+    {
+      "name": "mobile-flashcard-app",
+      "title": "Mobile Flashcard App",
+      "description": "No description available",
+      "path": "./mobile-flashcard-app/",
+      "files": [
+        "index.html",
+        "styles.css",
+        "script.js"
+      ],
+      "icon": "M",
+      "lastModified": "2025-07-04T17:01:12.485Z",
+      "type": "JavaScript App"
     },
     {
       "name": "my-first-gr-design",
@@ -41,7 +69,7 @@
         "script.js"
       ],
       "icon": "G",
-      "lastModified": "2025-07-04T13:00:20.364Z",
+      "lastModified": "2025-07-04T15:07:32.498Z",
       "type": "UI Component"
     },
     {
@@ -55,7 +83,7 @@
         "script.js"
       ],
       "icon": "T",
-      "lastModified": "2025-07-04T13:23:15.655Z",
+      "lastModified": "2025-07-04T15:07:32.499Z",
       "type": "UI Component"
     }
   ]
