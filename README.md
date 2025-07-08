@@ -5,7 +5,7 @@ A monorepo for rapid UI prototyping with AI assistance.
 ## Quick Start
 
 ```bash
-git clone git@ssh.gitlab.grammarly.io:eng-shared/ai-frontend-prototypes.git
+git clone git@ssh.gitlab.grammarly.io:sandbox/ai-frontend-prototypes.git
 cd ./ai-frontend-prototypes
 make
 ```

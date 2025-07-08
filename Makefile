@@ -1,7 +1,7 @@
 # AI Frontend Development Makefile
 # Streamlined workflow for frontend prototyping
 
-.PHONY: help prereqs install new start stop deploy clean list build default
+.PHONY: help prereqs install new start stop deploy clean list build delete default
 
 # Default target - full setup (runs when just "make" is typed)
 default: prereqs install new
@@ -20,6 +20,7 @@ help:
 	@echo "  make start       - Build and start development server"
 	@echo "  make stop        - Stop development server"
 	@echo "  make list        - List all projects"
+	@echo "  make delete      - Delete project and branch"
 	@echo ""
 	@echo "Deployment:"
 	@echo "  make deploy      - Git add, commit, and push"
@@ -29,6 +30,7 @@ help:
 	@echo "  make new PROJECT=my-button-component"
 	@echo "  make start"
 	@echo "  make deploy MESSAGE='Add new component'"
+	@echo "  make delete PROJECT=my-button-component"
 
 # Check prerequisites
 prereqs:
@@ -230,6 +232,46 @@ list:
 	@echo ""
 	@echo "🌐 Main directory: http://localhost:8181/index.html"
 
+# Delete project and branch
+delete:
+	@if [ -z "$(PROJECT)" ]; then \
+		echo "Please provide a project name:"; \
+		read -p "Project name to delete: " PROJECT_NAME; \
+	else \
+		PROJECT_NAME="$(PROJECT)"; \
+	fi; \
+	if [ -z "$$PROJECT_NAME" ]; then \
+		echo "❌ Project name cannot be empty"; \
+		exit 1; \
+	fi; \
+	if [ ! -d "projects/$$PROJECT_NAME" ]; then \
+		echo "❌ Project '$$PROJECT_NAME' does not exist"; \
+		exit 1; \
+	fi; \
+	echo "⚠️  This will permanently delete:"; \
+	echo "   📁 projects/$$PROJECT_NAME/ (project files)"; \
+	echo "   📁 public/$$PROJECT_NAME/ (built files)"; \
+	echo "   🌿 $$PROJECT_NAME branch (if exists)"; \
+	echo ""; \
+	read -p "Are you sure? (y/N): " CONFIRM; \
+	if [ "$$CONFIRM" != "y" ] && [ "$$CONFIRM" != "Y" ]; then \
+		echo "❌ Deletion cancelled"; \
+		exit 1; \
+	fi; \
+	printf "%-40s" "Removing project files"; \
+	rm -rf "projects/$$PROJECT_NAME" && printf "✅\n" || printf "❌\n"; \
+	printf "%-40s" "Removing built files"; \
+	rm -rf "public/$$PROJECT_NAME" && printf "✅\n" || printf "⚠️\n"; \
+	printf "%-40s" "Switching to main branch"; \
+	git checkout main >/dev/null 2>&1 && printf "✅\n" || printf "⚠️\n"; \
+	printf "%-40s" "Deleting local branch"; \
+	git branch -D "$$PROJECT_NAME" >/dev/null 2>&1 && printf "✅\n" || printf "⚠️\n"; \
+	printf "%-40s" "Deleting remote branch"; \
+	git push origin --delete "$$PROJECT_NAME" >/dev/null 2>&1 && printf "✅\n" || printf "⚠️\n"; \
+	printf "%-40s" "Rebuilding sitemap"; \
+	npm run build:sitemap >/dev/null 2>&1 && printf "✅\n" || printf "❌\n"; \
+	echo "✅ Project '$$PROJECT_NAME' deleted successfully"
+
 # Deploy changes
 deploy:
 	@printf "%-40s" "Building projects"; \
@@ -249,7 +291,7 @@ deploy:
 	fi; \
 	git commit -m "$$COMMIT_MSG" >/dev/null 2>&1 && printf "✅\n" || printf "❌\n"
 	@printf "%-40s" "Pushing to remote"; \
-	git push >/dev/null 2>&1 && printf "✅\n" || printf "❌\n"
+	git push -u origin HEAD >/dev/null 2>&1 && printf "✅\n" || printf "❌\n"
 	@echo "🌐 Live: https://ai-frontend-prototypes-c8939b.gpages.io/"
 
 # Clean build artifacts

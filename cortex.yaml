@@ -4,7 +4,7 @@ info:
   description: Monorepo for rapid frontend prototyping with AI integration and seamless deployment
   x-cortex-git:
     gitlab:
-      repository: "eng-shared/ai-frontend-prototypes"
+      repository: "sandbox/ai-frontend-prototypes"
   x-cortex-tag: ai-frontend-prototypes
   x-cortex-owners:
   - email: artur.kiryiak@grammarly.com
@@ -14,7 +14,7 @@ info:
   - template
   x-cortex-static-analysis:
     sonarqube:
-      project: "eng-shared_ai-frontend-prototypes"
+      project: "sandbox_ai-frontend-prototypes"
   x-cortex-custom-metadata:
     programming-language:
       value: other
