@@ -1,7 +1,35 @@
 {
-  "generated": "2025-07-08T11:49:12.802Z",
-  "count": 5,
+  "generated": "2025-10-07T23:14:17.846Z",
+  "count": 7,
   "projects": [
+    {
+      "name": "customer-support-agent",
+      "title": "Customer Support AI Agent",
+      "description": "No description available",
+      "path": "./customer-support-agent/",
+      "files": [
+        "index.html",
+        "styles.css",
+        "script.js"
+      ],
+      "icon": "C",
+      "lastModified": "2025-10-07T21:55:59.347Z",
+      "type": "JavaScript App"
+    },
+    {
+      "name": "figma-farheen",
+      "title": "Figma Farheen",
+      "description": "No description available",
+      "path": "./figma-farheen/",
+      "files": [
+        "index.html",
+        "styles.css",
+        "script.js"
+      ],
+      "icon": "F",
+      "lastModified": "2025-10-07T21:52:15.824Z",
+      "type": "JavaScript App"
+    },
     {
       "name": "golden-path-redesign",
       "title": "Golden Path - Step 2",
@@ -13,7 +41,7 @@
         "script.js"
       ],
       "icon": "G",
-      "lastModified": "2025-07-08T11:07:22.574Z",
+      "lastModified": "2025-10-07T21:51:04.237Z",
       "type": "UI Component"
     },
     {
@@ -27,7 +55,7 @@
         "script.js"
       ],
       "icon": "G",
-      "lastModified": "2025-07-08T11:07:22.575Z",
+      "lastModified": "2025-10-07T21:51:04.238Z",
       "type": "UI Component"
     },
     {
@@ -41,7 +69,7 @@
         "script.js"
       ],
       "icon": "M",
-      "lastModified": "2025-07-08T11:07:22.576Z",
+      "lastModified": "2025-10-07T21:51:04.239Z",
       "type": "JavaScript App"
     },
     {
@@ -55,7 +83,7 @@
         "script.js"
       ],
       "icon": "G",
-      "lastModified": "2025-07-08T11:07:22.576Z",
+      "lastModified": "2025-10-07T21:51:04.240Z",
       "type": "UI Component"
     },
     {
@@ -69,7 +97,7 @@
         "script.js"
       ],
       "icon": "T",
-      "lastModified": "2025-07-08T11:07:22.576Z",
+      "lastModified": "2025-10-07T21:51:04.241Z",
       "type": "UI Component"
     }
   ]
