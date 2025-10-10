@@ -316,38 +316,32 @@ class ChatAgent:
         if not relevant_docs:
             return "I couldn't find relevant information to answer your question."
 
-        # Separate documents by priority: FAQ, Decision Log, Other
-        faq_chunks = []
-        decision_log_chunks = []
-        other_chunks = []
-
-        for doc, meta, score in relevant_docs:
-            source = meta.get('source', '')
-            # Skip UserQuestions.txt
-            if 'UserQuestions' in source:
-                continue
-            if 'FAQ' in source:
-                faq_chunks.append((doc, meta, score))
-            elif 'Decision Log' in source:
-                decision_log_chunks.append((doc, meta, score))
-            else:
-                other_chunks.append((doc, meta, score))
-
         # Get ALL FAQ chunks from the entire knowledge base (highest priority)
         all_faq_chunks = []
         for doc, meta in zip(self.documents, self.metadata):
             source = meta.get('source', '')
-            if 'FAQ' in source and 'UserQuestions' not in source:
+            if 'FAQ' in source and 'UserQuestions' not in source and 'BadAnswers' not in source:
                 all_faq_chunks.append(doc.strip())
 
         # Get ALL Decision Log chunks from the entire knowledge base (second priority)
         all_decision_log_chunks = []
         for doc, meta in zip(self.documents, self.metadata):
             source = meta.get('source', '')
-            if 'Decision Log' in source and 'UserQuestions' not in source:
+            if 'Decision Log' in source and 'UserQuestions' not in source and 'BadAnswers' not in source:
                 all_decision_log_chunks.append(doc.strip())
 
-        # Build context with FAQ FIRST, then Decision Log, then other relevant documents
+        # Get ALL other document chunks (excluding FAQ, Decision Log, UserQuestions, BadAnswers)
+        all_other_chunks = []
+        for doc, meta in zip(self.documents, self.metadata):
+            source = meta.get('source', '')
+            # Skip UserQuestions.txt, BadAnswers.txt, FAQ, and Decision Log
+            if ('UserQuestions' not in source and
+                'BadAnswers' not in source and
+                'FAQ' not in source and
+                'Decision Log' not in source):
+                all_other_chunks.append((doc.strip(), source))
+
+        # Build context with FAQ FIRST, then Decision Log, then ALL other documents
         context_parts = []
 
         # Add all FAQ content first (highest priority)
@@ -362,11 +356,11 @@ class ChatAgent:
             for idx, doc in enumerate(all_decision_log_chunks, 1):
                 context_parts.append(f"Decision Log Section {idx}:\n{doc}")
 
-        # Add other relevant documents (excluding UserQuestions)
-        if other_chunks:
-            context_parts.append("\n=== OTHER RELEVANT DOCUMENTS ===")
-            for idx, (doc, meta, score) in enumerate(other_chunks, 1):
-                context_parts.append(f"Document {idx}:\n{doc.strip()}")
+        # Add ALL other documents (excluding UserQuestions and BadAnswers)
+        if all_other_chunks:
+            context_parts.append("\n=== ALL OTHER DOCUMENTS ===")
+            for idx, (doc, source) in enumerate(all_other_chunks, 1):
+                context_parts.append(f"Document {idx}:\n{doc}")
 
         context = "\n\n".join(context_parts)
 

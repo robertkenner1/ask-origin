@@ -1,0 +1,21 @@
+================================================================================
+Timestamp: 2025-10-09T22:27:58.966Z
+Question: What is ATC
+
+Answer: ATC (Air Traffic Control) page is a landing page that customers see when they signup on Superhuman.com after Oct 29. This page has tiles for Grammarly, Coda, Go and Mail products. From this page you can also access Super Admin Experience.
+
+The ATC page (also called "product recommendation page") has settings and account management links available at the corner of the landing page screen that allow transition to user/organization management for existing users.
+
+When users log in with their Mailbox email address, if a Mail or Genesis user of any tier has ever seen ATC, they will NOT be redirected to mail.superhuman.com so that they can reach ATC again through www.sh.com.
+================================================================================
+
+================================================================================
+Timestamp: 2025-10-09T22:55:26.930Z
+Question: What is ATC
+
+Answer: ATC page (Air Traffic Control page) is a landing page that customers see when they signup on Superhuman.com after Oct 29. This page has tiles for Grammarly, Coda, Go and Mail products. From this page you can also access Super Admin Experience.
+
+For logged-in users, ATC is also referred to as the "product recommendation page" and includes settings and account management links in the corner that allow transition to user/organization management.
+
+The page serves as an "app launcher" page after login as the "MVP" experience for the Fall launch. After Oct 29, this page may be refined into a "My Superhuman" experience similar to iCloud.
+================================================================================

@@ -2,9 +2,15 @@ const express = require('express');
 const { spawn } = require('child_process');
 const path = require('path');
 const fs = require('fs');
+const https = require('https');
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+// Glean MCP configuration
+const GLEAN_MCP_URL = 'https://grammarly-be.glean.com/mcp/default';
+const GLEAN_API_TOKEN = process.env.GLEAN_API_TOKEN;
 
 // Middleware
 app.use(express.json());
@@ -52,6 +58,94 @@ app.get('/api/status', (req, res) => {
         documentsLoaded: agentReady
     });
 });
+
+// API endpoint to handle feedback
+app.post('/api/feedback', async (req, res) => {
+    const { question, answer, timestamp } = req.body;
+
+    if (!question || !answer) {
+        return res.status(400).json({ error: 'Question and answer are required' });
+    }
+
+    try {
+        const logEntry = `\n${'='.repeat(80)}\nTimestamp: ${timestamp}\nQuestion: ${question}\n\nAnswer: ${answer}\n${'='.repeat(80)}\n`;
+
+        const badAnswersPath = path.join(__dirname, 'knowledge', 'BadAnswers.txt');
+        fs.appendFileSync(badAnswersPath, logEntry);
+
+        console.log('Logged bad answer to BadAnswers.txt');
+        res.json({ success: true });
+    } catch (error) {
+        console.error('Error logging feedback:', error);
+        res.status(500).json({ error: 'Failed to log feedback' });
+    }
+});
+
+// Function to search Glean via MCP
+async function searchGlean(query) {
+    // Skip if no API token configured
+    if (!GLEAN_API_TOKEN) {
+        console.log('Glean API token not configured, skipping search');
+        return [];
+    }
+
+    return new Promise((resolve, reject) => {
+        const data = JSON.stringify({
+            jsonrpc: '2.0',
+            method: 'tools/call',
+            params: {
+                name: 'search',
+                arguments: {
+                    query: query,
+                    limit: 3
+                }
+            },
+            id: 1
+        });
+
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${GLEAN_API_TOKEN}`,
+                'Content-Length': data.length
+            }
+        };
+
+        const request = https.request(GLEAN_MCP_URL, options, (response) => {
+            let body = '';
+            response.on('data', (chunk) => body += chunk);
+            response.on('end', () => {
+                try {
+                    const result = JSON.parse(body);
+                    if (result.error) {
+                        console.log('Glean search error:', result.error);
+                        resolve([]);
+                    } else {
+                        resolve(result.result?.content || []);
+                    }
+                } catch (error) {
+                    console.log('Glean parse error:', error);
+                    resolve([]);
+                }
+            });
+        });
+
+        request.on('error', (error) => {
+            console.log('Glean request error:', error);
+            resolve([]);
+        });
+
+        request.write(data);
+        request.end();
+
+        // Timeout after 5 seconds
+        setTimeout(() => {
+            request.destroy();
+            resolve([]);
+        }, 5000);
+    });
+}
 
 // API endpoint to handle chat messages
 app.post('/api/chat', async (req, res) => {
@@ -111,7 +205,7 @@ print(answer)
             errorOutput += data.toString();
         });
 
-        pythonProcess.on('close', (code) => {
+        pythonProcess.on('close', async (code) => {
             // Clean up temp script
             try {
                 fs.unlinkSync(tempScriptPath);
@@ -150,8 +244,13 @@ print(answer)
 
             const answer = answerLines.join('\n').trim();
 
+            // Search Glean in parallel with Anthropic response
+            console.log('Searching Glean for additional results...');
+            const gleanResults = await searchGlean(message);
+
             res.json({
                 answer: answer || 'I could not generate an answer.',
+                gleanResults: gleanResults,
                 timestamp: new Date().toISOString()
             });
         });
