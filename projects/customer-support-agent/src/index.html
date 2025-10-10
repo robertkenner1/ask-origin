@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Support AI Agent</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="logo.png" alt="Superhuman" class="logo-icon" />
+                    <span class="logo-text">Customer Support AI</span>
+                </div>
+                <div class="status-badge" id="statusBadge">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Initializing...</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Welcome Message -->
+                    <div class="welcome-message">
+                        <svg class="welcome-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="4" y="12" width="56" height="40" rx="4" fill="#7c5cff" opacity="0.1"/>
+                            <circle cx="16" cy="44" r="2" fill="#7c5cff"/>
+                            <circle cx="24" cy="44" r="2" fill="#7c5cff"/>
+                            <circle cx="32" cy="44" r="2" fill="#7c5cff"/>
+                            <path d="M12 20h40M12 26h30M12 32h35" stroke="#7c5cff" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <h2>Welcome to AI Support</h2>
+                        <p>Ask me anything about the Oct 29 launch. I'm powered by Claude AI and have access to all relevant documents for the launch</p>
+                        <div class="quick-questions">
+                            <p class="quick-questions-title">Try asking:</p>
+                            <button class="quick-question-btn" data-question="What is a Genesis org?">What is a Genesis org?</button>
+                            <button class="quick-question-btn" data-question="Will Genesis support discounts?">Will Genesis support discounts?</button>
+                            <button class="quick-question-btn" data-question="Tell me about enterprise customers">Tell me about enterprise customers</button>
+                        </div>
+                    </div>
+
+                    <!-- Info Panel -->
+                    <div class="info-panel">
+                        <div class="info-grid">
+                            <div class="info-card">
+                                <div class="info-icon">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                        <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" fill="currentColor"/>
+                                    </svg>
+                                </div>
+                                <div class="info-content">
+                                    <div class="info-label">Powered by</div>
+                                    <div class="info-value">Claude AI</div>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-icon">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                        <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" fill="currentColor"/>
+                                    </svg>
+                                </div>
+                                <div class="info-content">
+                                    <div class="info-label">Knowledge Base</div>
+                                    <div class="info-value" id="kbStatusInfo">Loading...</div>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-icon">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                        <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 10.586V7z" fill="currentColor"/>
+                                    </svg>
+                                </div>
+                                <div class="info-content">
+                                    <div class="info-label">Privacy Note</div>
+                                    <div class="info-value">No PII data</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-tips">
+                            <div class="tip-item">💡 Ask specific questions for best results</div>
+                            <div class="tip-item">📋 Decision Log is prioritized</div>
+                            <div class="tip-item">⚠️ Don't include customer PII information</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input Area -->
+                <div class="chat-input-container">
+                    <div class="chat-input-wrapper">
+                        <textarea
+                            class="chat-input"
+                            id="messageInput"
+                            placeholder="Ask me anything about your knowledge base..."
+                            rows="1"
+                        ></textarea>
+                        <button class="send-button" id="sendButton" disabled>
+                            <svg class="send-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 21L23 12L2 3V10L17 12L2 14V21Z" fill="currentColor"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="input-hint">
+                        <svg class="hint-icon" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm.9 12H7.1V7.1h1.8V12zm0-6.3H7.1V3.9h1.8v1.8z"/>
+                        </svg>
+                        <span>Powered by Claude AI</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Feedback Modal -->
+    <div class="modal-overlay" id="feedbackModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Help us improve</h3>
+                <button class="modal-close" id="modalClose">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-description">Please tell us what was wrong with this response. Your feedback helps us improve our AI.</p>
+                <textarea
+                    class="feedback-textarea"
+                    id="feedbackText"
+                    placeholder="What was missing or incorrect?"
+                    rows="4"
+                ></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-button modal-button-secondary" id="modalCancel">Skip</button>
+                <button class="modal-button modal-button-primary" id="modalSubmit">Submit Feedback</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

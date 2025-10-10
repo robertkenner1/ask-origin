@@ -1,0 +1,17 @@
+# Core dependencies
+PyPDF2>=3.0.0  # For PDF file support
+gradio>=4.0.0  # For web-based chat interface
+anthropic>=0.18.0  # For Claude API integration
+python-dotenv>=1.0.0  # For loading environment variables from .env file
+
+# Optional: Enhanced text processing
+# scikit-learn>=1.0.0  # For TF-IDF vectorization
+# numpy>=1.21.0  # For numerical operations
+
+# Optional: Advanced embeddings and similarity
+# sentence-transformers>=2.0.0  # For semantic search
+# faiss-cpu>=1.7.0  # For efficient similarity search
+
+# Optional: Web interface
+# flask>=2.0.0  # For web-based chat interface
+# gradio>=3.0.0  # For quick UI prototyping

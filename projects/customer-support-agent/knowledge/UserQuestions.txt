@@ -1,0 +1,97 @@
+These are all the questions
+
+[2025-10-07 13:14:36] Will Genesis support discounts?
+[2025-10-07 13:14:36] Will Genesis support discounts?
+[2025-10-07 13:18:21] What is a Genesis org?
+[2025-10-07 13:18:21] What is a Genesis org?
+[2025-10-07 13:24:31] Will Genesis support discounts?
+[2025-10-07 13:25:01] Will Grammarly discounts continue to work?
+[2025-10-07 14:02:01] Will Genesis support discounts?
+[2025-10-07 15:12:49] What is a Genesis org?
+[2025-10-07 15:15:27] What is a Genesis org?
+[2025-10-07 15:16:04] What is a Genesis org?
+[2025-10-07 15:16:36] What is a Genesis org?
+[2025-10-07 16:05:15] What is a Genesis org?
+[2025-10-07 16:07:46] What is a Genesis org?
+[2025-10-07 16:08:17] What is a Genesis org?
+[2025-10-07 16:09:46] What is a Genesis org?
+[2025-10-07 16:10:38] What is a Genesis org?
+[2025-10-07 16:11:30] Will Genesis support discounts?
+[2025-10-07 16:13:44] What is a Genesis org?
+[2025-10-07 16:16:11] What is a Genesis org?
+[2025-10-07 16:17:31] Will Genesis support discounts?
+[2025-10-07 16:18:31] What is a Genesis org?
+[2025-10-07 16:21:00] Will Grammarly discounts work?
+[2025-10-07 16:26:50] What is a Genesis org?
+[2025-10-07 16:29:24] What is a Genesis org?
+[2025-10-07 16:30:06] What is a Genesis org?
+[2025-10-07 16:32:04] What is a Genesis org?
+[2025-10-07 16:32:56] Test question
+[2025-10-07 16:33:26] What is a Genesis org?
+[2025-10-07 16:33:54] Will Grammarly discounts work?
+[2025-10-07 16:35:20] For Oct 29, can I purchase Superhuman Business?
+[2025-10-07 16:40:11] What is included in Superhuman Pro
+[2025-10-07 16:40:46] What is included in Superhuman Business?
+[2025-10-07 16:41:21] Which decisions is the previous answer referring to?
+[2025-10-07 16:42:06] What is included in Superhuman Business? Show the relevant document/decisions you used to answer
+[2025-10-07 16:43:45] Use the SKU Upgrade Downgrade paths and tell me if a Coda Enterprise customer can purchase the bundle?
+[2025-10-07 16:46:27] Can a Grammarly Enterprise user purchase Genesis Enterprise?
+[2025-10-07 16:47:12] Can a Coda Enterprise customer purchase Grammarly Pro?
+[2025-10-07 17:14:07] Can a Grammarly Enterprise user purchase Genesis Enterprise?
+[2025-10-07 17:16:05] Can a Coda Enterprise customer purchase Grammarly Pro?
+[2025-10-07 17:17:18] Can a Coda Enterprise customer purchase Grammarly Pro?
+[2025-10-07 17:18:24] Can a Coda Enterprise customer purchase Mail Starter?
+[2025-10-07 17:23:30] In what scenarios are Genesis orgs created
+[2025-10-07 17:25:22] In what scenarios are Genesis orgs created
+[2025-10-07 17:26:06] In what scenarios are Genesis orgs created
+[2025-10-07 17:26:52] In what scenarios are Genesis orgs created
+[2025-10-07 17:27:20] In what scenarios are Genesis orgs created
+[2025-10-08 10:44:53] What is a Genesis org?
+[2025-10-08 10:59:40] What is a Genesis org?
+[2025-10-08 12:59:52] What happens if a Grammarly Free user logs into Superhuman.com
+[2025-10-08 13:00:36] What happens if a Grammarly Pro user logs into Superhuman.com
+[2025-10-08 13:01:45] Can users still signup on Grammarly.com
+[2025-10-08 17:28:33] Can a Coda customer purchase Grammarly Pro
+[2025-10-08 17:30:30] Can a Mail customer purchase Grammarly Pro
+[2025-10-08 17:31:03] Can a Coda customer purchase Grammarly Pro
+[2025-10-08 17:32:22] Can a Coda customer purchase Grammarly Pro?
+[2025-10-08 17:32:58] Can a Coda customer purchase Grammarly Pro?
+[2025-10-08 17:33:40] What happens when a Coda customer goes to Superhuman, Grammarly or Mail checkout funnels?
+[2025-10-08 17:35:52] Can a Coda customer purchase Grammarly Pro?
+[2025-10-08 17:42:57] Can a Coda customer purchase Grammarly Pro?
+[2025-10-08 17:43:55] Can a Coda customer purchase Grammarly Pro?
+[2025-10-08 17:47:49] Can a Coda customer purchase Grammarly Pro?
+[2025-10-08 17:48:48] Can a Coda customer purchase Grammarly Pro?
+[2025-10-08 17:52:31] Can a Coda customer purchase Grammarly Pro
+[2025-10-08 17:54:07] Can a Coda customer purchase Grammarly Pro
+[2025-10-08 17:55:56] Can a Coda customer purchase Grammarly Pro
+[2025-10-08 17:57:29] Can a Coda customer purchase Grammarly Pro
+[2025-10-08 18:10:02] What Superhuman SKUs will be available as of Oct 29?
+[2025-10-09 07:30:49] What Superhuman SKUs will be available as of Oct 29?
+[2025-10-09 08:35:43] What are the Superhuman Bundles launching on Oct 29?
+[2025-10-09 12:28:57] What SKUs are launching on Oct 29
+[2025-10-09 13:19:21] What are the SKUs launching on Oct 29?
+[2025-10-09 15:14:45] Tell me about enterprise customers
+[2025-10-09 15:27:39] What is ATC
+[2025-10-09 15:31:19] What is ATC
+[2025-10-09 15:55:12] What is ATC
+[2025-10-10 10:59:57] What SKUs are launching on Oct 29
+[2025-10-10 13:16:32] What is a plan level SKU
+[2025-10-10 13:24:28] What is the experience of an existing Superhuman Mail user who has SSO configured? Will that lead to a security bypass?
+[2025-10-10 13:32:59] What is the experience of an existing Superhuman Mail user who has SSO configured? Will that lead to a security bypass?
+[2025-10-10 13:50:13] What is the experience of an existing Superhuman Mail user who has SSO configured? Will that lead to a security bypass?
+[2025-10-10 13:51:33] What is the prioritization order of login providers when a user signs in to Superhuman.com
+[2025-10-10 13:52:19] What are the current triggers for correlation and the Bridge Service?
+[2025-10-10 13:54:24] How will we sell the Superhuman Enterprise bundle in Q4?
+[2025-10-10 14:05:32] What is the plan for the edge cases that can happen when a user is unable to accept an invite to Genesis. (One case where they would be unable to join is if the invitation is cancelled by the sender.)
+[2025-10-10 14:06:28] What happens to an Enterprise user (existing or SH Ent) when they log into SH.com?
+[2025-10-10 14:48:30] How can I tell which product the customer signed up from?
+[2025-10-10 15:02:45] What will the signin users on Superhuman.com see? Will it be the homepage or the ATC page?
+[2025-10-10 15:09:52] What features are we including for each Bundle SKU?
+[2025-10-10 15:14:38] What 1P/2P/3P agents will be available in the Agent store on Oct 29?
+[2025-10-10 15:23:29] What is a Genesis org?
+[2025-10-10 15:57:50] What is the decision log process?
+[2025-10-10 16:02:18] What is a Genesis org?
+[2025-10-10 16:03:24] What is a Genesis org?
+[2025-10-10 16:23:21] What is a Genesis org?
+[2025-10-10 16:37:56] What is a Genesis org?

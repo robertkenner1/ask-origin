@@ -1,0 +1,40 @@
+================================================================================
+Timestamp: 2025-10-09T22:27:58.966Z
+Question: What is ATC
+
+Answer: ATC (Air Traffic Control) page is a landing page that customers see when they signup on Superhuman.com after Oct 29. This page has tiles for Grammarly, Coda, Go and Mail products. From this page you can also access Super Admin Experience.
+
+The ATC page (also called "product recommendation page") has settings and account management links available at the corner of the landing page screen that allow transition to user/organization management for existing users.
+
+When users log in with their Mailbox email address, if a Mail or Genesis user of any tier has ever seen ATC, they will NOT be redirected to mail.superhuman.com so that they can reach ATC again through www.sh.com.
+================================================================================
+
+================================================================================
+Timestamp: 2025-10-09T22:55:26.930Z
+Question: What is ATC
+
+Answer: ATC page (Air Traffic Control page) is a landing page that customers see when they signup on Superhuman.com after Oct 29. This page has tiles for Grammarly, Coda, Go and Mail products. From this page you can also access Super Admin Experience.
+
+For logged-in users, ATC is also referred to as the "product recommendation page" and includes settings and account management links in the corner that allow transition to user/organization management.
+
+The page serves as an "app launcher" page after login as the "MVP" experience for the Fall launch. After Oct 29, this page may be refined into a "My Superhuman" experience similar to iCloud.
+================================================================================
+
+================================================================================
+Timestamp: 2025-10-10T23:38:22.040Z
+Question: What is a Genesis org?
+
+Answer: A Genesis org is a foundational object used to represent alacarte and bundle customers. As of Oct 29, Genesis orgs will only support Genesis Free, Genesis Pro and Genesis Business SKUs. A Genesis org is connected to:
+
+- A Coda workspace
+- May or may not be connected to a Grammarly Institution 
+- May or may not be connected to a Superhuman Mail team
+
+Key points:
+- A Genesis org is connected to a Grammarly Institution when the org is paid
+- The billing/SKU tier of the Genesis org matches the Coda workspace it's attached to (e.g., if a Genesis org is at Superhuman Pro, the Coda Workspace is also at Pro tier)
+
+You can read more about Genesis organizations [here](https://coda.io/d/Product-Integration-PI-Program-go-pi_d1hBQhbsxee/Object-Hierarchy-Catalyst_suJxFsZo#_luZDv7Yk).
+
+User Feedback: Just bad
+================================================================================
