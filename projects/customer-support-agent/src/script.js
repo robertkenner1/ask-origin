@@ -5,16 +5,23 @@ const sendButton = document.getElementById('sendButton');
 const statusBadge = document.getElementById('statusBadge');
 const kbStatus = document.getElementById('kbStatus');
 const kbStatusInfo = document.getElementById('kbStatusInfo');
+const feedbackModal = document.getElementById('feedbackModal');
+const feedbackText = document.getElementById('feedbackText');
+const modalClose = document.getElementById('modalClose');
+const modalCancel = document.getElementById('modalCancel');
+const modalSubmit = document.getElementById('modalSubmit');
 
 // State
 let isProcessing = false;
 let agentReady = false;
+let currentFeedbackData = null;
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     checkStatus();
     setupEventListeners();
     autoResizeTextarea();
+    setupModalListeners();
 });
 
 // Check agent status
@@ -345,26 +352,101 @@ async function handleFeedback(type, feedbackDiv, question = null, answer = null)
         // Show thank you message
         feedbackDiv.innerHTML = '<span class="feedback-thanks" style="color: var(--success); font-size: 0.875rem;">✓ Thank you for your feedback!</span>';
     } else {
-        // Show feedback noted message
-        feedbackDiv.innerHTML = '<span class="feedback-thanks" style="color: var(--text-secondary); font-size: 0.875rem;">Your feedback has been noted.</span>';
+        // Store feedback data and show modal
+        currentFeedbackData = {
+            question: question,
+            answer: answer,
+            feedbackDiv: feedbackDiv,
+            timestamp: new Date().toISOString()
+        };
 
-        // Send to server to log bad answer
-        try {
-            await fetch('http://localhost:3001/api/feedback', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    question: question,
-                    answer: answer,
-                    timestamp: new Date().toISOString()
-                })
-            });
-        } catch (error) {
-            console.error('Failed to log feedback:', error);
-        }
+        // Show the modal
+        showFeedbackModal();
     }
+}
+
+// Setup modal event listeners
+function setupModalListeners() {
+    // Close modal on X button
+    modalClose.addEventListener('click', closeFeedbackModal);
+
+    // Close modal on Cancel button
+    modalCancel.addEventListener('click', () => {
+        closeFeedbackModal();
+        if (currentFeedbackData) {
+            // Submit without details
+            submitFeedback('');
+        }
+    });
+
+    // Submit feedback with details
+    modalSubmit.addEventListener('click', () => {
+        const details = feedbackText.value.trim();
+        closeFeedbackModal();
+        submitFeedback(details);
+    });
+
+    // Close modal on backdrop click
+    feedbackModal.addEventListener('click', (e) => {
+        if (e.target === feedbackModal) {
+            closeFeedbackModal();
+            if (currentFeedbackData) {
+                submitFeedback('');
+            }
+        }
+    });
+
+    // Submit on Enter (with Shift+Enter for new lines)
+    feedbackText.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            modalSubmit.click();
+        }
+    });
+}
+
+// Show feedback modal
+function showFeedbackModal() {
+    feedbackText.value = '';
+    feedbackModal.classList.add('active');
+    setTimeout(() => feedbackText.focus(), 100);
+}
+
+// Close feedback modal
+function closeFeedbackModal() {
+    feedbackModal.classList.remove('active');
+    feedbackText.value = '';
+}
+
+// Submit feedback to server
+async function submitFeedback(details) {
+    if (!currentFeedbackData) return;
+
+    const { question, answer, feedbackDiv, timestamp } = currentFeedbackData;
+
+    // Show feedback noted message
+    feedbackDiv.innerHTML = '<span class="feedback-thanks" style="color: var(--text-secondary); font-size: 0.875rem;">Your feedback has been noted.</span>';
+
+    // Send to server to log bad answer
+    try {
+        await fetch('http://localhost:3001/api/feedback', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                question: question,
+                answer: answer,
+                details: details,
+                timestamp: timestamp
+            })
+        });
+    } catch (error) {
+        console.error('Failed to log feedback:', error);
+    }
+
+    // Clear current feedback data
+    currentFeedbackData = null;
 }
 
 // Log to console

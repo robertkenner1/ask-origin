@@ -61,19 +61,26 @@ app.get('/api/status', (req, res) => {
 
 // API endpoint to handle feedback
 app.post('/api/feedback', async (req, res) => {
-    const { question, answer, timestamp } = req.body;
+    const { question, answer, details, timestamp } = req.body;
 
     if (!question || !answer) {
         return res.status(400).json({ error: 'Question and answer are required' });
     }
 
     try {
-        const logEntry = `\n${'='.repeat(80)}\nTimestamp: ${timestamp}\nQuestion: ${question}\n\nAnswer: ${answer}\n${'='.repeat(80)}\n`;
+        let logEntry = `\n${'='.repeat(80)}\nTimestamp: ${timestamp}\nQuestion: ${question}\n\nAnswer: ${answer}\n`;
+
+        // Add user feedback details if provided
+        if (details && details.trim()) {
+            logEntry += `\nUser Feedback: ${details}\n`;
+        }
+
+        logEntry += `${'='.repeat(80)}\n`;
 
         const badAnswersPath = path.join(__dirname, 'knowledge', 'BadAnswers.txt');
         fs.appendFileSync(badAnswersPath, logEntry);
 
-        console.log('Logged bad answer to BadAnswers.txt');
+        console.log('Logged bad answer to BadAnswers.txt' + (details ? ' (with user feedback)' : ''));
         res.json({ success: true });
     } catch (error) {
         console.error('Error logging feedback:', error);

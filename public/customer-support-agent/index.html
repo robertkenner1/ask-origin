@@ -119,6 +119,33 @@
         </main>
     </div>
 
+    <!-- Feedback Modal -->
+    <div class="modal-overlay" id="feedbackModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Help us improve</h3>
+                <button class="modal-close" id="modalClose">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-description">Please tell us what was wrong with this response. Your feedback helps us improve our AI.</p>
+                <textarea
+                    class="feedback-textarea"
+                    id="feedbackText"
+                    placeholder="What was missing or incorrect?"
+                    rows="4"
+                ></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-button modal-button-secondary" id="modalCancel">Skip</button>
+                <button class="modal-button modal-button-primary" id="modalSubmit">Submit Feedback</button>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
