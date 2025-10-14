@@ -2,6 +2,7 @@
 PyPDF2>=3.0.0  # For PDF file support
 gradio>=4.0.0  # For web-based chat interface
 anthropic>=0.18.0  # For Claude API integration
+openai>=1.0.0  # For OpenAI API integration (including Grammarly proxy)
 python-dotenv>=1.0.0  # For loading environment variables from .env file
 
 # Optional: Enhanced text processing

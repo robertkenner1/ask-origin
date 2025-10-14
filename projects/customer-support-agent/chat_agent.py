@@ -192,28 +192,58 @@ class ChatAgent:
         self.instructions = ""
         self.instructions_path = instructions_path
 
-        # Initialize Claude client
-        self.use_claude = False
+        # Initialize LLM client
+        self.use_llm = False
         self.client = None
+        self.llm_provider = os.environ.get("LLM_PROVIDER", "anthropic").lower()
 
         # Get API key from parameter or environment
         self.api_key = api_key or os.environ.get("ANTHROPIC_API_KEY")
 
-        if self.api_key:
-            try:
-                import anthropic
-                self.client = anthropic.Anthropic(api_key=self.api_key)
-                self.use_claude = True
-                print("✓ Claude API initialized")
-            except ImportError:
-                print("Warning: anthropic package not installed. Install with: pip install anthropic")
-                print("Falling back to keyword-based search")
-            except Exception as e:
-                print(f"Warning: Could not initialize Claude API: {e}")
-                print("Falling back to keyword-based search")
+        if self.llm_provider == "openai":
+            # Initialize OpenAI client
+            openai_key = os.environ.get("OPENAI_API_KEY")
+            openai_base_url = os.environ.get("OPENAI_BASE_URL")
+            openai_calling_service = os.environ.get("OPENAI_CALLING_SERVICE")
+
+            if openai_key and openai_base_url:
+                try:
+                    import openai
+                    self.client = openai.OpenAI(
+                        base_url=openai_base_url,
+                        api_key=openai_key,
+                        timeout=30.0,
+                        default_headers={
+                            "X-LLM-Proxy-Calling-Service": openai_calling_service
+                        }
+                    )
+                    self.use_llm = True
+                    print("✓ OpenAI API initialized (Grammarly Proxy)")
+                except ImportError:
+                    print("Warning: openai package not installed. Install with: pip install openai")
+                    print("Falling back to keyword-based search")
+                except Exception as e:
+                    print(f"Warning: Could not initialize OpenAI API: {e}")
+                    print("Falling back to keyword-based search")
+            else:
+                print("Note: OPENAI_API_KEY or OPENAI_BASE_URL not found. Using keyword-based search.")
         else:
-            print("Note: ANTHROPIC_API_KEY not found. Using keyword-based search.")
-            print("To use Claude, set ANTHROPIC_API_KEY environment variable or pass api_key parameter.")
+            # Initialize Anthropic client (default)
+            if self.api_key:
+                try:
+                    import anthropic
+                    self.client = anthropic.Anthropic(api_key=self.api_key)
+                    self.use_llm = True
+                    print("✓ Claude API initialized")
+                except ImportError:
+                    print("Warning: anthropic package not installed. Install with: pip install anthropic")
+                    print("Falling back to keyword-based search")
+                except Exception as e:
+                    print(f"Warning: Could not initialize Claude API: {e}")
+                    print("Falling back to keyword-based search")
+            else:
+                print("Note: ANTHROPIC_API_KEY not found. Using keyword-based search.")
+                print("To use Claude, set ANTHROPIC_API_KEY environment variable or pass api_key parameter.")
 
         # Load instructions if file exists
         self.load_instructions()
@@ -356,16 +386,26 @@ class ChatAgent:
             for idx, doc in enumerate(all_decision_log_chunks, 1):
                 context_parts.append(f"Decision Log Section {idx}:\n{doc}")
 
-        # Add ALL other documents (excluding UserQuestions and BadAnswers)
-        if all_other_chunks:
-            context_parts.append("\n=== ALL OTHER DOCUMENTS ===")
-            for idx, (doc, source) in enumerate(all_other_chunks, 1):
-                context_parts.append(f"Document {idx}:\n{doc}")
+        # For OpenAI, limit other documents to avoid context length issues
+        # OpenAI has 128K token limit, and we're hitting it with all documents
+        if self.llm_provider == "openai":
+            # Only use top 5 most relevant other documents for OpenAI
+            other_limit = min(5, len(all_other_chunks))
+            if all_other_chunks and other_limit > 0:
+                context_parts.append("\n=== ADDITIONAL RELEVANT DOCUMENTS ===")
+                for idx, (doc, source) in enumerate(all_other_chunks[:other_limit], 1):
+                    context_parts.append(f"Document {idx}:\n{doc}")
+        else:
+            # For Anthropic (Claude), use ALL other documents
+            if all_other_chunks:
+                context_parts.append("\n=== ALL OTHER DOCUMENTS ===")
+                for idx, (doc, source) in enumerate(all_other_chunks, 1):
+                    context_parts.append(f"Document {idx}:\n{doc}")
 
         context = "\n\n".join(context_parts)
 
-        # Use Claude API if available
-        if self.use_claude and self.client:
+        # Use LLM API if available
+        if self.use_llm and self.client:
             try:
                 # Build system prompt with instructions
                 system_prompt = self.instructions if self.instructions else """You are a helpful customer support agent. Answer questions based on the provided context documents.
@@ -395,23 +435,46 @@ IMPORTANT INSTRUCTIONS:
 
 Please answer the question based on the context provided above. Do not reference the documents or sources in your answer."""
 
-                # Call Claude API
-                response = self.client.messages.create(
-                    model="claude-3-5-sonnet-20241022",
-                    max_tokens=2000,
-                    system=system_prompt,
-                    messages=[
-                        {"role": "user", "content": user_prompt}
-                    ]
-                )
+                # Call appropriate API based on provider
+                if self.llm_provider == "openai":
+                    # Call OpenAI API with GPT-4o (128K context window)
+                    response = self.client.chat.completions.create(
+                        model="gpt-4o",
+                        messages=[
+                            {"role": "system", "content": system_prompt},
+                            {"role": "user", "content": user_prompt}
+                        ],
+                        max_tokens=2000,
+                        temperature=0.7
+                    )
+                    print(f"DEBUG: OpenAI response received")
+                    print(f"DEBUG: Has choices attr: {hasattr(response, 'choices')}")
+                    if hasattr(response, 'choices'):
+                        print(f"DEBUG: Choices: {response.choices}")
+                        print(f"DEBUG: Choices length: {len(response.choices) if response.choices else 0}")
+                    if hasattr(response, 'error'):
+                        print(f"DEBUG: Error in response: {response.error}")
 
-                # Extract answer from response
-                answer = response.content[0].text
+                    if response and hasattr(response, 'choices') and response.choices and len(response.choices) > 0:
+                        answer = response.choices[0].message.content
+                    else:
+                        raise Exception(f"Invalid response structure from OpenAI API. Has choices: {hasattr(response, 'choices')}, Choices: {getattr(response, 'choices', None)}")
+                else:
+                    # Call Anthropic API (Claude)
+                    response = self.client.messages.create(
+                        model="claude-3-5-sonnet-20241022",
+                        max_tokens=2000,
+                        system=system_prompt,
+                        messages=[
+                            {"role": "user", "content": user_prompt}
+                        ]
+                    )
+                    answer = response.content[0].text
 
                 return answer
 
             except Exception as e:
-                print(f"Error calling Claude API: {e}")
+                print(f"Error calling {self.llm_provider.upper()} API: {e}")
                 print("Falling back to simple retrieval")
                 # Fall back to simple concatenation
                 return "\n\n".join([doc.strip() for doc, meta, score in relevant_docs])
