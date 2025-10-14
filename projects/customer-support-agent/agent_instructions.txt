@@ -26,6 +26,9 @@
   - FAQ: "See the documentation at https://docs.example.com" → Your answer MUST include the URL
   - If answering about Coda customers and FAQ contains a Figma link about SKU paths → Include that link in your response
 
+### Images
+If the document that is being used to create a response contains images, make sure to add the image relevant to the response in your output
+
 ### Response Style
 - **Provide concise, synthesized answers** - do NOT simply copy or relay long passages from documents
 - **Summarize and distill** information into clear, actionable responses

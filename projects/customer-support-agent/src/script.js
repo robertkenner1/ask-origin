@@ -88,6 +88,18 @@ function setupEventListeners() {
         sendButton.disabled = !hasText || !agentReady || isProcessing;
     });
 
+    // Disable paste functionality
+    messageInput.addEventListener('paste', (e) => {
+        e.preventDefault();
+        return false;
+    });
+
+    // Also block context menu paste
+    messageInput.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        return false;
+    });
+
     // Quick question buttons
     document.querySelectorAll('.quick-question-btn').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -154,7 +166,7 @@ async function handleSend() {
         const data = await response.json();
 
         // Add assistant message with feedback buttons
-        addMessage(data.answer, 'assistant', message, data.gleanResults);
+        addMessage(data.answer, 'assistant', message, data.gleanResults, data.codaResults);
 
     } catch (error) {
         console.error('Chat error:', error);
@@ -171,7 +183,7 @@ async function handleSend() {
 }
 
 // Add message to chat
-function addMessage(text, role, userQuestion = null, gleanResults = null) {
+function addMessage(text, role, userQuestion = null, gleanResults = null, codaResults = null) {
     const messageDiv = document.createElement('div');
     messageDiv.className = `message ${role}`;
 
@@ -236,6 +248,45 @@ function addMessage(text, role, userQuestion = null, gleanResults = null) {
 
         gleanDiv.innerHTML = gleanHTML;
         contentDiv.appendChild(gleanDiv);
+    }
+
+    // Add Coda search results if available
+    if (role === 'assistant' && codaResults && codaResults.length > 0) {
+        const codaDiv = document.createElement('div');
+        codaDiv.className = 'glean-results';
+
+        let codaHTML = '<div class="glean-header"><strong>📝 Related Coda Results:</strong></div>';
+
+        codaResults.forEach((result, index) => {
+            if (result.type === 'text' && result.text) {
+                // Parse the text to extract title and URL
+                const lines = result.text.split('\n');
+                let title = '';
+                let url = '';
+
+                for (const line of lines) {
+                    if (line.startsWith('Title:')) {
+                        title = line.replace('Title:', '').trim();
+                    } else if (line.startsWith('URL:')) {
+                        url = line.replace('URL:', '').trim();
+                    }
+                }
+
+                if (title && url) {
+                    codaHTML += `
+                        <div class="glean-result-item">
+                            <span class="glean-result-number">${index + 1}.</span>
+                            <a href="${url}" target="_blank" rel="noopener noreferrer" class="glean-result-link">
+                                ${title}
+                            </a>
+                        </div>
+                    `;
+                }
+            }
+        });
+
+        codaDiv.innerHTML = codaHTML;
+        contentDiv.appendChild(codaDiv);
     }
 
     // Add feedback buttons for assistant messages

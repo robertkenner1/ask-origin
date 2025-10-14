@@ -12,6 +12,10 @@ const PORT = process.env.PORT || 3001;
 const GLEAN_MCP_URL = 'https://grammarly-be.glean.com/mcp/default';
 const GLEAN_API_TOKEN = process.env.GLEAN_API_TOKEN;
 
+// Coda MCP configuration
+const CODA_MCP_URL = 'https://head.coda.io/apis/codaInternal/mcp';
+const CODA_API_TOKEN = process.env.CODA_API_TOKEN;
+
 // Middleware
 app.use(express.json());
 
@@ -88,6 +92,106 @@ app.post('/api/feedback', async (req, res) => {
     }
 });
 
+// Helper function to parse Glean markdown results into structured format
+function parseGleanMarkdown(markdownText) {
+    const results = [];
+
+    console.log('Full Glean markdown:', markdownText.substring(0, 500));
+
+    // Split by ### headers (each result)
+    const sections = markdownText.split(/###\s+\d+\.\s+/).filter(s => s.trim());
+
+    for (const section of sections.slice(0, 3)) { // Limit to top 3
+        const lines = section.split('\n');
+        const title = lines[0].trim();
+
+        // Look for URL in the section - try multiple patterns
+        let url = '';
+        for (const line of lines) {
+            // Pattern 1: **Link:** URL
+            let urlMatch = line.match(/\*\*Link:\*\*\s+(https?:\/\/[^\s]+)/);
+            if (urlMatch) {
+                url = urlMatch[1];
+                break;
+            }
+            // Pattern 2: [View in ...](URL)
+            urlMatch = line.match(/\[View in .*?\]\((https?:\/\/[^\)]+)\)/);
+            if (urlMatch) {
+                url = urlMatch[1];
+                break;
+            }
+            // Pattern 3: **URL:** <URL>
+            urlMatch = line.match(/\*\*URL:\*\*\s*<?(https?:\/\/[^\s>]+)>?/);
+            if (urlMatch) {
+                url = urlMatch[1];
+                break;
+            }
+        }
+
+        if (title && url) {
+            console.log(`Found result: ${title} -> ${url}`);
+            results.push({
+                type: 'text',
+                text: `Title: ${title}\nURL: ${url}`
+            });
+        } else {
+            console.log(`Skipped result - Title: ${title}, URL: ${url}`);
+        }
+    }
+
+    return results;
+}
+
+// Helper function to parse Coda markdown results into structured format
+function parseCodaMarkdown(markdownText) {
+    const results = [];
+
+    console.log('Full Coda markdown:', markdownText.substring(0, 500));
+
+    // Split by ### headers (each result)
+    const sections = markdownText.split(/###\s+\d+\.\s+/).filter(s => s.trim());
+
+    for (const section of sections.slice(0, 3)) { // Limit to top 3
+        const lines = section.split('\n');
+        const title = lines[0].trim();
+
+        // Look for URL in the section
+        let url = '';
+        for (const line of lines) {
+            // Pattern 1: **Link:** URL
+            let urlMatch = line.match(/\*\*Link:\*\*\s+(https?:\/\/[^\s]+)/);
+            if (urlMatch) {
+                url = urlMatch[1];
+                break;
+            }
+            // Pattern 2: **URL:** URL
+            urlMatch = line.match(/\*\*URL:\*\*\s*<?(https?:\/\/[^\s>]+)>?/);
+            if (urlMatch) {
+                url = urlMatch[1];
+                break;
+            }
+            // Pattern 3: [View](URL)
+            urlMatch = line.match(/\[View.*?\]\((https?:\/\/[^\)]+)\)/);
+            if (urlMatch) {
+                url = urlMatch[1];
+                break;
+            }
+        }
+
+        if (title && url) {
+            console.log(`Found Coda result: ${title} -> ${url}`);
+            results.push({
+                type: 'text',
+                text: `Title: ${title}\nURL: ${url}`
+            });
+        } else {
+            console.log(`Skipped Coda result - Title: ${title}, URL: ${url}`);
+        }
+    }
+
+    return results;
+}
+
 // Function to search Glean via MCP
 async function searchGlean(query) {
     // Skip if no API token configured
@@ -123,16 +227,27 @@ async function searchGlean(query) {
             let body = '';
             response.on('data', (chunk) => body += chunk);
             response.on('end', () => {
+                console.log(`Glean response status: ${response.statusCode}`);
+                console.log(`Glean response body: ${body.substring(0, 200)}...`);
                 try {
                     const result = JSON.parse(body);
                     if (result.error) {
                         console.log('Glean search error:', result.error);
                         resolve([]);
                     } else {
-                        resolve(result.result?.content || []);
+                        const content = result.result?.content || [];
+                        // Parse markdown content into structured format
+                        if (content.length > 0 && content[0].type === 'text') {
+                            const parsedResults = parseGleanMarkdown(content[0].text);
+                            console.log(`Parsed ${parsedResults.length} Glean results`);
+                            resolve(parsedResults);
+                        } else {
+                            resolve([]);
+                        }
                     }
                 } catch (error) {
                     console.log('Glean parse error:', error);
+                    console.log('Full response body:', body);
                     resolve([]);
                 }
             });
@@ -140,6 +255,83 @@ async function searchGlean(query) {
 
         request.on('error', (error) => {
             console.log('Glean request error:', error);
+            resolve([]);
+        });
+
+        request.write(data);
+        request.end();
+
+        // Timeout after 5 seconds
+        setTimeout(() => {
+            request.destroy();
+            resolve([]);
+        }, 5000);
+    });
+}
+
+// Function to search Coda via MCP
+async function searchCoda(query) {
+    // Skip if no API token configured
+    if (!CODA_API_TOKEN) {
+        console.log('Coda API token not configured, skipping search');
+        return [];
+    }
+
+    return new Promise((resolve, reject) => {
+        const data = JSON.stringify({
+            jsonrpc: '2.0',
+            method: 'tools/call',
+            params: {
+                name: 'search',
+                arguments: {
+                    query: query,
+                    limit: 3
+                }
+            },
+            id: 1
+        });
+
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${CODA_API_TOKEN}`,
+                'Content-Length': data.length
+            }
+        };
+
+        const request = https.request(CODA_MCP_URL, options, (response) => {
+            let body = '';
+            response.on('data', (chunk) => body += chunk);
+            response.on('end', () => {
+                console.log(`Coda response status: ${response.statusCode}`);
+                console.log(`Coda response body: ${body.substring(0, 200)}...`);
+                try {
+                    const result = JSON.parse(body);
+                    if (result.error) {
+                        console.log('Coda search error:', result.error);
+                        resolve([]);
+                    } else {
+                        const content = result.result?.content || [];
+                        // Parse markdown content into structured format
+                        if (content.length > 0 && content[0].type === 'text') {
+                            const parsedResults = parseCodaMarkdown(content[0].text);
+                            console.log(`Parsed ${parsedResults.length} Coda results`);
+                            resolve(parsedResults);
+                        } else {
+                            resolve([]);
+                        }
+                    }
+                } catch (error) {
+                    console.log('Coda parse error:', error);
+                    console.log('Full response body:', body);
+                    resolve([]);
+                }
+            });
+        });
+
+        request.on('error', (error) => {
+            console.log('Coda request error:', error);
             resolve([]);
         });
 
@@ -251,13 +443,17 @@ print(answer)
 
             const answer = answerLines.join('\n').trim();
 
-            // Search Glean in parallel with Anthropic response
-            console.log('Searching Glean for additional results...');
-            const gleanResults = await searchGlean(message);
+            // Search Glean and Coda in parallel with Anthropic response
+            console.log('Searching Glean and Coda for additional results...');
+            const [gleanResults, codaResults] = await Promise.all([
+                searchGlean(message),
+                searchCoda(message)
+            ]);
 
             res.json({
                 answer: answer || 'I could not generate an answer.',
                 gleanResults: gleanResults,
+                codaResults: codaResults,
                 timestamp: new Date().toISOString()
             });
         });
