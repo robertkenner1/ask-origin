@@ -1,0 +1,117 @@
+# Box
+
+**Full path**: GDS/Box
+
+**Import**:
+```typescript
+import { Box } from '@grammarly/design-system';
+```
+
+## Examples
+
+### Default
+
+### Borders
+
+```tsx
+(
+    <Flex gap={4} direction="row">
+      <Flex gap={4} direction="column">
+        <Box borderRadius={0.5} {...commonProps}>
+          Base-default with half radius
+        </Box>
+        <Box borderRadius={1} {...commonProps}>
+          Base-default with 1 radius
+        </Box>
+        <Box borderRadius={2} {...commonProps}>
+          Base-default with 2 radius
+        </Box>
+        <Box borderRadius={3} {...commonProps}>
+          Base-default with 3 radius
+        </Box>
+      </Flex>
+    ...
+```
+
+### TextColors
+
+```tsx
+(
+    <Flex gap={4} direction="column" width={200}>
+      <Box color="brand-default" {...commonProps}>
+        brand-default
+      </Box>
+      <Box color="critical-default" {...commonProps}>
+        critical-default
+      </Box>
+      <Box color="success-default" {...commonProps}>
+        success-default
+      </Box>
+      <Box color="clarity-default" {...commonProps}>
+        clarity-default
+      </Box>
+      <Box color="base-inverse" bgColor="background-base-inverse" {...commonProps}>
+      ...
+```
+
+### Elevation
+
+```tsx
+(
+    <Flex gap={8} padding={4} bgColor="background-base-subdued">
+      <Box elevation="low" padding={4}>
+        low
+      </Box>
+      <Box elevation="medium" padding={4}>
+        medium
+      </Box>
+      <Box elevation="high" padding={4}>
+        high
+      </Box>
+    </Flex>
+  )
+```
+
+### Margin
+
+```tsx
+(
+    <Flex gap={5} direction="column" borderColor="base-subdued">
+      <Box margin={6} {...spacingCommon}>
+        <Text as="span" variant="text-small">
+          Margin
+        </Text>
+      </Box>
+      <Box marginLeft={4} {...spacingCommon}>
+        <Text as="span" variant="text-small">
+          Margin Left
+        </Text>
+      </Box>
+      <Box marginTop={10} {...spacingCommon}>
+        <Text as="span" variant="text-small">
+          Margin Top
+        </Text>
+      </Box>
+      <Box mar...
+```
+
+*... and 1 more examples*
+
+## All Available Stories
+
+- Default
+- Borders
+- Text Colors
+- Elevation
+- Margin
+- Padding
+- Visual Test
+
+## Documentation
+
+See the live Storybook for detailed usage examples, props, and interactive demos:
+https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-box
+
+## Related Components
+
+Explore the full component library at: https://uifoundation.gpages.io/grammarly-design-system

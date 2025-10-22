@@ -1,0 +1,27 @@
+# CircularLoader
+
+**Full path**: GDS/Loader/CircularLoader
+
+**Import**:
+```typescript
+import { CircularLoader } from '@grammarly/design-system';
+```
+
+## All Available Stories
+
+- Default
+- Small
+- Large
+- Inverse
+- In Context
+- Within Shadow DOM
+- Visual Test
+
+## Documentation
+
+See the live Storybook for detailed usage examples, props, and interactive demos:
+https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-loader-circularloader
+
+## Related Components
+
+Explore the full component library at: https://uifoundation.gpages.io/grammarly-design-system

@@ -1,0 +1,104 @@
+# ButtonAsLink
+
+**Full path**: GDS/ButtonAsLink
+
+**Import**:
+```typescript
+import { ButtonAsLink } from '@grammarly/design-system';
+```
+
+## Examples
+
+### Default
+
+### AllVariantsOnBackground
+
+```tsx
+(
+    <div
+      style={{
+        display: "flex",
+        gap: "8px",
+        padding: "8px",
+        backgroundColor: "var(--color-background-base-subdued)
+```
+
+### AllVariantsIconStart
+
+```tsx
+(
+    <Flex gap={2}>
+      {variants.map(v => (
+        <ButtonAsLink
+          href="https://www.grammarly.com"
+          key={v}
+          accessibilityLabel="Grammarly home"
+          variant={v}
+          text={v}
+          onClick={()
+```
+
+### AllVariantsIconEnd
+
+```tsx
+(
+    <Flex gap={2}>
+      {variants.map(v => (
+        <ButtonAsLink
+          href="https://www.grammarly.com"
+          key={v}
+          accessibilityLabel="Grammarly home"
+          variant={v}
+          text={v}
+          onClick={()
+```
+
+### AllVariantsShortcutSmallContainer
+
+```tsx
+(
+    <div
+      style={{
+        display: "flex",
+        border: "1px solid grey",
+        flexWrap: "wrap",
+        gap: "8px",
+        width: "100px",
+      }}
+    >
+      {variants.map(v => (
+        <ButtonAsLink
+          href="https://www.grammarly.com"
+          key={v}
+          accessibilityLabel="Grammarly home"
+          variant={v}
+          text={v}
+          onClick={()
+```
+
+*... and 5 more examples*
+
+## All Available Stories
+
+- Default
+- All Variants On Background
+- All Variants Icon Start
+- All Variants Icon End
+- All Variants Shortcut Small Container
+- Full Width
+- With Complex Content
+- All Variants Small
+- Download With Renamed Filename
+- All States
+- All States Icon
+- Within Shadow DOM
+- Visual Test
+
+## Documentation
+
+See the live Storybook for detailed usage examples, props, and interactive demos:
+https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-buttonaslink
+
+## Related Components
+
+Explore the full component library at: https://uifoundation.gpages.io/grammarly-design-system

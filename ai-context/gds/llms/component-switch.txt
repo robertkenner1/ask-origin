@@ -1,0 +1,60 @@
+# Switch
+
+**Full path**: GDS/Switch
+
+**Import**:
+```typescript
+import { Switch } from '@grammarly/design-system';
+```
+
+## Examples
+
+### Default
+
+### HelperMessage
+
+**Args**: `{"helperMessage":"\"Use icons to identify different suggestion types\"","labelDisplay":"\"left\""}`
+
+### RightLabel
+
+**Args**: `{"helperMessage":"\"Use icons to identify different suggestion types\"","labelDisplay":"\"right\""}`
+
+### TopLabel
+
+**Args**: `{"helperMessage":"\"Use icons to identify different suggestion types\"","labelDisplay":"\"top\""}`
+
+### TopLabelSuperLong
+
+**Args**: `{"label":"\"This is a very long label for a Switch. It should be wrapped if it is too long.\"","helperMessage":"\"This is a very long helper message for checkbox. It should be wrapped if it is too long\"","labelDisplay":"\"top\""}`
+
+*... and 12 more examples*
+
+## All Available Stories
+
+- Default
+- Helper Message
+- Right Label
+- Top Label
+- Top Label Super Long
+- Hidden Label
+- External Label
+- Switch Set To On
+- All Sizes
+- Disabled Off
+- Disabled On
+- On Change
+- Status Change
+- In Narrow Container Left Label
+- In Narrow Container Right Label
+- In Narrow Container Top Label
+- Within Shadow DOM
+- Visual Test
+
+## Documentation
+
+See the live Storybook for detailed usage examples, props, and interactive demos:
+https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-switch
+
+## Related Components
+
+Explore the full component library at: https://uifoundation.gpages.io/grammarly-design-system

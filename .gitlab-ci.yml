@@ -6,6 +6,7 @@ default:
 
 variables:
   PROJECT_PIPELINE_NAME: 'DEFAULT PIPELINE NAME'
+  BASE_VERSION: '0.0.2'
 
 # https://docs.gitlab.com/ee/ci/yaml/workflow.html#switch-between-branch-pipelines-and-merge-request-pipelines
 workflow:

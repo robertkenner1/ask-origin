@@ -1,0 +1,81 @@
+# Form
+
+**Full path**: GDS/Form
+
+**Import**:
+```typescript
+import { Form } from '@grammarly/design-system';
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | `-` | Contents of the form, should all be contained in FormHeader, FormRow, FormFieldset, or FormFooter |
+| `maxWidth` | `number` | `650` | Sets a width on the content of the Form in pixels |
+| `name` | `string` | `-` | Used to identify this form |
+| `spacing` | `"spacious" | "standard" | "compact"` | `standard` | Adjusts the vertical spacing between parts of the Form |
+| `onSubmit` | `(e: FormEvent) => void` | `-` | Callback that is triggered when the form is submitted |
+| `children` | `ReactNode` | `-` | Contents of the header if more functionality is needed outside of title and helperMessage. Places content after the title or helperMessage |
+| `description` | `string` | `-` | Adds detail about the purpose or goal of this form |
+| `heading` | `string` | `-` | Title of the form |
+| `headingLevel` | `"h1" | "h2" | "h3" | "h4"` | `h2` | Changes the underlying semantics of the heading |
+| `headingSize` | `"large" | "medium" | "small"` | `large` | Changes the font size of the heading according to our Typography tokens |
+| `children` | `ReactNode` | `-` | Contents of the row of the Form. Adds spacing between each child |
+| `children` | `ReactNode` | `-` | Contents of a fieldset, typically at least two inputs |
+| `legend` | `string` | `-` | Legend of the fieldset, describes the purpose of the set of fields |
+| `description` | `string` | `-` | Optional description for the set of fields |
+| `isRequired` | `boolean` | `-` | Identify that the fieldset is required |
+| `legendIndicatorForRequired` | `string` | `"(Required)"` | Legend indicator for required |
+| `isOptional` | `boolean` | `-` | Identify that the fieldset is optional |
+| `legendIndicatorForOptional` | `string` | `"(Optional)"` | Legend indicator for optional |
+| `children` | `ReactNode` | `-` | Contents of the form footer, typically one or more Buttons |
+
+## Examples
+
+### Default
+
+### MaxWidth
+
+**Args**: `{"maxWidth":"400"}`
+
+### SmallMaxWidthToStack
+
+**Args**: `{"maxWidth":"200"}`
+
+### WithSpaciousSpacing
+
+**Args**: `{"spacing":"\"spacious\"","heading":"\"Settings (spacious)\""}`
+
+### WithStandardSpacing
+
+**Args**: `{"spacing":"\"standard\"","heading":"\"Settings (standard)\""}`
+
+*... and 9 more examples*
+
+## All Available Stories
+
+- Default
+- Max Width
+- Small Max Width To Stack
+- With Spacious Spacing
+- With Standard Spacing
+- With Compact Spacing
+- With Errors Compact
+- With Errors Standard
+- With Errors Spacious
+- Custom Heading Size
+- With On Submit Event
+- With Custom Header
+- All Inputs
+- Within Shadow DOM
+- Visual Test
+
+## Documentation
+
+See the live Storybook for detailed usage examples, props, and interactive demos:
+https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-form
+
+## Related Components
+
+Explore the full component library at: https://uifoundation.gpages.io/grammarly-design-system

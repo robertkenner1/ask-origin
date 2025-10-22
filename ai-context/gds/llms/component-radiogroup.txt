@@ -1,0 +1,71 @@
+# RadioGroup
+
+**Full path**: GDS/RadioGroup
+
+**Import**:
+```typescript
+import { RadioGroup } from '@grammarly/design-system';
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `helperMessage` | `string` | `-` | Helper text used in addition to the label |
+| `children` | `ReactNode` | `-` | The label or content of the RadioButton |
+
+## Examples
+
+### Default
+
+### WithDefaultValue
+
+**Args**: `{"defaultValue":"\"all\""}`
+
+### WithHelperMessage
+
+### Required
+
+**Args**: `{"isRequired":"true"}`
+
+### Optional
+
+**Args**: `{"isOptional":"true"}`
+
+*... and 18 more examples*
+
+## All Available Stories
+
+- Default
+- With Default Value
+- With Helper Message
+- Required
+- Optional
+- With Error Message
+- With Helper And Error Message
+- In Row Layout
+- With Three Options
+- With Four Options
+- With Five Options
+- With Five Options And Error
+- With All Disabled
+- With One Disabled
+- With On Change Alert
+- With Hidden Legend
+- With Individual Helper Text
+- With Individual Helper Text And Wrapping
+- All Sizes
+- All Sizes With Error
+- All Sizes Row
+- With Another Language
+- Within Shadow DOM
+- Visual Test
+
+## Documentation
+
+See the live Storybook for detailed usage examples, props, and interactive demos:
+https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-radiogroup
+
+## Related Components
+
+Explore the full component library at: https://uifoundation.gpages.io/grammarly-design-system

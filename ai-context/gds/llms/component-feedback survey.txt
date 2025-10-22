@@ -1,0 +1,21 @@
+# Feedback Survey
+
+**Full path**: Patterns/Feedback Survey
+
+**Import**:
+```typescript
+import { Feedback Survey } from '@grammarly/design-system';
+```
+
+## All Available Stories
+
+- Default
+
+## Documentation
+
+See the live Storybook for detailed usage examples, props, and interactive demos:
+https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/patterns-feedback-survey
+
+## Related Components
+
+Explore the full component library at: https://uifoundation.gpages.io/grammarly-design-system

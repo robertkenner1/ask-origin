@@ -1,0 +1,72 @@
+# Badge
+
+**Full path**: GDS/Badge
+
+**Import**:
+```typescript
+import { Badge } from '@grammarly/design-system';
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `getTooltipText` | `(count: number, specialCharBefore?: string, specialCharAfter?: string) => string` | `-` | Format aria label on the Badge component tooltip |
+| `tabIndex` | `number` | `0` | Tab index for the Badge component. |
+| `tooltipProps` | `Partial<TooltipProps>` | `-` | Props to pass to the Tooltip component. |
+| `tooltipContentProps` | `Partial<TooltipContentProps>` | `-` | Props to pass to the TooltipContent component. shadowDom and iFrame environments may needed to override this prop and provide their own root |
+
+## Variants
+
+- `neutral`
+- `business`
+- `addition`
+- `clarity`
+- `correctness`
+- `critical`
+- `deletion`
+- `delivery`
+- `engagement`
+- `plagiarism`
+- `premium`
+- `pro`
+- `success`
+- `warning`
+
+## Examples
+
+### Default
+
+### Counts
+
+### AllVariants
+
+### SpecialChars
+
+### SpecialCharsAllowAnyNumber
+
+**Args**: `{"count":"999999","variant":"\"critical\"","specialCharBefore":"\"+\"","specialCharAfter":"\"%\""}`
+
+*... and 1 more examples*
+
+## All Available Stories
+
+- Default
+- Counts
+- All Variants
+- Special Chars
+- Special Chars Allow Any Number
+- With Tooltip
+- With Tooltip All Variants
+- With Tooltip Special Chars
+- Within Shadow DOM
+- Visual Test
+
+## Documentation
+
+See the live Storybook for detailed usage examples, props, and interactive demos:
+https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-badge
+
+## Related Components
+
+Explore the full component library at: https://uifoundation.gpages.io/grammarly-design-system

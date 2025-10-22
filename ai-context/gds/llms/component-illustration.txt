@@ -1,0 +1,154 @@
+# Illustration
+
+**Full path**: GDS/Illustration
+
+**Import**:
+```typescript
+import { Illustration } from '@grammarly/design-system';
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `(typeof illustrationTypes)[number]` | `-` | Which illustration to display. |
+| `size` | `"small" | "medium" | "large" | "xlarge"` | `'medium'` | Defines the size of the Illustration. Small (32x32px), Medium (56x56px), Large (80x80px) and xLarge (96x96px) |
+| `accessibilityLabel` | `string` | `-` | Used to provide a label for screen reader users. |
+| `colorMode` | `"auto" | "light" | "dark"` | `-` | Whether to follow the inherited color scheme (light or dark). |
+
+## IllustrationTypes
+
+- `empty-birding`
+- `empty-cactus`
+- `empty-cookie`
+- `empty-hat`
+- `empty-painting`
+- `empty-plane`
+- `empty-sand`
+- `empty-scribe`
+- `empty-work`
+- `empty-write`
+- `success-birding`
+- `success-cactus`
+- `success-check`
+- `success-cookie`
+- `success-hat`
+- `success-painting`
+- `success-plane`
+- `success-sand`
+- `success-scribe`
+- `success-work`
+- `success-write`
+- `spot-celebrate`
+- `spot-issue`
+- `spot-chat-double`
+- `spot-chat-check`
+- `spot-doc-sparkles`
+- `spot-doc-award`
+- `spot-doc-magic`
+- `spot-doc-check`
+- `spot-doc-double-check`
+- `spot-doc-100`
+- `spot-chart-user`
+- `spot-target`
+- `spot-coin`
+- `spot-doc-on-brand`
+- `spot-chart-line-graph`
+- `spot-plagiarism`
+- `spot-detect-ai-text`
+
+## Examples
+
+### Default
+
+### AllSizes
+
+```tsx
+(
+    <>
+      <ColorSchemeProvider scheme="light">
+        <Flex padding={4} gap={8} align="end" bgColor="background-base-default">
+          {["small", "medium", "large", "xlarge"].map(size => (
+            <Illustration
+              key={size}
+              type="success-cactus"
+              size={size as IllustrationProps["size"]}
+            />
+          )
+```
+
+### EmptyState
+
+```tsx
+(
+    <ColorSchemeProvider scheme="dark">
+      <Flex
+        direction="column"
+        padding={4}
+        gap={2}
+        align="center"
+        justify="center"
+        bgColor="background-base-default"
+      >
+        <Illustration type="empty-cactus" colorMode="auto" accessibilityLabel="test" />
+        <Box>
+          <Text as="p" variant="text-medium" weight="bold" align="center">
+            There are no more suggestions.
+          </Text>
+          <Text as="p" variant="text-small" col...
+```
+
+### Illustrations
+
+```tsx
+(
+    <div>
+      <Text as="span" variant="text-small">
+        Total illustrations: {illustrationTypes.length}
+      </Text>
+      <Flex gap={8} wrap marginTop={4}>
+        {illustrationTypes.map(key => (
+          <Illustration key={key} type={key} accessibilityLabel={key} />
+        )
+```
+
+### colorModes
+
+```tsx
+(
+    <Flex direction="column" gap={16}>
+      <Heading as="h3" variant="text-large">
+        Variant Examples
+      </Heading>
+      <Flex gap={16} wrap>
+        <Box>
+          <Text variant="text-medium" as="p">
+            Light
+          </Text>
+          <ColorSchemeProvider scheme="dark">
+            <Illustration type="success-cactus" colorMode="light" />
+          </ColorSchemeProvider>
+        </Box>
+        <Box>
+          <Text variant="text-medium" as="p">
+            Dark
+         ...
+```
+
+## All Available Stories
+
+- Default
+- All Sizes
+- Empty State
+- Illustrations
+- Color Modes
+- Visual Test
+
+## Documentation
+
+See the live Storybook for detailed usage examples, props, and interactive demos:
+https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-illustration
+
+## Related Components
+
+Explore the full component library at: https://uifoundation.gpages.io/grammarly-design-system
