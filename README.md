@@ -73,10 +73,14 @@ Ask: "Create a new project called 'grammarly-tooltip' with hover effects"
 
 ## MCP Servers
 
-The setup automatically installs:
-- **Playwright** - Browser automation
-- **Sourcegraph** - Code search
-- **Figma** - Design system integration (manual setup required)
+Pre-configured in `.claude/claude_mcp_config.json`:
+- **Playwright** - Browser automation and testing
+- **Sourcegraph** - Code search across repositories
+- **Cortex** - Service catalog and metadata
+- **Workflows** - Engineering workflows and procedures
+- **Figma** - Design integration (manual setup required)
+
+See [`.claude/README.md`](./.claude/README.md) for detailed documentation.
 
 ## Git Workflow
 
