@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest"
+      ]
+    },
+    "sourcegraph": {
+      "url": "https://apigw.prod-platform-plane.grammarlyaws.com/sourcegraph-mcp-server/mcp/"
+    }
+  }
+}
