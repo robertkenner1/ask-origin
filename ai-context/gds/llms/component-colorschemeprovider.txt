@@ -1,0 +1,57 @@
+# ColorSchemeProvider
+
+**Full path**: GDS/ColorSchemeProvider
+
+**Import**:
+```typescript
+import { ColorSchemeProvider } from '@grammarly/design-system';
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `scheme` | `ColorSchemeOption` | `"auto"` | Color scheme (aka theme) to use. If not provided, the value is detected based on the user's OS settings ("auto"). |
+| `target` | `HTMLElement` | `-` | Custom target to attach `data-gds-theme` attribute. Defaults to a container div if not provided. |
+| `children` | `ReactNode` | `-` | Contents that make use of the color scheme. |
+
+## Examples
+
+### Default
+
+**Args**: `{"children":"<ExampleContent setting=\"auto\" />"}`
+
+### Dark
+
+**Args**: `{"scheme":"\"dark\"","children":"<ExampleContent setting=\"dark\" />"}`
+
+### Light
+
+**Args**: `{"scheme":"\"light\"","children":"<ExampleContent setting=\"light\" />"}`
+
+### Target
+
+### TextTestDark
+
+**Args**: `{"scheme":"\"dark\"","children":"<ExampleTextContent setting=\"dark\" />"}`
+
+*... and 1 more examples*
+
+## All Available Stories
+
+- Default
+- Dark
+- Light
+- Target
+- Text Test Dark
+- Text Test Light
+- Visual Test
+
+## Documentation
+
+See the live Storybook for detailed usage examples, props, and interactive demos:
+https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-colorschemeprovider
+
+## Related Components
+
+Explore the full component library at: https://uifoundation.gpages.io/grammarly-design-system

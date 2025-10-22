@@ -1,0 +1,100 @@
+# Text
+
+**Full path**: GDS/Text
+
+**Import**:
+```typescript
+import { Text } from '@grammarly/design-system';
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `as` | `"p" | "span" | "small" | "strong" | "abbr" | "pre" | "kbd" | "label" | "legend"` | `-` | Changes the underlying HTML element for semantics and accessibility. |
+| `children` | `ReactNode` | `-` | The text that is displayed. |
+| `variant` | `(typeof textVariants)[number]` | `"text-medium"` | Applies base font properties according to our [typography](/foundations/typography/). |
+| `color` | `TextColor` | `-` | Applies a text color from the [semantic color palette](/foundations/tokens/). |
+| `align` | `"start" | "center" | "end" | "justify"` | `-` | Determines horizontal alignment of the text. |
+| `weight` | `"normal" | "medium" | "semibold" | "bold"` | `-` | Determines the font weight of the text. |
+| `italic` | `boolean` | `-` | When true, styles the text in italics. |
+| `decoration` | `"none" | "line-through"` | `-` | Determines if the text has a horizontal line through the center of it. |
+| `margin` | `MarginSpacing` | `0` | Applies the same margin to all sides. The options are based on our available [spacing tokens](/foundations/tokens/#space). The scale is in 4px increments — a value of 8 is a 32px margin. |
+| `marginLeft` | `MarginSpacing` | `-` | Applies margin to the left side. The options are based on our available [spacing tokens](/foundations/tokens/#space). The scale is in 4px increments — a value of 8 is a 32px margin. |
+| `marginRight` | `MarginSpacing` | `-` | Applies margin to the right side. The options are based on our available [spacing tokens](/foundations/tokens/#space). The scale is in 4px increments — a value of 8 is a 32px margin. |
+| `marginTop` | `MarginSpacing` | `-` | Applies margin to the top side. The options are based on our available [spacing tokens](/foundations/tokens/#space). The scale is in 4px increments — a value of 8 is a 32px margin. |
+| `marginBottom` | `MarginSpacing` | `-` | Applies margin to the bottom side. The options are based on our available [spacing tokens](/foundations/tokens/#space). The scale is in 4px increments — a value of 8 is a 32px margin. |
+| `maxLines` | `number` | `-` | Limits the number of lines displayed in the text component. If the content exceeds this number, it will be truncated with an ellipsis. |
+
+## TextVariants
+
+- `text-large`
+- `text-medium`
+- `text-small`
+- `text-xsmall`
+- `heading-large`
+- `heading-medium`
+- `heading-small`
+- `heading-xsmall`
+- `heading-xxsmall`
+
+## Examples
+
+### Default
+
+### WithColor
+
+### AllVariants
+
+### FontSettings
+
+```tsx
+(
+    <Flex direction="column" gap={4}>
+      {["text-large", "heading-large"].map(variant => (
+        <Text key={variant} as="p" variant={variant as TextProps["variant"]}>
+          ABCDEFGHIJKLMNOPQRSTUVWXYZ
+          <br />
+          abcdefghijklmnopqrstuvwxyz
+          <br />
+          1234567890
+        </Text>
+      )
+```
+
+### WithStyle
+
+```tsx
+(
+    <Flex direction="column" gap={4}>
+      <Text as="p">normal (default)
+```
+
+*... and 5 more examples*
+
+## All Available Stories
+
+- Default
+- With Color
+- All Variants
+- Font Settings
+- With Style
+- With Align
+- With Margins
+- Inherits
+- With Max Lines Dynamic
+- With Max Lines Align Start
+- With Max Lines Align End
+- With Max Lines Align Center
+- With Max Lines Align Justify
+- With Max Lines Align End Dynamic Text
+- Visual Test
+
+## Documentation
+
+See the live Storybook for detailed usage examples, props, and interactive demos:
+https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-text
+
+## Related Components
+
+Explore the full component library at: https://uifoundation.gpages.io/grammarly-design-system

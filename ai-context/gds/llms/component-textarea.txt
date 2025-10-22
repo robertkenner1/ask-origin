@@ -1,0 +1,77 @@
+# Textarea
+
+**Full path**: GDS/Textarea
+
+**Import**:
+```typescript
+import { Textarea } from '@grammarly/design-system';
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | `-` | Label for the textarea |
+| `autocomplete` | `"on" | "off"` | `-` | Used to tell browsers whether to offer autocomplete suggestions. |
+| `errorMessage` | `string` | `-` | Used to describe why this textarea has an error. |
+| `helperMessage` | `string` | `-` | Adds a helper message above the textarea. Recommended maximum length is 140 characters. |
+| `isOptional` | `boolean` | `-` | Adds (Optional) to the label. Cannot be combined with `isRequired`. |
+| `isRequired` | `boolean` | `-` | Adds (Required) to the label and marks textarea as required. Cannot be combined with `isOptional`. |
+| `isDisabled` | `boolean` | `-` | When true, indicates that the Textarea cannot be focused, changed, or interacted with. |
+| `labelDisplay` | `"visible" | "hidden"` | `'visible'` | Can be used to visually hide the legend when another element on the page is acting as the visual label for the textarea. |
+| `labelIndicatorForOptional` | `string` | `'(Optional)'` | Can be used to override the content for the optional indication. |
+| `labelIndicatorForRequired` | `string` | `'(Required)'` | Can be used to override the content for the required indication. |
+| `rows` | `number` | `3` | Used to set the number of lines of text to display. |
+| `name` | `string` | `-` | The name of the textarea element that is used when submitting an HTML form. [Learn more at MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#htmlattrdefname). |
+| `onChange` | `(value: string) => void` | `-` | Event handler that is called when the Textarea value changes. |
+| `onFocus` | `(event: FocusEvent) => void` | `-` | Event handler that is called when the Textarea receives focus. |
+| `placeholder` | `string` | `-` | Adds placeholder text to the textarea, if needed. Recommended not to use. |
+| `resizable` | `"on" | "off" | "horizontal" | "vertical"` | `'on'` | Can be used to make the textarea resizable. |
+| `value` | `string` | `-` | To implement as controlled component, the `value` prop can be used to maintain the textarea's value |
+
+## Examples
+
+### Default
+
+### IsReadOnly
+
+**Args**: `{"isReadOnly":"true"}`
+
+### WithHiddenLabel
+
+**Args**: `{"labelDisplay":"\"hidden\"","isOptional":"true"}`
+
+### WithName
+
+**Args**: `{"name":"\"with-name\""}`
+
+### WithPlaceholder
+
+**Args**: `{"placeholder":"\"Ex: grmrrly!\""}`
+
+*... and 6 more examples*
+
+## All Available Stories
+
+- Default
+- Is Read Only
+- With Hidden Label
+- With Name
+- With Placeholder
+- With Autocomplete
+- With Default Value
+- With On Change
+- With Controlled Value
+- With Resizable Off
+- In Narrow Container
+- All States
+- Visual Test
+
+## Documentation
+
+See the live Storybook for detailed usage examples, props, and interactive demos:
+https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-textarea
+
+## Related Components
+
+Explore the full component library at: https://uifoundation.gpages.io/grammarly-design-system

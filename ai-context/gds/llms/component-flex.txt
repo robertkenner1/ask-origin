@@ -1,0 +1,70 @@
+# Flex
+
+**Full path**: GDS/Flex
+
+**Import**:
+```typescript
+import { Flex } from '@grammarly/design-system';
+```
+
+## JustifyContent
+
+- `start`
+- `end`
+- `center`
+- `space-between`
+- `space-around`
+- `space-evenly`
+
+## Examples
+
+### Default
+
+### Column
+
+**Args**: `{"direction":"\"column\""}`
+
+### ColumnWithGapObject
+
+**Args**: `{"gap":"{ row: 14","column":"8"}`
+
+### Gap
+
+**Args**: `{"gap":"16"}`
+
+### GapObject
+
+**Args**: `{"gap":"{ row: 4","column":"8"}`
+
+*... and 13 more examples*
+
+## All Available Stories
+
+- Default
+- Column
+- Column With Gap Object
+- Gap
+- Gap Object
+- With Width Percentage
+- With Border And Wrap
+- Borders
+- Text Colors
+- With Grow Flex
+- As A Section
+- Justify Content Variants
+- Align Self Variants
+- Margin
+- Padding
+- Button Example
+- Button Accept Example
+- Button Demo Example
+- Visual Test
+
+## Documentation
+
+See the live Storybook for detailed usage examples, props, and interactive demos:
+https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-flex
+
+## Related Components
+
+Explore the full component library at: https://uifoundation.gpages.io/grammarly-design-system

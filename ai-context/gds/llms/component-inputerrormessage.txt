@@ -1,0 +1,26 @@
+# InputErrorMessage
+
+**Full path**: GDS/InputErrorMessage
+
+**Import**:
+```typescript
+import { InputErrorMessage } from '@grammarly/design-system';
+```
+
+## Examples
+
+### Default
+
+## All Available Stories
+
+- Default
+- Visual Test
+
+## Documentation
+
+See the live Storybook for detailed usage examples, props, and interactive demos:
+https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-inputerrormessage
+
+## Related Components
+
+Explore the full component library at: https://uifoundation.gpages.io/grammarly-design-system

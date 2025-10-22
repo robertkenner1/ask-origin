@@ -1,0 +1,81 @@
+# Modal
+
+**Full path**: GDS/Modal
+
+**Import**:
+```typescript
+import { Modal } from '@grammarly/design-system';
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | `-` | The content to render in the modal |
+| `title` | `string` | `-` | The title of the modal, displayed in the header |
+| `description` | `string` | `-` | Description beneath the title with details about the modal |
+| `dismissOnOutsideClick` | `boolean` | `-` | Determines whether you can click outside the modal container to close the modal window |
+| `hasCloseButton` | `boolean` | `-` | Determines if the modal contains a close Icon Button in the top corner |
+| `isOpen` | `boolean` | `-` | Determines whether the modal is currently visible |
+| `onClose` | `() => void` | `-` | Event handler that is called when the Modal is about to close. Use this to manually control the `isOpen`. |
+| `onHide` | `() => void` | `-` | Event handler that is automatically called when the Modal has closed. |
+| `onShow` | `() => void` | `-` | Event handler that is automatically called when the Modal has opened. |
+| `width` | `"small" | "medium"` | `-` | Small is 480px, Medium is 640px |
+| `role` | `"dialog" | "alertdialog"` | `-` | Used to notify screen reader user if this is an alert or error, vs. a dialog for data input or information |
+| `accessibilityLabelCloseButton` | `string` | `-` | Used to override the default label on the close button |
+| `target` | `Element | DocumentFragment` | `-` | Used to override the render target |
+| `title` | `string` | `-` | The title of the modal, displayed in the header |
+| `description` | `string` | `-` | Description beneath the title with details about the modal |
+| `children` | `ReactNode` | `-` | The content to render in the modal dialog |
+| `hasCloseButton` | `boolean` | `-` | Determines if the modal contains a close Icon Button in the top corner |
+| `onClose` | `() => void` | `-` | Handler that is called when the close button is clicked |
+| `accessibilityLabelCloseButton` | `string` | `-` | Used to override the default label on the close button |
+| `onClick` | `() => void` | `-` | Handler that is called when the close button is clicked |
+| `onKeyDown` | `(event: KeyboardEvent<HTMLButtonElement>) => void` | `-` | Handler that is called when the close button has focus and keyboard event is triggered |
+| `accessibilityLabelCloseButton` | `string` | `-` | Used to override the default label on the Close Icon Button |
+| `children` | `ReactNode` | `-` | The content to render in the modal body |
+| `children` | `ReactNode` | `-` | The content to render in the modal footer |
+
+## Examples
+
+### Default
+
+### AssertOpens
+
+### AssertCloses
+
+### MediumModal
+
+**Args**: `{"width":"\"medium\""}`
+
+### TitleDescriptionModal
+
+**Args**: `{"width":"\"medium\"","description":"\"Modal description\""}`
+
+*... and 8 more examples*
+
+## All Available Stories
+
+- Default
+- Assert Opens
+- Assert Closes
+- Medium Modal
+- Title Description Modal
+- Transactional Modal
+- Alert Dialog Modal
+- Alert Dialog Modal With Long Text
+- Footer
+- Dialog With Title Description
+- Within Shadow DOM
+- Visual Test
+- Render Target
+- Render Target Provider
+
+## Documentation
+
+See the live Storybook for detailed usage examples, props, and interactive demos:
+https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-modal
+
+## Related Components
+
+Explore the full component library at: https://uifoundation.gpages.io/grammarly-design-system

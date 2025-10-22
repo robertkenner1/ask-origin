@@ -1,0 +1,435 @@
+# Grammarly Design System
+
+Complete component library for building Grammarly products.
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system
+**Package**: @grammarly/design-system
+**Installation**: `npm install @grammarly/design-system` or `pnpm add @grammarly/design-system`
+
+## Quick Start
+
+```typescript
+import { Button, TextField, Modal } from '@grammarly/design-system';
+import '@grammarly/design-system/dist/index.css';
+```
+
+## Available Components (43)
+
+### Accordion
+
+**Import**: `import { Accordion } from '@grammarly/design-system';`
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-accordion
+
+---
+
+### Badge
+
+**Import**: `import { Badge } from '@grammarly/design-system';`
+
+**Key props**: getTooltipText, tabIndex, tooltipProps, tooltipContentProps
+
+**variants**: neutral, business, addition, clarity, correctness, critical, deletion, delivery, engagement, plagiarism, premium, pro, success, warning
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-badge
+
+---
+
+### Box
+
+**Import**: `import { Box } from '@grammarly/design-system';`
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-box
+
+---
+
+### BrandedLoader
+
+**Import**: `import { BrandedLoader } from '@grammarly/design-system';`
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-loader-brandedloader
+
+---
+
+### Button
+
+**Import**: `import { Button } from '@grammarly/design-system';`
+
+**Key props**: children, text, iconStart, iconEnd, isLoading and 1 more
+
+**variants**: primary, secondary, tertiary, ghost, premium, critical, pro, enterprise
+
+**sizes**: small, medium, large, xlarge, 2xlarge, 3xlarge, 4xlarge
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-button
+
+---
+
+### ButtonAsLink
+
+**Import**: `import { ButtonAsLink } from '@grammarly/design-system';`
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-buttonaslink
+
+---
+
+### Checkbox
+
+**Import**: `import { Checkbox } from '@grammarly/design-system';`
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-checkbox
+
+---
+
+### CircularLoader
+
+**Import**: `import { CircularLoader } from '@grammarly/design-system';`
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-loader-circularloader
+
+---
+
+### ColorSchemeProvider
+
+**Import**: `import { ColorSchemeProvider } from '@grammarly/design-system';`
+
+**Key props**: scheme, target, children
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-colorschemeprovider
+
+---
+
+### Combobox
+
+**Import**: `import { Combobox } from '@grammarly/design-system';`
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-combobox
+
+---
+
+### Feedback Survey
+
+**Import**: `import { Feedback Survey } from '@grammarly/design-system';`
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/patterns-feedback-survey
+
+---
+
+### Flex
+
+**Import**: `import { Flex } from '@grammarly/design-system';`
+
+**JustifyContent**: start, end, center, space-between, space-around, space-evenly
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-flex
+
+---
+
+### Form
+
+**Import**: `import { Form } from '@grammarly/design-system';`
+
+**Key props**: children, maxWidth, name, spacing, onSubmit and 14 more
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-form
+
+---
+
+### Heading
+
+**Import**: `import { Heading } from '@grammarly/design-system';`
+
+**Key props**: as, children, variant, color, align and 6 more
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-heading
+
+---
+
+### Icon
+
+**Import**: `import { Icon } from '@grammarly/design-system';`
+
+**Key props**: accessibilityLabel, variant, isDecorative, size, icon and 1 more
+
+**variants**: default, inverse, brand, business, addition, critical, deletion, success, premium, pro, warning, inherit
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-icon
+
+---
+
+### IconButton
+
+**Import**: `import { IconButton } from '@grammarly/design-system';`
+
+**Key props**: icon, accessibilityLabel, size, tooltipProps, tooltipContentProps and 1 more
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-iconbutton
+
+---
+
+### Illustration
+
+**Import**: `import { Illustration } from '@grammarly/design-system';`
+
+**Key props**: type, size, accessibilityLabel, colorMode
+
+**illustrationTypes**: empty-birding, empty-cactus, empty-cookie, empty-hat, empty-painting, empty-plane, empty-sand, empty-scribe, empty-work, empty-write, success-birding, success-cactus, success-check, success-cookie, success-hat, success-painting, success-plane, success-sand, success-scribe, success-work, success-write, spot-celebrate, spot-issue, spot-chat-double, spot-chat-check, spot-doc-sparkles, spot-doc-award, spot-doc-magic, spot-doc-check, spot-doc-double-check, spot-doc-100, spot-chart-user, spot-target, spot-coin, spot-doc-on-brand, spot-chart-line-graph, spot-plagiarism, spot-detect-ai-text
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-illustration
+
+---
+
+### InputErrorMessage
+
+**Import**: `import { InputErrorMessage } from '@grammarly/design-system';`
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-inputerrormessage
+
+---
+
+### InputLabel
+
+**Import**: `import { InputLabel } from '@grammarly/design-system';`
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-inputlabel
+
+---
+
+### Link
+
+**Import**: `import { Link } from '@grammarly/design-system';`
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-link
+
+---
+
+### LiveAnnouncer
+
+**Import**: `import { LiveAnnouncer } from '@grammarly/design-system';`
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-liveannouncer
+
+---
+
+### Logo
+
+**Import**: `import { Logo } from '@grammarly/design-system';`
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-logo
+
+---
+
+### Menu
+
+**Import**: `import { Menu } from '@grammarly/design-system';`
+
+**Key props**: children, activator, accessibilityLabel, initialOpen, onClose and 11 more
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-menu
+
+---
+
+### Modal
+
+**Import**: `import { Modal } from '@grammarly/design-system';`
+
+**Key props**: children, title, description, dismissOnOutsideClick, hasCloseButton and 19 more
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-modal
+
+---
+
+### PlanTag
+
+**Import**: `import { PlanTag } from '@grammarly/design-system';`
+
+**variants**: free, pro, enterprise, edu, business, premium
+
+**sizes**: xsmall, small, medium, large
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-plantag
+
+---
+
+### Popover
+
+**Import**: `import { Popover } from '@grammarly/design-system';`
+
+**Key props**: dismissOnOutsideClick, initialOpen, placement, open, onOpenChange and 10 more
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-popover
+
+---
+
+### PortalContainerProvider
+
+**Import**: `import { PortalContainerProvider } from '@grammarly/design-system';`
+
+**Key props**: default, modal, tooltip, popover
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-portalcontainerprovider
+
+---
+
+### RadioGroup
+
+**Import**: `import { RadioGroup } from '@grammarly/design-system';`
+
+**Key props**: helperMessage, children
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-radiogroup
+
+---
+
+### Rating
+
+**Import**: `import { Rating } from '@grammarly/design-system';`
+
+**Key props**: label, isError, value, isRequired, starLabels and 1 more
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-rating
+
+---
+
+### ScreenReaderOnly
+
+**Import**: `import { ScreenReaderOnly } from '@grammarly/design-system';`
+
+**Key props**: children, as
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-screenreaderonly
+
+---
+
+### SearchField
+
+**Import**: `import { SearchField } from '@grammarly/design-system';`
+
+**Key props**: label, labelDisplay, name, placeholder, value and 5 more
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-searchfield
+
+---
+
+### Select
+
+**Import**: `import { Select } from '@grammarly/design-system';`
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-select
+
+---
+
+### SkeletonLoader
+
+**Import**: `import { SkeletonLoader } from '@grammarly/design-system';`
+
+**Key props**: children, accessibilityLabel, delay, label, labelOffset and 11 more
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-loader-skeletonloader
+
+---
+
+### Sticker
+
+**Import**: `import { Sticker } from '@grammarly/design-system';`
+
+**Key props**: discount
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-sticker
+
+---
+
+### Switch
+
+**Import**: `import { Switch } from '@grammarly/design-system';`
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-switch
+
+---
+
+### Tabs
+
+**Import**: `import { Tabs } from '@grammarly/design-system';`
+
+**Key props**: children, defaultSelectedTab, onChange, size, accessibilityLabel and 8 more
+
+**sizes**: small, medium, large, xlarge, auto
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-tabs
+
+---
+
+### Tag
+
+**Import**: `import { Tag } from '@grammarly/design-system';`
+
+**variants**: neutral, brand, critical, premium, pro, success, tip, warning, inverse, deletion, // deprecated
+  addition, // deprecated
+  business, // deprecated
+
+**deprecatedVariant**: deletion, addition, business
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-tag
+
+---
+
+### Text
+
+**Import**: `import { Text } from '@grammarly/design-system';`
+
+**Key props**: as, children, variant, color, align and 9 more
+
+**textVariants**: text-large, text-medium, text-small, text-xsmall, heading-large, heading-medium, heading-small, heading-xsmall, heading-xxsmall
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-text
+
+---
+
+### Textarea
+
+**Import**: `import { Textarea } from '@grammarly/design-system';`
+
+**Key props**: label, autocomplete, errorMessage, helperMessage, isOptional and 12 more
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-textarea
+
+---
+
+### TextField
+
+**Import**: `import { TextField } from '@grammarly/design-system';`
+
+**Key props**: label, autocomplete, accessibilityLabelShowPassword, accessibilityLabelHidePassword, accessibilityLivePasswordIsShowing and 14 more
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-textfield
+
+---
+
+### Toast
+
+**Import**: `import { Toast } from '@grammarly/design-system';`
+
+**Key props**: text, variant, primaryAction, secondaryAction, onClose
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-toast
+
+---
+
+### Tooltip
+
+**Import**: `import { Tooltip } from '@grammarly/design-system';`
+
+**Key props**: open, onOpenChange, onShow, onHide
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-tooltip
+
+---
+
+### VerificationCode
+
+**Import**: `import { VerificationCode } from '@grammarly/design-system';`
+
+**Documentation**: https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-verificationcode
+
+---
+

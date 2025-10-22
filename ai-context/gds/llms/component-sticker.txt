@@ -1,0 +1,73 @@
+# Sticker
+
+**Full path**: GDS/Sticker
+
+**Import**:
+```typescript
+import { Sticker } from '@grammarly/design-system';
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `discount` | `number` | `-` | Percent discount for the sticker for Grammarly Pro. |
+
+## Examples
+
+### Default
+
+### AllSizes
+
+```tsx
+(
+    <Flex gap={2}>
+      <Sticker size="small" variant="circle">
+        <Sticker.Discount discount={35} />
+      </Sticker>
+      <Sticker variant="circle">
+        <Sticker.Discount discount={35} />
+      </Sticker>
+      <Sticker size="large" variant="circle">
+        <Sticker.Discount discount={35} />
+      </Sticker>
+    </Flex>
+  )
+```
+
+### AllVariants
+
+```tsx
+(
+    <Flex gap={2}>
+      <Sticker size="small" variant="scallop">
+        <Sticker.Discount discount={35} />
+      </Sticker>
+      <Sticker variant="scallop">
+        <Sticker.Discount discount={35} />
+      </Sticker>
+      <Sticker size="large" variant="scallop">
+        <Sticker.Discount discount={35} />
+      </Sticker>
+      <Sticker size="small" variant="circle">
+        <Sticker.Discount discount={60} />
+      </Sticker>
+      <Sticker variant="circle">
+        <Sticker.Discount discou...
+```
+
+## All Available Stories
+
+- Default
+- All Sizes
+- All Variants
+- Visual Test
+
+## Documentation
+
+See the live Storybook for detailed usage examples, props, and interactive demos:
+https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-sticker
+
+## Related Components
+
+Explore the full component library at: https://uifoundation.gpages.io/grammarly-design-system

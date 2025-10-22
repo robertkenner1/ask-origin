@@ -1,0 +1,83 @@
+# TextField
+
+**Full path**: GDS/TextField
+
+**Import**:
+```typescript
+import { TextField } from '@grammarly/design-system';
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | `-` | Displays the text label for the Text Field. |
+| `autocomplete` | `| "bday" | "current-password" | "email" | "new-password" | "username" | "url" | "on" | "off"` | `-` | Used to tell browsers when to offer autocomplete suggestions. |
+| `accessibilityLabelShowPassword` | `string` | `-` | Used to override the aria-label on the Show Password IconButton. |
+| `accessibilityLabelHidePassword` | `string` | `-` | Used to override the aria-label on the Hide Password IconButton. |
+| `accessibilityLivePasswordIsShowing` | `string` | `-` | Can be used to override the aria-live announcement that gets changed when the Show/Hide password Icon Button is pressed |
+| `accessibilityLivePasswordIsHidden` | `string` | `-` | Can be used to override the aria-live announcement that gets changed when the Show/Hide password Icon Button is pressed |
+| `errorMessage` | `string` | `-` | Used to describe why this Text Field has an error. |
+| `helperMessage` | `string` | `-` | Adds a helper message above the input. Recommended maximum length is 140 characters. |
+| `iconStart` | `IconProps["icon"]` | `-` | Icon to place at the start of the input. Icon is decorative and will be hidden from screen readers. |
+| `isOptional` | `boolean` | `-` | Adds (Optional) to the label. Cannot be combined with isRequired. |
+| `isRequired` | `boolean` | `-` | Adds (Required) to the label and marks input as required. Cannot be combined with isOptional. |
+| `labelDisplay` | `"visible" | "hidden"` | `-` | Can be used to visually hide the label when another element on the page is acting as the visual label for the TextField. |
+| `labelIndicatorForOptional` | `string` | `-` | Can be used to override the content for the optional indication |
+| `labelIndicatorForRequired` | `string` | `-` | Can be used to override the content for the required indication |
+| `name` | `string` | `-` | The name of the input element that is used when submitting an HTML form. [Learn more at MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefname). |
+| `placeholder` | `string` | `-` | Adds placeholder text to the input, if needed. Recommended not to use. |
+| `size` | `"medium" | "large" | "xlarge"` | `"medium"` | Controls the height of the text field. |
+| `type` | `InputType` | `-` | Used to indicate specific types of text field. |
+| `value` | `string` | `-` | To implement as controlled component, the `value` prop can be used to maintain the input’s value |
+
+## Examples
+
+### Default
+
+### IsDisabled
+
+**Args**: `{"helperMessage":"\"Use your work email\"","isDisabled":"true"}`
+
+### WithHiddenLabel
+
+**Args**: `{"labelDisplay":"\"hidden\"","isOptional":"true"}`
+
+### WithName
+
+**Args**: `{"name":"\"work-email\"","isOptional":"true"}`
+
+### WithPlaceholder
+
+**Args**: `{"label":"\"Password\"","placeholder":"\"Ex: grmrrly!\""}`
+
+*... and 10 more examples*
+
+## All Available Stories
+
+- Default
+- Is Disabled
+- With Hidden Label
+- With Name
+- With Placeholder
+- With Autocomplete
+- With Icon Start
+- With Default Value
+- With On Change
+- With Controlled Value
+- Types
+- All Sizes
+- All Sizes Error
+- In Narrow Container
+- All States
+- Within Shadow DOM
+- Visual Test
+
+## Documentation
+
+See the live Storybook for detailed usage examples, props, and interactive demos:
+https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-textfield
+
+## Related Components
+
+Explore the full component library at: https://uifoundation.gpages.io/grammarly-design-system

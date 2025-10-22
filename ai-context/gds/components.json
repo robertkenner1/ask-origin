@@ -1,0 +1,4679 @@
+{
+  "package": "@grammarly/design-system",
+  "storybookUrl": "https://uifoundation.gpages.io/grammarly-design-system",
+  "components": [
+    {
+      "name": "Accordion",
+      "title": "GDS/Accordion",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-accordion",
+      "props": [],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "WithOneItem",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithOneItemArrowInline",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithLongTitles",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithCallbackOnExpanded",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithGrayBackground",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithoutSeparators",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AllSizes",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithItemsOpenByDefault",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithinShadowDOM",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithCustomStyling",
+          "args": {},
+          "hasCode": true
+        }
+      ],
+      "stories": [
+        "Default",
+        "With One Item",
+        "With One Item Arrow Inline",
+        "With Long Titles",
+        "With Callback On Expanded",
+        "With Gray Background",
+        "Without Separators",
+        "All Sizes",
+        "With Items Open By Default",
+        "Within Shadow DOM",
+        "With Custom Styling",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "Badge",
+      "title": "GDS/Badge",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-badge",
+      "props": [
+        {
+          "name": "getTooltipText",
+          "type": "(count: number, specialCharBefore?: string, specialCharAfter?: string) => string",
+          "description": "Format aria label on the Badge component tooltip"
+        },
+        {
+          "name": "tabIndex",
+          "type": "number",
+          "description": "Tab index for the Badge component.",
+          "default": "0"
+        },
+        {
+          "name": "tooltipProps",
+          "type": "Partial<TooltipProps>",
+          "description": "Props to pass to the Tooltip component."
+        },
+        {
+          "name": "tooltipContentProps",
+          "type": "Partial<TooltipContentProps>",
+          "description": "Props to pass to the TooltipContent component. shadowDom and iFrame environments may needed to override this prop and provide their own root"
+        }
+      ],
+      "constants": {
+        "variants": [
+          "neutral",
+          "business",
+          "addition",
+          "clarity",
+          "correctness",
+          "critical",
+          "deletion",
+          "delivery",
+          "engagement",
+          "plagiarism",
+          "premium",
+          "pro",
+          "success",
+          "warning"
+        ]
+      },
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "Counts",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "AllVariants",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "SpecialChars",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "SpecialCharsAllowAnyNumber",
+          "args": {
+            "count": "999999",
+            "variant": "\"critical\"",
+            "specialCharBefore": "\"+\"",
+            "specialCharAfter": "\"%\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithinShadowDOM",
+          "args": {},
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Default",
+        "Counts",
+        "All Variants",
+        "Special Chars",
+        "Special Chars Allow Any Number",
+        "With Tooltip",
+        "With Tooltip All Variants",
+        "With Tooltip Special Chars",
+        "Within Shadow DOM",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "Box",
+      "title": "GDS/Box",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-box",
+      "props": [],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "Borders",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "TextColors",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "Elevation",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "Margin",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "Padding",
+          "args": {},
+          "hasCode": true
+        }
+      ],
+      "stories": [
+        "Default",
+        "Borders",
+        "Text Colors",
+        "Elevation",
+        "Margin",
+        "Padding",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "BrandedLoader",
+      "title": "GDS/Loader/BrandedLoader",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-loader-brandedloader",
+      "props": [],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [],
+      "stories": [
+        "Default",
+        "Inverse",
+        "All Sizes",
+        "With Text",
+        "Within Shadow DOM",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "Button",
+      "title": "GDS/Button",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-button",
+      "props": [
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "description": "Content for inside the Button"
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "description": "Text inside the Button"
+        },
+        {
+          "name": "iconStart",
+          "type": "IconProps[\"icon\"]",
+          "description": "Icon to display inside on the left of the Button. For Premium Buttons, only the Premium Icon is allowed."
+        },
+        {
+          "name": "iconEnd",
+          "type": "IconProps[\"icon\"]",
+          "description": "Icon to display inside on the right of the Button. For Premium Buttons, only the Premium Icon is allowed."
+        },
+        {
+          "name": "isLoading",
+          "type": "boolean",
+          "description": "Whether to show a circular loader, such as when the associated Form has been submitted.",
+          "default": "false"
+        },
+        {
+          "name": "form",
+          "type": "string",
+          "description": "Link form submit button to a form in case the button is used outside of the form"
+        }
+      ],
+      "constants": {
+        "variants": [
+          "primary",
+          "secondary",
+          "tertiary",
+          "ghost",
+          "premium",
+          "critical",
+          "pro",
+          "enterprise"
+        ],
+        "sizes": [
+          "small",
+          "medium",
+          "large",
+          "xlarge",
+          "2xlarge",
+          "3xlarge",
+          "4xlarge"
+        ]
+      },
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "WithSubmitType",
+          "args": {
+            "onClick": "async () => {"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "LoadingState",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AllVariantsOnBackground",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AllSizes",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AllVariantsIconStart",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AllVariantsIconEnd",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AllVariantsShortcutSmallContainer",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "FullWidth",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithComplexContent",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AllVariantsSmall",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AllVariantsSmallWithShortcut",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithinShadowDOM",
+          "args": {},
+          "hasCode": true
+        }
+      ],
+      "stories": [
+        "Default",
+        "With Submit Type",
+        "Loading State",
+        "All Variants On Background",
+        "All Sizes",
+        "All Variants Icon Start",
+        "All Variants Icon End",
+        "All Variants Shortcut Small Container",
+        "Full Width",
+        "With Complex Content",
+        "All Variants Small",
+        "All Variants Small With Shortcut",
+        "All States",
+        "All States Shortcut",
+        "All States Icon",
+        "Within Shadow DOM",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "ButtonAsLink",
+      "title": "GDS/ButtonAsLink",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-buttonaslink",
+      "props": [],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "AllVariantsOnBackground",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AllVariantsIconStart",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AllVariantsIconEnd",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AllVariantsShortcutSmallContainer",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "FullWidth",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithComplexContent",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AllVariantsSmall",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "DownloadWithRenamedFilename",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithinShadowDOM",
+          "args": {},
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Default",
+        "All Variants On Background",
+        "All Variants Icon Start",
+        "All Variants Icon End",
+        "All Variants Shortcut Small Container",
+        "Full Width",
+        "With Complex Content",
+        "All Variants Small",
+        "Download With Renamed Filename",
+        "All States",
+        "All States Icon",
+        "Within Shadow DOM",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "Checkbox",
+      "title": "GDS/Checkbox",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-checkbox",
+      "props": [],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "DefaultEnabled",
+          "args": {
+            "defaultSelected": "true"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "ariaDescribedBy",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "ariaDescribedByAndHelperTextBothSet",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "Indeterminate",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AllSizeCheckbox",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithError",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithErrorControlled",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithHelperText",
+          "args": {
+            "helperMessage": "\"Browser will save your info for 7 days\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "Disabled",
+          "args": {
+            "isDisabled": "true"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "IndeterminateDisabled",
+          "args": {
+            "isIndeterminate": "true",
+            "isDisabled": "true"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "SelectedDisabled",
+          "args": {
+            "isSelected": "true",
+            "isDisabled": "true"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "InNarrowContainer",
+          "args": {
+            "children": "\"This is a very long label for checkbox. It should be wrapped if it is too long\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "VeryLongLabel",
+          "args": {
+            "children": "\"This is a very long label for checkbox.\"",
+            "isRequired": "true"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "Required",
+          "args": {
+            "isRequired": "true"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "ReadOnly",
+          "args": {
+            "isReadOnly": "true"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "Optional",
+          "args": {
+            "isOptional": "true"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "HiddenLabel",
+          "args": {
+            "labelDisplay": "\"hidden\"",
+            "children": "\"Select row: Holiday Out of office snippet\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "GroupWithDefaultValues",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "GroupWithHiddenLegend",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "GroupedReadonly",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "GroupedWithHelper",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AllSizesGroupRow",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AllSizesGroupColumn",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "GroupedWithErrors",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "ManyCheckboxes",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithinShadowDOM",
+          "args": {},
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Default",
+        "Default Enabled",
+        "Aria Described By",
+        "Aria Described By And Helper Text Both Set",
+        "Indeterminate",
+        "All Size Checkbox",
+        "With Error",
+        "With Error Controlled",
+        "With Helper Text",
+        "Disabled",
+        "Indeterminate Disabled",
+        "Selected Disabled",
+        "In Narrow Container",
+        "Very Long Label",
+        "Required",
+        "Read Only",
+        "Optional",
+        "Hidden Label",
+        "Group With Default Values",
+        "Group With Hidden Legend",
+        "Grouped Readonly",
+        "Grouped With Helper",
+        "All Sizes Group Row",
+        "All Sizes Group Column",
+        "Grouped With Errors",
+        "Many Checkboxes",
+        "Within Shadow DOM",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "CircularLoader",
+      "title": "GDS/Loader/CircularLoader",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-loader-circularloader",
+      "props": [],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [],
+      "stories": [
+        "Default",
+        "Small",
+        "Large",
+        "Inverse",
+        "In Context",
+        "Within Shadow DOM",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "ColorSchemeProvider",
+      "title": "GDS/ColorSchemeProvider",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-colorschemeprovider",
+      "props": [
+        {
+          "name": "scheme",
+          "type": "ColorSchemeOption",
+          "description": "Color scheme (aka theme) to use. If not provided, the value is detected based on the user's OS settings (\"auto\").",
+          "default": "\"auto\""
+        },
+        {
+          "name": "target",
+          "type": "HTMLElement",
+          "description": "Custom target to attach `data-gds-theme` attribute. Defaults to a container div if not provided."
+        },
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "description": "Contents that make use of the color scheme."
+        }
+      ],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {
+            "children": "<ExampleContent setting=\"auto\" />"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "Dark",
+          "args": {
+            "scheme": "\"dark\"",
+            "children": "<ExampleContent setting=\"dark\" />"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "Light",
+          "args": {
+            "scheme": "\"light\"",
+            "children": "<ExampleContent setting=\"light\" />"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "Target",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "TextTestDark",
+          "args": {
+            "scheme": "\"dark\"",
+            "children": "<ExampleTextContent setting=\"dark\" />"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "TextTestLight",
+          "args": {
+            "scheme": "\"light\"",
+            "children": "<ExampleTextContent setting=\"light\" />"
+          },
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Default",
+        "Dark",
+        "Light",
+        "Target",
+        "Text Test Dark",
+        "Text Test Light",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "Combobox",
+      "title": "GDS/Combobox",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-combobox",
+      "props": [],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithCustomValuesAllowed",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithHelperText",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithNoResults",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithNoResultsCustom",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithHiddenLabel",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithIconsAndInputDecoration",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "LongList",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithAnError",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithDisabledItems",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "OnSelect",
+          "args": {
+            "onSelection": "value => {"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithDefaultComboboxItems",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithCustomItemContent",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithCustomItemContentAndTextValue",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithLabelOptions",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithDefaultValue",
+          "args": {
+            "defaultSelectedItem": "\"cat\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithinShadowDOM",
+          "args": {},
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Default",
+        "With Custom Values Allowed",
+        "With Helper Text",
+        "With No Results",
+        "With No Results Custom",
+        "With Hidden Label",
+        "With Icons And Input Decoration",
+        "Long List",
+        "With An Error",
+        "With Disabled Items",
+        "On Select",
+        "With Default Combobox Items",
+        "With Custom Item Content",
+        "With Custom Item Content And Text Value",
+        "With Label Options",
+        "With Default Value",
+        "Within Shadow DOM",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "Feedback Survey",
+      "title": "Patterns/Feedback Survey",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/patterns-feedback-survey",
+      "props": [],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [],
+      "stories": [
+        "Default"
+      ]
+    },
+    {
+      "name": "Flex",
+      "title": "GDS/Flex",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-flex",
+      "props": [],
+      "constants": {
+        "JustifyContent": [
+          "start",
+          "end",
+          "center",
+          "space-between",
+          "space-around",
+          "space-evenly"
+        ]
+      },
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "Column",
+          "args": {
+            "direction": "\"column\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "ColumnWithGapObject",
+          "args": {
+            "gap": "{ row: 14",
+            "column": "8"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "Gap",
+          "args": {
+            "gap": "16"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "GapObject",
+          "args": {
+            "gap": "{ row: 4",
+            "column": "8"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithWidthPercentage",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithBorderAndWrap",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "Borders",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "TextColors",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithGrowFlex",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AsASection",
+          "args": {
+            "gap": "{ row: 14",
+            "column": "8"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "JustifyContentVariants",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AlignSelfVariants",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "Margin",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "Padding",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "ButtonExample",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "ButtonAcceptExample",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "ButtonDemoExample",
+          "args": {},
+          "hasCode": true
+        }
+      ],
+      "stories": [
+        "Default",
+        "Column",
+        "Column With Gap Object",
+        "Gap",
+        "Gap Object",
+        "With Width Percentage",
+        "With Border And Wrap",
+        "Borders",
+        "Text Colors",
+        "With Grow Flex",
+        "As A Section",
+        "Justify Content Variants",
+        "Align Self Variants",
+        "Margin",
+        "Padding",
+        "Button Example",
+        "Button Accept Example",
+        "Button Demo Example",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "Form",
+      "title": "GDS/Form",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-form",
+      "props": [
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "description": "Contents of the form, should all be contained in FormHeader, FormRow, FormFieldset, or FormFooter"
+        },
+        {
+          "name": "maxWidth",
+          "type": "number",
+          "description": "Sets a width on the content of the Form in pixels",
+          "default": "650"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "Used to identify this form"
+        },
+        {
+          "name": "spacing",
+          "type": "\"spacious\" | \"standard\" | \"compact\"",
+          "description": "Adjusts the vertical spacing between parts of the Form",
+          "default": "standard"
+        },
+        {
+          "name": "onSubmit",
+          "type": "(e: FormEvent) => void",
+          "description": "Callback that is triggered when the form is submitted"
+        },
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "description": "Contents of the header if more functionality is needed outside of title and helperMessage. Places content after the title or helperMessage"
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "description": "Adds detail about the purpose or goal of this form"
+        },
+        {
+          "name": "heading",
+          "type": "string",
+          "description": "Title of the form"
+        },
+        {
+          "name": "headingLevel",
+          "type": "\"h1\" | \"h2\" | \"h3\" | \"h4\"",
+          "description": "Changes the underlying semantics of the heading",
+          "default": "h2"
+        },
+        {
+          "name": "headingSize",
+          "type": "\"large\" | \"medium\" | \"small\"",
+          "description": "Changes the font size of the heading according to our Typography tokens",
+          "default": "large"
+        },
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "description": "Contents of the row of the Form. Adds spacing between each child"
+        },
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "description": "Contents of a fieldset, typically at least two inputs"
+        },
+        {
+          "name": "legend",
+          "type": "string",
+          "description": "Legend of the fieldset, describes the purpose of the set of fields"
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "description": "Optional description for the set of fields"
+        },
+        {
+          "name": "isRequired",
+          "type": "boolean",
+          "description": "Identify that the fieldset is required"
+        },
+        {
+          "name": "legendIndicatorForRequired",
+          "type": "string",
+          "description": "Legend indicator for required",
+          "default": "\"(Required)\""
+        },
+        {
+          "name": "isOptional",
+          "type": "boolean",
+          "description": "Identify that the fieldset is optional"
+        },
+        {
+          "name": "legendIndicatorForOptional",
+          "type": "string",
+          "description": "Legend indicator for optional",
+          "default": "\"(Optional)\""
+        },
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "description": "Contents of the form footer, typically one or more Buttons"
+        }
+      ],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "MaxWidth",
+          "args": {
+            "maxWidth": "400"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "SmallMaxWidthToStack",
+          "args": {
+            "maxWidth": "200"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithSpaciousSpacing",
+          "args": {
+            "spacing": "\"spacious\"",
+            "heading": "\"Settings (spacious)\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithStandardSpacing",
+          "args": {
+            "spacing": "\"standard\"",
+            "heading": "\"Settings (standard)\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithCompactSpacing",
+          "args": {
+            "spacing": "\"compact\"",
+            "heading": "\"Settings (compact)\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithErrorsCompact",
+          "args": {
+            "spacing": "\"compact\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithErrorsStandard",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "WithErrorsSpacious",
+          "args": {
+            "spacing": "\"spacious\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "CustomHeadingSize",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "WithOnSubmitEvent",
+          "args": {
+            "spacing": "\"compact\"",
+            "onSubmit": "e => {"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithCustomHeader",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "AllInputs",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "WithinShadowDOM",
+          "args": {},
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Default",
+        "Max Width",
+        "Small Max Width To Stack",
+        "With Spacious Spacing",
+        "With Standard Spacing",
+        "With Compact Spacing",
+        "With Errors Compact",
+        "With Errors Standard",
+        "With Errors Spacious",
+        "Custom Heading Size",
+        "With On Submit Event",
+        "With Custom Header",
+        "All Inputs",
+        "Within Shadow DOM",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "Heading",
+      "title": "GDS/Heading",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-heading",
+      "props": [
+        {
+          "name": "as",
+          "type": "\"h1\" | \"h2\" | \"h3\" | \"h4\" | \"h5\" | \"h6\"",
+          "description": "Changes the underlying HTML element for semantics and accessibility."
+        },
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "description": "The text that is displayed."
+        },
+        {
+          "name": "variant",
+          "type": "(typeof textVariants)[number]",
+          "description": "Applies base font properties according to our [typography](/foundations/typography/).",
+          "default": "\"heading-medium\""
+        },
+        {
+          "name": "color",
+          "type": "TextColor",
+          "description": "Applies a color from the [semantic color palette](/foundations/tokens/) to the Heading."
+        },
+        {
+          "name": "align",
+          "type": "\"start\" | \"center\" | \"end\"",
+          "description": "Determines horizontal alignment of the Heading."
+        },
+        {
+          "name": "margin",
+          "type": "MarginSpacing",
+          "description": "Applies the same margin to all sides. The options are based on our available [spacing tokens](/foundations/tokens/#space). The scale is in 4px increments — a value of 8 is a 32px margin.",
+          "default": "0"
+        },
+        {
+          "name": "marginLeft",
+          "type": "MarginSpacing",
+          "description": "Applies margin to the left side. The options are based on our available [spacing tokens](/foundations/tokens/#space). The scale is in 4px increments — a value of 8 is a 32px margin."
+        },
+        {
+          "name": "marginRight",
+          "type": "MarginSpacing",
+          "description": "Applies margin to the right side. The options are based on our available [spacing tokens](/foundations/tokens/#space). The scale is in 4px increments — a value of 8 is a 32px margin."
+        },
+        {
+          "name": "marginTop",
+          "type": "MarginSpacing",
+          "description": "Applies margin to the top side. The options are based on our available [spacing tokens](/foundations/tokens/#space). The scale is in 4px increments — a value of 8 is a 32px margin."
+        },
+        {
+          "name": "marginBottom",
+          "type": "MarginSpacing",
+          "description": "Applies margin to the bottom side. The options are based on our available [spacing tokens](/foundations/tokens/#space). The scale is in 4px increments — a value of 8 is a 32px margin."
+        },
+        {
+          "name": "maxLines",
+          "type": "number",
+          "description": "Limits the number of lines displayed in the text component. If the content exceeds this number, it will be truncated with an ellipsis."
+        }
+      ],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "WithColor",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "AllVariants",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "LegacyComponents",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "WithAlign",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "Nested",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithMargins",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "WithMaxLines",
+          "args": {},
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Default",
+        "With Color",
+        "All Variants",
+        "Legacy Components",
+        "With Align",
+        "Nested",
+        "With Margins",
+        "With Max Lines",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "Icon",
+      "title": "GDS/Icon",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-icon",
+      "props": [
+        {
+          "name": "accessibilityLabel",
+          "type": "string",
+          "description": "Used to provide a label for screen reader users."
+        },
+        {
+          "name": "variant",
+          "type": "(typeof variants)[number]",
+          "description": "Styles the Icon according to its use.",
+          "default": "'default'"
+        },
+        {
+          "name": "isDecorative",
+          "type": "boolean",
+          "description": "Sets the value of the `aria-hidden` attribute on the icon. If a non-empty",
+          "default": "true"
+        },
+        {
+          "name": "size",
+          "type": "\"small\" | \"medium\" | \"large\" | \"xlarge\" | \"xxlarge\"",
+          "description": "Defines the size of the Icon (only intended for Interface icons).",
+          "default": "'medium'"
+        },
+        {
+          "name": "icon",
+          "type": "{ __brand: \"color\" | \"nocolor\"",
+          "description": "Defines what icon is displayed. Must be an icon function generated by SVGR"
+        },
+        {
+          "name": "resourcePrefix",
+          "type": "string",
+          "description": "Provides a prefix for all `id` attributes and ID-based references inside the SVG,"
+        }
+      ],
+      "constants": {
+        "variants": [
+          "default",
+          "inverse",
+          "brand",
+          "business",
+          "addition",
+          "critical",
+          "deletion",
+          "success",
+          "premium",
+          "pro",
+          "warning",
+          "inherit"
+        ]
+      },
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "AllSizes",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AppsIcons",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "EmojiIcons",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "GGoIcons",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "LogoIcons",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "MiscIcons",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "InterfaceIconsDefault",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "InterfaceIconsBrand",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "InterfaceIconsInherit",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "InterfaceIconsWarning",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "InterfaceIconsCritical",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "SvgIdCollisionExample",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "InterfaceIconsInverted",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AllVariants",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "DangerouslyUseIconDirectly",
+          "args": {},
+          "hasCode": true
+        }
+      ],
+      "stories": [
+        "Default",
+        "All Sizes",
+        "Apps Icons",
+        "Emoji Icons",
+        "G Go Icons",
+        "Logo Icons",
+        "Misc Icons",
+        "Interface Icons Default",
+        "Interface Icons Brand",
+        "Interface Icons Inherit",
+        "Interface Icons Warning",
+        "Interface Icons Critical",
+        "Svg Id Collision Example",
+        "Interface Icons Inverted",
+        "All Variants",
+        "Dangerously Use Icon Directly",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "IconButton",
+      "title": "GDS/IconButton",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-iconbutton",
+      "props": [
+        {
+          "name": "icon",
+          "type": "IconProps[\"icon\"]",
+          "description": "Icon to display inside the IconButton"
+        },
+        {
+          "name": "accessibilityLabel",
+          "type": "string",
+          "description": "Describes the Icon Button's purpose. Also populates the Tooltip, unless otherwise changed through `tooltipContentProps`."
+        },
+        {
+          "name": "size",
+          "type": "\"small\" | \"medium\" | \"large\" | \"xlarge\"",
+          "description": "Size (height and width) of the Icon Button",
+          "default": "'medium'"
+        },
+        {
+          "name": "tooltipProps",
+          "type": "Partial<TooltipProps>",
+          "description": "Props to pass to the Tooltip component. E.g. initiallyOpen, placement, etc"
+        },
+        {
+          "name": "tooltipContentProps",
+          "type": "Partial<TooltipContentProps>",
+          "description": "Props to pass to the TooltipContent component. shadowDom and iFrame environments may need to override this prop and provide their own root"
+        },
+        {
+          "name": "variant",
+          "type": "Exclude<BaseButtonProps[\"variant\"], \"critical\" | \"pro\" | \"enterprise\">",
+          "description": "Look and feel of the Icon Button",
+          "default": "'primary'"
+        }
+      ],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "AllVariantsOnBackground",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithinShadowDOM",
+          "args": {},
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Default",
+        "All Variants On Background",
+        "All Variants With Shortcut",
+        "All Variants Small",
+        "All Sizes",
+        "With Separate Tooltip Content",
+        "With Delayed Disable After Focus",
+        "All States",
+        "Within Shadow DOM",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "Illustration",
+      "title": "GDS/Illustration",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-illustration",
+      "props": [
+        {
+          "name": "type",
+          "type": "(typeof illustrationTypes)[number]",
+          "description": "Which illustration to display."
+        },
+        {
+          "name": "size",
+          "type": "\"small\" | \"medium\" | \"large\" | \"xlarge\"",
+          "description": "Defines the size of the Illustration. Small (32x32px), Medium (56x56px), Large (80x80px) and xLarge (96x96px)",
+          "default": "'medium'"
+        },
+        {
+          "name": "accessibilityLabel",
+          "type": "string",
+          "description": "Used to provide a label for screen reader users."
+        },
+        {
+          "name": "colorMode",
+          "type": "\"auto\" | \"light\" | \"dark\"",
+          "description": "Whether to follow the inherited color scheme (light or dark)."
+        }
+      ],
+      "constants": {
+        "illustrationTypes": [
+          "empty-birding",
+          "empty-cactus",
+          "empty-cookie",
+          "empty-hat",
+          "empty-painting",
+          "empty-plane",
+          "empty-sand",
+          "empty-scribe",
+          "empty-work",
+          "empty-write",
+          "success-birding",
+          "success-cactus",
+          "success-check",
+          "success-cookie",
+          "success-hat",
+          "success-painting",
+          "success-plane",
+          "success-sand",
+          "success-scribe",
+          "success-work",
+          "success-write",
+          "spot-celebrate",
+          "spot-issue",
+          "spot-chat-double",
+          "spot-chat-check",
+          "spot-doc-sparkles",
+          "spot-doc-award",
+          "spot-doc-magic",
+          "spot-doc-check",
+          "spot-doc-double-check",
+          "spot-doc-100",
+          "spot-chart-user",
+          "spot-target",
+          "spot-coin",
+          "spot-doc-on-brand",
+          "spot-chart-line-graph",
+          "spot-plagiarism",
+          "spot-detect-ai-text"
+        ]
+      },
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "AllSizes",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "EmptyState",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "Illustrations",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "colorModes",
+          "args": {},
+          "hasCode": true
+        }
+      ],
+      "stories": [
+        "Default",
+        "All Sizes",
+        "Empty State",
+        "Illustrations",
+        "Color Modes",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "InputErrorMessage",
+      "title": "GDS/InputErrorMessage",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-inputerrormessage",
+      "props": [],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Default",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "InputLabel",
+      "title": "GDS/InputLabel",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-inputlabel",
+      "props": [],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "OptionalWithHelperText",
+          "args": {
+            "isOptional": "true",
+            "helperMessage": "\"Pick the one you want as a pet\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "Required",
+          "args": {
+            "isRequired": "true"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "HiddenLabel",
+          "args": {
+            "labelDisplay": "\"hidden\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "AsLegend",
+          "args": {
+            "as": "\"legend\""
+          },
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Default",
+        "Optional With Helper Text",
+        "Required",
+        "Hidden Label",
+        "As Legend",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "Link",
+      "title": "GDS/Link",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-link",
+      "props": [],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {
+            "href": "\"https://support.grammarly.com\"",
+            "children": "\"Visit the help center\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "SecondaryVariant",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "InheritVariant",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AllTextVariants",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "InlineLink",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "StandaloneLinkWithIcon",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "StandaloneLinkThatOpensInNewWindow",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AdjustSizeAndWeight",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "BoldSurroundingText",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "Mailto",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "OnClick",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "InNarrowContainerInline",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "InNarrowContainerStandalone",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "DownloadWithRenamedFilename",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "DownloadIcon",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "JustImage",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithinShadowDOM",
+          "args": {},
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Default",
+        "Secondary Variant",
+        "Inherit Variant",
+        "All Text Variants",
+        "Inline Link",
+        "Standalone Link With Icon",
+        "Standalone Link That Opens In New Window",
+        "Adjust Size And Weight",
+        "Bold Surrounding Text",
+        "Mailto",
+        "On Click",
+        "In Narrow Container Inline",
+        "In Narrow Container Standalone",
+        "Download With Renamed Filename",
+        "Download Icon",
+        "Just Image",
+        "All States",
+        "Within Shadow DOM",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "LiveAnnouncer",
+      "title": "GDS/LiveAnnouncer",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-liveannouncer",
+      "props": [],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "UsingLoader",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "UsingToast",
+          "args": {},
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Using Loader",
+        "Using Toast",
+        "Using Skeleton Loader"
+      ]
+    },
+    {
+      "name": "Logo",
+      "title": "GDS/Logo",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-logo",
+      "props": [],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {
+            "brand": "\"superhuman\"",
+            "accessibilityLabel": "\"Grammarly Logo Mark\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "Grammarly",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "Coda",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "Superhuman",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "Mail",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "Go",
+          "args": {},
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Default",
+        "Grammarly",
+        "Coda",
+        "Superhuman",
+        "Mail",
+        "Go",
+        "With Custom Width",
+        "With Custom Height",
+        "With Link",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "Menu",
+      "title": "GDS/Menu",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-menu",
+      "props": [
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "description": "The content to render in the Menu"
+        },
+        {
+          "name": "activator",
+          "type": "\"more-horizontal\" | \"more-vertical\" | React.ReactElement",
+          "description": "The Button or IconButton that opens the menu when activated.",
+          "default": "\"more-vertical\""
+        },
+        {
+          "name": "accessibilityLabel",
+          "type": "string",
+          "description": "Describes the Icon Button's purpose.",
+          "default": "\"More\""
+        },
+        {
+          "name": "initialOpen",
+          "type": "boolean",
+          "description": "Determines whether the Menu should be open initially on mount. Mostly for debug purposes.",
+          "default": "false"
+        },
+        {
+          "name": "onClose",
+          "type": "() => void",
+          "description": "Event handler that is called when the Menu is closed."
+        },
+        {
+          "name": "key",
+          "type": "string | number | Key",
+          "description": "Unique identifier for the MenuItem"
+        },
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "description": "The content to render in the MenuItem"
+        },
+        {
+          "name": "isDisabled",
+          "type": "boolean",
+          "description": "Indicates if the item can be activated"
+        },
+        {
+          "name": "icon",
+          "type": "IconProps[\"icon\"]",
+          "description": "Icon to display inside on the left side of the MenuItem"
+        },
+        {
+          "name": "onClick",
+          "type": "() => void",
+          "description": "Action for the item when activated"
+        },
+        {
+          "name": "href",
+          "type": "string",
+          "description": "If specified, children are rendered as a Link with the provided destination."
+        },
+        {
+          "name": "target",
+          "type": "\"_blank\" | \"_self\" | \"_parent\" | \"_top\"",
+          "description": "Determines where the Link will be opened."
+        },
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "description": "The items to render in the section."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "description": "Label for the section."
+        },
+        {
+          "name": "labelDisplay",
+          "type": "\"visible\" | \"hidden\"",
+          "description": "Can be used to visually hide the label.",
+          "default": "\"visible\""
+        },
+        {
+          "name": "role",
+          "type": "\"separator\" | \"none\"",
+          "description": "The role attribute defines the semantic meaning of the menu separator."
+        }
+      ],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "MenuWithHorizontalButton",
+          "args": {
+            "activator": "\"more-horizontal\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "MenuWithLinkItems",
+          "args": {
+            "activator": "\"more-horizontal\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "MenuWithCustomButton",
+          "args": {
+            "activator": "("
+          },
+          "hasCode": false
+        },
+        {
+          "name": "MenuWithCustomIconButton",
+          "args": {
+            "activator": "("
+          },
+          "hasCode": false
+        },
+        {
+          "name": "MenuPositions",
+          "args": {
+            "activator": "\"more-vertical\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "MenuContents",
+          "args": {
+            "activator": "\"more-vertical\"",
+            "initialOpen": "true"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithinShadowDOM",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "WithinShadowDOMWithMouseDownOverride",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "MenuWithMouseDownOverride",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "AssertWorksWithKeyboard",
+          "args": {
+            "onClick": "fn()"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "AssertWorksWithMouse",
+          "args": {
+            "onClick": "fn()"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "AssertTabClosesMenu",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "AssertAllowsCustomActivator",
+          "args": {
+            "accessibilityLabel": "\"\"",
+            "onClick": "fn()",
+            "activator": "("
+          },
+          "hasCode": false
+        },
+        {
+          "name": "OnClose",
+          "args": {},
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Default",
+        "Menu With Horizontal Button",
+        "Menu With Link Items",
+        "Menu With Custom Button",
+        "Menu With Custom Icon Button",
+        "Menu Positions",
+        "Menu Contents",
+        "Menu With Interaction",
+        "Within Shadow DOM",
+        "Within Shadow DOM With Mouse Down Override",
+        "Menu With Mouse Down Override",
+        "Assert Works With Keyboard",
+        "Assert Works With Mouse",
+        "Assert Tab Closes Menu",
+        "Assert Allows Custom Activator",
+        "Visual Test",
+        "On Close"
+      ]
+    },
+    {
+      "name": "Modal",
+      "title": "GDS/Modal",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-modal",
+      "props": [
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "description": "The content to render in the modal"
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "description": "The title of the modal, displayed in the header"
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "description": "Description beneath the title with details about the modal"
+        },
+        {
+          "name": "dismissOnOutsideClick",
+          "type": "boolean",
+          "description": "Determines whether you can click outside the modal container to close the modal window"
+        },
+        {
+          "name": "hasCloseButton",
+          "type": "boolean",
+          "description": "Determines if the modal contains a close Icon Button in the top corner"
+        },
+        {
+          "name": "isOpen",
+          "type": "boolean",
+          "description": "Determines whether the modal is currently visible"
+        },
+        {
+          "name": "onClose",
+          "type": "() => void",
+          "description": "Event handler that is called when the Modal is about to close. Use this to manually control the `isOpen`."
+        },
+        {
+          "name": "onHide",
+          "type": "() => void",
+          "description": "Event handler that is automatically called when the Modal has closed."
+        },
+        {
+          "name": "onShow",
+          "type": "() => void",
+          "description": "Event handler that is automatically called when the Modal has opened."
+        },
+        {
+          "name": "width",
+          "type": "\"small\" | \"medium\"",
+          "description": "Small is 480px, Medium is 640px"
+        },
+        {
+          "name": "role",
+          "type": "\"dialog\" | \"alertdialog\"",
+          "description": "Used to notify screen reader user if this is an alert or error, vs. a dialog for data input or information"
+        },
+        {
+          "name": "accessibilityLabelCloseButton",
+          "type": "string",
+          "description": "Used to override the default label on the close button"
+        },
+        {
+          "name": "target",
+          "type": "Element | DocumentFragment",
+          "description": "Used to override the render target"
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "description": "The title of the modal, displayed in the header"
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "description": "Description beneath the title with details about the modal"
+        },
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "description": "The content to render in the modal dialog"
+        },
+        {
+          "name": "hasCloseButton",
+          "type": "boolean",
+          "description": "Determines if the modal contains a close Icon Button in the top corner"
+        },
+        {
+          "name": "onClose",
+          "type": "() => void",
+          "description": "Handler that is called when the close button is clicked"
+        },
+        {
+          "name": "accessibilityLabelCloseButton",
+          "type": "string",
+          "description": "Used to override the default label on the close button"
+        },
+        {
+          "name": "onClick",
+          "type": "() => void",
+          "description": "Handler that is called when the close button is clicked"
+        },
+        {
+          "name": "onKeyDown",
+          "type": "(event: React.KeyboardEvent<HTMLButtonElement>) => void",
+          "description": "Handler that is called when the close button has focus and keyboard event is triggered"
+        },
+        {
+          "name": "accessibilityLabelCloseButton",
+          "type": "string",
+          "description": "Used to override the default label on the Close Icon Button"
+        },
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "description": "The content to render in the modal body"
+        },
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "description": "The content to render in the modal footer"
+        }
+      ],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "AssertOpens",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "AssertCloses",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "MediumModal",
+          "args": {
+            "width": "\"medium\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "TitleDescriptionModal",
+          "args": {
+            "width": "\"medium\"",
+            "description": "\"Modal description\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "TransactionalModal",
+          "args": {
+            "dismissOnOutsideClick": "false",
+            "hasCloseButton": "false"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "AlertDialogModal",
+          "args": {
+            "role": "\"alertdialog\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "AlertDialogModalWithLongText",
+          "args": {
+            "role": "\"alertdialog\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "Footer",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "DialogWithTitleDescription",
+          "args": {
+            "description": "\"Modal description\"",
+            "hasCloseButton": "true"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithinShadowDOM",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "RenderTarget",
+          "args": {
+            "target": "document.body"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "RenderTargetProvider",
+          "args": {},
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Default",
+        "Assert Opens",
+        "Assert Closes",
+        "Medium Modal",
+        "Title Description Modal",
+        "Transactional Modal",
+        "Alert Dialog Modal",
+        "Alert Dialog Modal With Long Text",
+        "Footer",
+        "Dialog With Title Description",
+        "Within Shadow DOM",
+        "Visual Test",
+        "Render Target",
+        "Render Target Provider"
+      ]
+    },
+    {
+      "name": "PlanTag",
+      "title": "GDS/PlanTag",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-plantag",
+      "props": [],
+      "constants": {
+        "variants": [
+          "free",
+          "pro",
+          "enterprise",
+          "edu",
+          "business",
+          "premium"
+        ],
+        "sizes": [
+          "xsmall",
+          "small",
+          "medium",
+          "large"
+        ]
+      },
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "AllVariantsAndSizes",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithACustomTitle",
+          "args": {},
+          "hasCode": true
+        }
+      ],
+      "stories": [
+        "Default",
+        "All Variants And Sizes",
+        "With A Custom Title",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "Popover",
+      "title": "GDS/Popover",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-popover",
+      "props": [
+        {
+          "name": "dismissOnOutsideClick",
+          "type": "boolean",
+          "description": "Determines whether the user can click outside the Popover to close it.",
+          "default": "true"
+        },
+        {
+          "name": "initialOpen",
+          "type": "boolean",
+          "description": "Determines whether the Popover should be open initially when its Popover.Anchor is mounted.",
+          "default": "false"
+        },
+        {
+          "name": "placement",
+          "type": "Placement",
+          "description": "Indicates placement of the Popover. If not specified, the Popover will be placed automatically based on position priority.",
+          "default": "'top'"
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "description": "If you plan to manually control the Popover state, use `open` with `onOpenChange` options.",
+          "default": "false"
+        },
+        {
+          "name": "onOpenChange",
+          "type": "React.Dispatch<React.SetStateAction<boolean>>",
+          "description": "Event handler that is called when the open state is changed. Use this to manually control `open`."
+        },
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "description": "`PopoverAnchor` controls where the Popover appears. It can also activate the Popover."
+        },
+        {
+          "name": "onShow",
+          "type": "() => void",
+          "description": ""
+        },
+        {
+          "name": "onHide",
+          "type": "() => void",
+          "description": ""
+        },
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "description": "The UI element that the Popover anchors itself to. If this also activates the Popover, it must be a Button or Icon Button."
+        },
+        {
+          "name": "accessibilityLabel",
+          "type": "string",
+          "description": "Used to give context to people using screen readers about the purpose of this Popover."
+        },
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "description": "Contents of the popover."
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "description": "A visible title displayed in bold inside the Popover."
+        },
+        {
+          "name": "root",
+          "type": "HTMLElement | null | undefined",
+          "description": "You can explicitly set the root element for the portal."
+        },
+        {
+          "name": "illustration",
+          "type": "React.ReactNode",
+          "description": "A decorative image or illustration that appears above the title in the Popover."
+        },
+        {
+          "name": "width",
+          "type": "number | string",
+          "description": "Sets a fixed width for the Popover. Can be a number for pixels or a string for percentages, like “75%”. Range is 225 to 480 px."
+        }
+      ],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "OnboardingNonDismissablePopover",
+          "args": {
+            "placement": "\"right\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithIllustration",
+          "args": {
+            "placement": "\"right\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithNoTitle",
+          "args": {
+            "placement": "\"right\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithLightContent",
+          "args": {
+            "placement": "\"top\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithShowHideCallbacks",
+          "args": {
+            "placement": "\"right\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithNonGDSButton",
+          "args": {
+            "placement": "\"right\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "MultiStep",
+          "args": {
+            "placement": "\"right\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithinShadowDOM",
+          "args": {},
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Default",
+        "Onboarding Non Dismissable Popover",
+        "With Illustration",
+        "With No Title",
+        "With Light Content",
+        "With Show Hide Callbacks",
+        "With Non GDS Button",
+        "Multi Step",
+        "Within Shadow DOM",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "PortalContainerProvider",
+      "title": "GDS/PortalContainerProvider",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-portalcontainerprovider",
+      "props": [
+        {
+          "name": "default",
+          "type": "HTMLElement",
+          "description": "The default outlet where portals should be rendered."
+        },
+        {
+          "name": "modal",
+          "type": "HTMLElement",
+          "description": "The outlet where Modal portals should be rendered. Leave empty to just use `default`."
+        },
+        {
+          "name": "tooltip",
+          "type": "HTMLElement",
+          "description": "The outlet where Tooltip portals should be rendered. Leave empty to just use `default`."
+        },
+        {
+          "name": "popover",
+          "type": "HTMLElement",
+          "description": "The outlet where Popover portals should be rendered. Leave empty to just use `default`."
+        }
+      ],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "TooltipPortal",
+          "args": {},
+          "hasCode": true
+        }
+      ],
+      "stories": [
+        "Default",
+        "Tooltip Portal",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "RadioGroup",
+      "title": "GDS/RadioGroup",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-radiogroup",
+      "props": [
+        {
+          "name": "helperMessage",
+          "type": "string",
+          "description": "Helper text used in addition to the label"
+        },
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "description": "The label or content of the RadioButton"
+        }
+      ],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "WithDefaultValue",
+          "args": {
+            "defaultValue": "\"all\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithHelperMessage",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "Required",
+          "args": {
+            "isRequired": "true"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "Optional",
+          "args": {
+            "isOptional": "true"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithErrorMessage",
+          "args": {
+            "errorMessage": "\"This is an extra extra extra long error text\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithHelperAndErrorMessage",
+          "args": {
+            "legend": "\"Choose your knowledge hub visibility settings\"",
+            "isRequired": "true",
+            "helperMessage": "\"This is also long helper text that explains something complex about this radio.\"",
+            "errorMessage": "\"This is extra extra extra long error text\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "InRowLayout",
+          "args": {
+            "errorMessage": "\"This is error text\"",
+            "layout": "\"row\"",
+            "children": "["
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithThreeOptions",
+          "args": {
+            "children": "["
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithFourOptions",
+          "args": {
+            "children": "["
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithFiveOptions",
+          "args": {
+            "children": "longerChildren"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithFiveOptionsAndError",
+          "args": {
+            "errorMessage": "\"You must select one\"",
+            "children": "longerChildren"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithAllDisabled",
+          "args": {
+            "isDisabled": "true",
+            "defaultValue": "\"select\"",
+            "children": "longerChildren"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithOneDisabled",
+          "args": {
+            "defaultValue": "\"all\"",
+            "children": "["
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithOnChangeAlert",
+          "args": {
+            "defaultValue": "\"all\"",
+            "onChange": "value => {"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithHiddenLegend",
+          "args": {
+            "legendDisplay": "\"hidden\"",
+            "children": "["
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithIndividualHelperText",
+          "args": {
+            "legend": "\"Visibility\"",
+            "errorMessage": "\"Server error\"",
+            "children": "["
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithIndividualHelperTextAndWrapping",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AllSizes",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AllSizesWithError",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AllSizesRow",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithAnotherLanguage",
+          "args": {
+            "legend": "\"Lieblingstier\"",
+            "isRequired": "true",
+            "legendIndicatorForRequired": "\"(Pflichtfelder)\"",
+            "children": "["
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithinShadowDOM",
+          "args": {},
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Default",
+        "With Default Value",
+        "With Helper Message",
+        "Required",
+        "Optional",
+        "With Error Message",
+        "With Helper And Error Message",
+        "In Row Layout",
+        "With Three Options",
+        "With Four Options",
+        "With Five Options",
+        "With Five Options And Error",
+        "With All Disabled",
+        "With One Disabled",
+        "With On Change Alert",
+        "With Hidden Legend",
+        "With Individual Helper Text",
+        "With Individual Helper Text And Wrapping",
+        "All Sizes",
+        "All Sizes With Error",
+        "All Sizes Row",
+        "With Another Language",
+        "Within Shadow DOM",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "Rating",
+      "title": "GDS/Rating",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-rating",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "description": "Text label displayed above the stars to describe the purpose of the rating."
+        },
+        {
+          "name": "isError",
+          "type": "boolean",
+          "description": "When true, displays an error message below the stars and highlights the rating control.",
+          "default": "false"
+        },
+        {
+          "name": "value",
+          "type": "RatingValue",
+          "description": "The currently selected rating index (0–4), where 0 = 1 star, 4 = 5 stars.",
+          "default": "undefined"
+        },
+        {
+          "name": "isRequired",
+          "type": "boolean",
+          "description": "When true, adds a \"(Required)\" label indicator and marks the field as required for screen readers.",
+          "default": "false"
+        },
+        {
+          "name": "starLabels",
+          "type": "StarLabels",
+          "description": "An array of five custom labels for the stars, ordered from lowest to highest value.",
+          "default": "* [ \"Not Valuable\", \"Slightly Valuable\", \"Moderately Valuable\", \"Fairly Valuable\", \"Very Valuable\" ]"
+        },
+        {
+          "name": "onChange",
+          "type": "(value: RatingValue) => void",
+          "description": "Callback fired when a user selects or changes a rating."
+        }
+      ],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {
+            "label": "\"How valuable was this suggestion?\"",
+            "onChange": "() => {"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithErrorState",
+          "args": {
+            "label": "\"How valuable was this suggestion?\"",
+            "isError": "true",
+            "onChange": "() => {"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithPreselectedState",
+          "args": {
+            "label": "\"How valuable was this suggestion?\"",
+            "value": "3",
+            "onChange": "() => {"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithOnChangeAlert",
+          "args": {
+            "label": "\"How valuable was this suggestion?\"",
+            "onChange": "value => {"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithCustomStarLabels",
+          "args": {
+            "label": "\"How valuable was this suggestion?\"",
+            "starLabels": "[\"Label1\"",
+            "onChange": "() => {"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "Required",
+          "args": {
+            "label": "\"How valuable was this suggestion?\"",
+            "isRequired": "true",
+            "onChange": "() => {"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithSubmit",
+          "args": {},
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Default",
+        "With Error State",
+        "With Preselected State",
+        "With On Change Alert",
+        "With Custom Star Labels",
+        "Required",
+        "With Submit",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "ScreenReaderOnly",
+      "title": "GDS/ScreenReaderOnly",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-screenreaderonly",
+      "props": [
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "description": "The content to be made visible only to screen-readers."
+        },
+        {
+          "name": "as",
+          "type": "AsOptions",
+          "description": "The rendered HTML element.",
+          "default": "'span'"
+        }
+      ],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": true
+        }
+      ],
+      "stories": [
+        "Default",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "SearchField",
+      "title": "GDS/SearchField",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-searchfield",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "description": "Displays the text label for the Search Field."
+        },
+        {
+          "name": "labelDisplay",
+          "type": "\"visible\" | \"hidden\"",
+          "description": "Can be used to visually hide the label when another element on the page is acting as the visual label for the TextField."
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "Unique name for this input, used for form validation."
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "description": "Adds placeholder text to the input, if needed. Recommended not to use."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "description": "To implement as controlled component, the `value` prop can be used to maintain the input’s value"
+        },
+        {
+          "name": "isDisabled",
+          "type": "boolean",
+          "description": "When true, indicates that the Search Field cannot be focused, changed, or interacted with.",
+          "default": "false"
+        },
+        {
+          "name": "accessibilityLabelClearButton",
+          "type": "string",
+          "description": "Can be used to override the aria-label on the clear icon button"
+        },
+        {
+          "name": "size",
+          "type": "\"medium\" | \"large\" | \"xlarge\"",
+          "description": "Controls the height of the Search Field.",
+          "default": "\"medium\""
+        },
+        {
+          "name": "onSubmit",
+          "type": "(value: string) => void",
+          "description": "Callback fired when the Enter key is pressed and focus is within the Search Field input"
+        },
+        {
+          "name": "onClear",
+          "type": "() => void",
+          "description": "Activated when the Clear iconButton at the end of the Search Field is pressed."
+        }
+      ],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "WithLongDefaultValue",
+          "args": {
+            "placeholder": "\"Search skills\"",
+            "defaultValue": "\"Component schema for search field\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithVisibleLabel",
+          "args": {
+            "label": "\"Search skills\"",
+            "labelDisplay": "\"visible\"",
+            "placeholder": "\"\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithOnChange",
+          "args": {
+            "label": "\"Search skills\"",
+            "placeholder": "\"Search images\"",
+            "onChange": "value => {"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithAnnouncedResults",
+          "args": {
+            "label": "\"Search cats\"",
+            "onChange": "async value => {"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithOnSubmit",
+          "args": {
+            "label": "\"Search skills\"",
+            "onSubmit": "value => {"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithCustomClearButtonLabel",
+          "args": {
+            "label": "\"Search skills\"",
+            "accessibilityLabelClearButton": "\"Clear the current search term\"",
+            "onClear": "() => {"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "AssertClears",
+          "args": {
+            "defaultValue": "\"gds\"",
+            "onClear": "fn()"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "InNarrowContainer",
+          "args": {
+            "placeholder": "\"Search skills\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "AllSizes",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithinShadowDOM",
+          "args": {},
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Default",
+        "With Long Default Value",
+        "With Visible Label",
+        "With On Change",
+        "With Announced Results",
+        "With On Submit",
+        "With Custom Clear Button Label",
+        "Assert Clears",
+        "In Narrow Container",
+        "All Sizes",
+        "All States",
+        "Within Shadow DOM",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "Select",
+      "title": "GDS/Select",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-select",
+      "props": [],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "WithOnChange",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithoutDefaultValue",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithOptionGroups",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithinShadowDOM",
+          "args": {},
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Default",
+        "With On Change",
+        "Without Default Value",
+        "With Option Groups",
+        "All States",
+        "Within Shadow DOM",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "SkeletonLoader",
+      "title": "GDS/Loader/SkeletonLoader",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-loader-skeletonloader",
+      "props": [
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "description": "Content that is either one of the SkeletonLoader subcomponents or loaded content."
+        },
+        {
+          "name": "accessibilityLabel",
+          "type": "string",
+          "description": "Label to read aloud immediately for screen reader users.",
+          "default": "\"Loading\""
+        },
+        {
+          "name": "delay",
+          "type": "number",
+          "description": "Delay in milliseconds before showing the label visually.",
+          "default": "2500"
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "description": "Displays visible text on top of skeleton components.",
+          "default": "\"Loading\""
+        },
+        {
+          "name": "labelOffset",
+          "type": "number",
+          "description": "Defines the offset in pixels from the top of the container to the visible “Loading” label.",
+          "default": "20"
+        },
+        {
+          "name": "width",
+          "type": "number | string",
+          "description": "Defines the width of the skeleton container. Defaults to the full width of its container."
+        },
+        {
+          "name": "width",
+          "type": "number | string",
+          "description": "Defines the diameter of the skeleton circle. Defaults to the full width of its container."
+        },
+        {
+          "name": "width",
+          "type": "number | string",
+          "description": "Defines the width of the skeleton item. Defaults to the full width of its container."
+        },
+        {
+          "name": "height",
+          "type": "number | string",
+          "description": "Defines the height of the skeleton item.",
+          "default": "12"
+        },
+        {
+          "name": "size",
+          "type": "\"small\" | \"medium\" | \"large\" | \"xlarge\"",
+          "description": "Sets the height of the skeleton item according to Button sizes.",
+          "default": "\"medium\""
+        },
+        {
+          "name": "variant",
+          "type": "\"primary\" | \"secondary\" | \"tertiary\" | \"ghost\" | \"premium\"",
+          "description": "Sets the visual weight of the skeleton item according to Button variants.",
+          "default": "\"primary\""
+        },
+        {
+          "name": "width",
+          "type": "number | string",
+          "description": "Defines the width of the skeleton item. Defaults to the full width of its container."
+        },
+        {
+          "name": "width",
+          "type": "number | string",
+          "description": "Defines the width of the skeleton item. Defaults to the full width of its container."
+        },
+        {
+          "name": "variant",
+          "type": "| \"heading-large\"\n    | \"heading-medium\"\n    | \"heading-small\"\n    | \"heading-xsmall\"\n    | \"heading-xxsmall\"",
+          "description": "Sets the height of the skeleton item according to Heading variants.",
+          "default": "\"heading-medium\""
+        },
+        {
+          "name": "variant",
+          "type": "\"text-large\" | \"text-medium\" | \"text-small\" | \"text-xsmall\"",
+          "description": "Sets the height of the skeleton item according to Text variants.",
+          "default": "\"text-medium\""
+        },
+        {
+          "name": "width",
+          "type": "number | string",
+          "description": "Defines the width of the skeleton item. Defaults to the full width of its container."
+        }
+      ],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "CardToggle",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AccountList",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AccountListSubduedBackground",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "Circle",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "Rectangle",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "ButtonToggle",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "TextToggle",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "HeadingToggle",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "IconToggle",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithinShadowDOM",
+          "args": {},
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Default",
+        "Card Toggle",
+        "Account List",
+        "Account List Subdued Background",
+        "Circle",
+        "Rectangle",
+        "Button Toggle",
+        "Text Toggle",
+        "Heading Toggle",
+        "Icon Toggle",
+        "Within Shadow DOM",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "Sticker",
+      "title": "GDS/Sticker",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-sticker",
+      "props": [
+        {
+          "name": "discount",
+          "type": "number",
+          "description": "Percent discount for the sticker for Grammarly Pro."
+        }
+      ],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "AllSizes",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AllVariants",
+          "args": {},
+          "hasCode": true
+        }
+      ],
+      "stories": [
+        "Default",
+        "All Sizes",
+        "All Variants",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "Switch",
+      "title": "GDS/Switch",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-switch",
+      "props": [],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "HelperMessage",
+          "args": {
+            "helperMessage": "\"Use icons to identify different suggestion types\"",
+            "labelDisplay": "\"left\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "RightLabel",
+          "args": {
+            "helperMessage": "\"Use icons to identify different suggestion types\"",
+            "labelDisplay": "\"right\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "TopLabel",
+          "args": {
+            "helperMessage": "\"Use icons to identify different suggestion types\"",
+            "labelDisplay": "\"top\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "TopLabelSuperLong",
+          "args": {
+            "label": "\"This is a very long label for a Switch. It should be wrapped if it is too long.\"",
+            "helperMessage": "\"This is a very long helper message for checkbox. It should be wrapped if it is too long\"",
+            "labelDisplay": "\"top\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "HiddenLabel",
+          "args": {
+            "labelDisplay": "\"hidden\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "ExternalLabel",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "SwitchSetToOn",
+          "args": {
+            "defaultSelected": "true"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "AllSizes",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "DisabledOff",
+          "args": {
+            "defaultSelected": "false",
+            "isDisabled": "true"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "DisabledOn",
+          "args": {
+            "defaultSelected": "true",
+            "isDisabled": "true"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "OnChange",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "StatusChange",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "InNarrowContainerLeftLabel",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "InNarrowContainerRightLabel",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "InNarrowContainerTopLabel",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "WithinShadowDOM",
+          "args": {},
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Default",
+        "Helper Message",
+        "Right Label",
+        "Top Label",
+        "Top Label Super Long",
+        "Hidden Label",
+        "External Label",
+        "Switch Set To On",
+        "All Sizes",
+        "Disabled Off",
+        "Disabled On",
+        "On Change",
+        "Status Change",
+        "In Narrow Container Left Label",
+        "In Narrow Container Right Label",
+        "In Narrow Container Top Label",
+        "Within Shadow DOM",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "Tabs",
+      "title": "GDS/Tabs",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-tabs",
+      "props": [
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "description": "Passes the Tab List and Tab Panels."
+        },
+        {
+          "name": "defaultSelectedTab",
+          "type": "string",
+          "description": "The first Tab is activated by default unless using this property to override the value. This corresponds with the Tab `id` prop. We do not recommend overriding this behavior."
+        },
+        {
+          "name": "onChange",
+          "type": "(id: string) => void",
+          "description": "Event handler that is called when a Tab is selected."
+        },
+        {
+          "name": "size",
+          "type": "(typeof sizes)[number]",
+          "description": "Determines the size of the Tabs",
+          "default": "\"medium\""
+        },
+        {
+          "name": "accessibilityLabel",
+          "type": "string",
+          "description": "Used to describe the theme of the entire set of Tabs."
+        },
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "description": "Used for the Tab subcomponents. Must include at least two."
+        },
+        {
+          "name": "bottomBorder",
+          "type": "\"default\" | \"none\"",
+          "description": "Determines if there is a border below the Tabs that stretches the full width of the container.",
+          "default": "\"default\""
+        },
+        {
+          "name": "width",
+          "type": "\"full\" | \"fixed\"",
+          "description": "Width of the TabList",
+          "default": "'fixed'"
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "description": "A unique ID that must match to the corresponding `TabPanel`."
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "description": "Used for the text displayed in an individual Tab."
+        },
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "description": "Used to implement custom content for inside the Tab."
+        },
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "description": "Used for the main content of the `TabPanel`."
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "description": "A unique ID that must match to the corresponding `Tab`."
+        }
+      ],
+      "constants": {
+        "sizes": [
+          "small",
+          "medium",
+          "large",
+          "xlarge",
+          "auto"
+        ]
+      },
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "NoBorder",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "FullWidth",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithDifferentDefaultSelectedTab",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithManyTabs",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithManyTabsFullWidth",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "InEachSize",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithOnChange",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithCustomTabContent",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AssertSelectsWithKeyboard",
+          "args": {
+            "onChange": "fn()"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "AssertSelectsWithMouse",
+          "args": {
+            "onChange": "fn()"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "AssertFocusManagement",
+          "args": {},
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Default",
+        "No Border",
+        "Full Width",
+        "With Different Default Selected Tab",
+        "With Many Tabs",
+        "With Many Tabs Full Width",
+        "In Each Size",
+        "With On Change",
+        "With Custom Tab Content",
+        "Assert Selects With Keyboard",
+        "Assert Selects With Mouse",
+        "Assert Focus Management",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "Tag",
+      "title": "GDS/Tag",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-tag",
+      "props": [],
+      "constants": {
+        "variants": [
+          "neutral",
+          "brand",
+          "critical",
+          "premium",
+          "pro",
+          "success",
+          "tip",
+          "warning",
+          "inverse",
+          "deletion",
+          "// deprecated\n  addition",
+          "// deprecated\n  business",
+          "// deprecated"
+        ],
+        "deprecatedVariant": [
+          "deletion",
+          "addition",
+          "business"
+        ]
+      },
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "AllVariants",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AllVariantsWithIcon",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "PremiumProAndTipWithoutIcon",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithAccessibilityLabel",
+          "args": {
+            "label": "\"Dog\"",
+            "accessibilityLabel": "\"Category: Dog\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "InNarrowContainer",
+          "args": {
+            "label": "\"New feature\"",
+            "variant": "\"brand\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "InHeading",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "SubduedBackground",
+          "args": {
+            "label": "\"New feature\"",
+            "variant": "\"inverse\""
+          },
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Default",
+        "All Variants",
+        "All Variants With Icon",
+        "Premium Pro And Tip Without Icon",
+        "With Accessibility Label",
+        "In Narrow Container",
+        "In Heading",
+        "Subdued Background",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "Text",
+      "title": "GDS/Text",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-text",
+      "props": [
+        {
+          "name": "as",
+          "type": "\"p\" | \"span\" | \"small\" | \"strong\" | \"abbr\" | \"pre\" | \"kbd\" | \"label\" | \"legend\"",
+          "description": "Changes the underlying HTML element for semantics and accessibility."
+        },
+        {
+          "name": "children",
+          "type": "React.ReactNode",
+          "description": "The text that is displayed."
+        },
+        {
+          "name": "variant",
+          "type": "(typeof textVariants)[number]",
+          "description": "Applies base font properties according to our [typography](/foundations/typography/).",
+          "default": "\"text-medium\""
+        },
+        {
+          "name": "color",
+          "type": "TextColor",
+          "description": "Applies a text color from the [semantic color palette](/foundations/tokens/)."
+        },
+        {
+          "name": "align",
+          "type": "\"start\" | \"center\" | \"end\" | \"justify\"",
+          "description": "Determines horizontal alignment of the text."
+        },
+        {
+          "name": "weight",
+          "type": "\"normal\" | \"medium\" | \"semibold\" | \"bold\"",
+          "description": "Determines the font weight of the text."
+        },
+        {
+          "name": "italic",
+          "type": "boolean",
+          "description": "When true, styles the text in italics."
+        },
+        {
+          "name": "decoration",
+          "type": "\"none\" | \"line-through\"",
+          "description": "Determines if the text has a horizontal line through the center of it."
+        },
+        {
+          "name": "margin",
+          "type": "MarginSpacing",
+          "description": "Applies the same margin to all sides. The options are based on our available [spacing tokens](/foundations/tokens/#space). The scale is in 4px increments — a value of 8 is a 32px margin.",
+          "default": "0"
+        },
+        {
+          "name": "marginLeft",
+          "type": "MarginSpacing",
+          "description": "Applies margin to the left side. The options are based on our available [spacing tokens](/foundations/tokens/#space). The scale is in 4px increments — a value of 8 is a 32px margin."
+        },
+        {
+          "name": "marginRight",
+          "type": "MarginSpacing",
+          "description": "Applies margin to the right side. The options are based on our available [spacing tokens](/foundations/tokens/#space). The scale is in 4px increments — a value of 8 is a 32px margin."
+        },
+        {
+          "name": "marginTop",
+          "type": "MarginSpacing",
+          "description": "Applies margin to the top side. The options are based on our available [spacing tokens](/foundations/tokens/#space). The scale is in 4px increments — a value of 8 is a 32px margin."
+        },
+        {
+          "name": "marginBottom",
+          "type": "MarginSpacing",
+          "description": "Applies margin to the bottom side. The options are based on our available [spacing tokens](/foundations/tokens/#space). The scale is in 4px increments — a value of 8 is a 32px margin."
+        },
+        {
+          "name": "maxLines",
+          "type": "number",
+          "description": "Limits the number of lines displayed in the text component. If the content exceeds this number, it will be truncated with an ellipsis."
+        }
+      ],
+      "constants": {
+        "textVariants": [
+          "text-large",
+          "text-medium",
+          "text-small",
+          "text-xsmall",
+          "heading-large",
+          "heading-medium",
+          "heading-small",
+          "heading-xsmall",
+          "heading-xxsmall"
+        ]
+      },
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "WithColor",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "AllVariants",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "FontSettings",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithStyle",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithAlign",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithMargins",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "Inherits",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithMaxLinesDynamic",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "WithMaxLinesAlignEndDynamicText",
+          "args": {},
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Default",
+        "With Color",
+        "All Variants",
+        "Font Settings",
+        "With Style",
+        "With Align",
+        "With Margins",
+        "Inherits",
+        "With Max Lines Dynamic",
+        "With Max Lines Align Start",
+        "With Max Lines Align End",
+        "With Max Lines Align Center",
+        "With Max Lines Align Justify",
+        "With Max Lines Align End Dynamic Text",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "Textarea",
+      "title": "GDS/Textarea",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-textarea",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "description": "Label for the textarea"
+        },
+        {
+          "name": "autocomplete",
+          "type": "\"on\" | \"off\"",
+          "description": "Used to tell browsers whether to offer autocomplete suggestions."
+        },
+        {
+          "name": "errorMessage",
+          "type": "string",
+          "description": "Used to describe why this textarea has an error."
+        },
+        {
+          "name": "helperMessage",
+          "type": "string",
+          "description": "Adds a helper message above the textarea. Recommended maximum length is 140 characters."
+        },
+        {
+          "name": "isOptional",
+          "type": "boolean",
+          "description": "Adds (Optional) to the label. Cannot be combined with `isRequired`."
+        },
+        {
+          "name": "isRequired",
+          "type": "boolean",
+          "description": "Adds (Required) to the label and marks textarea as required. Cannot be combined with `isOptional`."
+        },
+        {
+          "name": "isDisabled",
+          "type": "boolean",
+          "description": "When true, indicates that the Textarea cannot be focused, changed, or interacted with."
+        },
+        {
+          "name": "labelDisplay",
+          "type": "\"visible\" | \"hidden\"",
+          "description": "Can be used to visually hide the legend when another element on the page is acting as the visual label for the textarea.",
+          "default": "'visible'"
+        },
+        {
+          "name": "labelIndicatorForOptional",
+          "type": "string",
+          "description": "Can be used to override the content for the optional indication.",
+          "default": "'(Optional)'"
+        },
+        {
+          "name": "labelIndicatorForRequired",
+          "type": "string",
+          "description": "Can be used to override the content for the required indication.",
+          "default": "'(Required)'"
+        },
+        {
+          "name": "rows",
+          "type": "number",
+          "description": "Used to set the number of lines of text to display.",
+          "default": "3"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "The name of the textarea element that is used when submitting an HTML form. [Learn more at MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea#htmlattrdefname)."
+        },
+        {
+          "name": "onChange",
+          "type": "(value: string) => void",
+          "description": "Event handler that is called when the Textarea value changes."
+        },
+        {
+          "name": "onFocus",
+          "type": "(event: FocusEvent) => void",
+          "description": "Event handler that is called when the Textarea receives focus."
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "description": "Adds placeholder text to the textarea, if needed. Recommended not to use."
+        },
+        {
+          "name": "resizable",
+          "type": "\"on\" | \"off\" | \"horizontal\" | \"vertical\"",
+          "description": "Can be used to make the textarea resizable.",
+          "default": "'on'"
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "description": "To implement as controlled component, the `value` prop can be used to maintain the textarea's value"
+        }
+      ],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "IsReadOnly",
+          "args": {
+            "isReadOnly": "true"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithHiddenLabel",
+          "args": {
+            "labelDisplay": "\"hidden\"",
+            "isOptional": "true"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithName",
+          "args": {
+            "name": "\"with-name\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithPlaceholder",
+          "args": {
+            "placeholder": "\"Ex: grmrrly!\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithAutocomplete",
+          "args": {
+            "autocomplete": "\"on\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithDefaultValue",
+          "args": {
+            "defaultValue": "\"default value\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithOnChange",
+          "args": {
+            "onChange": "value => {"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithControlledValue",
+          "args": {
+            "value": "\"aye\"",
+            "onChange": "value => {"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithResizableOff",
+          "args": {
+            "resizable": "\"off\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "InNarrowContainer",
+          "args": {
+            "defaultValue": "`this is long text just to verify that overflow happens correctly instead of causing a horizontal scrollbar`.replace("
+          },
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Default",
+        "Is Read Only",
+        "With Hidden Label",
+        "With Name",
+        "With Placeholder",
+        "With Autocomplete",
+        "With Default Value",
+        "With On Change",
+        "With Controlled Value",
+        "With Resizable Off",
+        "In Narrow Container",
+        "All States",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "TextField",
+      "title": "GDS/TextField",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-textfield",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "description": "Displays the text label for the Text Field."
+        },
+        {
+          "name": "autocomplete",
+          "type": "| \"bday\"\n    | \"current-password\"\n    | \"email\"\n    | \"new-password\"\n    | \"username\"\n    | \"url\"\n    | \"on\"\n    | \"off\"",
+          "description": "Used to tell browsers when to offer autocomplete suggestions."
+        },
+        {
+          "name": "accessibilityLabelShowPassword",
+          "type": "string",
+          "description": "Used to override the aria-label on the Show Password IconButton."
+        },
+        {
+          "name": "accessibilityLabelHidePassword",
+          "type": "string",
+          "description": "Used to override the aria-label on the Hide Password IconButton."
+        },
+        {
+          "name": "accessibilityLivePasswordIsShowing",
+          "type": "string",
+          "description": "Can be used to override the aria-live announcement that gets changed when the Show/Hide password Icon Button is pressed"
+        },
+        {
+          "name": "accessibilityLivePasswordIsHidden",
+          "type": "string",
+          "description": "Can be used to override the aria-live announcement that gets changed when the Show/Hide password Icon Button is pressed"
+        },
+        {
+          "name": "errorMessage",
+          "type": "string",
+          "description": "Used to describe why this Text Field has an error."
+        },
+        {
+          "name": "helperMessage",
+          "type": "string",
+          "description": "Adds a helper message above the input. Recommended maximum length is 140 characters."
+        },
+        {
+          "name": "iconStart",
+          "type": "IconProps[\"icon\"]",
+          "description": "Icon to place at the start of the input. Icon is decorative and will be hidden from screen readers."
+        },
+        {
+          "name": "isOptional",
+          "type": "boolean",
+          "description": "Adds (Optional) to the label. Cannot be combined with isRequired."
+        },
+        {
+          "name": "isRequired",
+          "type": "boolean",
+          "description": "Adds (Required) to the label and marks input as required. Cannot be combined with isOptional."
+        },
+        {
+          "name": "labelDisplay",
+          "type": "\"visible\" | \"hidden\"",
+          "description": "Can be used to visually hide the label when another element on the page is acting as the visual label for the TextField."
+        },
+        {
+          "name": "labelIndicatorForOptional",
+          "type": "string",
+          "description": "Can be used to override the content for the optional indication"
+        },
+        {
+          "name": "labelIndicatorForRequired",
+          "type": "string",
+          "description": "Can be used to override the content for the required indication"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "The name of the input element that is used when submitting an HTML form. [Learn more at MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefname)."
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "description": "Adds placeholder text to the input, if needed. Recommended not to use."
+        },
+        {
+          "name": "size",
+          "type": "\"medium\" | \"large\" | \"xlarge\"",
+          "description": "Controls the height of the text field.",
+          "default": "\"medium\""
+        },
+        {
+          "name": "type",
+          "type": "InputType",
+          "description": "Used to indicate specific types of text field."
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "description": "To implement as controlled component, the `value` prop can be used to maintain the input’s value"
+        }
+      ],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "IsDisabled",
+          "args": {
+            "helperMessage": "\"Use your work email\"",
+            "isDisabled": "true"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithHiddenLabel",
+          "args": {
+            "labelDisplay": "\"hidden\"",
+            "isOptional": "true"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithName",
+          "args": {
+            "name": "\"work-email\"",
+            "isOptional": "true"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithPlaceholder",
+          "args": {
+            "label": "\"Password\"",
+            "placeholder": "\"Ex: grmrrly!\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithAutocomplete",
+          "args": {
+            "label": "\"Password\"",
+            "type": "\"password\"",
+            "autocomplete": "\"current-password\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithIconStart",
+          "args": {
+            "label": "\"Destination folder\"",
+            "iconStart": "InterfaceFolder"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithDefaultValue",
+          "args": {
+            "label": "\"Username\"",
+            "defaultValue": "\"ayesham\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithOnChange",
+          "args": {
+            "label": "\"Username\"",
+            "onChange": "value => {"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithControlledValue",
+          "args": {
+            "label": "\"Username\"",
+            "value": "\"aye\"",
+            "onChange": "value => {"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "Types",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AllSizes",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AllSizesError",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "InNarrowContainer",
+          "args": {
+            "label": "\"Password\"",
+            "type": "\"password\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithinShadowDOM",
+          "args": {},
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Default",
+        "Is Disabled",
+        "With Hidden Label",
+        "With Name",
+        "With Placeholder",
+        "With Autocomplete",
+        "With Icon Start",
+        "With Default Value",
+        "With On Change",
+        "With Controlled Value",
+        "Types",
+        "All Sizes",
+        "All Sizes Error",
+        "In Narrow Container",
+        "All States",
+        "Within Shadow DOM",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "Toast",
+      "title": "GDS/Toast",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-toast",
+      "props": [
+        {
+          "name": "text",
+          "type": "string",
+          "description": "The text shown in the Toast."
+        },
+        {
+          "name": "variant",
+          "type": "ToastVariants",
+          "description": "Changes the icon to convey a system status.",
+          "default": "\"default\""
+        },
+        {
+          "name": "primaryAction",
+          "type": "React.ReactNode",
+          "description": "A Button representing the primary action to take on the Toast. Only use Ghost Buttons inside Toasts."
+        },
+        {
+          "name": "secondaryAction",
+          "type": "React.ReactNode",
+          "description": "A Button representing the secondary action to take on the Toast. Only use Ghost Buttons inside Toasts."
+        },
+        {
+          "name": "onClose",
+          "type": "() => void",
+          "description": "Event handler that is called when the Close button is clicked."
+        }
+      ],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Default",
+        "Success",
+        "Warning",
+        "Critical",
+        "Loading",
+        "Text Wrapping",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "Tooltip",
+      "title": "GDS/Tooltip",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-tooltip",
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "description": "If you plan to manually control the Tooltip state, use `open` and `onOpenChange`.",
+          "default": "false"
+        },
+        {
+          "name": "onOpenChange",
+          "type": "React.Dispatch<React.SetStateAction<boolean>>",
+          "description": "Event handler that is called when the open state is internally changed. Use this to manually control the `open`."
+        },
+        {
+          "name": "onShow",
+          "type": "() => void",
+          "description": ""
+        },
+        {
+          "name": "onHide",
+          "type": "() => void",
+          "description": ""
+        }
+      ],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "WithAnnotation",
+          "args": {
+            "placement": "\"left\"",
+            "annotation": "\"⌘ + Shift + 7\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithCallbacks",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "ControlledOpen",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithLongAnnotation",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "Placements",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "WithinShadowDOM",
+          "args": {},
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Default",
+        "With Annotation",
+        "With Callbacks",
+        "Controlled Open",
+        "With Long Annotation",
+        "Placements",
+        "Within Shadow DOM",
+        "Visual Test"
+      ]
+    },
+    {
+      "name": "VerificationCode",
+      "title": "GDS/VerificationCode",
+      "importPath": "@grammarly/design-system",
+      "docsUrl": "https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-verificationcode",
+      "props": [],
+      "constants": {},
+      "defaultArgs": {},
+      "examples": [
+        {
+          "name": "Default",
+          "args": {},
+          "hasCode": false
+        },
+        {
+          "name": "AllSizes",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "AllSizesError",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithAnErrorMessage",
+          "args": {
+            "errorMessage": "\"Enter a valid code\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "WithAValue",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithAValueAlphanumeric",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "WithAnOnChange",
+          "args": {},
+          "hasCode": true
+        },
+        {
+          "name": "Disabled",
+          "args": {
+            "isDisabled": "true"
+          },
+          "hasCode": false
+        },
+        {
+          "name": "AssertCallsOnChangeWithCurrentValueTyping",
+          "args": {
+            "onChange": "fn()",
+            "type": "\"text\""
+          },
+          "hasCode": false
+        },
+        {
+          "name": "AssertCallsOnFocus",
+          "args": {
+            "onFocus": "fn()"
+          },
+          "hasCode": false
+        }
+      ],
+      "stories": [
+        "Default",
+        "All Sizes",
+        "All Sizes Error",
+        "With An Error Message",
+        "With A Value",
+        "With A Value Alphanumeric",
+        "With An On Change",
+        "Disabled",
+        "Assert Calls On Change With Current Value Typing",
+        "Assert Calls On Focus",
+        "Visual Test"
+      ]
+    }
+  ],
+  "generatedAt": "2025-10-19T15:39:39.555Z"
+}

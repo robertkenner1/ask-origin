@@ -1,0 +1,92 @@
+# SkeletonLoader
+
+**Full path**: GDS/Loader/SkeletonLoader
+
+**Import**:
+```typescript
+import { SkeletonLoader } from '@grammarly/design-system';
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | `-` | Content that is either one of the SkeletonLoader subcomponents or loaded content. |
+| `accessibilityLabel` | `string` | `"Loading"` | Label to read aloud immediately for screen reader users. |
+| `delay` | `number` | `2500` | Delay in milliseconds before showing the label visually. |
+| `label` | `string` | `"Loading"` | Displays visible text on top of skeleton components. |
+| `labelOffset` | `number` | `20` | Defines the offset in pixels from the top of the container to the visible “Loading” label. |
+| `width` | `number | string` | `-` | Defines the width of the skeleton container. Defaults to the full width of its container. |
+| `width` | `number | string` | `-` | Defines the diameter of the skeleton circle. Defaults to the full width of its container. |
+| `width` | `number | string` | `-` | Defines the width of the skeleton item. Defaults to the full width of its container. |
+| `height` | `number | string` | `12` | Defines the height of the skeleton item. |
+| `size` | `"small" | "medium" | "large" | "xlarge"` | `"medium"` | Sets the height of the skeleton item according to Button sizes. |
+| `variant` | `"primary" | "secondary" | "tertiary" | "ghost" | "premium"` | `"primary"` | Sets the visual weight of the skeleton item according to Button variants. |
+| `width` | `number | string` | `-` | Defines the width of the skeleton item. Defaults to the full width of its container. |
+| `width` | `number | string` | `-` | Defines the width of the skeleton item. Defaults to the full width of its container. |
+| `variant` | `| "heading-large" | "heading-medium" | "heading-small" | "heading-xsmall" | "heading-xxsmall"` | `"heading-medium"` | Sets the height of the skeleton item according to Heading variants. |
+| `variant` | `"text-large" | "text-medium" | "text-small" | "text-xsmall"` | `"text-medium"` | Sets the height of the skeleton item according to Text variants. |
+| `width` | `number | string` | `-` | Defines the width of the skeleton item. Defaults to the full width of its container. |
+
+## Examples
+
+### Default
+
+### CardToggle
+
+```tsx
+{
+    const [loading, setLoading] = React.useState(true);
+    return (
+      <Flex gap={3}
+```
+
+### AccountList
+
+```tsx
+{
+    return (
+      <Flex gap={3}
+```
+
+### AccountListSubduedBackground
+
+```tsx
+{
+    return (
+      <Flex gap={3}
+```
+
+### Circle
+
+```tsx
+{
+    return (
+      <Flex gap={3}
+```
+
+*... and 6 more examples*
+
+## All Available Stories
+
+- Default
+- Card Toggle
+- Account List
+- Account List Subdued Background
+- Circle
+- Rectangle
+- Button Toggle
+- Text Toggle
+- Heading Toggle
+- Icon Toggle
+- Within Shadow DOM
+- Visual Test
+
+## Documentation
+
+See the live Storybook for detailed usage examples, props, and interactive demos:
+https://uifoundation.gpages.io/grammarly-design-system/?path=/docs/gds-loader-skeletonloader
+
+## Related Components
+
+Explore the full component library at: https://uifoundation.gpages.io/grammarly-design-system
