@@ -61,7 +61,7 @@ make install
 ### Project Management Scripts
 
 #### `create-project.sh`
-Create a new project from templates.
+Create a new project from available templates.
 
 **Usage:**
 ```bash
@@ -71,18 +71,36 @@ make new PROJECT=my-project
 ```
 
 **What it does:**
-1. Validates project name
-2. Stashes current changes
-3. Switches to main branch and pulls latest
-4. Creates new branch with project name
-5. Creates project structure in `projects/[name]/`
-6. Copies and processes templates
-7. Builds project
-8. Starts dev server
-9. Launches Claude Code
+1. Lists available templates (static-website, ai-editor, etc.)
+2. Prompts for template selection
+3. Slugifies project name (lowercase, hyphens)
+4. Creates branch with `proj-` prefix: `proj-my-project`
+5. Copies selected template to `projects/[name]/`
+6. Generates `.project.json` with metadata
+7. Processes template variables
+8. Installs dependencies (if Node.js project)
+9. Starts appropriate dev server
+10. Launches Claude Code
 
 **Arguments:**
 - `$1` - Project name (optional, will prompt if not provided)
+  - Name will be slugified automatically
+  - Example: "My Project" → "my-project"
+
+**Branch naming:**
+- Convention: `proj-{slugified-name}`
+- Example: "My Cool Project" → branch `proj-my-cool-project`
+
+**Project metadata:**
+- Creates `.project.json` with deployment info
+- Includes Vercel URLs for Next.js projects
+- Includes GitLab Pages URLs for static sites
+- Template variables replaced: `{{PROJECT_NAME}}`, `{{PROJECT_DESCRIPTION}}`, `{{BRANCH_NAME}}`, etc.
+
+**Template selection:**
+- Interactive menu shows all templates
+- Select by number or name
+- Each template has specific deployment target
 
 ---
 
