@@ -1,7 +1,7 @@
 # AI Frontend Development Makefile
 # Streamlined workflow for frontend prototyping
 
-.PHONY: help prereqs install new start stop deploy clean list build delete default
+.PHONY: help prereqs install new start stop deploy deploy-vercel clean list build delete default
 
 # Default target - full setup (runs when just "make" is typed)
 default: prereqs install new
@@ -23,8 +23,9 @@ help:
 	@echo "  make delete      - Delete project and branch"
 	@echo ""
 	@echo "Deployment:"
-	@echo "  make deploy      - Git add, commit, and push"
-	@echo "  make clean       - Clean build artifacts"
+	@echo "  make deploy         - Git add, commit, and push"
+	@echo "  make deploy-vercel  - Deploy project to Vercel preview"
+	@echo "  make clean          - Clean build artifacts"
 	@echo ""
 	@echo "Examples:"
 	@echo "  make new PROJECT=my-button-component"
@@ -68,6 +69,10 @@ delete:
 # Deploy changes
 deploy:
 	@./scripts/deploy.sh $(MESSAGE)
+
+# Deploy to Vercel preview
+deploy-vercel:
+	@./scripts/deploy-vercel.sh $(PROJECT)
 
 # Clean build artifacts
 clean:
