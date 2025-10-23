@@ -1,0 +1,101 @@
+# Deploy Vercel projects from monorepo
+deploy-vercel:
+  stage: deploy
+  image: $ARTIFACTORY_DOCKER_REPO/node:20-alpine
+  rules:
+    # Only run on branches starting with "proj-"
+    - if: '$CI_COMMIT_BRANCH =~ /^proj-.*/'
+  before_script:
+    - echo "🚀 Vercel Deployment Pipeline"
+    - echo ""
+    - echo "Branch: $CI_COMMIT_BRANCH"
+
+    # Extract project name from branch (proj-my-app -> my-app)
+    - export PROJECT_NAME=$(echo "$CI_COMMIT_BRANCH" | sed 's/^proj-//')
+    - echo "Project: $PROJECT_NAME"
+    - echo ""
+
+    # Check if project directory exists
+    - |
+      if [ ! -d "projects/$PROJECT_NAME" ]; then
+        echo "❌ Error: Project directory not found: projects/$PROJECT_NAME"
+        exit 1
+      fi
+
+    # Check if .project.json exists
+    - |
+      if [ ! -f "projects/$PROJECT_NAME/.project.json" ]; then
+        echo "❌ Error: .project.json not found in projects/$PROJECT_NAME"
+        echo "⚠️  This project may not be configured for deployment"
+        exit 1
+      fi
+
+    # Check if deployment type is vercel
+    - |
+      DEPLOYMENT_TYPE=$(cat "projects/$PROJECT_NAME/.project.json" | grep -o '"deployment": *"[^"]*"' | sed 's/"deployment": *"\(.*\)"/\1/' || echo "")
+      echo "Deployment type: $DEPLOYMENT_TYPE"
+
+      if [ "$DEPLOYMENT_TYPE" != "vercel" ]; then
+        echo "⚠️  Project deployment type is '$DEPLOYMENT_TYPE', not 'vercel'"
+        echo "⚠️  Skipping Vercel deployment"
+        exit 0
+      fi
+
+    # Install Vercel CLI
+    - echo ""
+    - echo "📦 Installing Vercel CLI..."
+    - npm install -g vercel@latest
+
+    # Verify Vercel token is available (required for CI/CD)
+    - |
+      if [ -z "$VERCEL_TOKEN" ]; then
+        echo "❌ Error: VERCEL_TOKEN not set in GitLab CI/CD variables"
+        echo "Add VERCEL_TOKEN as a masked variable in GitLab CI/CD settings:"
+        echo "  Settings > CI/CD > Variables > Add Variable"
+        echo "  Key: VERCEL_TOKEN"
+        echo "  Value: <your-token-from-https://vercel.com/account/tokens>"
+        echo "  Flags: Masked"
+        exit 1
+      fi
+      echo "✅ VERCEL_TOKEN is configured"
+
+  script:
+    - echo ""
+    - echo "🚀 Starting deployment..."
+    - echo ""
+
+    # Make script executable
+    - chmod +x scripts/deploy-vercel.sh
+
+    # Run deployment script
+    - ./scripts/deploy-vercel.sh "$PROJECT_NAME"
+
+  environment:
+    name: vercel-preview/$PROJECT_NAME
+    url: https://$PROJECT_NAME-git-$CI_COMMIT_BRANCH-grammarly-0ad4c188.vercel.app
+    on_stop: stop-vercel-preview
+    auto_stop_in: 30 days
+
+  artifacts:
+    reports:
+      dotenv: deploy.env
+    expire_in: 1 day
+
+  only:
+    variables:
+      - $VERCEL_TOKEN
+
+# Optional: Stop preview environment (manual action)
+stop-vercel-preview:
+  stage: deploy
+  image: $ARTIFACTORY_DOCKER_REPO/node:20-alpine
+  rules:
+    - if: '$CI_COMMIT_BRANCH =~ /^proj-.*/'
+      when: manual
+  script:
+    - echo "🛑 Stopping Vercel preview environment"
+    - echo "Note: Preview deployments are automatically cleaned up by Vercel"
+    - echo "This is a placeholder for manual cleanup if needed"
+  environment:
+    name: vercel-preview/$PROJECT_NAME
+    action: stop

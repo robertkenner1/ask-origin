@@ -202,6 +202,94 @@ make deploy MESSAGE="Commit message"
 
 ---
 
+#### `deploy-vercel.sh`
+Deploy Next.js projects to Vercel preview environments.
+
+**Usage:**
+```bash
+./scripts/deploy-vercel.sh [project-name]
+# or
+make deploy-vercel PROJECT=my-ai-editor
+# or (auto-detect from branch)
+make deploy-vercel
+```
+
+**What it does:**
+1. Auto-detects project from git branch (proj-* pattern) or uses provided name
+2. Validates project directory and `.project.json` exist
+3. Checks deployment type is "vercel"
+4. Verifies Vercel CLI and `VERCEL_TOKEN` are available
+5. Checks if Vercel project already exists
+6. Links project to Vercel (creates project if needed)
+7. Deploys to Vercel preview (NOT production)
+8. Displays deployment URL
+
+**Arguments:**
+- `$1` - Project name (optional, auto-detects from branch if not provided)
+
+**Environment Variables:**
+- `VERCEL_TOKEN` (optional for local, required for CI/CD) - Vercel authentication token
+  - Local: Not needed if already logged in with `vercel login`
+  - Get token from: https://vercel.com/account/tokens
+  - For manual use with token: `export VERCEL_TOKEN=your_token`
+  - For GitLab CI: Add as masked CI/CD variable (required)
+
+**Branch Detection:**
+- Branch `proj-my-app` → deploys `projects/my-app/`
+- Only works for branches starting with `proj-`
+
+**Requirements:**
+- Vercel CLI installed (`brew install vercel-cli`)
+- Authentication: Either logged in (`vercel login`) OR `VERCEL_TOKEN` set
+- Project has `.project.json` with `"deployment": "vercel"`
+- Project has `package.json` (Next.js project)
+
+**GitLab CI Integration:**
+- Automatically runs on `proj-*` branches
+- Requires `VERCEL_TOKEN` in GitLab CI/CD variables
+- Creates preview deployment URL in job output
+- Environment: `vercel-preview/$PROJECT_NAME`
+
+**Example Output:**
+```
+🚀 Vercel Deployment: my-ai-editor
+
+Checking project directory              ✅
+Checking project metadata               ✅
+Validating deployment type              ✅
+Checking package.json                   ✅
+Checking Vercel CLI                     ✅
+Checking Vercel authentication          ✅ (logged in as your-username)
+
+📋 Vercel Project Details:
+   📦 Project: my-ai-editor
+   📁 Directory: projects/my-ai-editor
+   👥 Team: grammarly-0ad4c188
+
+🔍 Checking Vercel project status...
+Listing Vercel projects                 ✅
+   ✓ Project exists on Vercel
+
+🔗 Linking project to Vercel...
+Linking project                         ✅
+
+🚀 Deploying to Vercel preview...
+Deploying project                       ✅
+
+✅ Deployment successful!
+
+🌐 Preview URL:
+   https://my-ai-editor-git-proj-my-ai-editor-grammarly-0ad4c188.vercel.app
+```
+
+**Notes:**
+- Deployments are ALWAYS preview (branch) deployments, never production
+- Preview URLs follow pattern: `https://[project]-git-[branch]-[team].vercel.app`
+- Creates `.vercel/` folder in project directory (gitignored)
+- Vercel team slug: `grammarly-0ad4c188`
+
+---
+
 ## Script Features
 
 ### Color-Coded Output
