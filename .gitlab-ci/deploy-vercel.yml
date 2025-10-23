@@ -3,8 +3,8 @@ deploy-vercel:
   stage: deploy
   image: $ARTIFACTORY_DOCKER_REPO/node:20-alpine
   rules:
-    # Only run on branches starting with "proj-"
-    - if: '$CI_COMMIT_BRANCH =~ /^proj-.*/'
+    # Only run on branches starting with "proj-" and when VERCEL_TOKEN is available
+    - if: '$CI_COMMIT_BRANCH =~ /^proj-.*/ && $VERCEL_TOKEN'
   before_script:
     - echo "🚀 Vercel Deployment Pipeline"
     - echo ""
@@ -80,10 +80,6 @@ deploy-vercel:
     reports:
       dotenv: deploy.env
     expire_in: 1 day
-
-  only:
-    variables:
-      - $VERCEL_TOKEN
 
 # Optional: Stop preview environment (manual action)
 stop-vercel-preview:
