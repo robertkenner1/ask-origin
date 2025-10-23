@@ -1,0 +1,46 @@
+{
+  "name": "AI Editor (Next.js)",
+  "description": "Full-featured Next.js application with AI-powered text editor, similar to Grammarly or GitHub Copilot",
+  "type": "nextjs-app",
+  "language": "typescript",
+  "deployment": {
+    "targets": ["vercel"],
+    "default": "vercel"
+  },
+  "devServer": {
+    "port": 2345,
+    "command": "npm run dev"
+  },
+  "build": {
+    "required": true,
+    "command": "npm run build",
+    "outputDir": ".next"
+  },
+  "requirements": {
+    "node": ">=18.0.0",
+    "python": false,
+    "environment": [
+      {
+        "key": "CLAUDE_API_KEY",
+        "description": "Claude API key for AI features",
+        "required": true,
+        "example": "sk-ant-..."
+      },
+      {
+        "key": "PORT",
+        "description": "Development server port",
+        "required": false,
+        "example": "2345"
+      }
+    ]
+  },
+  "features": [
+    "React 18 with TypeScript",
+    "TailwindCSS for styling",
+    "TipTap editor with extensions",
+    "Claude AI integration",
+    "IndexedDB for document persistence",
+    "Real-time AI suggestions",
+    "Chat interface with Claude"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "name": "{{PROJECT_NAME}}",
+  "description": "{{PROJECT_DESCRIPTION}}",
+  "deployment": "vercel",
+  "created": "{{CREATED_DATE}}",
+  "repository": {
+    "branch": "{{BRANCH_NAME}}"
+  },
+  "urls": {
+    "local": "http://localhost:2345",
+    "remote": "https://{{PROJECT_NAME}}-git-{{BRANCH_NAME}}-{{VERCEL_TEAM_SLUG}}.vercel.app"
+  },
+  "template": {
+    "type": "nextjs-app",
+    "version": "1.0.0"
+  },
+  "environment": {
+    "required": [
+      {
+        "key": "CLAUDE_API_KEY",
+        "description": "Claude API key for AI features"
+      }
+    ]
+  }
+}

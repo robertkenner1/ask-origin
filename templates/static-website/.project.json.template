@@ -1,0 +1,17 @@
+{
+  "name": "{{PROJECT_NAME}}",
+  "description": "{{PROJECT_DESCRIPTION}}",
+  "deployment": "gitlab-pages",
+  "created": "{{CREATED_DATE}}",
+  "repository": {
+    "branch": "{{BRANCH_NAME}}"
+  },
+  "urls": {
+    "local": "http://localhost:8181/{{PROJECT_NAME}}/",
+    "remote": "https://ai-frontend-prototypes-c8939b.gpages.io/{{PROJECT_NAME}}/"
+  },
+  "template": {
+    "type": "static-website",
+    "version": "1.0.0"
+  }
+}
