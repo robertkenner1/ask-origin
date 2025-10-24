@@ -1,68 +1,165 @@
-# {{PROJECT_TITLE}} - Project Settings
+# {{PROJECT_TITLE}} - Static Website Project
 
-## Project Overview
-{{PROJECT_DESCRIPTION}}
+## Architecture Note
 
-## Project Type
-Frontend Prototype
+This project uses **symlinked resources** from the monorepo:
 
-## Technology Stack
-- HTML5 (Semantic markup)
-- CSS3 (Grid/Flexbox, Custom Properties)
-- Vanilla JavaScript (ES6+ Classes)
+```
+{{PROJECT_NAME}}/
+├── src/              # 📄 Your project files (edit these)
+├── scripts/          # 🔗 Symlink → ../../.shared/scripts/
+├── ai-context/       # 🔗 Symlink → ../../.shared/ai-context/
+├── .mcp.json         # 📄 MCP servers (customizable)
+├── Makefile          # 📄 Build commands (customizable)
+└── CLAUDE.md         # 📄 This file
+```
 
-## Design Requirements
-- [ ] Pixel-perfect accuracy
-- [ ] Responsive design (mobile-first)
-- [ ] Accessibility compliance (WCAG 2.1)
-- [ ] Cross-browser compatibility
-- [ ] Performance optimization
+**Symlinks appear as regular directories** but actually point to shared resources.
 
-## Key Features
-- Semantic HTML structure
-- Modern CSS with custom properties
-- Interactive JavaScript components
-- Responsive breakpoints
-- Utility classes
+## Available Resources
 
-## Development Guidelines
+### Scripts (Symlinked)
 
-### CSS Architecture
-- Use CSS custom properties for theming
-- Follow BEM naming convention for classes
-- Mobile-first responsive design
-- Utility classes for common patterns
+Located at: `./scripts/` → `../../.shared/scripts/`
 
-### JavaScript Patterns
-- ES6+ class-based components
-- Event delegation for performance
-- Debounced resize handlers
-- Modular, reusable code
+Available commands:
+- `./scripts/build.sh` - Copies src/ to public/{{PROJECT_NAME}}/
+- `./scripts/start.sh` - Starts development server on port 8181
+- `./scripts/stop.sh` - Stops development server
+- `./scripts/deploy.sh` - Deploys to GitLab Pages
 
-### Accessibility Checklist
-- [ ] Semantic HTML elements
-- [ ] ARIA labels where needed
-- [ ] Keyboard navigation support
-- [ ] Focus management
-- [ ] Screen reader compatibility
-- [ ] Color contrast compliance
+Or use Makefile shortcuts:
+- `make build` - Build project
+- `make start` - Start dev server
+- `make stop` - Stop dev server
+- `make deploy` - Deploy to GitLab
 
-## Build Configuration
-- **Source files:** `projects/{{PROJECT_NAME}}/src/`
-- **Documentation:** `projects/{{PROJECT_NAME}}/prompts/`
-- **Build output:** `public/{{PROJECT_NAME}}/`
-- **Build command:** `npm run build:sitemap`
+### AI Context (Symlinked)
+
+Located at: `./ai-context/` → `../../.shared/ai-context/`
+
+**Grammarly Design System documentation:**
+```
+Read(ai-context/gds/llms.txt)              # Complete GDS reference
+Read(ai-context/gds/llms/component-*.txt)  # Individual components
+```
+
+**Note:** Symlinked files won't appear in @ autocomplete, use explicit `Read()` or `Glob()`.
 
 ## Development Workflow
-1. Edit files in `projects/{{PROJECT_NAME}}/src/`
-2. Run `make build` to copy to public
-3. Use `make start` for development server
-4. Test with `make deploy` for production
 
-## Reference Materials
-- Grammarly Design System: https://uifoundation.gpages.io/grammarly-design-system/
-- MDN Web Docs: https://developer.mozilla.org/
-- WCAG Guidelines: https://www.w3.org/WAI/WCAG21/quickref/
+### Starting Development
+```bash
+# From repository root, create and enter project
+make new PROJECT={{PROJECT_NAME}}
+cd projects/{{PROJECT_NAME}}/
 
-## Notes
-{{PROJECT_NOTES}}
+# Start Claude Code
+claude
+```
+
+### Building
+```bash
+make build
+# Copies src/ to public/{{PROJECT_NAME}}/
+```
+
+### Development Server
+```bash
+make start
+# Opens http://localhost:8181/{{PROJECT_NAME}}/
+```
+
+### Deploying
+```bash
+make deploy MESSAGE="Your commit message"
+# Builds, commits, pushes to GitLab
+# Live at: https://ai-frontend-prototypes-c8939b.gpages.io/{{PROJECT_NAME}}/
+```
+
+## Project Structure
+
+```
+src/
+├── index.html    # Main HTML file
+├── styles.css    # Styles
+└── script.js     # JavaScript
+```
+
+## Customizing This Project
+
+### Custom Build Script
+
+If you need custom build logic:
+```bash
+# Remove symlink
+rm scripts
+mkdir scripts
+
+# Copy and customize
+cp ../../.shared/scripts/build.sh scripts/
+vim scripts/build.sh
+```
+
+**Warning:** Once you break the symlink, you won't get automatic updates from `.shared/scripts/`.
+
+### Custom MCP Servers
+
+`.mcp.json` is already a real file (not symlinked), so edit freely:
+```bash
+vim .mcp.json
+```
+
+## Important Notes
+
+1. **Don't edit symlinked files directly** - This affects ALL projects
+2. **Use `Read(path)` explicitly** - Symlinked files don't autocomplete with @
+3. **Scripts are executable** - Run with `./scripts/build.sh` or `make build`
+4. **Build before viewing** - Run `make build` to copy src/ to public/
+
+## Grammarly Style Prototypes
+
+When building Grammarly-style interfaces:
+
+1. **Use Grammarly Design System:**
+   ```
+   Read(ai-context/gds/llms.txt)
+   ```
+
+2. **Check component docs:**
+   ```
+   Glob(ai-context/gds/llms/component-*.txt)
+   ```
+
+3. **Reference logos and assets:** Available in ai-context/gds/
+
+## Common Issues
+
+### "File not found: ai-context/..."
+```bash
+# Check symlink exists
+ls -la ai-context
+
+# Should show: ai-context -> ../../.shared/ai-context
+
+# If broken, recreate:
+ln -s ../../.shared/ai-context ai-context
+```
+
+### "Script not executable"
+```bash
+chmod +x scripts/*.sh
+```
+
+### "Can't find file in @ autocomplete"
+Symlinked files don't show in autocomplete. Use explicit commands:
+```
+Read(ai-context/gds/llms.txt)
+Glob(ai-context/**/*.txt)
+```
+
+## See Also
+
+- **Repository architecture:** `../../ARCHITECTURE.md`
+- **Other templates:** `../../templates/`
+- **Shared scripts:** `../../.shared/scripts/`

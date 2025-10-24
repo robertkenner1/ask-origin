@@ -1,13 +1,19 @@
 {
   "mcpServers": {
     "playwright": {
+      "type": "stdio",
       "command": "npx",
       "args": [
         "@playwright/mcp@latest"
       ]
     },
-    "sourcegraph": {
+    "parent": {
+      "type": "http",
       "url": "https://apigw.prod-platform-plane.grammarlyaws.com/sourcegraph-mcp-server/mcp/"
+    },
+    "hubspot": {
+      "type": "http",
+      "url": "https://mcp.hubspot.com/anthropic"
     }
   }
 }
