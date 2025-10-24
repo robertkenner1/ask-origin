@@ -4,17 +4,16 @@
 
 set -e
 
-# Color codes
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
+# Load common library
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/lib/common.sh"
 
-# Get project info
-PROJECT_DIR=$(pwd)
-PROJECT_NAME=$(basename "$PROJECT_DIR")
-REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null || echo "../..")
+# Ensure we're in a project directory
+ensure_project_dir || exit 1
+
+# Resolve paths
+REPO_ROOT=$(resolve_repo_root) || exit 1
+PROJECT_NAME=$(detect_project_name)
 
 # Get commit message from argument or prompt
 if [ -z "$1" ]; then
@@ -26,61 +25,47 @@ fi
 
 # Validate commit message
 if [ -z "$COMMIT_MSG" ]; then
-    echo -e "${RED}❌ Commit message cannot be empty${NC}"
+    log_error "❌ Commit message cannot be empty"
     exit 1
 fi
 
-echo -e "${BLUE}🚀 Deploying project: $PROJECT_NAME${NC}"
+log_info "🚀 Deploying project: $PROJECT_NAME"
 echo ""
 
+# Load project config
+load_project_config
+
 # Build project
-printf "%-40s" "Building project"
-if ./scripts/build.sh >/dev/null 2>&1; then
-    printf "${GREEN}✅${NC}\n"
-else
-    printf "${RED}❌${NC}\n"
-    echo -e "${RED}Build failed${NC}"
+exec_with_status "Building project" "./scripts/build.sh" || {
+    log_error "Build failed"
     exit 1
-fi
+}
 
 # Go to repo root for git operations
 cd "$REPO_ROOT"
 
 # Build master index
-printf "%-40s" "Building sitemap"
-if npm run build:sitemap >/dev/null 2>&1; then
-    printf "${GREEN}✅${NC}\n"
-else
-    printf "${RED}❌${NC}\n"
-    exit 1
-fi
+exec_with_status "Building sitemap" "npm run build:sitemap"
 
 # Add changes
-printf "%-40s" "Adding changes"
-if git add . >/dev/null 2>&1; then
-    printf "${GREEN}✅${NC}\n"
-else
-    printf "${RED}❌${NC}\n"
-    exit 1
-fi
+exec_with_status "Adding changes" "git add ."
 
 # Create commit
-printf "%-40s" "Creating commit"
+print_status "Creating commit" ""
 if git commit -m "$COMMIT_MSG" >/dev/null 2>&1; then
-    printf "${GREEN}✅${NC}\n"
+    print_status "Creating commit" "success"
 else
-    printf "${YELLOW}⚠️${NC}  (nothing to commit)\n"
+    print_status "Creating commit" "note" "nothing to commit"
 fi
 
 # Push to remote
-printf "%-40s" "Pushing to remote"
-if git push -u origin HEAD >/dev/null 2>&1; then
-    printf "${GREEN}✅${NC}\n"
-else
-    printf "${RED}❌${NC}\n"
-    exit 1
-fi
+exec_with_status "Pushing to remote" "git push -u origin HEAD"
 
 echo ""
-echo -e "${GREEN}✅ Deployment complete${NC}"
-echo "   🌐 Live: https://ai-frontend-prototypes-c8939b.gpages.io/$PROJECT_NAME/"
+log_success "✅ Deployment complete"
+
+# Get remote URL from config or construct it
+GITLAB_PAGES_BASE=$(get_config "GITLAB_PAGES_URL_BASE" "https://ai-frontend-prototypes-c8939b.gpages.io")
+REMOTE_URL=$(get_config "REMOTE_URL" "$GITLAB_PAGES_BASE/$PROJECT_NAME/")
+
+log_info "   🌐 Live: $REMOTE_URL"

@@ -47,6 +47,45 @@ npm run format
 # npm test
 ```
 
+### Using Shared Scripts
+
+This project has access to shared scripts via symlink at `./scripts/` → `../../.shared/scripts/`.
+
+**Available scripts:**
+- `./scripts/build.sh` - Auto-detects Next.js, runs `npm run build`
+- `./scripts/start.sh` - Runs `npm run dev` (uses port from package.json)
+- `./scripts/stop.sh` - Stops dev server on configured port
+- `./scripts/deploy.sh` - Builds, commits, pushes to GitLab Pages
+- `./scripts/deploy-vercel.sh` - Deploys to Vercel preview
+
+**Makefile shortcuts:**
+- `make build` - Build project
+- `make start` - Start dev server
+- `make stop` - Stop dev server
+- `make deploy MESSAGE="..."` - Deploy to GitLab
+- `make deploy-vercel` - Deploy to Vercel
+
+**Configuration override:**
+```bash
+# Use different port (though Next.js uses package.json port)
+PROJECT_DEV_SERVER_PORT=3000 ./scripts/start.sh
+
+# Vercel team slug
+PROJECT_VERCEL_TEAM_SLUG="your-team" ./scripts/deploy-vercel.sh
+```
+
+Or edit `.project.json`:
+```json
+{
+  "config": {
+    "port": 3000,
+    "vercelTeam": "your-team-slug"
+  }
+}
+```
+
+All scripts use a common library with unified logging and robust path resolution.
+
 ## Environment Setup
 
 Create a `.env.local` file in the root directory with your Claude API key:
@@ -180,11 +219,25 @@ The codebase is currently being refactored with:
 
 ### Available Components Documentation
 
-Complete component documentation is available at:
-- **Main index:** `../../ai-context/gds/llms.txt`
-- **Component docs:** `../../ai-context/gds/llms/component-*.txt`
+Complete component documentation is available via symlink at `./ai-context/gds/` → `../../.shared/ai-context/gds/`.
 
-Common components include: Button, Text, Heading, Box, Flex, Modal, Popover, Tooltip, TextField, TextArea, Select, Checkbox, RadioGroup, Icon, Badge, Tag, Toast, Tabs, Accordion, Menu, and more.
+**Quick reference:**
+```bash
+# Read complete GDS reference (all components)
+Read(ai-context/gds/llms.txt)
+
+# List all component docs
+Glob(ai-context/gds/llms/component-*.txt)
+
+# Read specific component
+Read(ai-context/gds/llms/component-button.txt)
+Read(ai-context/gds/llms/component-modal.txt)
+Read(ai-context/gds/llms/component-textfield.txt)
+```
+
+**Available components:** Button, Text, Heading, Box, Flex, Modal, Popover, Tooltip, TextField, TextArea, Select, Checkbox, RadioGroup, Icon, Badge, Tag, Toast, Tabs, Accordion, Menu, and more.
+
+**Note:** Symlinked files won't appear in @ autocomplete, use explicit `Read()` or `Glob()`.
 
 ### Usage Example
 
@@ -198,6 +251,39 @@ import { Button, Text, Flex, Modal } from '@grammarly/design-system';
   </Button>
 </Flex>
 ```
+
+### GDS Design Tokens
+
+The ai-context contains complete design tokens:
+- **Colors:** Primary (#15C39A), text, backgrounds, semantic colors
+- **Typography:** Inter font family, heading/body scales
+- **Spacing:** 4px base unit (xs=4px, sm=8px, md=16px, lg=24px, xl=32px, xxl=48px)
+- **Border radius:** Standard corner radius values
+- **Shadows:** Elevation shadows for depth
+- **Breakpoints:** Responsive design breakpoints
+
+### How to Use GDS Components
+
+1. **Check documentation first:**
+   ```bash
+   Read(ai-context/gds/llms/component-<name>.txt)
+   ```
+
+2. **Import components:**
+   ```typescript
+   import { ComponentName } from '@grammarly/design-system';
+   ```
+
+3. **Follow prop APIs from docs:**
+   - Component variants (primary, secondary, etc.)
+   - Size options (small, medium, large)
+   - State props (disabled, loading, error, etc.)
+   - Event handlers (onClick, onChange, etc.)
+
+4. **Use design tokens for consistency:**
+   - Colors: Use semantic colors from GDS
+   - Spacing: Use GDS spacing scale
+   - Typography: Use Text/Heading components
 
 **Always check the component documentation in `ai-context/gds/llms/` before implementing UI elements.**
 

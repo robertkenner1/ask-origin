@@ -6,52 +6,14 @@ deploy-vercel:
     # Only run on branches starting with "proj-" and when VERCEL_TOKEN is available
     - if: '$CI_COMMIT_BRANCH =~ /^proj-.*/ && $VERCEL_TOKEN'
   before_script:
-    - echo "🚀 Vercel Deployment Pipeline"
-    - echo ""
-    - echo "Branch: $CI_COMMIT_BRANCH"
-    - export PROJECT_NAME=$(echo "$CI_COMMIT_BRANCH" | sed 's/^proj-//')
-    - echo "Project: $PROJECT_NAME"
-    - echo ""
-    - |
-      if [ ! -d "projects/$PROJECT_NAME" ]; then
-        echo "❌ Error: Project directory not found: projects/$PROJECT_NAME"
-        exit 1
-      fi
-    - |
-      if [ ! -f "projects/$PROJECT_NAME/.project.json" ]; then
-        echo "❌ Error: .project.json not found in projects/$PROJECT_NAME"
-        echo "⚠️  This project may not be configured for deployment"
-        exit 1
-      fi
-    - |
-      DEPLOYMENT_TYPE=$(cat "projects/$PROJECT_NAME/.project.json" | grep -o '"deployment": *"[^"]*"' | sed 's/"deployment": *"\(.*\)"/\1/' || echo "")
-      echo "Deployment type: $DEPLOYMENT_TYPE"
-      if [ "$DEPLOYMENT_TYPE" != "vercel" ]; then
-        echo "⚠️  Project deployment type is '$DEPLOYMENT_TYPE', not 'vercel'"
-        echo "⚠️  Skipping Vercel deployment"
-        exit 0
-      fi
-    - echo ""
-    - echo "📦 Installing Vercel CLI..."
-    - npm install -g vercel@latest
-    - |
-      if [ -z "$VERCEL_TOKEN" ]; then
-        echo "❌ Error: VERCEL_TOKEN not set in GitLab CI/CD variables"
-        echo "Add VERCEL_TOKEN as a masked variable in GitLab CI/CD settings:"
-        echo "  Settings > CI/CD > Variables > Add Variable"
-        echo "  Key: VERCEL_TOKEN"
-        echo "  Value: <your-token-from-https://vercel.com/account/tokens>"
-        echo "  Flags: Masked"
-        exit 1
-      fi
-      echo "✅ VERCEL_TOKEN is configured"
+    - chmod +x .gitlab-ci/scripts/prepare-vercel-deployment.sh
+    - ./.gitlab-ci/scripts/prepare-vercel-deployment.sh "$CI_COMMIT_BRANCH"
 
   script:
-    - echo ""
     - echo "🚀 Starting deployment..."
     - echo ""
-    - chmod +x scripts/deploy-vercel.sh
-    - ./scripts/deploy-vercel.sh "$PROJECT_NAME"
+    - chmod +x .shared/scripts/deploy-vercel.sh
+    - ./.shared/scripts/deploy-vercel.sh "$CI_COMMIT_BRANCH"
 
   environment:
     name: vercel-preview/$PROJECT_NAME
@@ -73,7 +35,7 @@ stop-vercel-preview:
       when: manual
   script:
     - echo "🛑 Stopping Vercel preview environment"
-    - echo "Note: Preview deployments are automatically cleaned up by Vercel"
+    - echo "Note - Preview deployments are automatically cleaned up by Vercel"
     - echo "This is a placeholder for manual cleanup if needed"
   environment:
     name: vercel-preview/$PROJECT_NAME

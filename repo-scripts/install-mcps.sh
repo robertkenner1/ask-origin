@@ -3,48 +3,40 @@
 
 set -e
 
-# Color codes
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
+# Load common library
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/../.shared/scripts/lib/common.sh"
 
-echo "🔌 MCP Server Configuration"
+log_info "🔌 MCP Server Configuration"
 echo ""
 
 # Check if .claude directory exists
 if [ ! -d ".claude" ]; then
-    echo -e "${RED}❌ .claude/mcp.json file not found${NC}"
+    log_error "❌ .claude/mcp.json file not found"
     exit 1
 fi
 
 # Check if config file exists
-printf "%-40s" "Checking MCP configuration"
-if [ -f ".claude/mcp.json" ]; then
-    printf "${GREEN}✅${NC}\n"
-else
-    printf "${RED}❌${NC}\n"
-    echo ""
-    echo -e "${RED}❌ .claude/mcp.json file not found${NC}"
-    echo "Expected: .claude/mcp.json"
+exec_with_status "Checking MCP configuration" "[ -f '.claude/mcp.json' ]" || {
+    log_error "❌ .claude/mcp.json file not found"
+    log_info "Expected: .claude/mcp.json"
     exit 1
-fi
+}
 
 echo ""
-echo -e "${BLUE}📋 Pre-configured MCP Servers:${NC}"
+log_info "📋 Pre-configured MCP Servers:"
 echo ""
-echo -e "  ✅ ${GREEN}Playwright MCP${NC}"
+log_success "  ✅ Playwright MCP"
 echo "     Browser automation and testing"
 echo "     Command: npx @playwright/mcp@latest"
 echo ""
-echo -e "  ✅ ${GREEN}Sourcegraph MCP${NC}"
+log_success "  ✅ Sourcegraph MCP"
 echo "     Code search across repositories"
 echo "     URL: https://apigw.prod-platform-plane.grammarlyaws.com/sourcegraph-mcp-server/mcp/"
 echo ""
 
 # Check for Figma MCP (optional, requires manual setup)
-echo -e "${YELLOW}⚠️  Figma MCP${NC} (Optional - Manual Setup Required)"
+log_warning "⚠️  Figma MCP (Optional - Manual Setup Required)"
 echo "   Manual installation required for Figma integration:"
 echo "   🔗 Follow: https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Dev-Mode-MCP-Server"
 echo "   💡 Requires Figma account and manual configuration"
@@ -53,14 +45,8 @@ echo "         (Home>Your User>Settings>Your Spaces>Upgrade to Dev) and restart 
 echo ""
 
 # Install project dependencies
-printf "%-40s" "Installing project dependencies"
-if npm install >/dev/null 2>&1; then
-    printf "${GREEN}✅${NC}\n"
-else
-    printf "${RED}❌${NC}\n"
-    exit 1
-fi
+exec_with_status "Installing project dependencies" "npm install"
 
 echo ""
-echo -e "${GREEN}✅ MCP servers are pre-configured in .claude/mcp.json${NC}"
-echo -e "${BLUE}ℹ️  Claude Code will automatically use these MCP servers when running in this directory${NC}"
+log_success "✅ MCP servers are pre-configured in .claude/mcp.json"
+log_info "ℹ️  Claude Code will automatically use these MCP servers when running in this directory"

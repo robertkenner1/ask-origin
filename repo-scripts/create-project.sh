@@ -3,15 +3,14 @@
 
 set -e
 
-# Color codes
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
+# Load common library
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/../.shared/scripts/lib/common.sh"
 
-# Constants
-VERCEL_TEAM_SLUG="grammarly-0ad4c188"
+# Get configuration
+VERCEL_TEAM_SLUG=$(get_config "VERCEL_TEAM_SLUG" "grammarly-0ad4c188")
+TEMPLATES_DIR=$(get_config "TEMPLATES_DIR" "templates")
+PROJECTS_DIR=$(get_config "PROJECTS_DIR" "projects")
 
 # Function to slugify project name
 slugify() {
@@ -20,11 +19,11 @@ slugify() {
 
 # Function to list available templates
 list_templates() {
-    echo -e "${BLUE}📦 Available Templates:${NC}"
+    log_info "📦 Available Templates:"
     echo ""
 
     local i=1
-    for template_dir in templates/*/; do
+    for template_dir in $TEMPLATES_DIR/*/; do
         if [ -d "$template_dir" ]; then
             local template_name=$(basename "$template_dir")
             local template_json="$template_dir/template.json"
@@ -58,17 +57,17 @@ PROJECT_NAME=$(slugify "$PROJECT_INPUT")
 
 # Validate project name
 if [ -z "$PROJECT_NAME" ]; then
-    echo -e "${RED}❌ Project name cannot be empty${NC}"
+    log_error "❌ Project name cannot be empty"
     exit 1
 fi
 
-if [ -d "projects/$PROJECT_NAME" ]; then
-    echo -e "${RED}❌ Project '$PROJECT_NAME' already exists${NC}"
+if [ -d "$PROJECTS_DIR/$PROJECT_NAME" ]; then
+    log_error "❌ Project '$PROJECT_NAME' already exists"
     exit 1
 fi
 
-if [ ! -d "templates" ]; then
-    echo -e "${RED}❌ Templates directory not found${NC}"
+if [ ! -d "$TEMPLATES_DIR" ]; then
+    log_error "❌ Templates directory not found"
     exit 1
 fi
 
@@ -84,7 +83,7 @@ TEMPLATE_DIR=""
 if [[ "$TEMPLATE_CHOICE" =~ ^[0-9]+$ ]]; then
     # User entered a number
     i=1
-    for template_dir in templates/*/; do
+    for template_dir in $TEMPLATES_DIR/*/; do
         if [ -d "$template_dir" ]; then
             if [ $i -eq $TEMPLATE_CHOICE ]; then
                 TEMPLATE_DIR="$template_dir"
@@ -95,20 +94,20 @@ if [[ "$TEMPLATE_CHOICE" =~ ^[0-9]+$ ]]; then
     done
 else
     # User entered a name
-    TEMPLATE_DIR="templates/$TEMPLATE_CHOICE"
+    TEMPLATE_DIR="$TEMPLATES_DIR/$TEMPLATE_CHOICE"
 fi
 
 # Validate template selection
 if [ ! -d "$TEMPLATE_DIR" ]; then
-    echo -e "${RED}❌ Template not found: $TEMPLATE_CHOICE${NC}"
+    log_error "❌ Template not found: $TEMPLATE_CHOICE"
     exit 1
 fi
 
 TEMPLATE_NAME=$(basename "$TEMPLATE_DIR")
 
 echo ""
-echo "🚀 Creating project: $PROJECT_NAME"
-echo "📦 Using template: $TEMPLATE_NAME"
+log_info "🚀 Creating project: $PROJECT_NAME"
+log_info "📦 Using template: $TEMPLATE_NAME"
 echo ""
 
 # Prompt for project description
@@ -123,84 +122,42 @@ CREATED_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 PROJECT_TITLE=$(echo "$PROJECT_NAME" | sed 's/-/ /g' | awk '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) tolower(substr($i,2)); print}')
 
 # Stash current changes
-printf "%-40s" "Stashing current changes"
-if git stash push -m "Auto-stash before creating $PROJECT_NAME" >/dev/null 2>&1; then
-    printf "${GREEN}✅${NC}\n"
-else
-    printf "${YELLOW}⚠️${NC}\n"
-fi
+exec_with_status "Stashing current changes" "git stash push -m 'Auto-stash before creating $PROJECT_NAME'" || print_status "Stashing current changes" "note" "nothing to stash"
 
 # Switch to main branch
-printf "%-40s" "Switching to main branch"
-if git checkout main >/dev/null 2>&1; then
-    printf "${GREEN}✅${NC}\n"
-else
-    printf "${RED}❌${NC}\n"
-    exit 1
-fi
+exec_with_status "Switching to main branch" "git checkout main"
 
 # Pull latest changes
-printf "%-40s" "Pulling latest changes"
-if git pull origin main >/dev/null 2>&1; then
-    printf "${GREEN}✅${NC}\n"
-else
-    printf "${YELLOW}⚠️${NC}\n"
-fi
+exec_with_status "Pulling latest changes" "git pull origin main" || print_status "Pulling latest changes" "warning"
 
 # Create new branch with proj- prefix
-printf "%-40s" "Creating new branch: $BRANCH_NAME"
-if git checkout -b "$BRANCH_NAME" >/dev/null 2>&1; then
-    printf "${GREEN}✅${NC}\n"
-else
-    printf "${RED}❌${NC}\n"
-    exit 1
-fi
+exec_with_status "Creating new branch: $BRANCH_NAME" "git checkout -b '$BRANCH_NAME'"
 
 # Restore stashed changes
-printf "%-40s" "Restoring stashed changes"
-if git stash pop >/dev/null 2>&1; then
-    printf "${GREEN}✅${NC}\n"
-else
-    printf "${YELLOW}⚠️${NC}\n"
-fi
+exec_with_status "Restoring stashed changes" "git stash pop" || print_status "Restoring stashed changes" "note" "nothing to restore"
 
 # Create project directory
-printf "%-40s" "Creating project directory"
-if mkdir -p "projects/$PROJECT_NAME"; then
-    printf "${GREEN}✅${NC}\n"
-else
-    printf "${RED}❌${NC}\n"
-    exit 1
-fi
+exec_with_status "Creating project directory" "mkdir -p '$PROJECTS_DIR/$PROJECT_NAME'"
 
 # Copy template source files to project directory
-printf "%-40s" "Copying template files"
-if cp -r "$TEMPLATE_DIR"/* "projects/$PROJECT_NAME/"; then
-    printf "${GREEN}✅${NC}\n"
-else
-    printf "${RED}❌${NC}\n"
-    exit 1
-fi
+exec_with_status "Copying template files" "cp -r '$TEMPLATE_DIR'/* '$PROJECTS_DIR/$PROJECT_NAME/'"
 
 # Create symlinks to shared resources
-printf "%-40s" "Creating symlink: scripts/"
-if ln -s "../../.shared/scripts" "projects/$PROJECT_NAME/scripts"; then
-    printf "${GREEN}✅${NC}\n"
-else
-    printf "${RED}❌${NC}\n"
-    exit 1
-fi
+exec_with_status "Creating symlink: scripts/" "ln -s '../../.shared/scripts' '$PROJECTS_DIR/$PROJECT_NAME/scripts'"
+exec_with_status "Creating symlink: ai-context/" "ln -s '../../.shared/ai-context' '$PROJECTS_DIR/$PROJECT_NAME/ai-context'"
 
-printf "%-40s" "Creating symlink: ai-context/"
-if ln -s "../../.shared/ai-context" "projects/$PROJECT_NAME/ai-context"; then
-    printf "${GREEN}✅${NC}\n"
+# Copy Claude settings from shared template
+print_status "Copying Claude settings" ""
+if [ -f ".shared/.claude/settings.local.json.template" ]; then
+    mkdir -p "$PROJECTS_DIR/$PROJECT_NAME/.claude"
+    cp ".shared/.claude/settings.local.json.template" "$PROJECTS_DIR/$PROJECT_NAME/.claude/settings.local.json"
+    print_status "Copying Claude settings" "success"
 else
-    printf "${RED}❌${NC}\n"
-    exit 1
+    print_status "Copying Claude settings" "note" "template not found"
 fi
 
 # Create .project.json from template
-printf "%-40s" "Creating project metadata"
+print_status "Creating project metadata" ""
 if [ -f "$TEMPLATE_DIR/.project.json.template" ]; then
     # Use template if exists
     sed -e "s/{{PROJECT_NAME}}/$PROJECT_NAME/g" \
@@ -208,10 +165,10 @@ if [ -f "$TEMPLATE_DIR/.project.json.template" ]; then
         -e "s/{{CREATED_DATE}}/$CREATED_DATE/g" \
         -e "s/{{BRANCH_NAME}}/$BRANCH_NAME/g" \
         -e "s/{{VERCEL_TEAM_SLUG}}/$VERCEL_TEAM_SLUG/g" \
-        "$TEMPLATE_DIR/.project.json.template" > "projects/$PROJECT_NAME/.project.json"
+        "$TEMPLATE_DIR/.project.json.template" > "$PROJECTS_DIR/$PROJECT_NAME/.project.json"
 else
     # Create default .project.json
-    cat > "projects/$PROJECT_NAME/.project.json" <<EOF
+    cat > "$PROJECTS_DIR/$PROJECT_NAME/.project.json" <<EOF
 {
   "name": "$PROJECT_NAME",
   "description": "$PROJECT_DESCRIPTION",
@@ -227,48 +184,34 @@ else
 }
 EOF
 fi
-printf "${GREEN}✅${NC}\n"
+print_status "Creating project metadata" "success"
 
 # Process template variables in all files
-printf "%-40s" "Processing template variables"
-find "projects/$PROJECT_NAME" -type f \( -name "*.md" -o -name "*.html" -o -name "*.js" -o -name "*.json" -o -name "*.ts" -o -name "*.tsx" \) -exec sed -i '' \
-    -e "s/{{PROJECT_NAME}}/$PROJECT_NAME/g" \
-    -e "s/{{PROJECT_TITLE}}/$PROJECT_TITLE/g" \
-    -e "s/{{PROJECT_DESCRIPTION}}/$PROJECT_DESCRIPTION/g" \
-    -e "s/{{CREATED_DATE}}/$CREATED_DATE/g" \
-    -e "s/{{BRANCH_NAME}}/$BRANCH_NAME/g" \
-    -e "s/{{VERCEL_TEAM_SLUG}}/$VERCEL_TEAM_SLUG/g" \
-    {} \; 2>/dev/null
-printf "${GREEN}✅${NC}\n"
+exec_with_status "Processing template variables" "find '$PROJECTS_DIR/$PROJECT_NAME' -type f \\( -name '*.md' -o -name '*.html' -o -name '*.js' -o -name '*.json' -o -name '*.ts' -o -name '*.tsx' \\) -exec sed -i '' -e 's/{{PROJECT_NAME}}/$PROJECT_NAME/g' -e 's/{{PROJECT_TITLE}}/$PROJECT_TITLE/g' -e 's/{{PROJECT_DESCRIPTION}}/$PROJECT_DESCRIPTION/g' -e 's/{{CREATED_DATE}}/$CREATED_DATE/g' -e 's/{{BRANCH_NAME}}/$BRANCH_NAME/g' -e 's/{{VERCEL_TEAM_SLUG}}/$VERCEL_TEAM_SLUG/g' {} \\;"
 
 # Determine if this is a static or Next.js project
-if [ -f "projects/$PROJECT_NAME/package.json" ]; then
+if [ -f "$PROJECTS_DIR/$PROJECT_NAME/package.json" ]; then
     # Next.js or Node project - install dependencies
-    printf "%-40s" "Installing dependencies"
-    (cd "projects/$PROJECT_NAME" && npm install >/dev/null 2>&1) && printf "${GREEN}✅${NC}\n" || printf "${YELLOW}⚠️${NC}\n"
+    exec_with_status "Installing dependencies" "(cd '$PROJECTS_DIR/$PROJECT_NAME' && npm install)" || print_status "Installing dependencies" "warning"
 
     # Build project if needed
-    if [ -f "projects/$PROJECT_NAME/next.config.ts" ] || [ -f "projects/$PROJECT_NAME/next.config.js" ]; then
+    if [ -f "$PROJECTS_DIR/$PROJECT_NAME/next.config.ts" ] || [ -f "$PROJECTS_DIR/$PROJECT_NAME/next.config.js" ]; then
         # Don't build Next.js projects yet
         echo ""
-        echo -e "${BLUE}ℹ️  Next.js project created. Use 'cd projects/$PROJECT_NAME && npm run dev' to start${NC}"
+        log_info "ℹ️  Next.js project created. Use 'cd $PROJECTS_DIR/$PROJECT_NAME && npm run dev' to start"
     fi
 else
     # Static website - build sitemap
-    printf "%-40s" "Building sitemap"
-    if npm run build:sitemap >/dev/null 2>&1; then
-        printf "${GREEN}✅${NC}\n"
-    else
-        printf "${RED}❌${NC}\n"
-    fi
+    exec_with_status "Building sitemap" "npm run build:sitemap"
 
     # Stop existing dev server
-    printf "%-40s" "Stopping existing dev server"
-    if lsof -t -i:8181 >/dev/null 2>&1; then
-        kill -9 $(lsof -t -i:8181) >/dev/null 2>&1
-        printf "${GREEN}✅${NC}\n"
+    PORT=$(get_config "REPO_DEV_SERVER_PORT" "8181")
+    if is_port_in_use "$PORT"; then
+        print_status "Stopping existing dev server" ""
+        kill_port "$PORT"
+        print_status "Stopping existing dev server" "success"
     else
-        printf "${YELLOW}⚠️${NC}  (not running)\n"
+        print_status "Stopping existing dev server" "note" "not running"
     fi
 
     # Start dev server in background
@@ -276,16 +219,16 @@ else
 fi
 
 echo ""
-echo -e "${GREEN}✅ Project '$PROJECT_NAME' created successfully${NC}"
+log_success "✅ Project '$PROJECT_NAME' created successfully"
 echo ""
-echo -e "${BLUE}📋 Project Details:${NC}"
+log_info "📋 Project Details:"
 echo "   📦 Template: $TEMPLATE_NAME"
 echo "   🌿 Branch: $BRANCH_NAME"
-echo "   📁 Location: projects/$PROJECT_NAME/"
+echo "   📁 Location: $PROJECTS_DIR/$PROJECT_NAME/"
 
 # Show URLs based on project type
-if [ -f "projects/$PROJECT_NAME/package.json" ]; then
-    PROJECT_JSON="projects/$PROJECT_NAME/.project.json"
+if [ -f "$PROJECTS_DIR/$PROJECT_NAME/package.json" ]; then
+    PROJECT_JSON="$PROJECTS_DIR/$PROJECT_NAME/.project.json"
     if [ -f "$PROJECT_JSON" ]; then
         LOCAL_URL=$(cat "$PROJECT_JSON" | grep -o '"local": *"[^"]*"' | sed 's/"local": *"\(.*\)"/\1/' || echo "")
         if [ -n "$LOCAL_URL" ]; then

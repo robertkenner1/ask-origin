@@ -4,58 +4,68 @@
 
 set -e
 
-# Color codes
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
+# Load common library
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/lib/common.sh"
 
-# Get project info
-PROJECT_DIR=$(pwd)
-PROJECT_NAME=$(basename "$PROJECT_DIR")
-REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null || echo "../..")
+# Ensure we're in a project directory
+ensure_project_dir || exit 1
 
-echo -e "${BLUE}🚀 Starting development server: $PROJECT_NAME${NC}"
+# Resolve paths
+REPO_ROOT=$(resolve_repo_root) || exit 1
+PROJECT_NAME=$(detect_project_name)
+PROJECT_TYPE=$(detect_project_type)
+
+log_info "🚀 Starting development server: $PROJECT_NAME"
 echo ""
 
-# Check if this is a Node.js project with dev script
-if [ -f "package.json" ]; then
-    # Check if package.json has dev script
-    if grep -q '"dev":' package.json; then
-        echo "📦 Starting Node.js dev server"
+# Load project config
+load_project_config
+
+# Get port configuration
+PORT=$(get_config "DEV_SERVER_PORT" "8181")
+
+# Start based on project type
+case "$PROJECT_TYPE" in
+    nextjs|nodejs)
+        # Check if package.json has dev script
+        if ! grep -q '"dev":' package.json 2>/dev/null; then
+            log_error "⚠️  No dev script found in package.json"
+            exit 1
+        fi
+
+        log_info "📦 Starting Node.js dev server"
         echo ""
         npm run dev
-    else
-        echo -e "${YELLOW}⚠️  No dev script found in package.json${NC}"
+        ;;
+
+    static)
+        # Build first
+        ./scripts/build.sh
+
+        # Check if server is already running
+        if is_port_in_use "$PORT"; then
+            log_warning "⚠️  Server already running on port $PORT"
+            log_info "   Stopping existing server..."
+            kill_port "$PORT"
+        fi
+
+        # Get local URL from config or construct it
+        LOCAL_URL=$(get_config "LOCAL_URL" "http://localhost:$PORT/$PROJECT_NAME/")
+
+        # Start server from public directory
+        echo ""
+        log_success "🌐 Server starting: $LOCAL_URL"
+        log_info "   Press Ctrl+C to stop"
+        echo "────────────────────────────────────"
+
+        cd "$REPO_ROOT/public"
+        npx http-server . -p "$PORT" -o "/$PROJECT_NAME/"
+        ;;
+
+    *)
+        log_error "❌ Unknown project type"
+        log_info "   Expected: package.json OR src/ directory"
         exit 1
-    fi
-
-elif [ -d "src" ]; then
-    # Static project - build and serve
-    PORT=8181
-
-    # Build first
-    ./scripts/build.sh
-
-    # Check if server is already running
-    if lsof -t -i:$PORT >/dev/null 2>&1; then
-        echo -e "${YELLOW}⚠️  Server already running on port $PORT${NC}"
-        echo "   Stopping existing server..."
-        kill -9 $(lsof -t -i:$PORT) >/dev/null 2>&1
-    fi
-
-    # Start server from public directory
-    echo ""
-    echo -e "${GREEN}🌐 Server starting:${NC} http://localhost:$PORT/$PROJECT_NAME/"
-    echo "   Press Ctrl+C to stop"
-    echo "────────────────────────────────────"
-
-    cd "$REPO_ROOT/public"
-    npx http-server . -p $PORT -o "/$PROJECT_NAME/"
-
-else
-    echo -e "${RED}❌ Unknown project type${NC}"
-    echo "   Expected: package.json OR src/ directory"
-    exit 1
-fi
+        ;;
+esac

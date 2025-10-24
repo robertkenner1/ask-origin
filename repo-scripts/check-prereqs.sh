@@ -3,11 +3,9 @@
 
 set -e
 
-# Color codes
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+# Load common library
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/../.shared/scripts/lib/common.sh"
 
 # Check a command and optionally install it
 check_command() {
@@ -18,18 +16,18 @@ check_command() {
     printf "%-40s" "Checking $name"
 
     if command -v "$command" >/dev/null 2>&1; then
-        printf "${GREEN}✅${NC}\n"
+        printf "${GREEN}${SYM_SUCCESS}${NC}\n"
         return 0
     else
-        printf "${RED}❌${NC}\n"
+        printf "${RED}${SYM_ERROR}${NC}\n"
 
         if [ -n "$install_cmd" ]; then
             printf "%-40s" "Installing $name"
             if eval "$install_cmd" >/dev/null 2>&1; then
-                printf "${GREEN}✅${NC}\n"
+                printf "${GREEN}${SYM_SUCCESS}${NC}\n"
                 return 0
             else
-                printf "${RED}❌${NC}\n"
+                printf "${RED}${SYM_ERROR}${NC}\n"
                 return 1
             fi
         fi
@@ -37,7 +35,7 @@ check_command() {
     fi
 }
 
-echo "🔍 Checking Prerequisites"
+log_info "🔍 Checking Prerequisites"
 echo ""
 
 # Check Homebrew
@@ -56,13 +54,7 @@ check_command "Claude Code CLI" "claude" "npm install -g @anthropic-ai/claude-co
 check_command "Vercel CLI" "vercel" "brew install vercel-cli"
 
 # Install project dependencies
-printf "%-40s" "Installing project dependencies"
-if npm install >/dev/null 2>&1; then
-    printf "${GREEN}✅${NC}\n"
-else
-    printf "${RED}❌${NC}\n"
-    exit 1
-fi
+exec_with_status "Installing project dependencies" "npm install"
 
 echo ""
-echo -e "${GREEN}✅ All prerequisites checked${NC}"
+log_success "✅ All prerequisites checked"

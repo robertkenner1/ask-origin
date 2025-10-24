@@ -3,11 +3,9 @@
 
 set -e
 
-# Color codes
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+# Load common library
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/../.shared/scripts/lib/common.sh"
 
 # Get commit message from argument or prompt
 if [ -z "$1" ]; then
@@ -19,49 +17,34 @@ fi
 
 # Validate commit message
 if [ -z "$COMMIT_MSG" ]; then
-    echo -e "${RED}❌ Commit message cannot be empty${NC}"
+    log_error "❌ Commit message cannot be empty"
     exit 1
 fi
 
-echo "🚀 Deploying changes"
+log_info "🚀 Deploying changes"
 echo ""
 
 # Build projects
-printf "%-40s" "Building projects"
-if npm run build:sitemap >/dev/null 2>&1; then
-    printf "${GREEN}✅${NC}\n"
-else
-    printf "${RED}❌${NC}\n"
-    exit 1
-fi
+exec_with_status "Building projects" "npm run build:sitemap"
 
 # Add changes
-printf "%-40s" "Adding changes"
-if git add . >/dev/null 2>&1; then
-    printf "${GREEN}✅${NC}\n"
-else
-    printf "${RED}❌${NC}\n"
-    exit 1
-fi
+exec_with_status "Adding changes" "git add ."
 
 # Create commit
-printf "%-40s" "Creating commit"
+print_status "Creating commit" ""
 if git commit -m "$COMMIT_MSG" >/dev/null 2>&1; then
-    printf "${GREEN}✅${NC}\n"
+    print_status "Creating commit" "success"
 else
-    printf "${RED}❌${NC}\n"
+    print_status "Creating commit" "error"
     exit 1
 fi
 
 # Push to remote
-printf "%-40s" "Pushing to remote"
-if git push -u origin HEAD >/dev/null 2>&1; then
-    printf "${GREEN}✅${NC}\n"
-else
-    printf "${RED}❌${NC}\n"
-    exit 1
-fi
+exec_with_status "Pushing to remote" "git push -u origin HEAD"
 
 echo ""
-echo -e "${GREEN}✅ Deployment complete${NC}"
-echo "   🌐 Live: https://ai-frontend-prototypes-c8939b.gpages.io/"
+log_success "✅ Deployment complete"
+
+# Get GitLab Pages URL from config
+GITLAB_PAGES_BASE=$(get_config "GITLAB_PAGES_URL_BASE" "https://ai-frontend-prototypes-c8939b.gpages.io")
+log_info "   🌐 Live: $GITLAB_PAGES_BASE/"

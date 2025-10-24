@@ -94,6 +94,7 @@ ai-frontend-prototypes/
 |----------|----------|------|--------|---------|
 | **scripts/** | 🔗 Symlink | ~50KB | Executables, shared logic | Automatic |
 | **ai-context/** | 🔗 Symlink | 328KB | Read-only docs, large | Automatic |
+| **.claude/settings.local.json** | 📄 Copy | <1KB | Permissions & MCP config | Manual |
 | **.mcp.json** | 📄 Copy | <1KB | Template-specific servers | Manual |
 | **Makefile** | 📄 Copy | <5KB | Template-specific commands | Manual |
 | **CLAUDE.md** | 📄 Copy | <10KB | Project instructions | Manual |
@@ -229,6 +230,51 @@ cat ai-context/gds/llms.txt  # ← Shows new content
 2. **File Browser UI**
    - Symlinked directories may not expand in UI
    - **Solution:** Use Glob, Grep, or explicit Read commands
+
+---
+
+## Claude Code Settings
+
+Each project gets a `.claude/settings.local.json` file that defines permissions and MCP server configurations.
+
+### Settings Template
+
+**Source:** `.shared/.claude/settings.local.json.template`
+
+**Copied to:** `projects/[name]/.claude/settings.local.json` during project creation
+
+**Grants permissions for:**
+
+1. **Read AI Context**: `Read(ai-context/**)`
+   - Access to Grammarly Design System documentation
+
+2. **Read Scripts**: `Read(scripts/**)`
+   - View available automation scripts
+
+3. **Execute Scripts**: `Bash(./scripts/*.sh:*)`
+   - Run build, start, stop, deploy scripts
+
+4. **Git Operations**: Full workflow support
+   - `git add`, `git commit`, `git status`, `git diff`, etc.
+
+5. **Package Management**: `npm:*`, `pnpm:*`
+   - Install dependencies, run scripts
+
+6. **Deployment**: `vercel:*`
+   - Deploy to Vercel
+
+7. **MCP Servers**:
+   - Playwright (browser automation)
+   - Sourcegraph (code search)
+   - Figma (design-to-code)
+
+### Customization
+
+**Per-Project**: Edit `.claude/settings.local.json` in the project directory
+
+**For All New Projects**: Edit `.shared/.claude/settings.local.json.template`
+
+**Documentation**: See `.shared/.claude/README.md` for complete reference
 
 ---
 
