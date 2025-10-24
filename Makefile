@@ -35,15 +35,15 @@ help:
 
 # Check prerequisites
 prereqs:
-	@./scripts/check-prereqs.sh
+	@./repo-scripts/check-prereqs.sh
 
 # Install required MCP servers
 install:
-	@./scripts/install-mcps.sh
+	@./repo-scripts/install-mcps.sh
 
 # Create new project
 new:
-	@./scripts/create-project.sh $(PROJECT)
+	@./repo-scripts/create-project.sh $(PROJECT)
 
 # Build projects from source to public
 build:
@@ -52,27 +52,27 @@ build:
 
 # Stop development server
 stop:
-	@./scripts/stop-server.sh
+	@./repo-scripts/stop-server.sh
 
 # Start development server
 start:
-	@./scripts/start-server.sh
+	@./repo-scripts/start-server.sh
 
 # List all projects
 list:
-	@./scripts/list-projects.sh
+	@./repo-scripts/list-projects.sh
 
 # Delete project and branch
 delete:
-	@./scripts/delete-project.sh $(PROJECT)
+	@./repo-scripts/delete-project.sh $(PROJECT)
 
 # Deploy changes
 deploy:
-	@./scripts/deploy.sh $(MESSAGE)
+	@./repo-scripts/deploy.sh $(MESSAGE)
 
 # Deploy to Vercel preview
 deploy-vercel:
-	@./scripts/deploy-vercel.sh $(PROJECT)
+	@./repo-scripts/deploy-vercel.sh $(PROJECT)
 
 # Clean build artifacts
 clean:

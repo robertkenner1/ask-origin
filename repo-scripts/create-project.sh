@@ -173,9 +173,26 @@ else
     exit 1
 fi
 
-# Copy template to project directory
+# Copy template source files to project directory
 printf "%-40s" "Copying template files"
 if cp -r "$TEMPLATE_DIR"/* "projects/$PROJECT_NAME/"; then
+    printf "${GREEN}✅${NC}\n"
+else
+    printf "${RED}❌${NC}\n"
+    exit 1
+fi
+
+# Create symlinks to shared resources
+printf "%-40s" "Creating symlink: scripts/"
+if ln -s "../../.shared/scripts" "projects/$PROJECT_NAME/scripts"; then
+    printf "${GREEN}✅${NC}\n"
+else
+    printf "${RED}❌${NC}\n"
+    exit 1
+fi
+
+printf "%-40s" "Creating symlink: ai-context/"
+if ln -s "../../.shared/ai-context" "projects/$PROJECT_NAME/ai-context"; then
     printf "${GREEN}✅${NC}\n"
 else
     printf "${RED}❌${NC}\n"

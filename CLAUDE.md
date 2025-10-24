@@ -3,49 +3,65 @@
 This guide helps Claude assist users in creating pixel-perfect frontend prototypes from websites, screenshots, or Figma designs in this monorepo.
 You are experienced Frontend Developer and mature designer.
 
+## Architecture
+
+**IMPORTANT:** This monorepo uses **symlinks** for shared resources. See `ARCHITECTURE.md` for complete details.
+
+**Key concepts:**
+- Projects are self-sufficient (work in project directory)
+- `scripts/` and `ai-context/` are symlinks to `.shared/`
+- `.mcp.json` and `Makefile` are template-specific (real files)
+- Updates to `.shared/` propagate to all projects automatically
+
 ## Project Structure
 
-This is a **monorepo** for frontend experiments with automatic project discovery and build system:
+This is a **monorepo** for frontend experiments with symlink-based architecture:
 
 ```
-ai-frontend/
-├── projects/                     # 🎯 Source files for all projects
-│   ├── golden-path-redesign/     # Example project
-│   │   ├── src/                  # Source files (HTML, CSS, JS)
-│   │   │   ├── index.html
-│   │   │   ├── styles.css
-│   │   │   └── script.js
-│   │   ├── prompts/              # Initial prompt and documentation
-│   │   │   └── initial-prompt.md
-│   │   └── CLAUDE.md             # Project-specific settings
-│   └── [your-new-project]/       # Create new projects here
-├── public/                       # 🔨 Built/deployed versions (auto-generated)
-│   ├── index.html               # Main directory (auto-generated)
-│   ├── projects.json            # Auto-generated sitemap
-│   ├── golden-path-redesign/    # Built from projects/golden-path-redesign/src/
-│   │   ├── index.html
-│   │   ├── styles.css
-│   │   └── script.js
-│   └── [built-projects]/        # Auto-generated from source
-├── templates/                   # Project templates
-│   ├── CLAUDE.md               # Project template
-│   ├── index.html              # HTML template
-│   ├── styles.css              # CSS template
-│   ├── script.js               # JS template
-│   └── initial-prompt.md       # Prompt template
-├── build-sitemap.js            # Sitemap generator & build system
-├── Makefile                    # Build automation
-└── package.json                # Build scripts
+ai-frontend-prototypes/
+├── .shared/                      # 🔗 Shared resources (symlinked)
+│   ├── scripts/                 # Executable scripts for all projects
+│   └── ai-context/              # AI documentation (328KB)
+│
+├── repo-scripts/                 # 📦 Repository management
+│   ├── create-project.sh
+│   └── ...
+│
+├── templates/                    # 📋 Project templates
+│   ├── static-website/
+│   │   ├── src/
+│   │   ├── Makefile            # Template-specific
+│   │   ├── .mcp.json           # Template-specific
+│   │   └── CLAUDE.md
+│   └── ai-editor/
+│
+├── projects/                     # 🎯 Active projects
+│   └── my-project/              # ✅ Self-sufficient
+│       ├── src/                 # Real files
+│       ├── scripts/             # 🔗 → ../../.shared/scripts/
+│       ├── ai-context/          # 🔗 → ../../.shared/ai-context/
+│       ├── .mcp.json            # Real file (from template)
+│       ├── Makefile             # Real file (from template)
+│       └── CLAUDE.md
+│
+├── public/                       # 🌐 Built/deployed versions
+├── build-sitemap.js             # Master index generator
+├── Makefile                     # Repository commands
+└── package.json
 ```
 
 **Key Rules:**
-- Run `make build` or `npm run build:sitemap` to build projects
+- **Work from project directory:** `cd projects/[project-name]/` before starting
+- **Symlinked resources:** `scripts/` and `ai-context/` are symlinks to `.shared/`
+- **Read through symlinks:** Use `Read(ai-context/gds/llms.txt)` explicitly
+- **Don't edit symlinks:** To customize, remove symlink and create real directory
+- Run `make build` from project dir to build
 - Built projects auto-appear in `public/` and main directory listing
-- Edit source files in `projects/`, not `public/`
-- If user ased to build prototype in Grammarly style, check logo and style in Grammarly Design System.
-- Always double check if something looks wrong in size or colors.
-- Better iterate more times with Playwright but provide better result.
-- if user ask to publish - do make publish and provide links for creating MR in gitlab and link for preview https://ai-frontend-prototypes-c8939b.gpages.io/.
+- Edit source files in `projects/*/src/`, not `public/`
+- If user asked to build prototype in Grammarly style, check logo and style in Grammarly Design System
+- Always double check if something looks wrong in size or colors
+- Better iterate more times with Playwright but provide better result
+- If user ask to publish - do `make deploy` and provide links for creating MR in GitLab and link for preview https://ai-frontend-prototypes-c8939b.gpages.io/
 
 
 ## 🎯 ACTIVE PROJECT DETECTION
