@@ -4,65 +4,54 @@
 
 set -e
 
-# Color codes
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
+# Load common library
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/lib/common.sh"
 
-# Get project info
-PROJECT_DIR=$(pwd)
-PROJECT_NAME=$(basename "$PROJECT_DIR")
-REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null || echo "../..")
+# Ensure we're in a project directory
+ensure_project_dir || exit 1
+
+# Resolve paths
+REPO_ROOT=$(resolve_repo_root) || exit 1
+PROJECT_NAME=$(detect_project_name)
+PROJECT_TYPE=$(detect_project_type)
 PUBLIC_DIR="$REPO_ROOT/public/$PROJECT_NAME"
 
-echo -e "${BLUE}🔨 Building project: $PROJECT_NAME${NC}"
+log_info "🔨 Building project: $PROJECT_NAME"
 echo ""
 
-# Check if this is a Node.js project
-if [ -f "package.json" ]; then
-    echo "📦 Detected Node.js project"
+# Load project config if available
+load_project_config
 
-    # Check for Next.js
-    if [ -f "next.config.ts" ] || [ -f "next.config.js" ] || [ -f "next.config.mjs" ]; then
-        echo "⚡ Next.js project detected"
-        printf "%-40s" "Running npm run build"
-        if npm run build >/dev/null 2>&1; then
-            printf "${GREEN}✅${NC}\n"
-        else
-            printf "${RED}❌${NC}\n"
-            echo -e "${RED}Build failed. Run 'npm run build' to see errors.${NC}"
+# Build based on project type
+case "$PROJECT_TYPE" in
+    nextjs)
+        log_info "⚡ Next.js project detected"
+        exec_with_status "Running npm run build" "npm run build" || {
+            log_error "Build failed. Run 'npm run build' to see errors."
             exit 1
-        fi
-    else
-        # Generic Node.js build
-        printf "%-40s" "Running npm run build"
-        if npm run build >/dev/null 2>&1; then
-            printf "${GREEN}✅${NC}\n"
-        else
-            printf "${YELLOW}⚠️${NC}  (no build script)\n"
-        fi
-    fi
+        }
+        ;;
 
-elif [ -d "src" ]; then
-    # Static project - copy to public
-    echo "📁 Detected static project"
+    nodejs)
+        log_info "📦 Node.js project detected"
+        exec_with_status "Running npm run build" "npm run build" || {
+            print_status "Running npm run build" "note" "no build script"
+        }
+        ;;
 
-    printf "%-40s" "Cleaning public directory"
-    rm -rf "$PUBLIC_DIR"
-    mkdir -p "$PUBLIC_DIR"
-    printf "${GREEN}✅${NC}\n"
+    static)
+        log_info "📁 Static project detected"
+        exec_with_status "Cleaning public directory" "rm -rf '$PUBLIC_DIR' && mkdir -p '$PUBLIC_DIR'"
+        exec_with_status "Copying files to public" "cp -r src/* '$PUBLIC_DIR/'"
+        ;;
 
-    printf "%-40s" "Copying files to public"
-    cp -r src/* "$PUBLIC_DIR/"
-    printf "${GREEN}✅${NC}\n"
-
-else
-    echo -e "${YELLOW}⚠️  Unknown project type${NC}"
-    echo "   Expected: package.json OR src/ directory"
-    exit 1
-fi
+    *)
+        log_error "⚠️  Unknown project type"
+        log_info "   Expected: package.json OR src/ directory"
+        exit 1
+        ;;
+esac
 
 echo ""
-echo -e "${GREEN}✅ Build complete${NC}"
+log_success "✅ Build complete"

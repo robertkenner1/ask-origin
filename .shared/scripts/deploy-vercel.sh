@@ -3,33 +3,35 @@
 
 set -e
 
-# Color codes
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
+# Load common library
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/lib/common.sh"
 
-# Constants
-VERCEL_TEAM_SLUG="grammarly-0ad4c188"
+# Get Vercel team slug from config
+VERCEL_TEAM_SLUG=$(get_config "VERCEL_TEAM_SLUG" "grammarly-0ad4c188")
 
 # Get project name from argument or auto-detect from branch
 PROJECT_NAME=""
 if [ -n "$1" ]; then
-    PROJECT_NAME="$1"
+    # If argument starts with "proj-", extract the project name
+    if [[ "$1" =~ ^proj-(.+)$ ]]; then
+        PROJECT_NAME="${BASH_REMATCH[1]}"
+    else
+        PROJECT_NAME="$1"
+    fi
 else
     # Auto-detect from git branch (proj-* pattern)
-    BRANCH_NAME=$(git branch --show-current 2>/dev/null || echo "")
+    BRANCH_NAME=$(get_current_branch)
     if [[ "$BRANCH_NAME" =~ ^proj-(.+)$ ]]; then
         PROJECT_NAME="${BASH_REMATCH[1]}"
-        echo -e "${BLUE}ℹ️  Auto-detected project from branch: $PROJECT_NAME${NC}"
+        log_info "ℹ️  Auto-detected project from branch: $PROJECT_NAME"
         echo ""
     fi
 fi
 
 # Validate project name
 if [ -z "$PROJECT_NAME" ]; then
-    echo -e "${RED}❌ Error: Project name not provided and could not auto-detect from branch${NC}"
+    log_error "❌ Error: Project name not provided and could not auto-detect from branch"
     echo ""
     echo "Usage:"
     echo "  $0 [project-name]"
@@ -40,76 +42,68 @@ if [ -z "$PROJECT_NAME" ]; then
     exit 1
 fi
 
-PROJECT_DIR="projects/$PROJECT_NAME"
+# Resolve paths
+REPO_ROOT=$(resolve_repo_root) || exit 1
+PROJECT_DIR="$REPO_ROOT/projects/$PROJECT_NAME"
 PROJECT_JSON="$PROJECT_DIR/.project.json"
 
-echo "🚀 Vercel Deployment: $PROJECT_NAME"
+log_info "🚀 Vercel Deployment: $PROJECT_NAME"
 echo ""
 
 # Validate project directory exists
-printf "%-40s" "Checking project directory"
-if [ ! -d "$PROJECT_DIR" ]; then
-    printf "${RED}❌${NC}\n"
-    echo -e "${RED}Error: Project directory not found: $PROJECT_DIR${NC}"
+exec_with_status "Checking project directory" "[ -d '$PROJECT_DIR' ]" || {
+    log_error "Error: Project directory not found: $PROJECT_DIR"
     exit 1
-fi
-printf "${GREEN}✅${NC}\n"
+}
 
 # Validate .project.json exists
-printf "%-40s" "Checking project metadata"
-if [ ! -f "$PROJECT_JSON" ]; then
-    printf "${RED}❌${NC}\n"
-    echo -e "${RED}Error: .project.json not found in $PROJECT_DIR${NC}"
+exec_with_status "Checking project metadata" "[ -f '$PROJECT_JSON' ]" || {
+    log_error "Error: .project.json not found in $PROJECT_DIR"
     exit 1
-fi
-printf "${GREEN}✅${NC}\n"
+}
 
 # Check if deployment type is vercel
-printf "%-40s" "Validating deployment type"
-DEPLOYMENT_TYPE=$(cat "$PROJECT_JSON" | grep -o '"deployment": *"[^"]*"' | sed 's/"deployment": *"\(.*\)"/\1/' || echo "")
+print_status "Validating deployment type" ""
+DEPLOYMENT_TYPE=$(get_config "DEPLOYMENT" "static")
 if [ "$DEPLOYMENT_TYPE" != "vercel" ]; then
-    printf "${YELLOW}⚠️${NC}\n"
-    echo -e "${YELLOW}Warning: Project deployment type is '$DEPLOYMENT_TYPE', not 'vercel'${NC}"
-    echo -e "${YELLOW}Skipping deployment${NC}"
+    print_status "Validating deployment type" "note" "type is '$DEPLOYMENT_TYPE'"
+    log_warning "Warning: Project deployment type is '$DEPLOYMENT_TYPE', not 'vercel'"
+    log_warning "Skipping deployment"
     exit 0
 fi
-printf "${GREEN}✅${NC}\n"
+print_status "Validating deployment type" "success"
 
 # Validate package.json exists (Next.js project)
-printf "%-40s" "Checking package.json"
-if [ ! -f "$PROJECT_DIR/package.json" ]; then
-    printf "${RED}❌${NC}\n"
-    echo -e "${RED}Error: package.json not found in $PROJECT_DIR${NC}"
-    echo -e "${RED}Only Next.js projects can be deployed to Vercel${NC}"
+exec_with_status "Checking package.json" "[ -f '$PROJECT_DIR/package.json' ]" || {
+    log_error "Error: package.json not found in $PROJECT_DIR"
+    log_error "Only Next.js projects can be deployed to Vercel"
     exit 1
-fi
-printf "${GREEN}✅${NC}\n"
+}
 
 # Check Vercel CLI is installed
-printf "%-40s" "Checking Vercel CLI"
-if ! command -v vercel >/dev/null 2>&1; then
-    printf "${RED}❌${NC}\n"
-    echo -e "${RED}Error: Vercel CLI not installed${NC}"
-    echo -e "${BLUE}Install with: brew install vercel-cli${NC}"
+exec_with_status "Checking Vercel CLI" "command -v vercel >/dev/null 2>&1" || {
+    log_error "Error: Vercel CLI not installed"
+    log_info "Install with: brew install vercel-cli"
     exit 1
-fi
-printf "${GREEN}✅${NC}\n"
+}
 
 # Check Vercel authentication
-printf "%-40s" "Checking Vercel authentication"
+print_status "Checking Vercel authentication" ""
 VERCEL_AUTH_ARGS=""
 if [ -n "$VERCEL_TOKEN" ]; then
     # Token provided - use it
     VERCEL_AUTH_ARGS="--token $VERCEL_TOKEN"
-    printf "${GREEN}✅${NC} (using token)\n"
+    print_status "Checking Vercel authentication" "success"
+    log_info "   (using token)"
 elif vercel whoami >/dev/null 2>&1; then
     # Already logged in
     CURRENT_USER=$(vercel whoami 2>/dev/null | tail -1)
-    printf "${GREEN}✅${NC} (logged in as $CURRENT_USER)\n"
+    print_status "Checking Vercel authentication" "success"
+    log_info "   (logged in as $CURRENT_USER)"
 else
     # Not authenticated
-    printf "${RED}❌${NC}\n"
-    echo -e "${RED}Error: Not authenticated with Vercel${NC}"
+    print_status "Checking Vercel authentication" "error"
+    log_error "Error: Not authenticated with Vercel"
     echo ""
     echo "Please either:"
     echo "  1. Login: vercel login"
@@ -120,121 +114,120 @@ else
 fi
 
 echo ""
-echo -e "${BLUE}📋 Vercel Project Details:${NC}"
+log_info "📋 Vercel Project Details:"
 
-# Get project name from .project.json
-VERCEL_PROJECT_NAME=$(cat "$PROJECT_JSON" | grep -o '"name": *"[^"]*"' | head -1 | sed 's/"name": *"\(.*\)"/\1/' || echo "$PROJECT_NAME")
+# Get project name from config
+VERCEL_PROJECT_NAME=$(get_config "NAME" "$PROJECT_NAME")
 echo "   📦 Project: $VERCEL_PROJECT_NAME"
 echo "   📁 Directory: $PROJECT_DIR"
 echo "   👥 Team: $VERCEL_TEAM_SLUG"
 
 echo ""
-echo -e "${BLUE}🔍 Checking Vercel project status...${NC}"
+log_info "🔍 Checking Vercel project status..."
 
 # Check if project already exists on Vercel
 PROJECT_EXISTS=false
-printf "%-40s" "Listing Vercel projects"
+print_status "Listing Vercel projects" ""
 
 # Try to get project list
 if vercel project ls --scope "$VERCEL_TEAM_SLUG" $VERCEL_AUTH_ARGS >/tmp/vercel-projects.txt 2>&1; then
-    printf "${GREEN}✅${NC}\n"
+    print_status "Listing Vercel projects" "success"
 
     # Check if our project is in the list
     if grep -q "$VERCEL_PROJECT_NAME" /tmp/vercel-projects.txt; then
         PROJECT_EXISTS=true
-        echo -e "   ${GREEN}✓ Project exists on Vercel${NC}"
+        log_success "   ✓ Project exists on Vercel"
     else
-        echo -e "   ${YELLOW}⚠ Project not found on Vercel${NC}"
+        log_warning "   ⚠ Project not found on Vercel"
     fi
 else
-    printf "${YELLOW}⚠️${NC}\n"
-    echo -e "${YELLOW}Warning: Could not list Vercel projects${NC}"
+    print_status "Listing Vercel projects" "warning"
+    log_warning "Warning: Could not list Vercel projects"
 fi
 
 # If project doesn't exist, we'll let vercel link handle the creation
 if [ "$PROJECT_EXISTS" = false ]; then
     echo ""
-    echo -e "${BLUE}📦 Project will be created during linking${NC}"
+    log_info "📦 Project will be created during linking"
 fi
 
 echo ""
-echo -e "${BLUE}🔗 Linking project to Vercel...${NC}"
+log_info "🔗 Linking project to Vercel..."
 
 # Link project (creates .vercel folder with project metadata)
-# This will create the project if it doesn't exist
-printf "%-40s" "Linking project"
+print_status "Linking project" ""
 cd "$PROJECT_DIR"
 if vercel link --yes --project "$VERCEL_PROJECT_NAME" --scope "$VERCEL_TEAM_SLUG" $VERCEL_AUTH_ARGS >/dev/null 2>&1; then
-    printf "${GREEN}✅${NC}\n"
+    print_status "Linking project" "success"
 else
-    printf "${RED}❌${NC}\n"
-    cd ../..
-    echo -e "${RED}Error: Failed to link project to Vercel${NC}"
+    print_status "Linking project" "error"
+    cd "$REPO_ROOT"
+    log_error "Error: Failed to link project to Vercel"
     exit 1
 fi
-cd ../..
+cd "$REPO_ROOT"
 
 echo ""
-echo -e "${BLUE}🔨 Building project locally...${NC}"
+log_info "🔨 Building project locally..."
 
 # Build locally with vercel build (handles private npm packages)
-printf "%-40s" "Running vercel build"
+print_status "Running vercel build" ""
 cd "$PROJECT_DIR"
 if vercel build --yes >/tmp/vercel-build.log 2>&1; then
-    printf "${GREEN}✅${NC}\n"
-    cd ../..
+    print_status "Running vercel build" "success"
+    cd "$REPO_ROOT"
 else
-    printf "${RED}❌${NC}\n"
-    cd ../..
+    print_status "Running vercel build" "error"
+    cd "$REPO_ROOT"
     echo ""
-    echo -e "${RED}Error: Local build failed${NC}"
-    echo -e "${YELLOW}Build log:${NC}"
+    log_error "Error: Local build failed"
+    log_warning "Build log:"
     tail -50 /tmp/vercel-build.log
     rm -f /tmp/vercel-build.log
     exit 1
 fi
 
 echo ""
-echo -e "${BLUE}🚀 Deploying prebuilt to Vercel preview...${NC}"
+log_info "🚀 Deploying prebuilt to Vercel preview..."
 
 # Deploy prebuilt to Vercel (NO --prod flag = preview deployment)
-printf "%-40s" "Deploying project"
+print_status "Deploying project" ""
 DEPLOY_OUTPUT=$(mktemp)
 cd "$PROJECT_DIR"
 if vercel deploy --prebuilt --scope "$VERCEL_TEAM_SLUG" $VERCEL_AUTH_ARGS 2>&1 | tee "$DEPLOY_OUTPUT"; then
-    printf "${GREEN}✅${NC}\n"
-    cd ../..
+    print_status "Deploying project" "success"
+    cd "$REPO_ROOT"
     echo ""
 
     # Extract deployment URL from output
     DEPLOYMENT_URL=$(grep -o 'https://[^ ]*vercel\.app' "$DEPLOY_OUTPUT" | head -1 || echo "")
 
     if [ -n "$DEPLOYMENT_URL" ]; then
-        echo -e "${GREEN}✅ Deployment successful!${NC}"
+        log_success "✅ Deployment successful!"
         echo ""
-        echo -e "${BLUE}🌐 Preview URL:${NC}"
+        log_info "🌐 Preview URL:"
         echo "   $DEPLOYMENT_URL"
         echo ""
 
-        # Also show the production URL from .project.json if available
-        PRODUCTION_URL=$(cat "$PROJECT_JSON" | grep -o '"remote": *"[^"]*"' | sed 's/"remote": *"\(.*\)"/\1/' || echo "")
+        # Also show the production URL from config if available
+        PRODUCTION_URL=$(get_config "REMOTE_URL" "")
         if [ -n "$PRODUCTION_URL" ]; then
-            echo -e "${BLUE}📋 Configured URL (from .project.json):${NC}"
+            log_info "📋 Configured URL (from .project.json):"
             echo "   $PRODUCTION_URL"
             echo ""
         fi
     else
-        echo -e "${YELLOW}⚠️  Deployment completed but URL not found in output${NC}"
+        log_warning "⚠️  Deployment completed but URL not found in output"
     fi
 
     rm -f "$DEPLOY_OUTPUT"
     rm -f /tmp/vercel-build.log
 else
-    printf "${RED}❌${NC}\n"
-    cd ../..
+    print_status "Deploying project" "error"
+    cd "$REPO_ROOT"
     echo ""
-    echo -e "${RED}Error: Deployment failed${NC}"
-    echo -e "${YELLOW}Check output above for details${NC}"
+    log_error "Error: Deployment failed"
+    log_warning "Check output above for details"
     rm -f "$DEPLOY_OUTPUT"
     rm -f /tmp/vercel-build.log
     exit 1
@@ -243,4 +236,4 @@ fi
 # Cleanup
 rm -f /tmp/vercel-projects.txt
 
-echo -e "${GREEN}✅ Vercel deployment complete!${NC}"
+log_success "✅ Vercel deployment complete!"

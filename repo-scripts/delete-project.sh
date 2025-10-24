@@ -3,11 +3,13 @@
 
 set -e
 
-# Color codes
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+# Load common library
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/../.shared/scripts/lib/common.sh"
+
+# Get configuration
+PROJECTS_DIR=$(get_config "PROJECTS_DIR" "projects")
+PUBLIC_DIR=$(get_config "PUBLIC_DIR" "public")
 
 # Get project name from argument or prompt
 if [ -z "$1" ]; then
@@ -19,82 +21,65 @@ fi
 
 # Validate project name
 if [ -z "$PROJECT_NAME" ]; then
-    echo -e "${RED}❌ Project name cannot be empty${NC}"
+    log_error "❌ Project name cannot be empty"
     exit 1
 fi
 
-if [ ! -d "projects/$PROJECT_NAME" ]; then
-    echo -e "${RED}❌ Project '$PROJECT_NAME' does not exist${NC}"
+if [ ! -d "$PROJECTS_DIR/$PROJECT_NAME" ]; then
+    log_error "❌ Project '$PROJECT_NAME' does not exist"
     exit 1
 fi
 
-echo -e "${YELLOW}⚠️  WARNING: Permanent Deletion${NC}"
+log_warning "⚠️  WARNING: Permanent Deletion"
 echo ""
 echo "This will permanently delete:"
-echo "   📁 projects/$PROJECT_NAME/ (project files)"
-echo "   📁 public/$PROJECT_NAME/ (built files)"
-echo "   🌿 $PROJECT_NAME branch (if exists)"
+echo "   📁 $PROJECTS_DIR/$PROJECT_NAME/ (project files)"
+echo "   📁 $PUBLIC_DIR/$PROJECT_NAME/ (built files)"
+echo "   🌿 proj-$PROJECT_NAME branch (if exists)"
 echo ""
 read -p "Are you sure? (y/N): " CONFIRM
 
 if [ "$CONFIRM" != "y" ] && [ "$CONFIRM" != "Y" ]; then
-    echo -e "${YELLOW}❌ Deletion cancelled${NC}"
+    log_warning "❌ Deletion cancelled"
     exit 1
 fi
 
 echo ""
-echo "🗑️  Deleting project: $PROJECT_NAME"
+log_info "🗑️  Deleting project: $PROJECT_NAME"
 echo ""
 
 # Remove project files
-printf "%-40s" "Removing project files"
-if rm -rf "projects/$PROJECT_NAME"; then
-    printf "${GREEN}✅${NC}\n"
-else
-    printf "${RED}❌${NC}\n"
-    exit 1
-fi
+exec_with_status "Removing project files" "rm -rf '$PROJECTS_DIR/$PROJECT_NAME'"
 
 # Remove built files
-printf "%-40s" "Removing built files"
-if rm -rf "public/$PROJECT_NAME"; then
-    printf "${GREEN}✅${NC}\n"
+if [ -d "$PUBLIC_DIR/$PROJECT_NAME" ]; then
+    exec_with_status "Removing built files" "rm -rf '$PUBLIC_DIR/$PROJECT_NAME'"
 else
-    printf "${YELLOW}⚠️${NC}\n"
+    print_status "Removing built files" "note" "not found"
 fi
 
 # Switch to main branch
-printf "%-40s" "Switching to main branch"
-if git checkout main >/dev/null 2>&1; then
-    printf "${GREEN}✅${NC}\n"
-else
-    printf "${YELLOW}⚠️${NC}\n"
-fi
+if is_git_repo; then
+    exec_with_status "Switching to main branch" "git checkout main" || print_status "Switching to main branch" "note" "already on main"
 
-# Delete local branch
-printf "%-40s" "Deleting local branch"
-if git branch -D "$PROJECT_NAME" >/dev/null 2>&1; then
-    printf "${GREEN}✅${NC}\n"
-else
-    printf "${YELLOW}⚠️${NC}\n"
-fi
+    # Delete local branch
+    BRANCH_NAME="proj-$PROJECT_NAME"
+    if git show-ref --verify --quiet "refs/heads/$BRANCH_NAME"; then
+        exec_with_status "Deleting local branch" "git branch -D '$BRANCH_NAME'" || print_status "Deleting local branch" "warning"
+    else
+        print_status "Deleting local branch" "note" "not found"
+    fi
 
-# Delete remote branch
-printf "%-40s" "Deleting remote branch"
-if git push origin --delete "$PROJECT_NAME" >/dev/null 2>&1; then
-    printf "${GREEN}✅${NC}\n"
-else
-    printf "${YELLOW}⚠️${NC}\n"
+    # Delete remote branch
+    if git ls-remote --heads origin "$BRANCH_NAME" | grep -q "$BRANCH_NAME"; then
+        exec_with_status "Deleting remote branch" "git push origin --delete '$BRANCH_NAME'" || print_status "Deleting remote branch" "warning"
+    else
+        print_status "Deleting remote branch" "note" "not found"
+    fi
 fi
 
 # Rebuild sitemap
-printf "%-40s" "Rebuilding sitemap"
-if npm run build:sitemap >/dev/null 2>&1; then
-    printf "${GREEN}✅${NC}\n"
-else
-    printf "${RED}❌${NC}\n"
-    exit 1
-fi
+exec_with_status "Rebuilding sitemap" "npm run build:sitemap"
 
 echo ""
-echo -e "${GREEN}✅ Project '$PROJECT_NAME' deleted successfully${NC}"
+log_success "✅ Project '$PROJECT_NAME' deleted successfully"

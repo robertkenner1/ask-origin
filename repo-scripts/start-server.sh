@@ -3,42 +3,34 @@
 
 set -e
 
-# Color codes
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+# Load common library
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/../.shared/scripts/lib/common.sh"
 
-PORT=8181
+# Get configuration
+PORT=$(get_config "REPO_DEV_SERVER_PORT" "8181")
 
-echo "🚀 Starting Development Server"
+log_info "🚀 Starting Development Server"
 echo ""
 
 # Stop existing server
-printf "%-40s" "Stopping existing server"
-if lsof -t -i:$PORT >/dev/null 2>&1; then
-    kill -9 $(lsof -t -i:$PORT) >/dev/null 2>&1
-    printf "${GREEN}✅${NC}\n"
+if is_port_in_use "$PORT"; then
+    print_status "Stopping existing server" ""
+    kill_port "$PORT"
+    print_status "Stopping existing server" "success"
 else
-    printf "${YELLOW}⚠️${NC}  (not running)\n"
+    print_status "Stopping existing server" "note" "not running"
 fi
 
 # Build projects
-printf "%-40s" "Building projects"
-if npm run build:sitemap >/dev/null 2>&1; then
-    printf "${GREEN}✅${NC}\n"
-else
-    printf "${RED}❌${NC}\n"
-    exit 1
-fi
+exec_with_status "Building projects" "npm run build:sitemap"
 
 # Start server
-printf "%-40s" "Starting development server"
-printf "${GREEN}🚀${NC}\n"
+print_status "Starting development server" "success"
 
 echo ""
-echo "🌐 Server: http://localhost:$PORT"
-echo "Press Ctrl+C to stop"
+log_success "🌐 Server: http://localhost:$PORT"
+log_info "Press Ctrl+C to stop"
 echo "────────────────────────────────────"
 
 npm run dev
