@@ -2,7 +2,7 @@
 
 import React from "react";
 import MarkdownRenderer from "./MarkdownRenderer";
-import { OrchestraIconAnimated } from "@/components/icons/OrchestraIconAnimated";
+import { OrchestraIconAnimated } from "./icons/OrchestraIconAnimated";
 
 export type MessageType = "user" | "assistant";
 

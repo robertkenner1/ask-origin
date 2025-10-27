@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { ArrowLeft } from "lucide-react";
-import { OrchestraIconAnimated } from "@/components/icons/OrchestraIconAnimated";
+import { OrchestraIconAnimated } from "./icons/OrchestraIconAnimated";
 import type { Suggestion } from "@/hooks/editor/useTextSuggestions";
 import useSidebarStore from "@/stores/chat/sidebarStore";
 import { useChatStore } from "@/stores/chat/chatStore";

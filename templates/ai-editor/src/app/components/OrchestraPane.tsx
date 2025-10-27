@@ -6,8 +6,8 @@ import ChatInput from "./ChatInput";
 import { useDocumentManager } from "@/hooks/document/useDocumentStore";
 import { useChatStore } from "@/stores/chat/chatStore";
 import { useSidebarStore } from "@/stores/chat/sidebarStore";
-import { OrchestraIconAnimated } from "@/components/icons/OrchestraIconAnimated";
-import { OrchestraIcon } from "@/components/icons/OrchestraIcon";
+import { OrchestraIconAnimated } from "./icons/OrchestraIconAnimated";
+import { OrchestraIcon } from "./icons/OrchestraIcon";
 import { iconSizes } from "@/config/iconConfig";
 
 interface OrchestraPaneProps {

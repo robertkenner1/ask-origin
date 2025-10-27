@@ -4,8 +4,8 @@ import React from "react";
 import { Plus, MoreVertical } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { OrchestraIcon } from "@/components/icons/OrchestraIcon";
-import ExternalLinkIcon from "@/components/icons/ExternalLinkIcon";
+import { OrchestraIcon } from "./icons/OrchestraIcon";
+import { ExternalLinkIcon } from "lucide-react";
 import { useDocumentStore } from "@/hooks/document/useDocumentStore";
 import {
   DropdownMenu,

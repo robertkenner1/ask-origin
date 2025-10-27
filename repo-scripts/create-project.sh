@@ -189,6 +189,9 @@ print_status "Creating project metadata" "success"
 # Process template variables in all files
 exec_with_status "Processing template variables" "find '$PROJECTS_DIR/$PROJECT_NAME' -type f \\( -name '*.md' -o -name '*.html' -o -name '*.js' -o -name '*.json' -o -name '*.ts' -o -name '*.tsx' \\) -exec sed -i '' -e 's/{{PROJECT_NAME}}/$PROJECT_NAME/g' -e 's/{{PROJECT_TITLE}}/$PROJECT_TITLE/g' -e 's/{{PROJECT_DESCRIPTION}}/$PROJECT_DESCRIPTION/g' -e 's/{{CREATED_DATE}}/$CREATED_DATE/g' -e 's/{{BRANCH_NAME}}/$BRANCH_NAME/g' -e 's/{{VERCEL_TEAM_SLUG}}/$VERCEL_TEAM_SLUG/g' {} \\;"
 
+# Get port configuration (will be used later)
+PORT=$(get_config "DEV_SERVER_PORT" "8181")
+
 # Determine if this is a static or Next.js project
 if [ -f "$PROJECTS_DIR/$PROJECT_NAME/package.json" ]; then
     # Next.js or Node project - install dependencies
@@ -198,14 +201,13 @@ if [ -f "$PROJECTS_DIR/$PROJECT_NAME/package.json" ]; then
     if [ -f "$PROJECTS_DIR/$PROJECT_NAME/next.config.ts" ] || [ -f "$PROJECTS_DIR/$PROJECT_NAME/next.config.js" ]; then
         # Don't build Next.js projects yet
         echo ""
-        log_info "ℹ️  Next.js project created. Use 'cd $PROJECTS_DIR/$PROJECT_NAME && npm run dev' to start"
+        log_info "ℹ️  Next.js project created."
     fi
 else
     # Static website - build sitemap
     exec_with_status "Building sitemap" "npm run build:sitemap"
 
     # Stop existing dev server
-    PORT=$(get_config "REPO_DEV_SERVER_PORT" "8181")
     if is_port_in_use "$PORT"; then
         print_status "Stopping existing dev server" ""
         kill_port "$PORT"
@@ -213,9 +215,6 @@ else
     else
         print_status "Stopping existing dev server" "note" "not running"
     fi
-
-    # Start dev server in background
-    npm run dev >/dev/null 2>&1 &
 fi
 
 echo ""
@@ -227,19 +226,50 @@ echo "   🌿 Branch: $BRANCH_NAME"
 echo "   📁 Location: $PROJECTS_DIR/$PROJECT_NAME/"
 
 # Show URLs based on project type
-if [ -f "$PROJECTS_DIR/$PROJECT_NAME/package.json" ]; then
-    PROJECT_JSON="$PROJECTS_DIR/$PROJECT_NAME/.project.json"
-    if [ -f "$PROJECT_JSON" ]; then
-        LOCAL_URL=$(cat "$PROJECT_JSON" | grep -o '"local": *"[^"]*"' | sed 's/"local": *"\(.*\)"/\1/' || echo "")
-        if [ -n "$LOCAL_URL" ]; then
-            echo "   🌐 Local: $LOCAL_URL"
-        fi
+PROJECT_JSON="$PROJECTS_DIR/$PROJECT_NAME/.project.json"
+if [ -f "$PROJECT_JSON" ]; then
+    LOCAL_URL=$(cat "$PROJECT_JSON" | grep -o '"local": *"[^"]*"' | sed 's/"local": *"\(.*\)"/\1/' || echo "")
+    if [ -n "$LOCAL_URL" ]; then
+        echo "   🌐 Local: $LOCAL_URL"
     fi
 else
-    echo "   🌐 Local: http://localhost:8181/$PROJECT_NAME/"
+    echo "   🌐 Local: http://localhost:$PORT/$PROJECT_NAME/"
 fi
 
 echo ""
 
-# Launch Claude Code
-claude
+# Start dev server for the project
+if [ -f "$PROJECTS_DIR/$PROJECT_NAME/package.json" ]; then
+    log_info "🚀 Starting development server..."
+    echo ""
+    # Start Node.js dev server in background
+    (cd "$PROJECTS_DIR/$PROJECT_NAME" && npm run dev >/dev/null 2>&1 &)
+    sleep 2
+    log_success "✅ Development server started"
+    echo ""
+else
+    # Start static dev server in background
+    log_info "🚀 Starting development server..."
+    echo ""
+    npm run dev >/dev/null 2>&1 &
+    sleep 2
+    log_success "✅ Development server started"
+    if [ -f "$PROJECT_JSON" ]; then
+        LOCAL_URL=$(cat "$PROJECT_JSON" | grep -o '"local": *"[^"]*"' | sed 's/"local": *"\(.*\)"/\1/' || echo "")
+        if [ -n "$LOCAL_URL" ]; then
+            log_info "   Visit: $LOCAL_URL"
+        fi
+    fi
+    echo ""
+fi
+
+# Show next steps
+log_info "📝 Next Steps:"
+echo "   1. cd $PROJECTS_DIR/$PROJECT_NAME/"
+echo "   2. Start coding with your favorite AI tool!"
+echo ""
+echo "   💡 Prefer Claude Code? Just type: ${GREEN}claude${NC}"
+echo ""
+
+# Change to project directory
+cd "$PROJECTS_DIR/$PROJECT_NAME"

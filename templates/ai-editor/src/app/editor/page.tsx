@@ -5,7 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { Editor } from "../components/Editor";
 import { EditorStaggered } from "../components/EditorStaggered";
 import { useDocumentStore } from "@/hooks/document/useDocumentStore";
-import { OrchestraIconAnimated } from "@/components/icons/OrchestraIconAnimated";
+import { OrchestraIconAnimated } from "../components/icons/OrchestraIconAnimated";
 import { useDeepWriterDocument } from "@/hooks/document/useDeepWriterDocument";
 
 // Simple loading component
