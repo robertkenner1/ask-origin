@@ -162,16 +162,19 @@ load_project_config() {
         return 1
     fi
 
-    # Extract common config values (handle missing fields gracefully)
-    export PROJECT_CONFIG_NAME=$(grep -o '"name": *"[^"]*"' "$config_file" 2>/dev/null | head -1 | sed 's/"name": *"\(.*\)"/\1/' || echo "")
-    export PROJECT_CONFIG_DESCRIPTION=$(grep -o '"description": *"[^"]*"' "$config_file" 2>/dev/null | head -1 | sed 's/"description": *"\(.*\)"/\1/' || echo "")
-    export PROJECT_CONFIG_DEPLOYMENT=$(grep -o '"deployment": *"[^"]*"' "$config_file" 2>/dev/null | sed 's/"deployment": *"\(.*\)"/\1/' || echo "")
-    export PROJECT_CONFIG_LOCAL_URL=$(grep -o '"local": *"[^"]*"' "$config_file" 2>/dev/null | sed 's/"local": *"\(.*\)"/\1/' || echo "")
-    export PROJECT_CONFIG_REMOTE_URL=$(grep -o '"remote": *"[^"]*"' "$config_file" 2>/dev/null | sed 's/"remote": *"\(.*\)"/\1/' || echo "")
+    # Require jq for JSON parsing
+    require_command "jq" "brew install jq" || return 1
 
-    # Extract nested config values if they exist
-    export PROJECT_CONFIG_PORT=$(grep -o '"port": *[0-9]*' "$config_file" 2>/dev/null | grep -o '[0-9]*' || echo "")
-    export PROJECT_CONFIG_VERCEL_TEAM=$(grep -o '"vercelTeam": *"[^"]*"' "$config_file" 2>/dev/null | sed 's/"vercelTeam": *"\(.*\)"/\1/' || echo "")
+    # Use jq for robust JSON parsing (// "" returns empty string for missing fields)
+    export PROJECT_CONFIG_NAME=$(jq -r '.name // ""' "$config_file" 2>/dev/null || echo "")
+    export PROJECT_CONFIG_DESCRIPTION=$(jq -r '.description // ""' "$config_file" 2>/dev/null || echo "")
+    export PROJECT_CONFIG_DEPLOYMENT=$(jq -r '.deployment // ""' "$config_file" 2>/dev/null || echo "")
+    export PROJECT_CONFIG_LOCAL_URL=$(jq -r '.urls.local // ""' "$config_file" 2>/dev/null || echo "")
+    export PROJECT_CONFIG_REMOTE_URL=$(jq -r '.urls.remote // ""' "$config_file" 2>/dev/null || echo "")
+
+    # Extract nested config values
+    export PROJECT_CONFIG_DEV_SERVER_PORT=$(jq -r '.config.port // ""' "$config_file" 2>/dev/null || echo "")
+    export PROJECT_CONFIG_VERCEL_TEAM_SLUG=$(jq -r '.config.vercelTeam // ""' "$config_file" 2>/dev/null || echo "")
 
     return 0
 }

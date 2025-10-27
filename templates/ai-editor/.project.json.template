@@ -7,8 +7,12 @@
     "branch": "{{BRANCH_NAME}}"
   },
   "urls": {
-    "local": "http://localhost:2345",
+    "local": "http://localhost:8181",
     "remote": "https://{{PROJECT_NAME}}-git-{{BRANCH_NAME}}-{{VERCEL_TEAM_SLUG}}.vercel.app"
+  },
+  "config": {
+    "port": 8181,
+    "vercelTeam": "{{VERCEL_TEAM_SLUG}}"
   },
   "template": {
     "type": "nextjs-app",

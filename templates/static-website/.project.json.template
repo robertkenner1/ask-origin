@@ -10,6 +10,9 @@
     "local": "http://localhost:8181/{{PROJECT_NAME}}/",
     "remote": "https://ai-frontend-prototypes-c8939b.gpages.io/{{PROJECT_NAME}}/"
   },
+  "config": {
+    "port": 8181
+  },
   "template": {
     "type": "static-website",
     "version": "1.0.0"

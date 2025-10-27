@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { OrchestraIconAnimated } from "@/components/icons/OrchestraIconAnimated";
+import { OrchestraIconAnimated } from "./icons/OrchestraIconAnimated";
 import { X } from "lucide-react";
 
 interface StreamGenerationProgressProps {

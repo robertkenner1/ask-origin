@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
-import { OrchestraIconAnimated } from "@/components/icons/OrchestraIconAnimated";
+import { OrchestraIconAnimated } from "./icons/OrchestraIconAnimated";
 import { cn } from "@/utils/common/cn";
 import { useDeepWriterDocument } from "@/hooks/document/useDeepWriterDocument";
 
