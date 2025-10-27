@@ -43,7 +43,7 @@
     "lowlight": "^3.3.0",
     "lucide-react": "^0.508.0",
     "markdown-it": "13.0.2",
-    "next": "15.3.2",
+    "next": "15.4.7",
     "prosemirror-markdown": "1.11.1",
     "prosemirror-state": "^1.4.3",
     "prosemirror-view": "^1.39.3",
