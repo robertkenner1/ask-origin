@@ -3,18 +3,9 @@
   "description": "{{PROJECT_DESCRIPTION}}",
   "deployment": "gitlab-pages",
   "created": "{{CREATED_DATE}}",
-  "repository": {
-    "branch": "{{BRANCH_NAME}}"
-  },
-  "urls": {
-    "local": "http://localhost:8181/{{PROJECT_NAME}}/",
-    "remote": "https://ai-frontend-prototypes-c8939b.gpages.io/{{PROJECT_NAME}}/"
-  },
-  "config": {
-    "port": 8181
-  },
   "template": {
-    "type": "static-website",
+    "name": "static-website",
     "version": "1.0.0"
-  }
+  },
+  "url": "{{PROJECT_NAME}}-grammarly-0ad4c188.vercel.app"
 }

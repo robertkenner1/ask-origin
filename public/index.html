@@ -144,6 +144,32 @@
             border: 1px solid #e9ecef;
         }
 
+        .deployment-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin-top: 12px;
+        }
+
+        .deployment-badge.gitlab-pages {
+            background: linear-gradient(135deg, #fca326 0%, #fc6d26 100%);
+            color: white;
+        }
+
+        .deployment-badge.vercel {
+            background: #000000;
+            color: white;
+        }
+
+        .deployment-badge.unknown {
+            background: #e2e8f0;
+            color: #718096;
+        }
+
         .empty-state {
             text-align: center;
             padding: 60px 30px;
@@ -348,22 +374,33 @@
             createProjectCard(project) {
                 const formatDate = (date) => {
                     const dateObj = typeof date === 'string' ? new Date(date) : date;
-                    return dateObj.toLocaleDateString('en-US', { 
-                        year: 'numeric', 
-                        month: 'short', 
-                        day: 'numeric' 
+                    return dateObj.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
                     });
                 };
 
-                const filesBadges = project.files.map(file => 
+                const filesBadges = project.files.map(file =>
                     `<span class="file-badge">${file}</span>`
                 ).join('');
+
+                // Format deployment badge
+                const deployment = project.deployment || 'unknown';
+                const deploymentLabel = deployment === 'gitlab-pages' ? 'GitLab Pages' :
+                                      deployment === 'vercel' ? 'Vercel' :
+                                      deployment.charAt(0).toUpperCase() + deployment.slice(1);
+
+                // Add external link indicator for projects with URLs
+                const externalIcon = project.url ? ' 🔗' : '';
+                const deploymentBadge = `<div class="deployment-badge ${deployment}">📦 ${deploymentLabel}${externalIcon}</div>`;
 
                 return `
                     <div class="project-card" data-project="${project.name}">
                         <div class="project-icon">${project.icon}</div>
                         <div class="project-title">${project.title}</div>
                         <div class="project-description">${project.description}</div>
+                        ${deploymentBadge}
                         <div class="project-meta">
                             <div class="project-files">${filesBadges}</div>
                             <div class="project-date">${formatDate(project.lastModified)}</div>
@@ -373,8 +410,13 @@
             }
 
             openProject(project) {
-                // Navigate to the project
-                window.location.href = project.path;
+                // If project has a URL (external deployment like Vercel), use that
+                // Otherwise use the local path
+                if (project.url) {
+                    window.open(project.url, '_blank');
+                } else {
+                    window.location.href = project.path;
+                }
             }
 
             // Method to add new projects dynamically

@@ -1,0 +1,10 @@
+{
+    "name": "golden-path-redesign",
+    "description": "Golden Path - Step 2",
+    "deployment": "gitlab-pages",
+    "created": "2025-10-28T12:18:28Z",
+    "template": {
+      "name": "static-website",
+      "version": "1.0.0"
+    }
+  }
