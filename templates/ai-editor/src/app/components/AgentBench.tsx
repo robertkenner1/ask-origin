@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import IconButton from "@/app/components/ui/icon-button";
 import { iconSizes } from "@/config/iconConfig";
 import { AGENT_LABELS } from "@/stores/chat/sidebarStore";
@@ -16,7 +16,7 @@ interface AgentBenchProps {
 }
 
 // Animation variants for label fade-in with stagger
-const labelContainerVariants = {
+const labelContainerVariants: Variants = {
   hidden: {
     opacity: 1,
   },
@@ -37,7 +37,7 @@ const labelContainerVariants = {
   },
 };
 
-const labelItemVariants = {
+const labelItemVariants: Variants = {
   hidden: {
     opacity: 0,
     x: -15, // Slightly more movement for better visual effect
@@ -49,7 +49,7 @@ const labelItemVariants = {
     scale: 1,
     transition: {
       duration: 0.4,
-      ease: "easeOut",
+      ease: [0.4, 0, 0.2, 1] as const, // easeOut cubic-bezier
     },
   },
   exit: {
@@ -58,13 +58,13 @@ const labelItemVariants = {
     scale: 0.95,
     transition: {
       duration: 0.3,
-      ease: "easeIn",
+      ease: [0.4, 0, 1, 1] as const, // easeIn cubic-bezier
     },
   },
 };
 
 // Tooltip animation variants
-const tooltipVariants = {
+const tooltipVariants: Variants = {
   hidden: {
     opacity: 0,
     scale: 0.95,
@@ -76,7 +76,7 @@ const tooltipVariants = {
     y: 0,
     transition: {
       duration: 0.15,
-      ease: "easeOut",
+      ease: [0.4, 0, 0.2, 1] as const, // easeOut cubic-bezier
     },
   },
   exit: {
@@ -85,7 +85,7 @@ const tooltipVariants = {
     y: 5,
     transition: {
       duration: 0.1,
-      ease: "easeIn",
+      ease: [0.4, 0, 1, 1] as const, // easeIn cubic-bezier
     },
   },
 };
