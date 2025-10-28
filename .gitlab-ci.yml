@@ -9,6 +9,11 @@ variables:
   BASE_VERSION: '0.1.0'
   ARTIFACTORY_MAIN_URL: https://artifactory.grammarly.io/artifactory
   ARTIFACTORY_NPM_URL: $ARTIFACTORY_MAIN_URL/api/npm
+  KUBERNETES_CPU_REQUEST: 4
+  KUBERNETES_CPU_LIMIT: 4
+  KUBERNETES_MEMORY_REQUEST: 4Gi
+  KUBERNETES_MEMORY_LIMIT: 4Gi
+
 
 # https://docs.gitlab.com/ee/ci/yaml/workflow.html#switch-between-branch-pipelines-and-merge-request-pipelines
 workflow:
