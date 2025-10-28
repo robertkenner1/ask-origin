@@ -1,39 +1,11 @@
 {
-  "generated": "2025-10-14T23:26:05.215Z",
-  "count": 7,
+  "generated": "2025-10-28T16:03:41.137Z",
+  "count": 3,
   "projects": [
-    {
-      "name": "customer-support-agent",
-      "title": "Customer Support AI Agent",
-      "description": "No description available",
-      "path": "./customer-support-agent/",
-      "files": [
-        "index.html",
-        "styles.css",
-        "script.js"
-      ],
-      "icon": "C",
-      "lastModified": "2025-10-09T23:06:40.435Z",
-      "type": "JavaScript App"
-    },
-    {
-      "name": "figma-farheen",
-      "title": "Figma Farheen",
-      "description": "No description available",
-      "path": "./figma-farheen/",
-      "files": [
-        "index.html",
-        "styles.css",
-        "script.js"
-      ],
-      "icon": "F",
-      "lastModified": "2025-10-07T21:52:15.824Z",
-      "type": "JavaScript App"
-    },
     {
       "name": "golden-path-redesign",
       "title": "Golden Path - Step 2",
-      "description": "No description available",
+      "description": "Grammarly Golden Path redesign prototype - multi-step form interface",
       "path": "./golden-path-redesign/",
       "files": [
         "index.html",
@@ -41,13 +13,14 @@
         "script.js"
       ],
       "icon": "G",
-      "lastModified": "2025-10-07T21:51:04.237Z",
-      "type": "UI Component"
+      "lastModified": "2025-10-28T16:03:41.133Z",
+      "type": "UI Component",
+      "deployment": "gitlab-pages"
     },
     {
       "name": "grammarly-ping-pong",
       "title": "Grammarly Ping Pong",
-      "description": "No description available",
+      "description": "Interactive ping pong game with Grammarly design system styling",
       "path": "./grammarly-ping-pong/",
       "files": [
         "index.html",
@@ -55,13 +28,14 @@
         "script.js"
       ],
       "icon": "G",
-      "lastModified": "2025-10-07T21:51:04.238Z",
-      "type": "UI Component"
+      "lastModified": "2025-10-28T16:03:41.134Z",
+      "type": "UI Component",
+      "deployment": "gitlab-pages"
     },
     {
       "name": "mobile-flashcard-app",
       "title": "Mobile Flashcard App",
-      "description": "No description available",
+      "description": "Interactive mobile flashcard app prototype with swipe gestures and animations",
       "path": "./mobile-flashcard-app/",
       "files": [
         "index.html",
@@ -69,36 +43,9 @@
         "script.js"
       ],
       "icon": "M",
-      "lastModified": "2025-10-07T21:51:04.239Z",
-      "type": "JavaScript App"
-    },
-    {
-      "name": "my-first-gr-design",
-      "title": "Grammarly Style Text Interaction",
-      "description": "No description available",
-      "path": "./my-first-gr-design/",
-      "files": [
-        "index.html",
-        "styles.css",
-        "script.js"
-      ],
-      "icon": "G",
-      "lastModified": "2025-10-07T21:51:04.240Z",
-      "type": "UI Component"
-    },
-    {
-      "name": "thinking-grammarly",
-      "title": "Thinking Grammarly Prototype",
-      "description": "No description available",
-      "path": "./thinking-grammarly/",
-      "files": [
-        "index.html",
-        "styles.css",
-        "script.js"
-      ],
-      "icon": "T",
-      "lastModified": "2025-10-07T21:51:04.241Z",
-      "type": "UI Component"
+      "lastModified": "2025-10-28T16:03:41.136Z",
+      "type": "JavaScript App",
+      "deployment": "gitlab-pages"
     }
   ]
 }

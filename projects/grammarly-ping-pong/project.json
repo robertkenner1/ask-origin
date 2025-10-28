@@ -1,0 +1,10 @@
+{
+    "name": "grammarly-ping-pong",
+    "description": "Grammarly Ping Pong",
+    "deployment": "gitlab-pages",
+    "created": "2025-10-28T12:18:28Z",
+    "template": {
+      "name": "static-website",
+      "version": "1.0.0"
+    }
+  }
