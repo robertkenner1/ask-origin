@@ -1,0 +1,455 @@
+---
+pagination_prev: null
+pagination_next: null
+slug: /components/branded-loader
+---
+
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import PropsTable from "../../_components/props_table";
+import RecommendationsTable from "../../_components/recommendations_table";
+import ComponentList from "../../_components/component_list";
+import ComponentPlayground from "../../_components/comp_playground";
+import { ComponentStatusRow } from "../../_components/component_status_row";
+import DoDontList from "../../_components/do_dont_list";
+import { 
+  Loader, 
+  Link, 
+  Icon, 
+  InterfaceDownloadIcon,
+  Text, 
+  Flex, 
+  ButtonAsLink } from "@grammarly/design-system";
+
+# Branded Loader
+
+A Branded Loader displays pulsating brand shapes to indicate an action in progress or loading content.
+<ComponentStatusRow name="Branded Loader" />
+
+<ComponentPlayground
+  showAsHero
+  hideCodePreview
+  code={`
+  <Flex 
+    direction="column"
+    elevation="high" 
+    borderRadius={2} 
+    bgColor="background-base-default" 
+    width={400} 
+    height={200} 
+    align="center" 
+    justify="start"
+  >
+    <Flex justify="space-between" width="100%" padding={4}>
+        <Flex gap={2}>
+          <LogoLogomarkColorDefaultIcon
+            style={{ height: 20, width: "auto" }}
+            aria-label="Grammarly logo"
+            aria-hidden={false}
+          />
+        </Flex>
+        <Flex>
+          <Icon accessibilityLabel="" icon={InterfaceCloseIcon} size="small"/>
+        </Flex>
+      </Flex>
+    <Flex marginTop={8}>
+      <Loader accessibilityLabel="Loading page">
+        <Loader.Branded />
+      </Loader>
+    </Flex>
+  </Flex>
+`}
+/>
+
+<p class="caption" style={{marginTop: "1rem"}}>
+  A Branded Loader appears while the content of a sign-in Modal is loading.
+</p>
+
+
+## Usage
+
+A Branded Loader gives feedback indicating that the system is working on a task. By communicating this status to a user, it lessens the confusion or frustration they may feel when an immediate response is not possible. [Learn about perceived performance on MDN](https://developer.mozilla.org/en-US/docs/Learn/Performance/Perceived_performance).
+
+**Use when**:
+
+- A full page or a large section of content is loading.
+- A branded animation enhances the experience.
+- It’s unhelpful to provide an abstract preview of underlying content, such as a video, before it loads fully.
+
+
+**Do not use when**:
+
+- A branded animation would distract from other, more important content. Instead, use a [Circular Loader](/components/circular-loader).
+- Multiple elements in a surface or page are loading at the same time, such as in a dashboard view. Instead, use multiple [Circular Loaders](/components/circular-loader).
+- You are providing a visual representation of the expected information hierarchy before the content loads fully. Instead, use a [Skeleton Loader](/components/skeleton-loader).
+- Underlying content often takes longer than 10 seconds to load. Instead, use a progress bar to indicate loading.
+
+## Examples
+
+### Default
+
+By default, a Branded Loader appears at `medium` size. The `accessibilityLabel` prop is recommended to provide context regarding what is currently loading.
+
+<ComponentPlayground
+  code={`
+    <Loader accessibilityLabel="Loading page">
+      <Loader.Branded />
+    </Loader>
+`}
+/>
+
+### Size
+Branded Loader is available in two sizes: `small` (24 x 24px) and `medium` (64 x 64px).
+
+<ComponentPlayground
+  code={`
+  <Flex gap={4}>
+    <Loader accessibilityLabel="Loading page">
+      <Loader.Branded size="small" />
+    </Loader>
+    <Loader accessibilityLabel="Loading page">
+      <Loader.Branded  />
+    </Loader>
+  </Flex>
+`}
+/>
+
+### Variants
+Use `variant="inverse"` to manually control the appearance of a Branded Loader. Otherwise, it uses Color Scheme Provider to appear in its `default` or `inverse` color based on context.
+
+<ComponentPlayground
+  code={`
+    <Flex direction="column" bgColor="background-brand-default" gap={2} align="center" padding={4}>
+      <Loader accessibilityLabel="Loading page">
+        <Loader.Branded variant="inverse" />
+      </Loader>
+      <Text as="p" color="base-inverse">Loading page …</Text>
+    </Flex>
+`}
+/>
+
+## Accessibility
+
+### Labeling
+
+The Branded Loader component intentionally lacks a visible label; however, the `accessibilityLabel` prop is required to supply the value of `aria-label`. This is what communicates the context of what is currently loading to people using a screen reader. If a separate [Text](/components/text) component labels the Branded Loader, repeat the same or similar content in the `accessibilityLabel`.
+
+<ComponentPlayground
+  code={`
+    <Flex align="center" gap={4}>
+      <Loader accessibilityLabel="Loading analytics data">
+        <Loader.Branded  />
+      </Loader>
+      <Text as="p">Loading analytics data …</Text>
+    </Flex>
+`}
+/>
+
+### User settings for contrast and motion
+
+A Branded Loader will account for a user’s browser or system settings with regard to contrast and motion.
+
+| User setting                     | Loader response                                     |
+| -------------------------------- | ------------------------------------------------------------ |
+| No preferences set               | Shows the animation                                  |
+| Reduced motion                   | Pauses the animation for 5 seconds before starting it again                             |
+
+## Writing
+Although a Branded Loader does not have a visible label, you can add explanatory context nearby. For example, you can use [Flex](/components/flex) to position a complementary [Text](/components/text) component next to a Branded Loader.
+
+Follow these guidelines when writing adjoining content:
+
+- Start with an _-ing_ verb in most cases.
+- Focus on the action in progress or the object being loaded.
+- Write in a neutral, direct tone and maintain our brand voice and tone.
+- Avoid unnecessary courtesies like “Please wait” and overly forceful phrases like “Hold on.”
+- Aspire to use five words or less.
+
+**Examples**
+
+<DoDontList
+  items={[
+    {
+      content: "Detecting your top tones … ",
+      type: "do",
+    },
+    {
+      content: "Hold on while we analyze your writing corpus to provide an analysis of tone …",
+      type: "dont",
+    },
+    {
+      spaceAbove: true,
+      content: "Working on it … ",
+      type: "do",
+    },
+    {
+      content: "Please wait while we facilitate your request …",
+      type: "dont",
+    }
+  ]}
+/>
+
+If using an ellipsis, format it as the horizontal ellipsis Unicode character “…”, which is three periods in a row. Insert one space between the ellipsis and any adjacent text. In HTML, the code for a horizontal ellipsis is `&hellip;`. [Learn more about ellipses](/content/style/punctuation#ellipses).
+
+**Examples**
+
+<DoDontList
+  items={[
+    {
+      content: "Reviewing your text … [Unicode character]",
+      type: "do",
+    },
+    {
+      content: "Reviewing your text . . . [has spaces between periods]",
+      type: "dont",
+    },
+    {
+      content: "Reviewing your text ... [uses three individually typed periods instead of the Unicode character]",
+      type: "dont",
+    }
+  ]}
+/>
+
+
+## Installation
+
+### JavaScript (Standard)
+
+1. Import the CSS (if not done already).
+
+```css
+@import "@grammarly/design-system";
+```
+
+2. Import the Loader component in JS, which includes Loader.Branded.
+
+```tsx
+import { Loader } from "@grammarly/design-system";
+```
+
+### With only HTML and CSS (Alternative)
+
+In rare cases when you need to render Branded Loader before JavaScript is available, a version with only HTML and CSS is also available.
+
+<details>
+  <summary>HTML</summary>
+
+  ```html
+  <div role="progressbar" aria-label="Loading page" aria-valuetext="In progress" aria-live="polite">
+  <div class="gds-branded-loader-container gds-branded-loader-container-size-medium">
+    <svg viewBox="0 0 128 128" fill="var(--color-icon-base-default)" xmlns="http://www.w3.org/2000/svg">
+      <path class="gds-branded-loader-bobble gds-branded-loader-top-left" d="M59.7334 38.4C59.7334 26.6179 50.1821 17.0667 38.4001 17.0667C26.618 17.0667 17.0667 26.6179 17.0667 38.4C17.0667 50.1821 26.618 59.7333 38.4001 59.7333H59.7334V38.4Z" />
+      <path class="gds-branded-loader-bobble gds-branded-loader-bottom-left" d="M59.7334 98.1333C59.7334 114.628 46.3616 128 29.8667 128C13.3718 128 6.48499e-05 114.628 6.48499e-05 98.1333C6.48499e-05 81.6384 13.3718 68.2667 29.8667 68.2667H59.7334V98.1333Z" />
+      <path class="gds-branded-loader-bobble gds-branded-loader-top-right" d="M68.2666 29.8667C68.2666 13.3718 81.6384 0 98.1333 0C114.628 0 128 13.3718 128 29.8667C128 46.3616 114.628 59.7333 98.1333 59.7333H68.2666V29.8667Z" />
+      <path class="gds-branded-loader-bobble gds-branded-loader-bottom-right" d="M68.2666 89.6C68.2666 101.382 77.8179 110.933 89.5999 110.933C101.382 110.933 110.933 101.382 110.933 89.6C110.933 77.8179 101.382 68.2667 89.5999 68.2667H68.2666V89.6Z" />
+    </svg>
+  </div>
+</div>
+  ```
+</details>
+
+<details>
+  <summary>CSS</summary>
+
+  ```css
+
+.gds-branded-loader-container{
+  --color-icon-base-default: #707070;
+}
+
+.gds-branded-loader-container-size-medium {
+  width: 64px;
+  height: 64px;
+}
+
+.gds-branded-loader-bobble {
+  transform-origin: 50% 50%;
+  transform: scale(0);
+  animation: show-pulse-hide 2.5s ease-in-out infinite forwards;
+}
+
+.gds-branded-loader-bottom-right {
+  animation-delay: 0s;
+}
+
+.gds-branded-loader-top-left {
+  animation-delay: 0.2s;
+}
+
+.gds-branded-loader-top-right {
+  animation-delay: 0.4s;
+}
+
+.gds-branded-loader-bottom-left {
+  animation-delay: 0.6s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gds-branded-loader-bobble {
+    animation: show-pulse-hide-5-sec-pause 6.5s ease-in-out infinite forwards;
+  }
+
+  .gds-branded-loader-bottom-right {
+    animation-delay: 0s;
+  }
+
+  .gds-branded-loader-top-left {
+    animation-delay: 0.2s;
+  }
+
+  .gds-branded-loader-top-right {
+    animation-delay: 0.4s;
+  }
+
+  .gds-branded-loader-bottom-left {
+    animation-delay: 0.6s;
+  }
+}
+
+@keyframes show-pulse-hide {
+  0% {
+    transform: scale(0);
+  }
+
+  18.75% {
+    transform: scale(0.9);
+  }
+
+  37.5% {
+    transform: scale(0.7);
+  }
+
+  56% {
+    transform: scale(0.9);
+  }
+
+  75% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes show-pulse-hide-5-sec-pause {
+  0% {
+    transform: scale(0);
+  }
+
+  6.25% {
+    transform: scale(0.9);
+  }
+
+  12.5% {
+    transform: scale(0.7);
+  }
+
+  18.75% {
+    transform: scale(0.9);
+  }
+
+  95% {
+    transform: scale(0.9);
+  }
+
+  100% {
+    transform: scale(0);
+  }
+}
+
+  ```
+
+</details>
+
+### With LottieFiles
+
+Lottie animations are a good solution for native clients, but can be used anywhere as needed. Follow the implementation instructions for your scenario. 
+
+- <Link target="_blank" href="https://lottiefiles.com/blog/working-with-lottie-animations/how-to-add-lottie-animation-in-web-page-html">HTML</Link>
+- <Link target="_blank" href="https://lottiefiles.com/blog/working-with-lottie-animations/how-to-use-lottie-in-react-app">React</Link>
+- <Link target="_blank" href="https://lottiefiles.com/blog/working-with-lottie-animations/how-to-add-lottie-animation-ios-app-swift">Swift</Link>
+- <Link target="_blank" href="https://lottiefiles.com/blog/working-with-lottie-animations/getting-started-with-lottie-animations-in-android-app">Android</Link>
+
+
+#### Self-hosted
+Download the Lottie files if you need a self-hosted solution. 
+
+<ButtonAsLink 
+  href={require("/files/branded-loader-lottie.zip").default}
+  variant="secondary" 
+  iconStart={InterfaceDownloadIcon} 
+  text="Download Lottie files" 
+  />
+
+#### Hosted
+If you're interested in a hosted version of the files, please contact us in the [#gds-support](https://grammarly.slack.com/archives/C03MNHYDT5E) Slack channel. 
+
+
+## API
+
+### Loader props
+
+<PropsTable properties={[
+  {
+    propertyName: 'children',
+    isRequired: true,
+    description: 'Content that is one of the types of loaders, either Branded or Circular.',
+    typeDefinition: 'React.ReactNode'
+  },
+  {
+    propertyName: 'accessibilityLabel',
+    isRequired: false,
+    description: 'Sets `aria-label` to convey the context of visible text related to a Branded Loader. The `accessibilityLabel` and any nearby visible text should be the same or align closely.',
+    defaultValue: "'Loading'",
+    typeDefinition: 'string'
+  },
+  {
+    propertyName: 'shouldFocus',
+    isRequired: false,
+    description: 'When true, moves focus to the progress container when loading starts. Only needed when multiple Branded Loaders appear together on a page.',
+    defaultValue: 'false',
+    typeDefinition: 'boolean'
+  },
+  {
+    propertyName: 'onLoaded',
+    isRequired: false,
+    description: 'Event handler that is called when a Branded Loader is unmounted. Can be used to move focus to a relevant element when loading is complete. This prop should be set in most cases to make sure a user lands at the correct place in the UI. Do not use this prop when multiple Branded Loaders appear together on a page.',
+    defaultValue: null,
+    typeDefinition: '() => void'
+  }
+]} />
+
+### Loader.Branded props
+
+<PropsTable properties={[
+
+  {
+    propertyName: 'size',
+    isRequired: false,
+    description: 'Determines the size of the Branded Loader to be displayed.',
+    defaultValue: "'medium'",
+    typeDefinition: '"small" | "medium"'
+  },
+  {
+    propertyName: 'variant',
+    isRequired: false,
+    description: 'Determines the color of the Branded Loader.',
+    defaultValue: '"default"',
+    typeDefinition: '"default" | "inverse"'
+  }
+]} />
+
+## Related components
+
+<ComponentList
+  components={[
+    {
+      href: "/components/circular-loader",
+      label: "Circular Loader",
+    },
+    {
+      href: "/components/skeleton-loader",
+      label: "Skeleton Loader",
+    },
+  ]}
+/>

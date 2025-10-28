@@ -1,0 +1,136 @@
+---
+title: Designers
+sidebar_position: 1
+pagination_prev: null
+pagination_next: null
+---
+
+import useBaseUrl from "@docusaurus/useBaseUrl";
+
+# Getting started as a designer
+
+The Grammarly Design System provides a shared visual language and a set of components to help speed up your work and enable design consistency across our product offerings and platforms.
+
+## Figma libraries
+
+We use Figma to deliver foundation styles and component design assets. The components are built using the icons and styles from the Foundations and Iconography libraries. These libraries must be enabled in your file to use the assets and receive updates.
+
+### Enabling libraries
+
+In Figma, select the **Assets** tab in the left sidebar and click the book icon to open the libraries panel. Find the Design System section and switch these libraries on:
+
+- GDS Base Components
+- GDS Foundations
+- GDS Iconography
+
+<div class="diagram">
+  <img
+    src={useBaseUrl("/img/getting-started/getting_started_designers_enabling.png")}
+    alt="Getting started designers enabling"
+  />
+</div>
+
+<p class="caption">
+  For a complete guide to using Figma libraries,
+  <a
+    href="https://help.figma.com/hc/en-us/articles/360041051154-Guide-to-libraries-in-Figma"
+    target="_blank"
+    class="external"
+  >
+    {" "}
+    refer to their documentation.
+  </a>
+</p>
+
+## Using components
+
+### Placement
+
+Open the Assets panel to select a component and drag it to your working area.
+
+<div class="diagram">
+  <img
+    src={useBaseUrl("/img/getting-started/getting_started_designers_using_1.png")}
+    alt="Getting started designers using 1"
+  />
+</div>
+<p class="caption">
+  The Assets panel shows the default state of each component to make it easy to select the component
+  needed and allow for customization in the Variants panel.
+</p>
+
+### Customization
+
+Many components come with features built-in using Figma's Variants and Properties features.
+
+#### Changing variants and properties​
+
+Most components have all of the variant options exposed in the Properties panel. Some complex components like [Menu](/components/menu) have other customizable components nested within them to allow for additional customization. In these cases, click into the component instance you want to customize to see the options.
+
+In some cases, it's necessary to detach the component. Be aware that detaching components will cause them to no longer receive updates when new features are published.
+
+<div class="diagram">
+  <img
+    src={useBaseUrl("/img/getting-started/getting_started_designers_using_2.png")}
+    alt="Variant panel configuration options"
+  />
+</div>
+<p class="caption">
+  The size of the modal and visibility of the scroll, description, and footer are all easy to change
+  in the Variants panel.
+</p>
+
+#### Usage instructions
+
+Most components include basic instructions about how to use them within Figma. Clicking the **Show more** link above the variant options will display the full instruction panel.
+
+<div class="diagram">
+  <img
+    src={useBaseUrl("/img/getting-started/getting_started_designers_usage.png")}
+    alt="Figma component usage instructions"
+  />
+</div>
+<p class="caption">
+  Component instructions help explain the nuances of using the component in Figma and give insight
+  into things like layers that are customizable.
+</p>
+
+## Updating components
+
+The Design System team periodically publishes updates to the component and style libraries. If existing component instances in your file are not <a href="https://help.figma.com/hc/en-us/articles/360038665754-Detach-an-instance-from-the-component" class="external" target="_blank">detached</a>, you will be notified that component updates are available.
+
+<div class="diagram">
+  <img
+    src={useBaseUrl("/img/getting-started/getting_started_designers_updating_1.png")}
+    alt="Keep components up to date"
+  />
+</div>
+<p class="caption">
+  The update notification will only appear if a component instance in your file is eligible to
+  receive updates.
+</p>
+
+The same notification will be presented in every file where component instances that are eligible to receive updates are used, and you will be prompted to review updates every time new updates are published. You may dismiss the notification and accept no updates or review updates and choose to accept or reject updates on a per-component basis.
+
+### Don't accept updates
+
+If you choose not to accept a component update, nothing in your file will visibly change. Existing component instances will remain unchanged while the main component in the **Assets** panel will receive the update. This means the latest version of the component will be available the next time you use a new instance.
+
+### Accept updates
+
+By accepting updates, you agree to existing component instances in your work changing based on the updates provided. A brief summary of the changes to each component is typically provided.
+
+_The Design System team runs extensive tests to mitigate unexpected changes to your work. In rare cases, there may be an unexpected loss of override data that can be resolved by rolling back to the most recently saved version in the file history._
+
+<div class="diagram">
+  <img
+    src={useBaseUrl("/img/getting-started/getting_started_designers_updating_2.png")}
+    alt="List of available updates"
+  />
+</div>
+<p class="caption">
+  Click <b>Review</b> to see a list of available updates. You can accept all updates or selectively
+  accept updates for each component individually.  
+</p>
+
+For more information on reviewing and accepting updates, see <a href="https://help.figma.com/hc/en-us/articles/360039234193-Review-and-accept-library-updates" class="external" target="_blank">Figma documentation</a>.

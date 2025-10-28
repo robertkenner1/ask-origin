@@ -1,0 +1,437 @@
+---
+pagination_prev: null
+pagination_next: null
+---
+
+import { ComponentStatusRow } from "../_components/component_status_row";
+import Hero from "../_components/hero";
+import ComponentPlayground from "../_components/comp_playground";
+import PropsTable from "../_components/props_table";
+import Recommendations from "../_components/recommendations_code_example";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import ComponentList from "../_components/component_list";
+import { Toast, Button, Flex } from "@grammarly/design-system";
+import DoDontList from "../_components/do_dont_list";
+
+# Toast
+
+<span>A Toast displays immediate feedback in response to a user’s action.</span>
+
+<ComponentStatusRow name="Toast" />
+<Hero
+  path={useBaseUrl("/img/components/toast_hero.svg")}
+  altText="A user’s email draft is in the background. In the foreground, the Grammarly assistant card has the UI for the Calendly app action. A Toast is shown and confirms that a user has inserted the Calendly link with a success icon and message."
+/>
+<p class="caption">
+  When a user inserts a scheduling link using the Calendly app action, a Toast appears to confirm that the requested action has been completed. The user can then confidently return to the primary task of sending an email.
+</p>
+
+## Usage
+
+A Toast provides feedback without interrupting a user or requiring their input. The message should be brief, usually fewer than 5 words and no more than 10.
+
+**Do not use when:**
+
+- A user’s interaction or consent is required for a critical or destructive action. Instead, place the content directly on the page or use a [Modal](/components/modal). 
+- Guiding a user through a task. Instead, use a [Popover](/components/popover).
+- Displaying a short, inline description of an element’s purpose. Instead, use a [Tooltip](/components/tooltip).
+
+### Optional actions
+
+Because Toasts are ephemeral, it can be frustrating for a user when the included actions disappear. A user may have unintentionally dismissed a Toast or dismissed it before realizing its utility.
+
+Consider the whole experience to make sure necessary functionality is still available, even after dismissing the Toast.
+
+<Recommendations
+  scope={{ Toast, Button, Flex }}
+  recommendations={[
+    {
+      code: `<Flex justify="center" marginBottom={2} marginTop={2}><Toast text="Couldn’t upload file." variant="warning" onClose={() => {}} primaryAction={<Button text="Try again" variant="ghost" onClick={() => {}} />}/></Flex>`,
+      caption: "Include actions only for optional actions that can be initiated elsewhere in the experience.",
+      type: "do",
+    },
+    {
+      code: `<Toast text="Are you sure you want to delete this item?" variant="warning" onClose={() => {}} primaryAction={<Button text="Yes, delete" variant="ghost" onClick={() => {}} />}/>`,
+      caption: "Don’t make requests of a user that require a response. Instead, put this kind of content on the page or use a Modal.",
+      type: "dont",
+    },
+  ]}
+/>
+
+## Anatomy
+
+<div className="diagram p-8">
+  <img
+    src={useBaseUrl("/img/components/toast_anatomy.svg")}
+    alt="Anatomy diagram of a Toast"
+  />
+</div>
+<ol className="diagram-legend small">
+  <li>Icon</li>
+  <li>Text (required)</li>
+  <li>Primary action</li>
+  <li>Secondary action</li>
+  <li>Close Icon Button (required)</li>
+</ol>
+
+## Examples
+
+### Default
+
+By default, a Toast includes text and a **Close** Icon Button. You must define what happens when the `onClose` event handler is called.
+
+<ComponentPlayground code={`<Toast text="Moved to trash." onClose={() => {}} />`} />
+
+### Variants
+
+Variants change the semantic meaning, the assertiveness for screen readers, and the Icon being displayed.
+
+#### Success 
+
+Use `variant="success"` to communicate the successful completion of an action or task.
+
+<ComponentPlayground
+  code={`<Toast text="Password saved." variant="success" onClose={() => {}} />`}
+/>
+
+#### Warning 
+
+Use `variant="warning"` to signal an issue is not critical and that a user can proceed with caution.
+
+<ComponentPlayground
+  code={`<Toast text="Couldn't load analytics. Check your connection and refresh the page." variant="warning" onClose={() => {}} />`}
+/>
+
+#### Critical 
+
+Use `variant="critical"` to communicate an error or failure without blocking the user’s progress or inputs.
+
+<ComponentPlayground
+  code={`<Toast text="The document was removed or the URL is no longer active." variant="critical" onClose={() => {}} />`}
+/>
+
+#### Loading 
+
+Use `variant="loading"` to communicate an action that’s currently in progress.
+
+<ComponentPlayground
+  code={`<Toast text="Copying document …" variant="loading" onClose={() => {}} />`}
+/>
+
+### With an action
+
+Using the `primaryAction` and `secondaryAction` props, add up to 2 nonessential actions or links. An important action can still be considered nonessential if it is available elsewhere after the Toast is dismissed.
+
+- **For a single action:** Use `variant="ghost"` as your default choice. In rare cases, it might make sense to use `variant="primary"` to emphasize a high-priority action.
+- **For two actions:** Use `variant="ghost"` for both actions to maintain a consistent style within the surface.
+
+For more information about variants, [review the Button documentation](/components/button#variants).
+
+<ComponentPlayground code={`
+<Toast
+  text="Task created."
+  variant="success"
+  primaryAction={
+    <Button
+      text="Copy link"
+      variant="ghost"
+      onClick={() => {}}
+    />
+  }
+  secondaryAction={
+    <ButtonAsLink
+      text="View task"
+      iconEnd={InterfaceOuterLinkIcon}
+      variant="ghost"
+      onClick={() => {}}
+    />
+  }
+  onClose={() => {}}
+></Toast>
+
+`} />
+
+## Behavior
+
+The component does not include animations or placement. You will need to define placement, animation, and persistence timing.
+
+### Width
+
+The length of the text determines a Toast’s width. Once the text reaches the maximum width, it wraps to the following line.
+
+- Minimum width: 210px
+- Maximum width: 400px
+
+## Accessibility
+
+Usually, the first focusable item of a Toast will be the **Close** Icon Button.
+
+### Live Announcer
+
+Toast has [Live Announcer](/utilities/live-announcer) built into the component because users need to know when a notification has been made available. When no actions are offered and the message is not critical, a Toast will be automatically announced with `assertiveness="polite"`.
+
+<ComponentPlayground
+  code={`
+  function Example() {
+    const [showToast, setShowToast] = React.useState(false);
+
+    return (
+      <Flex
+        padding={3}
+        gap={6}
+        align="center"
+        bgColor="background-base-default"
+        direction="column"
+      >
+        <Flex direction="row" gap={3}>
+          <Button onClick={() => setShowToast(!showToast)} text={showToast ? "Hide toast" : "Create task"}/>
+          <Button variant="tertiary" onClick={() => liveAnnouncer.clear("polite")}><Text as="span" weight="normal">Clear Announcer</Text></Button>
+          {showToast && (
+            <Toast variant="success" text="Task created."/>
+          )}
+        </Flex>
+        {showToast && <Text as="p">Screen readers says: "Success: Task created"</Text>}
+      </Flex>
+    )
+  }
+  `}
+/>
+
+### Keyboard navigation
+
+| Key                                    | Expected result                                    |
+| -------------------------------------- | -------------------------------------------------- |
+| <kbd>Tab</kbd>                  | Moves focus through interactive elements within a Toast.  |
+| <kbd>Esc</kbd>                    | If focus is within the Toast, closes the Toast.         |
+| <kbd>Enter</kbd> or <kbd>Space</kbd> | Activates the focused element.                       |
+
+## Writing
+
+### Text
+
+Although there is no length restriction, the text content of a Toast must be quickly scannable.
+
+- Limit yourself to 5 words or fewer in most cases. 10 words maximum.
+- A user should be able to read the entire text and actions in under 3 seconds. 
+
+#### Be brief and write simply
+
+Consider how machine or AI translations by third-party apps and browser extensions could affect our product. Look for what could be misunderstood and edit it for complete clarity. 
+
+Avoid using colloquialisms that may be difficult to understand. Translation apps often incorrectly translate casual expressions; for example, “ready to go” translated as meaning literally prepared to leave or depart from a physical location.
+
+<DoDontList
+  items={[
+    {
+      content: "Password saved.",
+      type: "do",
+    },
+    {
+      content: "Your new password is ready to go.",
+      type: "dont",
+    },
+  ]}
+/>
+
+#### Articles and pronouns
+
+Reduce the use of articles (_a_ and _the_), personal pronouns (_your_), and adverbs (_successfully_). By removing these elements from your writing, the message becomes more straightforward and faster to read.
+
+<DoDontList
+  items={[
+    {
+      content: "Document saved.",
+      type: "do",
+    },
+    {
+      content: "The document was saved.",
+      type: "dont",
+    },
+    {
+      content: "Your document has been saved successfully.",
+      type: "dont",
+    },
+  ]}
+/>
+
+#### Verb tense
+
+Write in the simple past to describe an action or task that already happened.
+
+<DoDontList
+  items={[
+    {
+      content: "Couldn’t load document.",
+      type: "do",
+    },
+    {
+      content: "The document couldn’t be loaded.",
+      type: "dont",
+    },
+    {
+      content: "Your document is unable to be loaded at this time. Try again later.",
+      type: "dont",
+    },
+  ]}
+/>
+
+Only use -ing verbs to indicate an action that’s in progress. [Learn how to format ellipses](/content/style/punctuation#ellipses).
+
+<DoDontList
+  items={[
+    {
+      content: "Copying rule …",
+      type: "do",
+    },
+    {
+      content: "Your rule copying is complete.",
+      type: "dont",
+    },
+  ]}
+/>
+
+#### Punctuation 
+
+Always use end punctuation for fragments and sentences, even if it’s a single fragment by itself. Exclamation points can read as shouting or overexcitement, so it’s recommended to avoid them unless it’s a moment of genuine celebration.
+
+<DoDontList
+  items={[
+    {
+      content: "Message sent.",
+      type: "do",
+    },
+    {
+      content: "Message sent",
+      type: "dont",
+    },
+    {
+      content: "Message sent!",
+      type: "dont",
+    },
+    {
+      spaceAbove: "true",
+      content: "2 new members added. 10 seats remaining.",
+      type: "do",
+    },
+    {
+      content: "2 new members added 10 seats remaining",
+      type: "dont",
+    },
+    {
+      content: "2 new members added! 10 seats remaining! Woo-hoo!!",
+      type: "dont",
+    },
+  ]}
+/>
+
+**Do not use question marks.** Because they are ephemeral, Toasts should never demand a user’s attention or engagement. Direct or rhetorical questions can cause a user to question themself about why additional intervention is necessary.
+
+<DoDontList
+  items={[
+    {
+      content: "You've been unsubscribed.",
+      type: "do",
+    },
+    {
+      content: "Unsubscribed. Consider changing your mind?",
+      type: "dont",
+    },
+    {
+      spaceAbove: "true",
+      content: "Update installed.",
+      type: "do",
+    },
+    {
+      content: "Are you ready to install this update?",
+      type: "dont",
+    },
+  ]}
+/>
+
+### Action labels
+
+Follow the [Button](/components/button#writing) or [Link](/components/link#writing) writing documentation for primary and secondary actions in a Toast.
+
+The built-in **Close** Icon Button already has a Tooltip with a label reading “Close”. [Learn more about describing Icons](/content/style/formatting#mentioning-ui-elements).
+
+## Installation
+
+1. Import the CSS (if not done already).
+
+```css
+@import "@grammarly/design-system";
+```
+
+2. Import the Toast component in JS.
+
+```tsx
+import { Toast } from "@grammarly/design-system";
+```
+
+## API
+
+<PropsTable
+  properties={[
+    {
+      propertyName: "text",
+      isRequired: true,
+      isDeprecated: false,
+      description: "The text shown in the Toast.",
+      defaultValue: null,
+      typeDefinition: "string",
+    },
+    {
+      propertyName: "onClose",
+      isRequired: true,
+      isDeprecated: false,
+      description: "Event handler that is called when the **Close** Icon Button is activated.",
+      defaultValue: null,
+      typeDefinition: "() => void",
+    },
+    {
+      propertyName: "primaryAction",
+      isRequired: false,
+      isDeprecated: false,
+      description:
+        'A Button or ButtonAsLink that provides an action that a user can take related to the text content. In most cases, use `variant="ghost"`.',
+      defaultValue: null,
+      typeDefinition: "ReactNode",
+    },
+    {
+      propertyName: "secondaryAction",
+      isRequired: false,
+      isDeprecated: false,
+      description:
+        'A Button or ButtonAsLink that provides a secondary action the user can take related to the text content. Only use after adding a `primaryAction` and only use `variant="ghost"`.',
+      defaultValue: null,
+      typeDefinition: "ReactNode",
+    },
+    {
+      propertyName: "variant",
+      isRequired: false,
+      isDeprecated: false,
+      description: "Changes the icon to convey a system status.",
+      defaultValue: "default",
+      typeDefinition: "'default' | 'critical' | 'loading' | 'success' | 'warning'",
+    },
+  ]}
+/>
+
+## Related components
+
+<ComponentList
+  components={[
+    {
+      href: "/components/modal",
+      label: "Modal",
+    },
+    {
+      href: "/components/popover",
+      label: "Popover",
+    },
+    {
+      href: "/components/tooltip",
+      label: "Tooltip",
+    },
+  ]}
+/>

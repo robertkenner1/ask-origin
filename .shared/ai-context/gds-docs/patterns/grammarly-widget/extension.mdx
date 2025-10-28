@@ -1,0 +1,172 @@
+---
+title: Extension
+sidebar_position: 1
+pagination_prev: null
+pagination_next: null
+hide_title: true
+---
+
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import ComponentList from "../../_components/component_list";
+
+# Extension
+
+How the Grammarly widget works in web browsers
+
+:::caution Editor’s note: 
+Your Grammarly widget will differ from the end user’s experience due to internal experiments. GDS documents address the current user-facing UI.
+:::
+
+## Anatomy
+
+<div className="diagram p-8">
+  <img
+    src={useBaseUrl("/img/patterns/widget/widget-extension-anatomy.svg")}
+    alt="Anatomy diagram of a Grammarly widget for extension"
+  />
+</div>
+<ol class="diagram-legend small">
+    <li>Widget</li>
+    <li>Generative AI Icon Button</li>
+    <li>G logomark Icon Button</li>
+    <li>Power Icon Button</li>
+</ol>
+
+## Position
+
+When Grammarly is running and checking text, the widget is fixed in the lower-right corner of most websites’ writing surfaces.
+
+<div class="diagram p-8">
+  <img src={useBaseUrl("/img/patterns/widget/widget-extension-position-textbox.svg")} alt="Diagram showing the Grammarly widget positioned in the lower right corner of a textbox." />
+</div>
+
+<br />
+
+In Google Docs, the widget is fixed in the lower-right corner of the full browser window. Though it won’t get in the way of the writing surface, it may overlap some other Google Docs elements, like comments. 
+
+<div className="diagram p-8">
+  <img
+    src={useBaseUrl("/img/patterns/widget/widget-extension-position-gdocs.svg")}
+    alt="Diagram showing the Grammarly widget positioned in the lower right corner of a browser window."
+  />
+</div>
+
+## States
+
+### Active
+
+When no suggestions are available, the widget appears in the active state. A user can activate generative AI features with the lightbulb Icon Button or more suggestions with the G logomark Icon Button.
+
+<div className="diagram p-8">
+  <img
+    src={useBaseUrl("/img/patterns/widget/widget-extension-active.svg")}
+    alt="The Grammarly widget displays the Generative AI icon and Grammarly logomark icon in green when active."
+  />
+</div>
+
+### Expanded
+
+When a user hovers on or moves focus to the widget, additional actions can appear. By default, an Icon Button appears on the left that allows a user to turn off Grammarly on a specific page. 
+
+When focus moves away from the widget, it returns to its previous state. 
+
+<div className="diagram p-8">
+  <img
+    src={useBaseUrl("/img/patterns/widget/widget-extension-expanded.svg")}
+    alt="The expanded state of the Grammarly widget showing the logout button."
+  />
+</div>
+
+### Loading
+
+When a user is typing or editing, a loading spinner appears inside the G logomark Icon Button. The spinner remains until the total number of each suggestion type is determined. Only then will a suggestion count appear.
+
+<div className="diagram p-8">
+  <div className="p-8">
+    <img
+      src={useBaseUrl("/img/patterns/widget/widget-extension-loading-critical.svg")}
+      alt="The Grammarly widget loading state animating over a red critical suggestion background."
+    />
+  </div>
+  <div className="p-8">
+    <img
+      src={useBaseUrl("/img/patterns/widget/widget-extension-loading-active.svg")}
+      alt="The Grammarly widget loading state animating over a green active background."
+    />
+  </div>
+</div>
+<p className="caption">
+  The background color of the loading state changes based on whether critical suggestions are available when a user starts typing. If critical suggestions are available, the background color is red. If not, the background color is green.
+</p>
+
+### Suggestion counts
+
+When suggestions are available, the widget displays a count based on category. The state and color of the G logomark Icon Button change to indicate categories.
+
+| State                                                                                                                                                            | Description                                                                                                                                                               |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <img src={useBaseUrl("/img/patterns/widget/widget-extension-advanced-only-state.svg")} alt="Grammarly widget advanced suggestions only state" />                 | Only advanced suggestions are available. Displays a count in a circular overlay.                                                                                          |
+| <img src={useBaseUrl("/img/patterns/widget/widget-extension-premium-only-state.svg")} alt="Grammarly widget Premium suggestions only state" />                   | Only Premium suggestions are available. Displays a count in a circular overlay.                                                                                           |
+| <img src={useBaseUrl("/img/patterns/widget/widget-extension-critical-only-state.svg")} alt="Grammarly widget critical suggestions only state" />                 | Only critical suggestions are available. Displays a count inside the G logomark container with a red background.                                                          |
+| <img src={useBaseUrl("/img/patterns/widget/widget-extension-critical-and-advanced-state.svg")} alt="Grammarly widget critical and advanced suggestions state" /> | Critical and advanced suggestions are available. Displays a count inside the G logomark container with a red background and a plus icon inside a purple circular overlay. |
+| <img src={useBaseUrl("/img/patterns/widget/widget-extension-advanced-hovered-state.svg")} alt="Grammarly widget advanced suggestions hovered state" />           | Hovering on the plus icon inside the circular overlay displays a count of advanced suggestions with a purple background.                                                   |
+| <img src={useBaseUrl("/img/patterns/widget/widget-extension-critical-and-premium-state.svg")} alt="Grammarly widget critical and premium suggestions state" />   | Critical and Premium suggestions are available. Displays a count inside the G logomark container with a red background and a plus icon inside a yellow circular overlay.  |
+| <img src={useBaseUrl("/img/patterns/widget/widget-extension-premium-hovered-state.svg")} alt="Grammarly widget Premium hovered state" />                         | Hovering on the plus icon inside the circular overlay displays a count of Premium suggestions with a yellow background.                                                   |
+
+### Tone detection
+
+If generative AI features are turned off, an emoji can appear next to the G logomark Icon Button. The emoji communicates a tone detected in the user’s writing. Activating the emoji Icon Button displays more information and any additional tones that were detected.
+
+<div className="diagram p-8">
+  <img
+    src={useBaseUrl("/img/patterns/widget/widget-extension-tone.svg")}
+    alt="An smiling emoji with sunglasses replaces the G logomark Icon Button."
+  />
+</div>
+
+### Inactive
+
+When the widget is inactive, the G logomark appears with a subdued background. This state is usually activated when documents exceed a certain length or when a user is not the document's owner.
+
+<div className="diagram p-8">
+  <img
+    src={useBaseUrl("/img/patterns/widget/widget-extension-inactive.svg")}
+    alt="A gray G logomark Icon Button indicates that the Grammarly widget is inactive."
+  />
+</div>
+
+## Settings
+
+A user can manage settings for the Grammarly browser extension from a browser’s toolbar.
+
+<div className="diagram p-8">
+  <img
+    src={useBaseUrl("/img/patterns/widget/widget-extension-settings.svg")}
+    alt="The settings menu is shown in the open state after a user clicks the Grammarly icon in the browser toolbar."
+  />
+</div>
+
+### Toolbar Button states
+
+The G logomark Icon Button in a browser’s toolbar changes to indicate different states.
+
+| State                                                                                                                                                                                                    | Description                                                                                                               |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| <img src={useBaseUrl("/img/patterns/widget/widget-extension-toolbar-default.svg")} alt="The active state of the toolbar icon displays as the green G logomark." />                                       | Grammarly is running and checking text when applicable.                                                                   |
+| <img src={useBaseUrl("/img/patterns/widget/widget-extension-toolbar-not-supported.svg")} alt="The not supported state displays a red circle with a slash through it in the corner of the G logomark." /> | Grammarly is not supported on this website, or the user has placed the domain on their block list in Grammarly’s settings. |
+| <img src={useBaseUrl("/img/patterns/widget/widget-extension-toolbar-deactivated.svg")} alt="The inactive displays as a gray G logomark icon." />                                                         | Grammarly is off and is not checking text.                                                                                |
+
+## Related resources
+
+<ComponentList
+  components={[
+    {
+      href: "https://brand.grammarly.com/",
+      label: "Brand Vault",
+    },
+    {
+      href: "/foundations/iconography",
+      label: "Iconography",
+    },
+  ]}
+/>

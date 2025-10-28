@@ -1,0 +1,371 @@
+---
+pagination_prev: null
+pagination_next: null
+---
+
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import { Rating, Text, TextField } from "@grammarly/design-system";
+import ComponentPlayground from "../_components/comp_playground";
+import { ComponentStatusRow } from "../_components/component_status_row";
+import Hero from "../_components/hero";
+import PropsTable from "../_components/props_table";
+import RecommendationsTable from "../_components/recommendations_table";
+
+# Rating
+
+<span>
+  The Rating component allows users to express quick, lightweight feedback by selecting a rating
+  from 1 to 5 stars.
+</span>
+
+<ComponentStatusRow name="Rating" />
+<Hero
+  path={useBaseUrl("/img/components/rating/rating_hero.svg")}
+  altText="A Textarea captures the text used in a Snippet, which can range from short, direct messages to long-form emails depending on a user’s need."
+/>
+<p class="caption">
+  Users can rate suggestions with stars, indicate how valuable they were, and share additional
+  feedback.
+</p>
+
+## Anatomy
+
+<div class="diagram p-8">
+  <img
+    src={useBaseUrl("/img/components/rating/rating_anatomy.svg")}
+    alt="Anatomy diagram of a feedback survey"
+  />
+</div>
+<ol class="diagram-legend small">
+  <li>Label</li>
+  <li>Optional or Required indicator</li>
+  <li>Stars</li>
+  <li>Star label</li>
+</ol>
+
+## Usage
+
+The Rating component is designed to be used inside a native `<form>` element. It supports form validation flows by exposing its state through controlled props like `value` and `isError`.
+
+**Use when:**
+
+- Use when collecting quick, lightweight feedback from users.
+
+**Do not use when:**
+
+- Users are in the middle of performing a task.
+- Feedback is needed in in multiple places on the page or across several steps.
+- Detailed insights or research are required.
+
+## States
+
+### Default
+
+By default, the star rating is unselected.
+
+<ComponentPlayground
+  code={`
+    function Example() {
+    const label = "How valuable was this suggestion?";
+    const [rating, setRating] = React.useState(undefined);
+
+    return (
+        <Rating label={label} value={rating} onChange={setRating} />
+      )
+    }
+
+`}
+/>
+
+### 1-star
+
+1 star is selected with the corresponding label “Not valuable.”
+
+<ComponentPlayground
+  code={`
+    function Example() {
+    const label = "How valuable was this suggestion?";
+    const [rating, setRating] = React.useState(0);
+
+    return (
+        <Rating label={label} value={rating} onChange={setRating} />
+      )
+    }
+
+`}
+/>
+
+### 2-star
+
+2 stars are selected with the corresponding label “Slightly valuable.”
+
+<ComponentPlayground
+  code={`
+    function Example() {
+    const label = "How valuable was this suggestion?";
+    const [rating, setRating] = React.useState(1);
+
+    return (
+        <Rating label={label} value={rating} onChange={setRating} />
+      )
+    }
+
+`}
+/>
+
+### 3-star
+
+3 stars are selected with the corresponding label “Moderately valuable.”
+
+<ComponentPlayground
+  code={`
+    function Example() {
+    const label = "How valuable was this suggestion?";
+    const [rating, setRating] = React.useState(2);
+
+    return (
+        <Rating label={label} value={rating} onChange={setRating} />
+      )
+    }
+
+`}
+/>
+
+### 4-star
+
+4 stars are selected with the corresponding label “Fairly valuable.”
+
+<ComponentPlayground
+  code={`
+    function Example() {
+    const label = "How valuable was this suggestion?";
+    const [rating, setRating] = React.useState(3);
+
+    return (
+        <Rating label={label} value={rating} onChange={setRating} />
+      )
+    }
+
+`}
+/>
+
+### 5-star
+
+5 stars are selected with the corresponding label “Very valuable.”
+
+<ComponentPlayground
+  code={`
+    function Example() {
+    const label = "How valuable was this suggestion?";
+    const [rating, setRating] = React.useState(4);
+
+    return (
+        <Rating label={label} value={rating} onChange={setRating} />
+      )
+    }
+
+`}
+/>
+
+### Hover state
+
+The star is filled when a user hovers over the star icons. The star rating label appears when a user hovers over the corresponding star for each level. Once selected, the state of each star and its label are preserved.
+
+<div class="diagram p-8">
+  <img
+    src={useBaseUrl("/img/components/rating/rating_hover.svg")}
+    alt="A mouse hovering on 2-star rating with star rating label 'slightly valuable'."
+  />
+</div>
+
+### Focus state
+
+The star is outlined when a user's focus is over the star icon.
+
+<div class="diagram p-8">
+  <img src={useBaseUrl("/img/components/rating/rating_focus.svg")} alt="A focus on first star" />
+</div>
+
+### Error state
+
+The component renders a red outline around the container and displays an error message below the stars.
+
+<ComponentPlayground
+  code={`
+    function Example() {
+    const label = "How valuable was this suggestion?";
+    const [rating, setRating] = React.useState(undefined);
+    const [error, setError] = React.useState(true);
+
+    return (
+        <Rating label={label} isError={error} value={rating} onChange={setRating} />
+      )
+    }
+
+`}
+/>
+
+## Behavior
+
+### Layout and Responsiveness
+
+The width of the component is determined by the width of its container. When the available space is narrower than the combined width of the stars and their labels, the layout adjusts to maintain usability:
+
+- Labels may wrap beneath the stars if they can’t fit inline.
+- If the longest label exceeds the container width, all labels will reflow beneath their corresponding stars to ensure consistent alignment.
+
+### States
+
+The component has several interactive visual states:
+
+- **Default**: All five stars are outlined and unselected.
+- **Hover**: Stars up to the hovered index become filled. A label associated with the hovered star is displayed.
+- **Selected**: After selecting a rating, stars up to the selected value are filled permanently, and the corresponding label is shown.
+- **Hover after selection**: Hovering again temporarily overrides the visual display of the selected rating. When the user moves the pointer away, the selected state returns.
+
+### Error Handling
+
+Use the `isError` prop to display an error message and highlight the component visually, typically when a user submits a form without selecting a rating.
+
+- The error state is controlled externally and does not reset automatically.
+- To clear the error, update the `isError` prop in the parent component (e.g., after a user selects a valid rating).
+- This makes the Rating component suitable for use in required form flows or feedback validation logic.
+
+## Accessibility
+
+### Keyboard interaction
+
+| Key                                                | Expected result                                                                                                                                                                                                                                            |
+| -------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <kbd>Tab</kbd>                                     | • Moves focus to the checked radio (star) button in the radio group. <br /> • If a radio button is not checked, focus moves to the first radio button in the group.                                                                                        |
+| <kbd>Down arrow</kbd> <br /><kbd>Right arrow</kbd> | • Moves focus to and checks the next radio button in the group. <br /> • If the focus is on the last radio button, it moves focus to the first radio button. <br /> • The state of the previously checked radio button is changed to unchecked.            |
+| <kbd>Up arrow</kbd> <br /><kbd>Left arrow</kbd>    | • Moves focus to and checks the previous radio button in the group. <br /> • If focus is on the first radio button, it moves focus to and checks the last radio button. <br /> • The state of the previously checked radio button is changed to unchecked. |
+| <kbd>Space</kbd>                                   | If the radio (star) with focus is not checked, it changes the state to checked. Otherwise, does nothing. <br />_Note: The state where a radio is not checked only occurs on page load._                                                                    |
+
+## Writing
+
+To ensure clarity, consistency, and a positive user experience, follow these writing best practices when designing the Rating component.
+
+<RecommendationsTable
+  caption="Writing best practices for helper text"
+  recommendations={[
+    {
+      recommendationDo: "Keep the writing brief, concise, and with the user in control.",
+      exampleDo: (
+        <img
+          src={useBaseUrl("/img/components/rating/rating_brief.svg")}
+          alt="Five unselected stars below the label 'How valuable was this suggestion? (Required)' showing the default rating state."
+        />
+      ),
+      recommendationDont:
+        'Avoid vague words like "this" in labels unless the context is clear. This is especially important for users who use screen reader.',
+      exampleDont: (
+        <img
+          src={useBaseUrl("/img/components/rating/rating_vague.svg")}
+          alt="Five unselected stars below the label 'How valuable was this suggestion to you? (Required)' — too wordy and informal."
+        />
+      ),
+    },
+    {
+      recommendationDo: "Use consistent language across similar rating flows.",
+      exampleDo: (
+        <img
+          src={useBaseUrl("/img/components/rating/rating_consistent.svg")}
+          alt="Five unselected stars below the label 'How valuable was this suggestion? (Required)' — correct sentence-case label."
+        />
+      ),
+      recommendationDont: "Don’t use different verbs or formats in adjacent rating components.",
+      exampleDont: (
+        <img
+          src={useBaseUrl("/img/components/rating/rating_differentVerbs.svg")}
+          alt="Five unselected stars below the label 'How Valuable Was This? (Required)' — incorrect title-case label."
+        />
+      ),
+    },
+    {
+      recommendationDo: "Use a question mark to end a user-facing question.",
+      exampleDo: (
+        <img
+          src={useBaseUrl("/img/components/rating/rating_questionMark.svg")}
+          alt="Five unselected stars below the label 'How valuable was this suggestion? (Required)?' — includes proper question mark."
+        />
+      ),
+      recommendationDont: "Do not use end punctuation, apart from a question mark.",
+      exampleDont: (
+        <img
+          src={useBaseUrl("/img/components/rating/rating_endPunctuation.svg")}
+          alt="Five unselected stars below the label 'How valuable was this suggestion (Required)' — missing ending question mark."
+        />
+      ),
+    },
+
+]}
+/>
+
+## Installation
+
+1. Import the CSS (if not done already).
+
+```css
+@import "@grammarly/design-system";
+```
+
+2. Import the Text Field component in JS.
+
+```tsx
+import { Rating } from "@grammarly/design-system";
+```
+
+## API
+
+<PropsTable
+  properties={[
+    {
+      propertyName: "label",
+      typeDefinition: "string",
+      isRequired: true,
+      description: "Text label displayed above the stars.",
+    },
+    {
+      propertyName: "onChange",
+      typeDefinition: "(value: 0 | 1 | 2 | 3 | 4 ) => void",
+      description: "Called when the user selects a star rating.",
+      isRequired: true,
+    },
+    {
+      propertyName: "value",
+      typeDefinition: "0 | 1 | 2 | 3 | 4",
+      defaultValue: "undefined",
+      description: "Current selected star index.",
+    },
+    {
+      propertyName: "isError",
+      typeDefinition: "boolean",
+      defaultValue: "false",
+      description:
+        "Indicates whether the component should display an error (e.g., user tried to submit without selecting a rating).",
+    },
+    {
+      propertyName: "isRequired",
+      typeDefinition: "boolean",
+      defaultValue: "false",
+      description:
+        "Indicates whether selecting a rating is mandatory. If set to true, it displays a '(Required)' label.",
+    },
+    {
+      propertyName: "starLabels",
+      typeDefinition: "[string, string, string, string, string]",
+      defaultValue:
+        "[ 'Not Valuable', 'Slightly Valuable', 'Moderately Valuable', 'Fairly Valuable', 'Very Valuable']",
+      description:
+        "An array of custom labels for each star, from lowest to highest value. Used for accessibility and tooltips.",
+    },
+  ]}
+/>
+
+## Related components​
+
+- [Button](/components/button)
+- [Textarea](/components/textarea)
+- [Form](/components/form)
+- [Feedback survey](/patterns/feedback-pattern)

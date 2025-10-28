@@ -122,24 +122,34 @@ Use: mcp__playwright__browser_snapshot
 - Testing responsive behavior
 - Pixel-perfect validation
 
-### 3. Grammarly Design System
-**Components:** https://gitlab.grammarly.io/uifoundation/grammarly-design-system/-/tree/main/packages/design-system/src/components
-**Icons:** https://gitlab.grammarly.io/uifoundation/grammarly-design-system/-/tree/main/packages/icons/assets  and https://gitlab.grammarly.io/uifoundation/grammarly-design-system/-/tree/main/packages/icons/generated/all
+### 3. Grammarly Design System (GDS)
+**Documentation:** Read(ai-context/gds-docs/llm.txt)
+**Website:** https://uifoundation.gpages.io/grammarly-design-system
+**Source:** https://gitlab.grammarly.io/uifoundation/grammarly-design-system
 
-**Usage**
-Use sourcegraph MCP
+**Available in this monorepo:**
+- Complete component documentation: `ai-context/gds-docs/`
+- 40+ components with usage examples
+- Design tokens and foundations
+- UI patterns and best practices
 
+**Usage:**
+```
+# Read GDS overview
+Read(ai-context/gds-docs/llm.txt)
 
-**Contains:**
-- Complete component library
-- Design tokens (colors, typography, spacing)
-- Interaction patterns
-- Grammarly-specific UI elements
+# Read specific component
+Read(ai-context/gds-docs/components/buttons/button.mdx)
+
+# Browse all components
+Glob(ai-context/gds-docs/components/**/*.mdx)
+```
 
 **When to use:**
-- Creating Grammarly-style interfaces
-- Need authentic Grammarly components
-- Building professional UI elements
+- Creating Grammarly-style or professional interfaces
+- Building production-quality UI with established patterns
+- Need consistent, accessible components
+- Want Superhuman-style clean, modern design
 
 ## Prototyping Workflow
 

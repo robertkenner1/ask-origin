@@ -219,23 +219,23 @@ The codebase is currently being refactored with:
 
 ### Available Components Documentation
 
-Complete component documentation is available via symlink at `./ai-context/gds/` → `../../.shared/ai-context/gds/`.
+Complete component documentation is available via symlink at `./ai-context/gds-docs/` → `../../.shared/ai-context/gds-docs/`.
 
 **Quick reference:**
 ```bash
-# Read complete GDS reference (all components)
-Read(ai-context/gds/llms.txt)
+# Read complete GDS reference (40+ components)
+Read(ai-context/gds-docs/llm.txt)
 
 # List all component docs
-Glob(ai-context/gds/llms/component-*.txt)
+Glob(ai-context/gds-docs/components/**/*.mdx)
 
 # Read specific component
-Read(ai-context/gds/llms/component-button.txt)
-Read(ai-context/gds/llms/component-modal.txt)
-Read(ai-context/gds/llms/component-textfield.txt)
+Read(ai-context/gds-docs/components/buttons/button.mdx)
+Read(ai-context/gds-docs/components/modal.mdx)
+Read(ai-context/gds-docs/components/text-field.mdx)
 ```
 
-**Available components:** Button, Text, Heading, Box, Flex, Modal, Popover, Tooltip, TextField, TextArea, Select, Checkbox, RadioGroup, Icon, Badge, Tag, Toast, Tabs, Accordion, Menu, and more.
+**Available components:** Button, ButtonAsLink, IconButton, TextField, Textarea, Checkbox, RadioButton, RadioButtonGroup, RadioGroup, Switch, SearchField, Select, Combobox, VerificationCode, Flex, Box, Text, Heading, Link, Toast, Notification, Modal, Popover, Tooltip, OnboardingTooltip, Tabs, Menu, SegmentedControl, Badge, Tag, PlanTag, Rating, Accordion, CircularLoader, BrandedLoader, SkeletonLoader, Icon, Illustration, Logo, Sticker, SuggestionToggle, Form, and more.
 
 **Note:** Symlinked files won't appear in @ autocomplete, use explicit `Read()` or `Glob()`.
 
@@ -266,7 +266,7 @@ The ai-context contains complete design tokens:
 
 1. **Check documentation first:**
    ```bash
-   Read(ai-context/gds/llms/component-<name>.txt)
+   Read(ai-context/gds-docs/components/[component-name].mdx)
    ```
 
 2. **Import components:**
@@ -285,7 +285,7 @@ The ai-context contains complete design tokens:
    - Spacing: Use GDS spacing scale
    - Typography: Use Text/Heading components
 
-**Always check the component documentation in `ai-context/gds/llms/` before implementing UI elements.**
+**Always check the component documentation in `ai-context/gds-docs/` before implementing UI elements.**
 
 ## Important Rules
 

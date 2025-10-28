@@ -11,14 +11,14 @@ This directory contains shared AI assistant resources and documentation used acr
 ```
 ai-context/
 ├── CLAUDE.md              # This file - directory documentation
-└── gds/                   # Grammarly Design System documentation
-    ├── README.md          # GDS documentation overview
-    ├── llms.txt           # Complete GDS component reference for AI
-    ├── components.json    # Structured component data
-    └── llms/              # Individual component documentation
-        ├── component-Button.txt
-        ├── component-TextField.txt
-        └── ... (43+ component files)
+├── gds/                   # Legacy GDS documentation (deprecated)
+└── gds-docs/              # Grammarly Design System documentation (current)
+    ├── llm.txt            # Complete GDS reference for AI (40+ components)
+    ├── components/        # Component documentation (MDX files)
+    ├── foundations/       # Design foundations
+    ├── tokens/            # Design tokens
+    ├── patterns/          # UI patterns
+    └── getting-started/   # Setup guides
 ```
 
 ## How This Directory Works
@@ -40,13 +40,14 @@ ai-context/
 
 ### 1. Grammarly Design System (GDS)
 
-**Location**: `ai-context/gds/`
+**Location**: `ai-context/gds-docs/`
 
 **What's included:**
-- Complete component library documentation (43+ components)
-- Design tokens (colors, typography, spacing)
-- Code examples and usage patterns
-- Import patterns and best practices
+- Complete component library documentation (40+ components)
+- Design tokens (colors, typography, spacing, shadows, etc.)
+- Design foundations and principles
+- UI patterns and best practices
+- Getting started guides
 
 **How to reference:**
 ```markdown
@@ -54,17 +55,20 @@ ai-context/
 ## Design System
 
 We use **Grammarly Design System**. See documentation:
-- Full reference: @ai-context/gds/llms.txt
-- Components list: @ai-context/gds/components.json
-- Specific component: @ai-context/gds/llms/component-Button.txt
+- Full reference: Read(ai-context/gds-docs/llm.txt)
+- Specific component: Read(ai-context/gds-docs/components/buttons/button.mdx)
+- Design tokens: Read(ai-context/gds-docs/tokens/)
+- Foundations: Read(ai-context/gds-docs/foundations/)
 ```
 
 **Available components:**
-Button, ButtonAsLink, IconButton, TextField, Textarea, Checkbox, RadioGroup, Switch, SearchField, Select, Combobox, VerificationCode, Flex, Box, Text, Heading, Toast, Modal, Popover, Tooltip, Tabs, Menu, Link, Badge, Tag, PlanTag, Rating, Accordion, CircularLoader, BrandedLoader, SkeletonLoader, Icon, Illustration, Logo, Sticker, ColorSchemeProvider, Form, and more.
+Button, ButtonAsLink, IconButton, TextField, Textarea, Checkbox, RadioButton, RadioButtonGroup, RadioGroup, Switch, SearchField, Select, Combobox, VerificationCode, Flex, Box, Text, Heading, Link, Toast, Notification, Modal, Popover, Tooltip, OnboardingTooltip, Tabs, Menu, SegmentedControl, Badge, Tag, PlanTag, Rating, Accordion, CircularLoader, BrandedLoader, SkeletonLoader, Icon, Illustration, Logo, Sticker, SuggestionToggle, Form, and more.
 
-**External resources:**
-- Live Storybook: https://uifoundation.gpages.io/grammarly-design-system
-- Source code: https://gitlab.grammarly.io/uifoundation/grammarly-design-system
+**Documentation website:**
+- https://uifoundation.gpages.io/grammarly-design-system
+
+**Source code:**
+- https://gitlab.grammarly.io/uifoundation/grammarly-design-system
 
 
 ## Design System Quick Reference
@@ -196,7 +200,7 @@ import './App.css';
 
 ### When to update ai-context/
 
-1. **New GDS version released**: Update gds/ documentation
+1. **New GDS version released**: Update gds-docs/ documentation
 2. **New shared resource needed**: Add to ai-context/
 3. **Better AI guidance**: Update this file
 
@@ -206,12 +210,13 @@ import './App.css';
 # Navigate to monorepo root
 cd /path/to/ai-frontend-prototypes
 
-# Update GDS documentation (if available)
-# [Add sync script or manual update instructions]
+# Update GDS documentation from latest release
+# Copy updated docs to .shared/ai-context/gds-docs/
+# Regenerate llm.txt if needed
 
 # Commit changes
-git add ai-context/
-git commit -m "docs: Update ai-context resources"
+git add .shared/ai-context/
+git commit -m "docs: Update GDS documentation to vX.X.X"
 ```
 
 ## Integration with Projects
@@ -228,7 +233,7 @@ Static sites typically don't use GDS directly, but can reference:
 Full GDS integration:
 1. Install GDS: `pnpm add @grammarly/design-system`
 2. Reference ai-context in project CLAUDE.md
-3. Use components according to ai-context/gds/ documentation
+3. Use components according to ai-context/gds-docs/ documentation
 
 ### Example Project CLAUDE.md
 
@@ -238,8 +243,9 @@ Full GDS integration:
 ## Design System
 
 Using Grammarly Design System. See:
-- @ai-context/gds/llms.txt - Complete component reference
-- @ai-context/gds/components.json - Component data
+- Read(ai-context/gds-docs/llm.txt) - Complete component reference
+- Read(ai-context/gds-docs/components/buttons/button.mdx) - Specific component
+- Read(ai-context/gds-docs/tokens/) - Design tokens
 
 ## Project-Specific Context
 
@@ -253,19 +259,20 @@ Using Grammarly Design System. See:
 **By name**:
 ```bash
 # Find specific component
-grep -r "Button" ai-context/gds/llms/
+find ai-context/gds-docs/components -name "*button*"
+grep -r "Button" ai-context/gds-docs/llm.txt
 ```
 
 **By feature**:
 ```bash
 # Find form components
-ls ai-context/gds/llms/ | grep -i "field\|input\|form"
+find ai-context/gds-docs/components -name "*field*" -o -name "*input*"
 ```
 
-**In components.json**:
+**In llm.txt**:
 ```bash
-# Parse JSON for component info
-cat ai-context/gds/components.json | jq '.[] | select(.name=="Button")'
+# Search for component info
+grep -A 5 "## Button" ai-context/gds-docs/llm.txt
 ```
 
 ## AI Assistant Usage
@@ -284,34 +291,34 @@ When working on a prototype:
 
 ```markdown
 <!-- In conversation or project docs -->
-@ai-context/gds/llms.txt              # Full GDS reference
-@ai-context/gds/components.json       # Component data
-@ai-context/gds/llms/component-Button.txt  # Specific component
+Read(ai-context/gds-docs/llm.txt)              # Full GDS reference
+Read(ai-context/gds-docs/components/buttons/button.mdx)  # Specific component
+Read(ai-context/gds-docs/tokens/)              # Design tokens
 ```
 
 ## Troubleshooting
 
 ### "Component not found in GDS"
 
-1. Check ai-context/gds/components.json for correct name
+1. Check ai-context/gds-docs/llm.txt for complete component list
 2. Verify component is available in current GDS version
-3. Check ai-context/gds/llms/ for component-{name}.txt file
+3. Search in ai-context/gds-docs/components/ for MDX file
 
 ### "Outdated component information"
 
-1. Check GDS Storybook for latest: https://uifoundation.gpages.io/grammarly-design-system
-2. Update ai-context/gds/ from source if needed
+1. Check GDS documentation site: https://uifoundation.gpages.io/grammarly-design-system
+2. Update ai-context/gds-docs/ from latest GDS release if needed
 3. Create issue if documentation needs updating
 
 ### "How do I use a specific component?"
 
-1. Read ai-context/gds/llms/component-{name}.txt
-2. Check examples in ai-context/gds/llms.txt
-3. Reference GDS Storybook for interactive examples
+1. Read ai-context/gds-docs/llm.txt for overview and quick reference
+2. Read specific component MDX file in ai-context/gds-docs/components/
+3. Check GDS documentation site for interactive examples
 
 ---
 
 **Need help?**
-- GDS Documentation: @ai-context/gds/README.md
-- Component Reference: @ai-context/gds/llms.txt
-- Live Storybook: https://uifoundation.gpages.io/grammarly-design-system
+- Complete GDS Reference: Read(ai-context/gds-docs/llm.txt)
+- Documentation Site: https://uifoundation.gpages.io/grammarly-design-system
+- GDS Source: https://gitlab.grammarly.io/uifoundation/grammarly-design-system

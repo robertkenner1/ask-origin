@@ -1,0 +1,921 @@
+---
+pagination_prev: null
+pagination_next: null
+---
+
+import { ComponentStatusRow } from "../_components/component_status_row";
+import Hero from "../_components/hero";
+import ExampleTable from "../_components/example_table";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import PropsTable from "../_components/props_table";
+import ComponentList from "../_components/component_list";
+import ComponentPlayground from "../_components/comp_playground";
+import RecommendationsTable from "../_components/recommendations_table";
+import Popover from "../_components/popover";
+import { Flex } from "@grammarly/design-system";
+
+# Popover
+
+<span>A Popover displays rich content in context.</span>
+
+<ComponentStatusRow name="Popover" />
+<Hero
+  path={useBaseUrl("/img/components/popover_hero.svg")}
+  altText="A Popover introduces how to use generative AI prompts in combination with a piece of text."
+/>
+<p className="caption">
+  A Popover introduces how to use genAI prompts in combination with a piece of text.
+</p>
+
+## Usage
+
+Popovers respond to a user with nice-to-know information in context. A user should get an obvious, immediate benefit from the information in the Popover—otherwise, they’ll likely ignore it.
+
+**Use when:**
+
+- A user’s action activates a tidbit of nice-to-know, but not essential, information.
+- Highlighting up to three UI elements, such as when introducing a new feature.
+- Displaying low- to medium-priority information.
+- An illustration or descriptive text is helpful to clarify a UI element’s purpose.
+
+**Do not use when:**
+
+- Explaining a familiar, expected, or standard interaction, such as how to fill in a Form field. Instead, omit the unnecessary instructions.
+- A user would benefit from persistent, visible instructions essential to completing a task. Instead, use plain UI text.
+- Displaying a short, inline description of an element’s purpose. Instead, use a [Tooltip](/components/tooltip).
+- A robust procedure or an image of UI is needed to explain an interaction. Instead, use a [Modal](/components/modal) or [Link](/components/link) to a help center article.
+
+## Anatomy
+
+<div className="diagram p-8">
+  <img src={useBaseUrl("/img/components/popover_anatomy.svg")} alt="Anatomy diagram of a Popover" />
+</div>
+<ol className="diagram-legend small">
+  <li>Pointer (required)</li>
+  <li>Close Icon Button (required)</li>
+  <li>Illustration</li>
+  <li>Title</li>
+  <li>Body (required)</li>
+  <li>Footer</li>
+</ol>
+
+## Examples
+
+### Default
+
+By default, a Popover has a pointer, a visually hidden accessibility label, body content, and a Close Icon Button. A visible title is recommended but not required. [Learn about pointer placements](#placement).
+
+<ComponentPlayground
+  code={`
+  function Example() {
+  const [open, setOpen] = React.useState(false);
+  const buttonRef = React.useRef();
+
+    return (
+      <Flex align="center" justify="space-between" gap={20} wrap>
+        <Flex direction="column" gap={2}>
+          <Popover
+            placement="left"
+            open={open}
+            onOpenChange={(isOpen) => {
+              if(!isOpen) {
+                buttonRef.current.focus();
+              }
+              setOpen();
+            }}>
+            <Popover.Anchor>
+              <Text as="p">App Actions</Text>
+            </Popover.Anchor>
+            <Popover.Content
+              accessibilityLabel="App Actions feature, focus returns to More App Actions button"
+              title="Keep your focus"
+              width={300}
+            >
+              <Text variant="text-small" as="p">Your go-to apps now work in Grammarly so you can concentrate on the task at hand.</Text>
+            </Popover.Content>
+          </Popover>
+          <Flex gap={2}>
+            <Button text="Add a GIF from Giphy" variant="secondary"/>
+            <Button ref={buttonRef} text="More" variant="secondary" iconStart={InterfaceAppsIcon}/>
+          </Flex>
+        </Flex>
+        <Button size="small" variant="tertiary" text="Show Popover" onClick={() => {setOpen(true)}}/>
+      </Flex>
+    )
+
+}
+`}
+/>
+
+### Illustration
+
+Use `illustration` to add a decoration. An illustration must be at least 50px in width.
+
+<ComponentPlayground
+  code={`
+  function Example() {
+  const [open, setOpen] = React.useState(false);
+  const buttonRef = React.useRef();
+
+    return (
+      <Flex align="center" justify="space-between" gap={20} wrap>
+          <Popover
+            placement="top"
+            open={open}
+            onOpenChange={(isOpen) => {
+              if(!isOpen) {
+                buttonRef.current && buttonRef.current.focus();
+              }
+              setOpen();
+            }}>
+
+            <Flex gap={2} align="end" width={300}>
+              <TextField labelDisplay="hidden" label="Username" placeholder={'Try “Rewrite it for a general audience”'}/>
+              <Popover.Anchor>
+                <IconButton ref={buttonRef} variant="secondary" icon={InterfaceLockIcon} accessibilityLabel="Unlock AI features"/>
+              </Popover.Anchor>
+            </Flex>
+            <Popover.Content
+              accessibilityLabel="Introducing AI, focus returns to prompt field"
+              title="Unlock the power of AI"
+              illustration={
+                <LogoLogomarkColorDefaultIcon
+                  style={{ height: 50, width: "auto" }}
+                  aria-label="Grammarly logo"
+                  aria-hidden={false}
+                />
+              }
+            >
+              <Flex gap={4} direction="column">
+                <Text variant="text-small" as="p">To ask our AI anything, simply sign up for free or log in to your existing account.</Text>
+                <Button width="full" text="Sign up"/>
+              </Flex>
+            </Popover.Content>
+          </Popover>
+        <Button size="small" variant="tertiary" text="Show Popover" onClick={() => {setOpen(true)}}/>
+      </Flex>
+    )
+
+}
+`}
+/>
+
+### Footer options
+
+#### Primary action
+
+Use a primary Button in the footer to allow a user to take action related to the content. In rare cases, a stacked, full-width tertiary Button can also be included.
+
+<ComponentPlayground
+  code={`
+  function Example() {
+  const [open, setOpen] = React.useState(false);
+  const buttonRef = React.useRef();
+
+    return (
+      <Flex align="center" justify="space-between" gap={20} wrap>
+          <Popover
+            placement="top"
+            open={open}
+            onOpenChange={setOpen}>
+            <Flex direction="column" borderColor="base-subdued" borderRadius={2} width={"75%"} height={150} padding={3} justify="space-between">
+              <Flex justify="space-between" width="100%">
+                <Popover.Anchor>
+                  <div>
+                    <Flex borderColor="base-subdued" borderRadius={3} padding={1}>
+                    <Text as="p" variant="text-xsmall">75 / 100</Text>
+                    </Flex>
+                  </div>
+                </Popover.Anchor>
+                <IconButton variant="secondary" accessibilityLabel="Settings" icon={InterfaceSettingsIcon} size="small"/>
+              </Flex>
+              <Flex direction="column">
+               <Flex gap={2} align="center" marginLeft={-1}>
+                <Icon
+                  icon={OutcomeCorrectnessIcon}
+                  size="medium"
+                  accessibilityLabel="Correctness Category"
+                />
+                <Text as="p" variant="text-small">Correctness</Text>
+                <Text as="p" variant="text-small">‧</Text>
+                <Text as="p" variant="text-small">Replace the word</Text>
+                <IconButton
+                  accessibilityLabel="Details about this correction"
+                  icon={InterfaceInfoIcon}
+                  variant="tertiary"
+                  onClick={() => {}}
+                />
+              </Flex>
+              <Text as="p">
+                Have a <Text as="span" weight="bold">great</Text> day today!
+              </Text>
+              <Flex marginLeft={-2} gap={2}>
+                <Button text="Dismiss" variant="tertiary" onClick={() => {}} />
+              </Flex>
+              </Flex>
+            </Flex>
+            <Popover.Content
+              accessibilityLabel="New scoring feature, focus returns to Score button"
+              title="Performance score"
+              width={300}
+            >
+              <Flex gap={4} direction="column">
+                <Text variant="text-small" as="p">Check to see how you’ve improved the quality of this piece of writing.</Text>
+                <Button width="full" text="View score"/>
+              </Flex>
+            </Popover.Content>
+          </Popover>
+        <Button size="small" variant="tertiary" text="Show Popover" onClick={() => {setOpen(true)}}/>
+      </Flex>
+    )
+
+}
+`}
+/>
+
+#### Multistep​
+
+Use a multistep footer to allow a user to navigate among a set of Popovers, usually during a tour of a few critical elements in the UI. This footer variant includes a step counter between Back and Next Buttons.
+
+<ComponentPlayground
+  code={`
+  function Example() {
+  const [open, setOpen] = React.useState(false);
+  const buttonRef = React.useRef();
+
+    return (
+      <Flex align="center" justify="space-between" gap={20}>
+          <Popover
+            placement="top-start"
+            open={open}
+            onOpenChange={setOpen}>
+            <Flex gap={10} align="center">
+              <Text as="p" align="center">Project Alpha</Text>
+              <Popover.Anchor>
+                <Button text="Publish"/>
+              </Popover.Anchor>
+            </Flex>
+            <Popover.Content
+              accessibilityLabel="New auto generation feature, focus returns to Publish button"
+              title="Publish draft terms"
+              width={300}
+            >
+              <Flex gap={4} direction="column">
+                <Text variant="text-small" as="p">Publish draft terms to make them visible to your entire organization.</Text>
+                <Flex justify="space-between" align="center" gap={4} marginLeft={-2}>
+                  <Button variant="tertiary" text="Back" accessibilityLabel="Back to previous step" />
+                  <Text as="p" variant="text-small">
+                    2 of 3
+                    <VisuallyHidden>Steps</VisuallyHidden>
+                  </Text>
+                  <Button text="Next" accessibilityLabel="Next step" />
+                </Flex>
+              </Flex>
+            </Popover.Content>
+          </Popover>
+        <Button size="small" variant="tertiary" text="Show Popover" onClick={() => {setOpen(true)}}/>
+      </Flex>
+    )
+
+}
+`}
+/>
+
+### With interactive content
+
+The body of the Popover can contain any type of content beyond just text, such as a Checkbox or another input.
+
+<ComponentPlayground
+  code={`
+  function Example() {
+    return (
+      <Popover placement="top-end">
+        <Popover.Anchor>
+          <Button text="Check my text"/>
+        </Popover.Anchor>
+        <Popover.Content
+          accessibilityLabel="Application not loading"
+          title="Can't check your text"
+          width={300}
+        >
+          <Flex gap={4} direction="column">
+            <Text variant="text-small" as="p">To get suggestions again, reopen Google Docs.</Text>
+            <Checkbox>Don't show this again</Checkbox>
+            <Button width="full" text="Reopen Google Docs" />
+          </Flex>
+        </Popover.Content>
+      </Popover>
+    )
+}
+`}
+/>
+
+### Initially open
+
+Use `initialOpen` to display the Popover when its anchor is mounted. Popovers that are open by default must turn off `dismissOnOutsideClick` to prevent a user from accidentally dismissing it. A user would have no way to recover the lost information.
+
+<div className="diagram p-8">
+  <img
+    src={useBaseUrl("/img/components/popover_cover_assistant.svg")}
+    alt="A Popover appears over the Grammarly assistant card. It tells a user they can keep their focus by using app actions because their go-to apps are now available as part of Grammarly's ubiquitous assistant."
+  />
+</div>
+
+<ComponentPlayground
+  hideDemoPreview
+  code={`
+  function Example() {
+    const [popoverIsOpen, setOpen] = React.useState(false);
+
+    return (
+      <Popover
+        placement="top-start"
+        initialOpen={true}
+        dismissOnOutsideClick={false}
+        open={popoverIsOpen}
+        onOpenChange={setOpen}>
+        <Popover.Anchor>
+          <Text as="p">App Actions</Text>
+        </Popover.Anchor>
+        <Popover.Content
+          accessibilityLabel="New feature alert, pointing to App Actions section at bottom of the assistant card, focus returns to More App Actions button"
+          title="Keep your focus"
+          width={300}
+        >
+          <Text variant="text-small" as="p">Your go-to apps now work in Grammarly so you can concentrate on the task at hand.</Text>
+        </Popover.Content>
+      </Popover>
+    )
+
+}
+`}
+/>
+
+## Behavior
+
+### Width​
+
+- Popovers have a minimum width of 225px and a maximum width of 480px. If your content is longer than 225px, allow the width to hug content until it reaches 480px.
+- You can set a fixed width within the range, too. For example, to maintain visual consistency, give all Popovers in a series the same width based on the longest one.
+- The title and body content wrap to the next line at maximum width to avoid truncation.
+
+In this example, two Popovers explain different parts of Knowledge Share. Although the content length varies, the width is consistent based on the longer text in step one.
+
+<div className="diagram p-8">
+  <Flex gap={6} direction="column">
+    <img
+      src={useBaseUrl("/img/components/Popover-width-step-1.svg")}
+      alt="A Popover appears over the Grammarly assistant card. It tells a user they can keep their focus by using app actions because their go-to apps are now available as part of Grammarly's ubiquitous assistant."
+    />
+    <img
+      src={useBaseUrl("/img/components/Popover-width-step-2.svg")}
+      alt="A Popover appears over the Grammarly assistant card. It tells a user they can keep their focus by using app actions because their go-to apps are now available as part of Grammarly's ubiquitous assistant."
+    />
+  </Flex>
+</div>
+
+### Placement
+
+- By default, a Popover appears in the `top` position. If there isn't enough space, it will automatically change positions.
+- The pointer of a Popover is always centered on another UI element.
+
+#### Available placements
+
+Click a Button to see the position of each Popover.
+
+<div className="demo-header">
+  <span className="demo-control"></span>
+  <span className="demo-control"></span>
+  <span className="demo-control"></span>
+</div>
+<div className="tooltip-demo-container">
+  <div className="tooltip-container-1">
+    <Popover directionName="Bottom Start" placementName="bottom-start" />
+  </div>
+  <div className="tooltip-container-2 tooltip-demo-content-center">
+    <Popover directionName="Bottom" placementName="bottom" />
+  </div>
+  <div className="tooltip-container-3 tooltip-demo-content-right">
+    <Popover directionName="Bottom End" placementName="bottom-end" />
+  </div>
+  <div className="tooltip-container-4">
+    <Popover directionName="Right Start" placementName="right-start" />
+  </div>
+  <div className="tooltip-container-5 tooltip-demo-content-right">
+    <Popover directionName="Left Start" placementName="left-start" />
+  </div>
+  <div className="tooltip-container-6">
+    <Popover directionName="Right" placementName="right" />
+  </div>
+  <div className="tooltip-container-7 tooltip-demo-content-right">
+    <Popover directionName="Left" placementName="left" />
+  </div>
+  <div className="tooltip-container-8">
+    <Popover directionName="Right End" placementName="right-end" />
+  </div>
+  <div className="tooltip-container-9 tooltip-demo-content-right">
+    <Popover directionName="Left End" placementName="left-end" />
+  </div>
+  <div className="tooltip-container-10">
+    <Popover directionName="Top Start" placementName="top-start" />
+  </div>
+  <div className="tooltip-container-11 tooltip-demo-content-center">
+    <Popover directionName="Top" placementName="top" />
+  </div>
+  <div className="tooltip-container-12 tooltip-demo-content-right">
+    <Popover directionName="Top End" placementName="top-end" />
+  </div>
+</div>
+
+<p className="caption">
+  Note: The Popover in this example is intended to demonstrate positioning. Clicking the content
+  within these demo Popovers will not close the Popover.
+</p>
+
+#### Covering the assistant
+
+A width of 300px or less is recommended inside the assistant card to minimize the amount of content covered by Popovers.
+
+The assistant container is a WebView that clips content outside of it. A Popover must be fully contained inside the container when the assistant is open.
+
+<div className="diagram p-8">
+  <img
+    src={useBaseUrl("/img/components/popover_cover_assistant.svg")}
+    alt="A Popover appears over the Grammarly assistant card. It tells a user they can keep their focus by using app actions because their go-to apps are now available as part of Grammarly's ubiquitous assistant."
+  />
+</div>
+<p className="caption">
+  A Popover introducing app actions has a 300px width and covers about a quarter of the assistant
+  container.
+</p>
+
+### Opening
+
+- By default, a Popover opens after a user activates a Button or an Icon Button.
+- When `initialOpen` is true, a Popover opens when its anchor is mounted.
+
+A Popover that opens by itself receives the initial focus when a page first loads. You must indicate what the Popover points to in screen reader–only text. Otherwise, a person using a screen reader would not have the context to make sense of the paired relationship.
+
+### Closing
+
+If a Popover is initially open, turn off `dismissOnOutsideClick` to prevent a user from accidentally dismissing it, as they user would have no way to recover the lost information.
+
+Otherwise, a Popover closes when a user:
+
+- Activates the **Close** Icon Button in the upper-right corner of a Popover
+- Activates a primary or tertiary Button in the Popover’s footer
+- Activates another element or clicks outside of the Popover
+
+#### Popovers on a Modal
+
+When a Popover appears inside or on top of a Modal, be aware of how you let users close or back out of each layer.
+
+The <kbd>Esc</kbd> key should close the Popover first and then the Modal.
+
+### Multistep footer
+
+Multiple Popovers connected in a series work best with passive, low-priority content—like definitions or brief feature highlights.
+
+**A  maximum of three steps in a row is recommended.** Dense information is hard to remember and users tend to leave after just two steps. If you feel you need more than three steps to explain an interaction, it may indicate a larger design flaw. For instance, is the core user flow as efficient as it could be? 
+
+When asking a user to take multiple actions:
+
+- Only show the next piece of the tutorial after the currently requested action is complete.
+- Use tools that already exist in components, such as helper text, to provide persistent instructions.
+- Link to a support article for robust procedures.
+- Display images or animations of the UI in a Modal to demonstrate unique interactions.
+
+## Accessibility
+
+### Focus order
+
+A Popover should be accessible with the mouse cursor and keyboard.
+
+When a Popover opens, the focus moves to the **Close** Icon Button. For people who use a screen reader, content is read in this order:
+
+<ol>
+  <li>Accessibility label (required)</li>
+  <li>Close Icon Button (required)</li>
+  <li>Illustration alt text</li>
+  <li>Title</li>
+  <li>Body (required)</li>
+  <li>Footer content</li>
+</ol>
+
+### Labeling the Popover
+
+An `accessibilityLabel` is required and must clearly communicate the purpose of the Popover. Make sure to factor in the Popover title when present and align it with the accessibility label in a way that will make sense when read aloud together.
+
+#### If the title is not descriptive:
+
+Add detail in the accessibility label when a title does not describe the context fully by itself. For example, if the title is just “New,” then you need to explain what specifically is new in the accessibility label.
+
+#### If `initialOpen` is true:
+
+Because a Popover that’s initially open receives the initial focus, a screen reader user needs to be told what it points to. Indicate the Popover’s anchor in the accessibility label to explain the paired relationship.
+
+#### If there are multiple steps:
+
+A screen reader user needs the context that they’re continuing on a tour of the same feature (and not getting disparate information about different features). You could provide content as follows:
+
+- **Title**: Polish your drafts
+- **`accessibilityLabel`**: Grammarly in Gmail tour, step 2 of 6, focus returns to Accept button.
+
+In all six steps, it’s announced that the information is part of a single “Grammarly in Gmail tour” collection.
+
+### Keyboard interaction
+
+| Key                                  | Expected result                                                                                                                                             |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <kbd>Tab</kbd>                       | Moves focus through any focusable elements within the Popover. Once the end of the Popover is reached, focus loops back to the beginning of the Popover. |
+| <kbd>Enter</kbd> or <kbd>Space</kbd> | Activates an action within the Popover or the Close Icon Button.                                                                                            |
+| <kbd>Esc</kbd>                       | Closes the Popover. When a Popover is closed, focus returns to the element that activated it.                                                               |
+
+## Writing
+
+Content in a Popover should be immediately relevant or actionable because it interrupts a user’s activity.
+
+### Title
+
+A title lets a user quickly understand what they can do or need to know without reading further.
+
+<RecommendationsTable
+  caption="Writing best practices for Popover titles"
+  recommendations={[
+    {
+      recommendationDo: "Use a directive [verb]+[noun] structure to command a user to take action.",
+      exampleDo: (
+        <img
+          src={useBaseUrl("/img/components/Popover-title-DO-1.svg")}
+          alt="A Popover has a title reading, “Keep your focus.” Body content explains that go-to apps are now available inside Grammarly."
+        />
+      ),
+      recommendationDont:
+        "Do not use ambivalent or meandering language that softens feature benefits.",
+      exampleDont: (
+        <img
+          src={useBaseUrl("/img/components/Popover-title-DONT-1.svg")}
+          alt="A Popover has a title reading, “Did you know that Grammarly can help you keep your focus?” Body content explains that go-to apps are available inside Grammarly."
+        />
+      ),
+    },
+    {
+      recommendationDo:
+        "Use a short fragment or sentence to boost readability and focus. Include articles (_a_, _the_) before nouns",
+      exampleDo: (
+        <img
+          src={useBaseUrl("/img/components/Popover-title-DO-2.svg")}
+          alt="A Popover has a title reading, “Never miss the point.” Body content expands that the most important sentences are highlighted for the user."
+        />
+      ),
+      recommendationDont:
+        "Do not use a lengthy, explanatory statement in a title. Instead, place fine details in the body content.",
+      exampleDont: (
+        <img
+          src={useBaseUrl("/img/components/Popover-title-DONT-2.svg")}
+          alt="A Popover has a title reading, “The most important sentences are highlighted for you” while body content explains this means the user will never miss the point. The ideal order of information delivery is flipped."
+        />
+      ),
+    },
+    {
+      recommendationDo: "Use a direct question that engages a user to act.",
+      exampleDo: (
+        <img
+          src={useBaseUrl("/img/components/Popover-title-DO-3.svg")}
+          alt="A Popover has a title reading, “Want to save time?” Body content explains that they can save phrases or sentences as a snippet."
+        />
+      ),
+      recommendationDont: "Do not use a rhetorical question that obscures the path forward.",
+      exampleDont: (
+        <img
+          src={useBaseUrl("/img/components/Popover-title-DONT-3.svg")}
+          alt="A Popover has a title reading, “What’re you waiting for?” The question is rhetorical, meaning it is not intended to be answered. It does not give a tangible benefit or tie into a feature name."
+        />
+      ),
+    },
+    {
+      recommendationDo: "Use sentence case.",
+      exampleDo: (
+        <img
+          src={useBaseUrl("/img/components/Popover-title-DO-4.svg")}
+          alt="A Popover has a title written in sentence case, where only the first letter of the first word is capitalized."
+        />
+      ),
+      recommendationDont: "Do not use Title Case or ALL CAPS.",
+      exampleDont: (
+        <img
+          src={useBaseUrl("/img/components/Popover-title-DONT-4.svg")}
+          alt="A Popover has a title written in ALL CAPS where every letter of every word is capitalized. It is jarring and seems like shouting at the user."
+        />
+      ),
+    },
+    {
+      recommendationDo: "Use a question mark for a title framed as a question.",
+      exampleDo: (
+        <img
+          src={useBaseUrl("/img/components/Popover-title-DO-5.svg")}
+          alt="A Popover has a title phrased as a question and uses a question mark at the end, “Why the emoji?”"
+        />
+      ),
+      recommendationDont:
+        "Do not use a period or exclamation point at the end of a title, whether a fragment or full sentence. ",
+      exampleDont: (
+        <img
+          src={useBaseUrl("/img/components/Popover-title-DONT-5.svg")}
+          alt="A Popover has a title phrased as a statement and uses a period at the end, which is against our standards. The title reads “Look for the emoji.”"
+        />
+      ),
+    },
+    {
+      recommendationDo:
+        "Use a single line when possible. If text is longer, it should wrap to a second line to avoid truncation.",
+      exampleDo: (
+        <img
+          src={useBaseUrl("/img/components/Popover-title-DO-6.svg")}
+          alt="A Popover has a title that extends onto two lines. The title says “Get writing assistance in more places.”"
+        />
+      ),
+      recommendationDont: "Do not truncate text.",
+      exampleDont: (
+        <img
+          src={useBaseUrl("/img/components/Popover-title-DONT-6.svg")}
+          alt="A Popover has a title reading, “Get writing assistance in …” Because the title is truncated, it iss unclear what it is trying to explain."
+        />
+      ),
+    },
+  ]}
+/>
+
+### Body
+
+Body content provides detail supporting the title or key concept.
+
+Be brief and focused—use 140 characters or fewer. Using long sentences or mixing separate ideas can slow down a user with more information than they can absorb at one time.
+
+Apply strategic writing tactics to break up dense information into smaller chunks. Tools to disperse content in chunks include:
+
+- Bulleted lists
+- Fragments or choppy sentences
+- Multiple steps
+
+<RecommendationsTable
+  caption="Writing best practices for Popover titles"
+  recommendations={[
+    {
+      recommendationDo:
+        "Use a rhetorical question to emphasize a point or prompt a user to consider something.",
+      exampleDo: (
+        <img
+          src={useBaseUrl("/img/components/Popover-Body-DO-1.svg")}
+          alt="A Popover has a title that says “See how it works” with body content asking rhetorically “Ever wondered how we made suggestions?” And finally a button that says “Take a tour”"
+        />
+      ),
+      recommendationDont:
+        "Do not use a direct question meant to be acted upon. This structure can add complexity to the hierarchy and Button affordances.",
+      exampleDont: (
+        <img
+          src={useBaseUrl("/img/components/Popover-Body-DONT-1.svg")}
+          alt="A Popover has a title that says “Learn how to use Grammarly” with body content asking directly “Want to take a tour?” And finally two buttons that says “Yes, take a tour” and “No, dismiss.” The structure is overly complicated."
+        />
+      ),
+    },
+    {
+      recommendationDo: "Use sentence case.",
+      exampleDo: (
+        <img
+          src={useBaseUrl("/img/components/Popover-Body-DO-2.svg")}
+          alt="The body content of a Popover is written in sentence case, where only the first letter of the first word is capitalized."
+        />
+      ),
+      recommendationDont: "Do not use Title Case or ALL CAPS.",
+      exampleDont: (
+        <img
+          src={useBaseUrl("/img/components/Popover-Body-DONT-2.svg")}
+          alt="The body content of a Popover is written in ALL CAPS and is hard to read because of this."
+        />
+      ),
+    },
+    {
+      recommendationDo: "Use end punctuation, even for fragments.",
+      exampleDo: (
+        <img
+          src={useBaseUrl("/img/components/Popover-Body-DO-3.svg")}
+          alt="A sentence fragment is used for dramatic effect, but it still has a period. The body content reads “Choose a suggested prompt. Or, create your own.”"
+        />
+      ),
+      recommendationDont: "Do not omit end punctuation in body content, even for fragments.",
+      exampleDont: (
+        <img
+          src={useBaseUrl("/img/components/Popover-Body-DONT-3.svg")}
+          alt="A full sentence is missing a period. We always use end punctuation, even when there is a single fragment by itself. The body content reads “Choose a suggested prompt or create your own” without end punctuation."
+        />
+      ),
+    },
+  ]}
+/>
+
+### Footer
+
+#### Primary action
+
+Follow the Button documentation for actions in a Popover. [Learn how to write a Button](/components/button#writing).
+
+When presenting information, offering both a **Close** Icon Button in the upper-right corner and a **Close** primary Button can make it easier for a user to dismiss the Popover.
+
+#### Multistep
+
+When presenting information in multiple steps:
+
+- Use **Back** and **Next** for the tertiary and primary Buttons that navigate between steps.
+- Omit the **Back** Button in the _first_ Popover of the series.
+- Use **OK** as the primary Button in the _last_ Popover of the series.
+
+## Installation
+
+1. Import the CSS (if not done already).
+
+```css
+@import "@grammarly/design-system";
+```
+
+2. Import the Popover component in JS.
+
+```tsx
+import { Popover } from "@grammarly/design-system";
+```
+
+## API
+
+### Popover props
+
+<PropsTable
+  properties={[
+    {
+      propertyName: "children",
+      isRequired: true,
+      isDeprecated: false,
+      description:
+        "`PopoverAnchor` controls where the Popover appears. It can also activate the Popover.\n" +
+        "`PopoverContent` is the primary content.",
+      defaultValue: null,
+      typeDefinition: "React.ReactNode",
+    },
+    {
+      propertyName: "dismissOnOutsideClick",
+      isRequired: false,
+      isDeprecated: false,
+      description: "Determines whether the user can click outside the Popover to close it.",
+      defaultValue: "true",
+      typeDefinition: "boolean",
+    },
+    {
+      propertyName: "initialOpen",
+      isRequired: false,
+      isDeprecated: false,
+      description:
+        "Determines whether the Popover should be open initially when its Popover.Anchor is mounted.",
+      defaultValue: "false",
+      typeDefinition: "boolean",
+    },
+    {
+      propertyName: "open",
+      isRequired: false,
+      isDeprecated: false,
+      description:
+        "If you plan to manually control the Popover state, use `open` with `onOpenChange` options.",
+      defaultValue: "false",
+      typeDefinition: "boolean",
+    },
+    {
+      propertyName: "placement",
+      isRequired: false,
+      isDeprecated: false,
+      description:
+        "Indicates placement of the Popover. If not specified, the Popover will be placed automatically based on position priority.",
+      defaultValue: "'top'",
+      typeDefinition:
+        "'top' | 'right' | 'bottom' | 'left' | 'top-start' | 'top-end' | 'right-start' | 'right-end' | 'bottom-start' | 'bottom-end' | 'left-start' | 'left-end'",
+    },
+    {
+      propertyName: "onHide",
+      isRequired: false,
+      isDeprecated: false,
+      description: "Event handler that is automatically called when the Popover is hidden.",
+      defaultValue: null,
+      typeDefinition: "( ) => void",
+    },
+    {
+      propertyName: "onOpenChange",
+      isRequired: false,
+      isDeprecated: false,
+      description:
+        "Event handler that is called when the open state is changed. Use this to manually control `open`.",
+      defaultValue: null,
+      typeDefinition: "React.Dispatch<React.SetStateAction<boolean>>",
+    },
+    {
+      propertyName: "onShow",
+      isRequired: false,
+      isDeprecated: false,
+      description: "Event handler that is automatically called when the Popover is displayed.",
+      defaultValue: null,
+      typeDefinition: "( ) => void",
+    },
+  ]}
+/>
+
+### Popover.Anchor props
+
+<PropsTable
+  properties={[
+    {
+      propertyName: "children",
+      isRequired: true,
+      isDeprecated: false,
+      description:
+        "The UI element that the Popover anchors itself to. If this also activates the Popover, it must be a Button or an Icon Button.",
+      defaultValue: null,
+      typeDefinition: "React.ReactNode",
+    },
+  ]}
+/>
+
+### Popover.Content props
+
+<PropsTable
+  properties={[
+    {
+      propertyName: "accessibilityLabel",
+      isRequired: true,
+      isDeprecated: false,
+      description:
+        "Used to give context to people using screen readers about the purpose of this Popover.",
+      defaultValue: null,
+      typeDefinition: "string",
+    },
+    {
+      propertyName: "children",
+      isRequired: true,
+      isDeprecated: false,
+      description: "Contents of the popover.",
+      defaultValue: null,
+      typeDefinition: "React.ReactNode",
+    },
+    {
+      propertyName: "illustration",
+      isRequired: false,
+      isDeprecated: false,
+      description:
+        "A decorative image or illustration that appears above the title in the Popover.",
+      defaultValue: null,
+      typeDefinition: "React.ReactNode",
+    },
+    {
+      propertyName: "root",
+      isRequired: false,
+      isDeprecated: false,
+      description:
+        "You can explicitly set the root element for the portal.\n" +
+        "For Extension, you should provide a shadow root element.\n" +
+        "For other Web Apps, you can pass null to use the default root.",
+      defaultValue: null,
+      typeDefinition: "HTMLElement | null | undefined",
+    },
+    {
+      propertyName: "title",
+      isRequired: false,
+      isDeprecated: false,
+      description: "A visible title displayed in bold inside the Popover.",
+      defaultValue: null,
+      typeDefinition: "string",
+    },
+    {
+      propertyName: "width",
+      isRequired: false,
+      isDeprecated: false,
+      description:
+        "Sets a fixed width for the Popover. Can be a number for pixels or a string for percentages, like “75%”. Range is 225 to 480 px.",
+      defaultValue: null,
+      typeDefinition: "string | number",
+    },
+  ]}
+/>
+
+## Related components
+
+<ComponentList
+  components={[
+    {
+      href: "/components/link",
+      label: "Link",
+    },
+    {
+      href: "/components/modal",
+      label: "Modal",
+    },
+    {
+      href: "/components/tooltip",
+      label: "Tooltip",
+    },
+  ]}
+/>

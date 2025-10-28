@@ -1,0 +1,376 @@
+---
+pagination_prev: null
+pagination_next: null
+---
+
+import { ComponentStatusRow } from "../_components/component_status_row";
+import Hero from "../_components/hero";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import TooltipWrapper from "../_components/tooltip";
+import PropsTable from "../_components/props_table";
+import ComponentPlayground from "../_components/comp_playground";
+import ComponentList from "../_components/component_list";
+import RecommendationsWithCode from "../_components/recommendations_code_example";
+import { Flex, Tooltip, TooltipContent, TooltipTrigger } from "@grammarly/design-system";
+
+# Tooltip
+
+<span>
+  A Tooltip displays short, informative text when a user hovers over or focuses on an element.
+</span>
+
+<ComponentStatusRow name="Tooltip" />
+<Hero
+  path={useBaseUrl("/img/components/tooltip_hero.svg")}
+  altText="A Tooltip above an “i” Icon Button in a card tells a user they can “Learn more” about the suggestion."
+/>
+<p class="caption">
+  A Tooltip above an **Information** Icon Button tells a user they can “Learn more” about the
+  suggestion.
+</p>
+
+## Usage
+
+Use when a short, text-only, inline description of an element’s purpose is needed. [Learn how to write effective Tooltips](/components/tooltip#writing).
+
+
+Because they are often used to describe an IconButton's purpose, [Tooltips are automatically built into the IconButton component](/components/icon-button#primary).
+
+**Do not use when:**
+
+- A user needs to take action or advance through steps. Instead, use a [Popover](/components/popover).
+- An image or long, descriptive text is required. Instead, use a [Popover](/components/popover).
+- The goal is to focus a user's attention on the content in a layer. Instead, use a [Modal](/components/modal).
+- The content repeats visible UI text, such as a label on a [Button](/components/button).
+
+### macOS, Windows, iOS, and Android
+
+macOS, Windows, iOS, and Android use a native Tooltip, which behaves according to the rules set by the operating system. The design on these platforms does not need to match the Web component, but you can use design system tokens to style it. [View the design tokens](/tokens).
+
+## Anatomy
+
+<div className="diagram p-8">
+  <img src={useBaseUrl("/img/components/tooltip_anatomy.svg")} alt="Anatomy diagram of a Tooltip" />
+</div>
+<ol className="diagram-legend small">
+  <li>Content</li>
+  <li>Keyboard shortcut (optional)</li>
+  <li>Pointer</li>
+</ol>
+
+## Examples
+
+### Variants
+
+| Example                                                                                                                                                                                                        | Variant                  |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
+| <Tooltip initialOpen placement="right"><TooltipTrigger asChild><button className="tertiary-button"></button></TooltipTrigger><TooltipContent root={null}>Numbered list</TooltipContent></Tooltip>              | Default                  |
+| <Tooltip initialOpen placement="right" annotation="⌘+I"><TooltipTrigger asChild><button className="tertiary-button"></button></TooltipTrigger><TooltipContent root={null}>Italicize</TooltipContent></Tooltip> | With a keyboard shortcut |
+
+## Behavior
+
+### Position
+
+- By default, a Tooltip appears above the element that it’s paired with.
+- If there isn’t enough space above an element to accommodate a Tooltip, it will automatically display in another available position. Position priority follows this order: top, right, bottom, left.
+- The pointer is always centered on an element and touches its edge.
+
+#### Example positions
+
+The bounding box in each example represents the viewport boundary.
+
+_Hover over each icon to see the position of the Tooltip._
+
+<div className="demo-header">
+  <span className="demo-control"></span>
+  <span className="demo-control"></span>
+  <span className="demo-control"></span>
+</div>
+<div className="tooltip-demo-container">
+  <div className="tooltip-container-1">
+    <TooltipWrapper directionName="bottom-start" placementName="bottom-start" />
+  </div>
+  <div className="tooltip-container-2 tooltip-demo-content-center">
+    <TooltipWrapper directionName="bottom" placementName="bottom" />
+  </div>
+  <div className="tooltip-container-3 tooltip-demo-content-right">
+    <TooltipWrapper directionName="bottom-end" placementName="bottom-end" />
+  </div>
+  <div className="tooltip-container-4">
+    <TooltipWrapper directionName="right-start" placementName="right-start" />
+  </div>
+  <div className="tooltip-container-5 tooltip-demo-content-right">
+    <TooltipWrapper directionName="left-start" placementName="left-start" />
+  </div>
+  <div className="tooltip-container-6">
+    <TooltipWrapper directionName="right" placementName="right" />
+  </div>
+  <div className="tooltip-container-7 tooltip-demo-content-right">
+    <TooltipWrapper directionName="left" placementName="left" />
+  </div>
+  <div className="tooltip-container-8">
+    <TooltipWrapper directionName="right-end" placementName="right-end" />
+  </div>
+  <div className="tooltip-container-9 tooltip-demo-content-right">
+    <TooltipWrapper directionName="left-end" placementName="left-end" />
+  </div>
+  <div className="tooltip-container-10">
+    <TooltipWrapper directionName="top-start" placementName="top-start" />
+  </div>
+  <div className="tooltip-container-11 tooltip-demo-content-center">
+    <TooltipWrapper directionName="top" placementName="top" />
+  </div>
+  <div className="tooltip-container-12 tooltip-demo-content-right">
+    <TooltipWrapper directionName="top-end" placementName="top-end" />
+  </div>
+</div>
+
+### Appearing and disappearing
+
+- A Tooltip appears when a user hovers on or focuses on a paired element after a 0.2-second pause.
+- A Tooltip disappears when the cursor is moved off of the element or when the tab focus is changed to a different element on the page.
+
+<ComponentPlayground
+  code={`
+      <Tooltip placement="right" annotation="⌘+B+L">
+        <TooltipTrigger asChild><button className="tertiary-button"></button></TooltipTrigger>
+        <TooltipContent className="my-tooltip" root={null}>Bulleted list</TooltipContent>
+      </Tooltip>
+    `}
+/>
+
+### Size
+
+The width and height of a Tooltip change based on content within it.
+
+#### Width
+
+The maximum width of a Tooltip is 200px. At its maximum width, the label and annotation can both wrap to the following line.
+
+#### Height
+
+- The height of a Tooltip is determined by the length of the content.
+- The content container in a Tooltip does not scroll.
+
+<ComponentPlayground
+  code={`
+    <Flex align="center" height={200}>
+      <Tooltip initialOpen placement="right" annotation="⌘+Option+9">
+        <TooltipTrigger asChild><button className="tertiary-button"></button></TooltipTrigger>
+        <TooltipContent root={null}>A longer tooltip string will cause the content to wrap.</TooltipContent>
+      </Tooltip>
+    </Flex>
+    `}
+/>
+
+## Accessibility
+
+A Tooltip should be accessible with the mouse cursor. For screen readers, content is read in this order:
+
+1. The element
+2. The Tooltip content
+3. A keyboard shortcut, if applicable
+
+### Keyboard interaction​
+
+| Key                                  | Expected result                                                                                                                                      |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <kbd>Space</kbd> or <kbd>Enter</kbd> | Activates an element’s Tooltip.                                                                                                                      |
+| <kbd>Esc</kbd>                       | Dismisses the Tooltip but does not dismiss any related overlay UI, such as a Modal. When the Tooltip is closed, focus returns to the paired element. |
+
+## Writing
+
+### Tooltips
+
+In as few words as possible, the content should make clear what the functionality or purpose of a paired element is. Provide only information that is not essential. It needs to be possible for a user to infer how to use a product without reading any Tooltips.
+
+For more robust access to essential content, instead use plain UI text, a [Popover](/components/popover), or a [Modal](/components/modal).
+
+<RecommendationsWithCode
+  scope={{ Flex, Tooltip, TooltipContent, TooltipTrigger }}
+  recommendations={[
+    {
+      code: `<Flex justify="center" align="end" height={200}>
+        <Tooltip initialOpen placement="top">
+          <TooltipTrigger asChild><button className="tertiary-button"></button></TooltipTrigger>
+          <TooltipContent root={null}>Numbered list</TooltipContent>
+        </Tooltip> 
+      </Flex>`,
+      caption: "Use sentence case and include a period only if it’s a complete sentence.",
+      type: "do",
+    },
+    {
+      code: `<Flex justify="center" align="end" height={200}>
+        <Tooltip initialOpen placement="top">
+          <TooltipTrigger asChild><button className="tertiary-button"></button></TooltipTrigger>
+          <TooltipContent root={null}>
+          <div>
+            <b>Don’t use headings</b>
+            <p>Bold, italics, headings, and icons are not conveyed by screen readers.</p>
+          </div>
+          </TooltipContent>
+        </Tooltip> 
+      </Flex>`,
+      caption: "Do not use rich formatting or write long, descriptive text.",
+      type: "dont",
+    },
+  ]}
+/>
+
+### Keyboard shortcuts
+
+An optional annotation can display a keyboard shortcut associated with an element.
+
+- Make sure keyboard shortcuts are dynamic based on the operating system. For example, Option for Mac is Alt for Windows.
+- Shorten: Ctrl, Alt, Del, Esc, Fn
+- Spell out: Tab, Enter, Return, Shift, Option, End, Home, Windows key
+- Use a symbol only for Command (⌘) and the up, right, down, or left arrow keys.
+- Do not use spaces around the + in combination shortcuts.
+
+<ComponentPlayground
+  code={`
+      <Tooltip initialOpen placement="right" annotation="⌘+Shift+7">
+        <TooltipTrigger asChild><button className="tertiary-button"></button></TooltipTrigger>
+        <TooltipContent root={null}>Numbered list</TooltipContent>
+      </Tooltip>
+    `}
+/>
+
+## Installation
+
+1. Import the CSS (if not done already).
+
+```css
+@import "@grammarly/design-system";
+```
+
+2. Import the Tooltip component in JS.
+
+```tsx
+import { Tooltip, TooltipContent, TooltipTrigger } from "@grammarly/design-system";
+```
+
+## API
+
+### Tooltip props
+
+<PropsTable
+  properties={[
+    {
+      propertyName: "children",
+      isRequired: true,
+      typeDefinition: "React.ReactNode",
+      description:
+        "`TooltipTrigger` activates the Tooltip. `TooltipContent` is the primary content.",
+    },
+    {
+      propertyName: "annotation",
+      typeDefinition: "string",
+      description: "Displays text for a keyboard shortcut.",
+    },
+    {
+      propertyName: "initialOpen",
+      typeDefinition: "boolean",
+      description: "Used to force the Tooltip to open when its paired element is mounted.",
+    },
+    {
+      propertyName: "onShow",
+      typeDefinition: "() => void",
+      description:
+        "Event handler that is called when the Tooltip is shown.",
+    },
+    {
+      propertyName: "onHide",
+      typeDefinition: "() => void",
+      description:
+        "Event handler that is called when the Tooltip is hidden.",
+    },
+    {
+      propertyName: "onOpenChange",
+      typeDefinition: "React.Dispatch<React.SetStateAction<boolean>>",
+      description: "Event handler that is called when the open state is internally changed. Use this to manually control `open`.",
+    },
+    {
+      propertyName: "open",
+      typeDefinition: "boolean",
+      description:
+        "If you plan to control the Tooltip state, use `open` with `onOpenChange` options.",
+    },
+    {
+      propertyName: "openDelay",
+      typeDefinition: "number",
+      description: "Used to delay the visibility of the Tooltip. Measured in milliseconds.",
+    },
+    {
+      propertyName: "placement",
+      typeDefinition:
+        "'top' | 'right' | 'bottom' | 'left' | 'top-start' | 'top-end' | 'right-start' | 'right-end' | 'bottom-start' | 'bottom-end' | 'left-start' | 'left-end'",
+      description:
+        "Indicates placement of the Tooltip. If not specified, the Tooltip will be placed automatically based on position priority.",
+    },
+  ]}
+/>
+
+### TooltipTrigger props
+
+<PropsTable
+  properties={[
+    {
+      propertyName: "children",
+      isRequired: true,
+      typeDefinition: "React.ReactNode",
+      description:
+        "Used for the element that activates the Tooltip. Must be an interactive element. Usually an Icon Button.",
+    },
+    {
+      propertyName: "asChild",
+      typeDefinition: "boolean",
+      description:
+        "Do not use wrapper element (button by default). Inject props to `children` instead.",
+    },
+  ]}
+/>
+
+### TooltipContent props
+
+<PropsTable
+  properties={[
+    {
+      propertyName: "children",
+      isRequired: true,
+      typeDefinition: "React.ReactNode",
+      description:
+        "Used for the primary content of the Tooltip (not including the keyboard shortcut).",
+    },
+    {
+      propertyName: "root",
+      typeDefinition: "HTMLElement | null | undefined",
+      isRequired: true,
+      description:
+        "Selects where to render the Tooltip host element. Useful for ShadowDOM or iFrame environments.",
+    },
+  ]}
+/>
+
+## Related components
+
+<ComponentList
+  components={[
+    {
+      href: "/components/icon-button",
+      label: "IconButton",
+    },
+    {
+      href: "/components/button",
+      label: "Button",
+    },
+    {
+      href: "/components/modal",
+      label: "Modal",
+    },
+    {
+      href: "/components/popover",
+      label: "Popover",
+    },
+  ]}
+/>

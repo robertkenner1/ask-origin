@@ -93,22 +93,22 @@ Located at: `./ai-context/` → `../../.shared/ai-context/`
 
 #### Grammarly Design System Documentation
 
-The `ai-context/gds/` directory contains complete Grammarly Design System documentation optimized for AI consumption.
+The `ai-context/gds-docs/` directory contains complete Grammarly Design System documentation optimized for AI consumption.
 
 **Quick reference:**
 ```bash
-# Read complete GDS reference (all components)
-Read(ai-context/gds/llms.txt)
+# Read complete GDS reference (40+ components)
+Read(ai-context/gds-docs/llm.txt)
 
 # List all component docs
-Glob(ai-context/gds/llms/component-*.txt)
+Glob(ai-context/gds-docs/components/**/*.mdx)
 
 # Read specific component
-Read(ai-context/gds/llms/component-button.txt)
-Read(ai-context/gds/llms/component-modal.txt)
+Read(ai-context/gds-docs/components/buttons/button.mdx)
+Read(ai-context/gds-docs/components/modal.mdx)
 ```
 
-**Available components:** Button, Text, Heading, Box, Flex, Modal, Popover, Tooltip, TextField, TextArea, Select, Checkbox, RadioGroup, Icon, Badge, Tag, Toast, Tabs, Accordion, Menu, and more.
+**Available components:** Button, ButtonAsLink, IconButton, TextField, Textarea, Checkbox, RadioButton, RadioButtonGroup, RadioGroup, Switch, SearchField, Select, Combobox, VerificationCode, Flex, Box, Text, Heading, Link, Toast, Notification, Modal, Popover, Tooltip, OnboardingTooltip, Tabs, Menu, SegmentedControl, Badge, Tag, PlanTag, Rating, Accordion, CircularLoader, BrandedLoader, SkeletonLoader, Icon, Illustration, Logo, Sticker, SuggestionToggle, Form, and more.
 
 #### How to Use GDS in Your Project
 
@@ -120,7 +120,7 @@ Read(ai-context/gds/llms/component-modal.txt)
    Example workflow:
    ```bash
    # 1. Read button component docs
-   Read(ai-context/gds/llms/component-button.txt)
+   Read(ai-context/gds-docs/components/buttons/button.mdx)
 
    # 2. Implement button with GDS styling
    # - Use exact colors from design tokens
@@ -147,7 +147,13 @@ Read(ai-context/gds/llms/component-modal.txt)
 
 ```bash
 # Read full design system reference for:
-Read(ai-context/gds/llms.txt)
+Read(ai-context/gds-docs/llm.txt)
+
+# Read tokens documentation
+Read(ai-context/gds-docs/tokens/)
+
+# Read foundations
+Read(ai-context/gds-docs/foundations/)
 ```
 
 Contains:
@@ -253,21 +259,26 @@ vim .mcp.json
 3. **Scripts are executable** - Run with `./scripts/build.sh` or `make build`
 4. **Build before viewing** - Run `make build` to copy src/ to public/
 
-## Grammarly Style Prototypes
+## Grammarly/Superhuman Style Prototypes
 
-When building Grammarly-style interfaces:
+When building Grammarly-style or Superhuman-style clean, modern interfaces:
 
 1. **Use Grammarly Design System:**
    ```
-   Read(ai-context/gds/llms.txt)
+   Read(ai-context/gds-docs/llm.txt)
    ```
 
 2. **Check component docs:**
    ```
-   Glob(ai-context/gds/llms/component-*.txt)
+   Glob(ai-context/gds-docs/components/**/*.mdx)
    ```
 
-3. **Reference logos and assets:** Available in ai-context/gds/
+3. **Read design foundations:**
+   ```
+   Read(ai-context/gds-docs/foundations/)
+   ```
+
+4. **Reference logos and assets:** Check Icon, Illustration, Logo components
 
 ## Common Issues
 
@@ -290,8 +301,8 @@ chmod +x scripts/*.sh
 ### "Can't find file in @ autocomplete"
 Symlinked files don't show in autocomplete. Use explicit commands:
 ```
-Read(ai-context/gds/llms.txt)
-Glob(ai-context/**/*.txt)
+Read(ai-context/gds-docs/llm.txt)
+Glob(ai-context/gds-docs/components/**/*.mdx)
 ```
 
 ## See Also

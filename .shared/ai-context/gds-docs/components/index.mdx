@@ -1,0 +1,42 @@
+---
+title: Components
+sidebar_position: 3
+pagination_prev: null
+pagination_next: null
+---
+
+import DocCardList from "@theme/DocCardList";
+import { useCurrentSidebarCategory } from "@docusaurus/theme-common";
+
+export const DEPRECATED_COMPONENTS = [
+  "Onboarding Tooltip",
+  "Suggestion Toggle",
+  "Radio Buttons",
+  "Radio Button Group",
+  "Segmented Control",
+  "Notification",
+];
+
+# Components
+
+Components are reusable user interface elements commonly used across the Grammarly product.
+
+Combining multiple components helps us build cohesion and familiarity for our customers.
+
+Each component meets [WCAG 2.2](https://www.w3.org/TR/WCAG22/) Level AA accessibility standards and uses elements from our [Foundation](../foundations/index.mdx) visual styles. Components like [Buttons](/components/button), [Tabs](/components/tabs), and form controls have all interactive states accounted for in their design.
+
+Visit the [Getting started as a designer](../getting-started/designers.mdx) documentation for complete instructions about using the components or the [Getting started as an engineer](../getting-started/engineers/) documentation for information about importing styles and components.
+
+## Component methodology
+
+Core design system components are often the most commonly used parts of experiences. They are purposely designed to be simple so they're useful to the largest number of product offerings. Despite their simplicity, core components have enough flexibility included to make them useful in a wide range of circumstances.
+
+Business logic or product-specific features are reserved for extensions of the core components, or components that apply to a single feature.
+
+You can [view our testing app, Granimals,](https://uifoundation.gpages.io/gds-sample-app/) to see some realistic examples of our components in context.
+
+<DocCardList
+  items={useCurrentSidebarCategory().items.filter(
+    component => !DEPRECATED_COMPONENTS.includes(component.label),
+  )}
+/>

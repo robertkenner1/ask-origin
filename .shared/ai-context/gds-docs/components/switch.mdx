@@ -1,0 +1,743 @@
+---
+pagination_prev: null
+pagination_next: null
+---
+
+import { ComponentStatusRow } from "../_components/component_status_row";
+import Hero from "../_components/hero";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import PropsTable from "../_components/props_table";
+import ComponentList from "../_components/component_list";
+import ComponentPlayground from "../_components/comp_playground";
+import { Switch, Checkbox, Heading, Tag, Flex } from "@grammarly/design-system";
+import RecommendationsTable from "../_components/recommendations_table";
+import { VisuallyHidden } from "react-aria";
+
+# Switch
+
+<span>A Switch has two possible states: on and off.</span>
+
+<ComponentStatusRow name="Switch" />
+<Hero
+  path={useBaseUrl("/img/components/switch_hero.svg")}
+  altText="Switches control the ability to turn on tone detection and automatic corrections in a Modal for Settings."
+/>
+<p class="caption">
+  Switches control the ability to turn on tone detection and automatic corrections in a Modal for
+  Settings.
+</p>
+
+## Usage
+
+**Use when:**
+
+- There is a choice to turn a single item on or off.
+- The choice isn’t affected by other options.
+- The state change takes effect immediately without the need for an additional Button to save changes.
+
+**Do not use when:**
+
+- A user needs to give their consent, such as when accepting terms and conditions. Instead, use a [Checkbox](/components/checkbox).
+- A user can select options that take effect only after activating a Button that saves changes. Instead, use a [Checkbox](/components/checkbox) or [Radio Group](/components/radio-group).
+- The option can be determined by other options, or turning on one option would turn off another in the same list. Instead, use a [Radio Group](/components/radio-group) or [Radio Button Group](/components/radio-button-group).
+- A user can choose between two options other than on and off. For example, choosing to download a document as either a PDF or CSV file. Instead, use a [Radio Group](/components/radio-group) or [Radio Button Group](/components/radio-button-group).
+
+### macOS, Windows, iOS, and Android
+
+When necessary, a native Switch can be used on macOS, Windows, iOS, and Android. It will behave according to the rules set by the operating system. The design on these platforms does not need to match the web component, but you can use design system tokens to style it. [View the design tokens](/tokens).
+
+## Anatomy
+
+<div className="diagram p-8">
+  <img src={useBaseUrl("/img/components/switch_anatomy.svg")} alt="Anatomy diagram of a Switch" />
+</div>
+<ol class="diagram-legend small">
+  <li>Label</li>
+  <li>Toggle</li>
+  <li>Helper text (optional)</li>
+</ol>
+
+## Examples
+
+### Default
+
+By default, a Switch includes a `label` displayed to the left of the toggle. The spacing between the label and toggle varies based on the width of the label and overall container.
+
+<ComponentPlayground scope={{ Switch }} code={`<Switch label="Snippets" />`} />
+
+### Size
+
+Use the `size` prop to scale the Switch control and its label. Size `medium` is the default.
+
+<ComponentPlayground
+  code={`
+  <Flex gap={3} direction="column" width={200}>
+    <Switch
+      label="Snippets"
+      size="small"
+    />
+    <Switch
+      label="Snippets"
+      size="medium"
+    />
+    <Switch
+      label="Snippets"
+      size="large"
+    />
+    <Switch
+      label="Snippets"
+      size="xlarge"
+    />
+    </Flex>
+  `}
+/>
+
+### Right label
+
+Use `labelDisplay="right"` to display the label on the right side of the toggle. Spacing is fixed at 8px between the label and toggle.
+
+<ComponentPlayground
+  code={`
+    <Switch
+      label="Snippets"
+      labelDisplay="right"
+    />
+  `}
+/>
+
+### Top label
+
+Use `labelDisplay="top"` to display the label above the toggle.
+
+<ComponentPlayground
+  code={`
+    <Switch
+      label="Snippets"
+      labelDisplay="top"
+    />
+  `}
+/>
+
+### Hidden label
+
+Use `labelDisplay="hidden"` to display the toggle without a visible label. A label is still required for people using a screen reader. [Learn about accessibility for hidden labels](#hidden-labels).
+
+The width of a Switch with a hidden label is the width of the toggle.
+
+<ComponentPlayground
+  code={`
+    <Switch
+      label="Snippets"
+      labelDisplay="hidden"
+    />
+  `}
+/>
+
+### With helper text
+
+Use `helperMessage` to provide additional details beyond the label of a Switch. Helper text always appears directly below the label, regardless of the label’s position.
+
+<ComponentPlayground
+  code={`
+<Flex gap={4} wrap width={480}>
+  <Switch
+    helperMessage="View, insert, and create snippets wherever you write using keyboard shortcuts."
+    label="Snippets"
+    labelDisplay="left"
+  />
+  <Switch
+    helperMessage="View, insert, and create snippets wherever you write using keyboard shortcuts."
+    label="Snippets"
+    labelDisplay="right"
+  />
+  <Switch
+    helperMessage="View, insert, and create snippets wherever you write using keyboard shortcuts."
+    label="Snippets"
+    labelDisplay="top"
+  />
+</Flex>
+`}
+/>
+
+### Default selection
+
+Specify `defaultSelected` to indicate a Switch is on when it is first presented to a user.
+
+<ComponentPlayground
+  code={`
+    <Switch
+      defaultSelected
+      helperMessage="View, insert, and create snippets wherever you write using keyboard shortcuts."
+      label="Snippets"
+    />
+  `}
+/>
+
+### Events
+
+The `onChange` event is called whenever a Switch is turned on or off.
+
+<ComponentPlayground
+  code={`function ControlledSwitchExample() {
+  const [selected, setSelected] = React.useState(false);
+  return (
+    <Switch
+    label="Snippets"
+      isSelected={selected}
+      onChange={(isSelected) => {
+        setSelected(isSelected)
+        alert("Your selection was saved.")
+      }}
+    />
+  );
+  }`}
+/>
+
+### Disabled
+
+Use `isDisabled` to indicate that a user cannot focus, change, or interact with a Switch.
+
+<ComponentPlayground
+  code={`
+    <Switch
+      isDisabled
+      helperMessage="View, insert, and create snippets wherever you write using keyboard shortcuts."
+      label="Snippets"
+    />
+ `}
+/>
+
+## Behavior
+
+### Width
+
+The width of a Switch with a hidden label is the width of the toggle.
+
+For Switches with a visible label, the Switch fills the width of its container up to a maximum of 480px. The label and helper text can wrap to a second line once the container or maximum width is reached.
+
+<div className="diagram p-8">
+  <img
+    src={useBaseUrl("/img/components/switch_max_width.svg")}
+    alt="Three Switches are shown at a width of 480px, the maximum allowed. The examples demonstrate the maximum width for right, left, and top label variants."
+  />
+</div>
+
+### Click area
+
+A user can click or tap anywhere on the label, helper message, toggle, or space between them to change the state of a Switch.
+
+### Immediate effect
+
+The effects of turning a Switch on or off are immediate. There is no need for an additional Button to save the selection.
+
+### No error state
+
+A Switch does not have an error state because it is always either on or off, both of which are valid states.
+
+If other errors or issues arise, such as an issue with internet connectivity, deliver this information in a [Toast](/components/toast) or a [Modal](/components/modal), depending on the appropriate level of urgency and intrusion.
+
+## Accessibility
+
+### Status changes
+
+When an `onChange` event occurs, status changes and any additional content or elements that appear must be announced for people using a screen reader. For example, a user needs to be made aware that a set of Checkboxes has appeared after activating a Switch.
+
+Write the announcement to explain what just happened and name where a user can interact with new content or elements.
+
+In the coded example we've provided, the announcement explains that toppings are either displayed or no longer available to add on. The new section is named "Add toppings" and the language aligns across both the announcement and legend so they're clearly related. You don't need to announce the individual Checkboxes because they will be read at the contextually relevant time after a user has moved focus into the Checkbox Group.
+
+<ComponentPlayground
+  scope={{ VisuallyHidden, useBaseUrl }}
+  code={`function SwitchStatusChangeExample() {
+    // State for the Switch
+    const [selected, setSelected] = React.useState(false);
+
+    // States for the Checkboxes
+    const [almonds, setAlmonds] = React.useState(false);
+    const [bananas, setBananas] = React.useState(false);
+
+    // State that indicates whether the status-changes section should include content.
+    // When the component is initially loaded or when the user interacts with a Checkbox,
+    // the status-changes section should not include content.
+    const [statusChanges, setStatusChanges] = React.useState(false);
+
+    return (
+      <>
+        <Form onSubmit={() => {}}>
+          <Flex gap={2}>
+            <FormHeader
+              heading="S'mores donut"
+              description="Marshmallow frosting topped with graham crackers and chocolate"
+            ></FormHeader>
+            <img src={useBaseUrl("/img/components/switch_donut.png")} alt="" style={{ maxHeight: "60px" }}/>
+          </Flex>
+
+          <FormRow>
+            <Switch
+              label="Customize donut"
+              isSelected={selected}
+              onChange={isSelected => {
+                setSelected(isSelected);
+                setStatusChanges(true);
+              }}
+            />
+          </FormRow>
+
+          {selected ? (
+            <FormRow>
+              <CheckboxGroup legend="Add toppings">
+                <Checkbox
+                  isSelected={almonds}
+                  onChange={isSelected => {
+                    setAlmonds(isSelected);
+                    setStatusChanges(false);
+                  }}
+                >
+                  Almonds
+                </Checkbox>
+                <Checkbox
+                  isSelected={bananas}
+                  onChange={isSelected => {
+                    setBananas(isSelected);
+                    setStatusChanges(false);
+                  }}
+                >
+                  Bananas
+                </Checkbox>
+              </CheckboxGroup>
+            </FormRow>
+          ) : null}
+
+          <FormFooter>
+            <Button onClick={() => {}} text="Add to order" type="submit" />
+            <Button onClick={() => {}} text="Cancel" variant="tertiary" />
+          </FormFooter>
+        </Form>
+
+        <VisuallyHidden id="status-changes" aria-live="assertive">
+          {statusChanges && selected && <p>Toppings are now displayed for you to add on.</p>}
+          {statusChanges && !selected && <p>Toppings are no longer displayed for you to add on.</p>}
+        </VisuallyHidden>
+      </>
+
+);
+}`}
+/>
+
+### Hidden labels
+
+A Switch’s label can only be plain text. In some cases, you may require custom styling beyond what’s available as part of the component. For example, you might want to add Tags to classify different Switches. This requires visually hiding a Switch’s label and adding a separate Text and Tag component nearby.
+
+A `label` is still required, but `labelDisplay="hidden"` can be used to visually hide the label while maintaining accessibility for people using screen readers. Add an `onClick` event handler to the external, visible text that acts as the label so that it will toggle the Switch's state as intended.
+
+<ComponentPlayground
+  scope={{ VisuallyHidden, useBaseUrl }}
+  code={`function SwitchStatusChangeExample() {
+    // State for "Disable Switch with custom label" Switch
+    const [disabled, setDisabled] = React.useState(false);
+
+    // State for the Switch with custom label
+    const [selected, setSelected] = React.useState(false);
+
+    return (
+      <Flex direction="column" gap={4}>
+        <Switch
+          label="Disable Switch with custom label"
+          isSelected={disabled}
+          onChange={setDisabled}
+          helperMessage="Disable the Switch with the custom label to see disabled style and behavior that should be implemented"
+        />
+
+        <Flex gap={2} justify="space-between">
+          <Flex
+            direction="column"
+            gap={1}
+            style={{ cursor: disabled ? 'not-allowed' : 'pointer' }}
+          >
+            <Text 
+              as="span"
+              variant="text-small"
+              weight="medium"
+              color="base-default"
+              onClick={() => {
+                if (!disabled) {
+                  setSelected(!selected);
+                }
+              }}
+            >
+              Switch with custom label{" "}
+              <Tag label="Beta" variant="warning" inline />
+            </Text>
+            <Text
+              as="p"
+              variant="text-xsmall"
+              color="base-subdued"
+              id="custom-label-helper"
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </Text>
+          </Flex>
+          <Switch
+            label="Switch with custom label (beta)"
+            isSelected={selected}
+            isDisabled={disabled}
+            onChange={setSelected}
+            labelDisplay="hidden"
+            aria-describedby="custom-label-helper"
+          />
+        </Flex>
+      </Flex>
+    );
+}`}
+/>
+
+
+### Keyboard interaction
+
+| Key              | Expected result                             |
+| ---------------- | ------------------------------------------- |
+| <kbd>Tab</kbd>   | Moves focus into the Switch.                |
+| <kbd>Space</kbd> | Activates the toggle and changes the state. |
+
+## Writing
+
+We aim to keep a consistent writing style across components within [Forms](/patterns/forms).
+
+### Referring to state changes
+
+With a well-considered label, a Switch should be so intuitive that no additional explanation is necessary to understand how to interact with it. If such an explanation is required to make sense of the experience, reconsider the label’s wording or whether another component might better match our users’ expectations. Avoid explaining how to use a Switch in UI content.
+
+Because Switches are used to control functionality across Grammarly’s product offerings, in some cases it’s necessary to redirect a user to another location to change the state of a Switch. For example, you may need to direct a user to turn on a new feature while using the desktop assistant.
+
+Do not use _toggle_ as a noun or verb. Avoid using the verb _switch_ in this context, too. Instead, use language that identifies turning an option on or off.
+
+<div className="diagram p-8">
+  <img
+    src={useBaseUrl("/img/components/switch_writing_state_changes.svg")}
+    alt="An empty state explains that a feature, Style, is turned off. There is a Button that says 'Open Settings' with an arrow pointing to the Settings menu a user would be taken to. A mouse hand cursor hovers over the corresponding Switch in the Settings menu."
+  />
+</div>
+<p class="caption">
+  An empty state in the assistant prompts a user to turn on a feature that detects writing style.
+  Because a user’s explicit permission is needed, they are taken to Settings, where the Switch
+  controlling the feature is displayed.
+</p>
+
+### Labels
+
+Labels help a user scan the various inputs in a Form. A label should describe the purpose of an individual input while clearly distinguishing each input from one another.
+
+<RecommendationsTable
+  caption="Writing best practices for Switch labels"
+  recommendations={[
+    {
+      recommendationDo:
+        "Use positive phrasing that clearly communicates what happens when the Switch is on.",
+      exampleDo: <Switch defaultSelected label="Show recent prompt history" />,
+      recommendationDont:
+        "Do not use negative phrasing, which can create a double negative with the off state. Instead, set the default value based on what most users will want.",
+      exampleDont: <Switch label="Don’t show recent prompt history" />,
+    },
+    {
+      recommendationDo:
+        "Think about the label being in conversation with the toggle, and the toggle can answer only “on” or “off.”",
+      exampleDo: <Switch label="Check writing in Google Docs" />,
+      recommendationDont:
+        "Do not use phrasing like questions that require a response other than “on” or “off.”",
+      exampleDont: <Switch label="Do you want to check writing in Google Docs?" />,
+    },
+    {
+      recommendationDo:
+        "Use three or fewer words when possible. In general, be brief but remain clear.",
+      exampleDo: <Switch label="Increase text size" />,
+      recommendationDont: "Do not describe the state change itself in the label.",
+      exampleDont: <Switch label="Turn on increased text size" />,
+    },
+    {
+      recommendationDo:
+        "Keep the writing structure and verb tense consistent within a list of Switches or other Form components.",
+      exampleDo: (
+        <Flex direction="column" gap={2}>
+          <Heading as="h3" variant="heading-xsmall">
+            Generative AI
+          </Heading>
+          <Switch label="Show on text selection" />
+          <Switch label="Show for quick replies" />
+          <Switch label="Show recent prompts" />
+        </Flex>
+      ),
+      recommendationDont:
+        "Do not mix writing structures or verb tenses within a list of Switches or other Form components.",
+      exampleDont: (
+        <Flex direction="column" gap={2}>
+          <Heading as="h3" variant="heading-xsmall">
+            Generative AI
+          </Heading>
+          <Switch label="Show on text selection" />
+          <Switch label="Quick replies can appear" />
+          <Switch label="Unhiding your recent prompts" />
+        </Flex>
+      ),
+    },
+    {
+      recommendationDo: "Use sentence case.",
+      exampleDo: <Switch defaultSelected label="Use organizational context in generative AI" />,
+      recommendationDont: "Do not use Title Case or ALL CAPS.",
+      exampleDont: <Switch defaultSelected label="USE ORGANIZATIONAL CONTEXT IN GENERATIVE AI" />,
+    },
+    {
+      recommendationDo: "Use internal punctuation when necessary.",
+      exampleDo: <Switch label="Color-blind mode" />,
+      recommendationDont: "Do not use end punctuation.",
+      exampleDont: <Switch label="Color-blind mode!" />,
+    },
+    {
+      recommendationDo:
+        "Use a single line for labels whenever possible. Text can wrap, but a shorter rewrite or helper text is preferable.",
+      exampleDo: (
+        <Switch
+          helperMessage="A little helper text goes a long way."
+          label="Show entire labels, even long ones"
+        />
+      ),
+      recommendationDont: "Do not truncate text.",
+      exampleDont: <Switch label="Show entire labels, even …" />,
+    },
+  ]}
+/>
+
+### Helper text
+
+Helper text takes different forms to fit specific needs. Some tell a user what to do using action verbs, while others define terms and requirements with punchy fragments of information.
+
+<RecommendationsTable
+  caption="Writing best practices for helper text of a Switch."
+  recommendations={[
+    {
+      recommendationDo:
+        "In human terms, explain how a user will benefit from an option when it is on.",
+      exampleDo: (
+        <Switch
+          defaultSelected
+          helperMessage="Save time by accepting multiple suggestions at once."
+          label="Suggestion bundles"
+          labelDisplay="left"
+        />
+      ),
+      recommendationDont:
+        "Do not explain how to use a Switch. The interaction should be obvious when combined with a well-considered label.",
+      exampleDont: (
+        <Switch
+          defaultSelected
+          helperMessage="Move the toggle to the right to turn on accepting bundles of multiple suggestions at once."
+          label="Suggestion bundles"
+          labelDisplay="left"
+        />
+      ),
+    },
+    {
+      recommendationDo: "Define terms that may not be clear.",
+      exampleDo: (
+        <Switch
+          helperMessage="Apply your writing style to any text you generate."
+          label="Style"
+          labelDisplay="left"
+        />
+      ),
+      recommendationDont: "Do not use jargon or overly technical language that hinders clarity.",
+      exampleDont: (
+        <Switch
+          helperMessage="Employ your most utilized linguistic register to any verbiage you induce."
+          label="Style"
+          labelDisplay="left"
+        />
+      ),
+    },
+    {
+      recommendationDo:
+        "Use “Example:” to offer a universal and inclusive example of an expected input. It’s OK to provide both instructions and an example if space allows.",
+      exampleDo: (
+        <Switch
+          defaultSelected
+          helperMessage="Example: Suggest using “their” instead of “his”"
+          label="Use gender-neutral generic pronouns"
+          labelDisplay="left"
+        />
+      ),
+      recommendationDont: "Do not use “E.g.” or “I.e.” to indicate an example.",
+      exampleDont: (
+        <Switch
+          defaultSelected
+          helperMessage="E.g., Suggest using “their” instead of “his”"
+          label="Use gender-neutral generic pronouns"
+          labelDisplay="left"
+        />
+      ),
+    },
+    {
+      recommendationDo: "Be brief. Use 140 characters or fewer unless unavoidable.",
+      exampleDo: (
+        <Switch
+          helperMessage="Suggest ways to sound more natural in English"
+          label="Fluency assistance"
+          labelDisplay="left"
+        />
+      ),
+      recommendationDont:
+        "Do not overexplain, which can slow down a user with surplus information.",
+      exampleDont: (
+        <Switch
+          helperMessage="Fluency assistance is a feature designed to provide users with suggestions that specifically target the most common grammatical issues that second-language learners often make in written English. For example, misplaced prepositions or missing articles."
+          label="Fluency assistance"
+          labelDisplay="left"
+        />
+      ),
+    },
+    {
+      recommendationDo: "Use sentence case.",
+      exampleDo: (
+        <Switch
+          defaultSelected
+          helperMessage="Suggest adding the Oxford comma after the second-to-last item in a list of things"
+          label="Use the Oxford comma"
+          labelDisplay="left"
+        />
+      ),
+      recommendationDont: "Do not use Title Case or ALL CAPS.",
+      exampleDont: (
+        <Switch
+          defaultSelected
+          helperMessage="SUGGEST ADDING THE OXFORD COMMA AFTER THE SECOND-TO-LAST ITEM IN A LIST OF THINGS "
+          label="Use the Oxford comma"
+          labelDisplay="left"
+        />
+      ),
+    },
+    {
+      recommendationDo:
+        "Include end punctuation if it’s a complete sentence or to distinguish two fragments.",
+      exampleDo: (
+        <Switch
+          defaultSelected
+          helperMessage="Brainstorm, write, and rewrite with Grammarly’s generative AI assistance."
+          label="Generative AI assistance"
+          labelDisplay="left"
+        />
+      ),
+      recommendationDont: "Do not use exclamation points or question marks.",
+      exampleDont: (
+        <Switch
+          defaultSelected
+          helperMessage="Brainstorm, write, and rewrite with Grammarly’s generative AI assistance!"
+          label="Generative AI assistance"
+          labelDisplay="left"
+        />
+      ),
+    },
+  ]}
+/>
+
+## Installation
+
+1. Import the CSS (if not done already).
+
+```css
+@import "@grammarly/design-system";
+```
+
+2. Import the Switch component in JS.
+
+```tsx
+import { Switch } from "@grammarly/design-system";
+```
+
+## API
+
+<PropsTable
+  properties={[
+    {
+      propertyName: "label",
+      isRequired: true,
+      typeDefinition: "string",
+      description: "The label that will be displayed outside of the toggle.",
+    },
+    {
+      propertyName: "defaultSelected",
+      typeDefinition: "boolean",
+      description:
+        "When true, indicates the Switch should be turned on by default. Use this property only with uncontrolled components.",
+    },
+    {
+      propertyName: "helperMessage",
+      typeDefinition: "string",
+      description: "Provides additional context for this Switch outside of the label.",
+    },
+    {
+      propertyName: "isDisabled",
+      typeDefinition: "boolean",
+      description:
+        "When true, indicates that a user cannot focus, change, or interact with the Switch.",
+    },
+    {
+      propertyName: "isSelected",
+      typeDefinition: "boolean",
+      description:
+        "When true, indicates that the Switch is in the on state. For a controlled component, use the `onChange` event handler to set this prop appropriately. Use this property only with controlled components.",
+    },
+    {
+      propertyName: "labelDisplay",
+      typeDefinition: "'left' | 'right' | 'top' | 'hidden'",
+      description:
+        "Used to indicate where the label for the Switch is displayed. <ul><li>`left`: Indicates the label should be displayed to the left of the toggle.</li><li>`right`: Indicates the label should be displayed to the right of the toggle.</li><li>`top`: Indicates the label should be displayed on top of the toggle.</li><li>`hidden`: Indicates the label should be visually hidden because another element on the page is acting as the visual label for the Switch.</li></ul>",
+      defaultValue: "left",
+    },
+    {
+      propertyName: "name",
+      typeDefinition: "string",
+      description:
+        "Defines the unique name of the input. Used when submitting an HTML form. <a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefname' target='_blank'>Learn more at MDN</a>.",
+    },
+    {
+      propertyName: "ref",
+      typeDefinition: "React.Element<HTMLInputElement>",
+      description: "`ref` that is forwarded to the underlying input element.",
+    },
+    {
+      propertyName: "size",
+      typeDefinition: "'small' | 'medium' | 'large' | 'xlarge'",
+      description:
+        "Controls the size of the Switch and label.",
+      defaultValue: "medium",
+    },
+    {
+      propertyName: "value",
+      typeDefinition: "string",
+      description:
+        "Used to identify the input when submitting an HTML form. <a href='https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#htmlattrdefvalue' target='_blank'>Learn more at MDN</a>.",
+    },
+    {
+      propertyName: "onChange",
+      typeDefinition: "(isSelected: boolean) => void",
+      description: "Event handler that is called whenever the Switch changes state.",
+    },
+  ]}
+/>
+
+## Related components
+
+<ComponentList
+  components={[
+    {
+      href: "/components/checkbox",
+      label: "Checkbox",
+    },
+    {
+      href: "/components/radio-button-group",
+      label: "Radio Button Group",
+    },
+    {
+      href: "/components/radio-group",
+      label: "Radio Group",
+    },
+  ]}
+/>
