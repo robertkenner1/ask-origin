@@ -64,7 +64,7 @@ exec_with_status "Checking project metadata" "[ -f '$PROJECT_JSON' ]" || {
 
 # Check if deployment type is vercel
 print_status "Validating deployment type" ""
-DEPLOYMENT_TYPE=$(get_config "DEPLOYMENT" "static")
+DEPLOYMENT_TYPE=$(get_config "DEPLOYMENT" "vercel")
 if [ "$DEPLOYMENT_TYPE" != "vercel" ]; then
     print_status "Validating deployment type" "note" "type is '$DEPLOYMENT_TYPE'"
     log_warning "Warning: Project deployment type is '$DEPLOYMENT_TYPE', not 'vercel'"
@@ -173,7 +173,7 @@ log_info "🔨 Building project locally..."
 # Build locally with vercel build (handles private npm packages)
 print_status "Running vercel build" ""
 cd "$PROJECT_DIR"
-if vercel build --yes >/tmp/vercel-build.log 2>&1; then
+if vercel build --yes $VERCEL_AUTH_ARGS >/tmp/vercel-build.log 2>&1; then
     print_status "Running vercel build" "success"
     cd "$REPO_ROOT"
 else

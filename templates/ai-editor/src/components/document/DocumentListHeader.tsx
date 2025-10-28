@@ -1,11 +1,10 @@
 "use client";
 
 import React from "react";
-import { Plus, MoreVertical } from "lucide-react";
+import { Plus, MoreVertical, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { OrchestraIcon } from "@/components/icons/OrchestraIcon";
-import ExternalLinkIcon from "@/components/icons/ExternalLinkIcon";
+import { OrchestraIcon } from "@/app/components/icons/OrchestraIcon";
 import { useDocumentStore } from "@/hooks/document/useDocumentStore";
 import {
   DropdownMenu,
@@ -82,7 +81,7 @@ export function DocumentListHeader({
                   rel="noopener noreferrer"
                   className="flex cursor-pointer items-center"
                 >
-                  <ExternalLinkIcon size={16} className="mr-2" />
+                  <ExternalLink size={16} className="mr-2" />
                   Open Test Page
                 </Link>
               </DropdownMenuItem>

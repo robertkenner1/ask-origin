@@ -76,9 +76,6 @@ const AskButton = ({
   >
     <OrchestraIconAnimated
       size={18}
-      useGradient={true}
-      rotationSpeed={60}
-      animating={loading}
     />
     <span className="ml-1 text-sm font-medium whitespace-nowrap">Ask</span>
   </div>
@@ -100,9 +97,6 @@ const CollapsedPill = ({
   >
     <OrchestraIconAnimated
       size={18}
-      useGradient={true}
-      rotationSpeed={60}
-      animating={loading}
     />
     <span className="text-muted-foreground ml-1 text-sm font-medium whitespace-nowrap">
       Ask anything
@@ -172,9 +166,6 @@ const AskMode = ({
         <div className="flex w-full items-center bg-white">
           <OrchestraIconAnimated
             size={18}
-            useGradient={true}
-            rotationSpeed={60}
-            animating={false}
           />
           <input
             type="text"

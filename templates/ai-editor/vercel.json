@@ -4,13 +4,5 @@
   "buildCommand": "npm run build",
   "devCommand": "npm run dev",
   "installCommand": "npm install",
-  "outputDirectory": ".next",
-  "env": {
-    "CLAUDE_API_KEY": "@claude_api_key"
-  },
-  "build": {
-    "env": {
-      "CLAUDE_API_KEY": "@claude_api_key"
-    }
-  }
+  "outputDirectory": ".next"
 }

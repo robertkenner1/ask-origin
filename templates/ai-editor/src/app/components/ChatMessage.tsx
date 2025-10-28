@@ -41,7 +41,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
         // Loading message with animated icon
         <div className="llm-response w-full px-1 text-gray-800">
           <div className="flex items-start">
-            <OrchestraIconAnimated size={21} useGradient={true} />
+            <OrchestraIconAnimated size={21} />
           </div>
         </div>
       ) : (
