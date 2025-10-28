@@ -1,0 +1,71 @@
+# Common Vercel deployment template
+# Extended by per-project deploy jobs
+.deploy_vercel_template:
+  stage: deploy
+  image: $ARTIFACTORY_DOCKER_REPO/node:20-alpine
+  before_script:
+    - |
+      set -e
+      echo "Installing bash"
+      apk update && apk add bash curl sed
+
+      echo "registry=${ARTIFACTORY_NPM_URL}/common-npm/" > ~/.npmrc
+      curl -u $ARTIFACTORY_USER:$ARTIFACTORY_PASSWORD $ARTIFACTORY_NPM_URL/auth >> ~/.npmrc
+      sed -i 's/_auth/\/\/artifactory.grammarly.io\/artifactory\/api\/npm\/common-npm\/:_auth/g' ~/.npmrc
+
+      echo "🚀 Vercel Deployment Pipeline"
+      echo ""
+      echo "Branch: $CI_COMMIT_BRANCH"
+      echo "Project: $PROJECT_NAME"
+      echo ""
+
+      # Validate project directory exists
+      if [ ! -d "projects/$PROJECT_NAME" ]; then
+          echo "❌ Error: Project directory not found: projects/$PROJECT_NAME"
+          exit 1
+      fi
+
+      # Validate .project.json exists
+      if [ ! -f "projects/$PROJECT_NAME/.project.json" ]; then
+          echo "❌ Error: .project.json not found in projects/$PROJECT_NAME"
+          echo "⚠️  This project may not be configured for deployment"
+          exit 1
+      fi
+
+      # Check deployment type
+      DEPLOYMENT_TYPE=$(cat "projects/$PROJECT_NAME/.project.json" | grep -o '"deployment": *"[^"]*"' | sed 's/"deployment": *"\(.*\)"/\1/' || echo "")
+      echo "Deployment type: $DEPLOYMENT_TYPE"
+
+      if [ "$DEPLOYMENT_TYPE" != "vercel" ]; then
+          echo "⚠️  Project deployment type is '$DEPLOYMENT_TYPE', not 'vercel'"
+          echo "⚠️  Skipping Vercel deployment"
+          exit 0
+      fi
+
+      echo ""
+      echo "📦 Installing Vercel CLI..."
+      npm install -g vercel@latest
+
+      # Validate VERCEL_TOKEN
+      if [ -z "$VERCEL_TOKEN" ]; then
+          echo "❌ Error: VERCEL_TOKEN not set in GitLab CI/CD variables"
+          echo ""
+          echo "Add VERCEL_TOKEN as a masked variable in GitLab CI/CD settings:"
+          echo "  Settings > CI/CD > Variables > Add Variable"
+          echo "  Key: VERCEL_TOKEN"
+          echo "  Value: <your-token-from-https://vercel.com/account/tokens>"
+          echo "  Flags: Masked"
+          exit 1
+      fi
+
+      echo "✅ VERCEL_TOKEN is configured"
+      echo ""
+
+  script:
+    - echo "🚀 Starting deployment for $PROJECT_NAME..."
+    - echo ""
+    - pwd
+    - chmod +x .shared/scripts/deploy-vercel.sh
+    - ls -la .shared/scripts/deploy-vercel.sh
+    - ./.shared/scripts/deploy-vercel.sh "$PROJECT_NAME"
+  needs: []

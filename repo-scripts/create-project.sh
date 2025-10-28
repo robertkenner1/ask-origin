@@ -186,6 +186,17 @@ EOF
 fi
 print_status "Creating project metadata" "success"
 
+# Generate GitLab CI deploy file from template
+print_status "Generating GitLab CI configuration" ""
+if [ -f "$TEMPLATE_DIR/.gitlab-ci/deploy.yml.template" ]; then
+    mkdir -p "$PROJECTS_DIR/$PROJECT_NAME/.gitlab-ci"
+    sed -e "s/{{PROJECT_NAME}}/$PROJECT_NAME/g" \
+        "$TEMPLATE_DIR/.gitlab-ci/deploy.yml.template" > "$PROJECTS_DIR/$PROJECT_NAME/.gitlab-ci/deploy.yml"
+    print_status "Generating GitLab CI configuration" "success"
+else
+    print_status "Generating GitLab CI configuration" "note" "template not found"
+fi
+
 # Process template variables in all files
 exec_with_status "Processing template variables" "find '$PROJECTS_DIR/$PROJECT_NAME' -type f \\( -name '*.md' -o -name '*.html' -o -name '*.js' -o -name '*.json' -o -name '*.ts' -o -name '*.tsx' \\) -exec sed -i '' -e 's/{{PROJECT_NAME}}/$PROJECT_NAME/g' -e 's/{{PROJECT_TITLE}}/$PROJECT_TITLE/g' -e 's/{{PROJECT_DESCRIPTION}}/$PROJECT_DESCRIPTION/g' -e 's/{{CREATED_DATE}}/$CREATED_DATE/g' -e 's/{{BRANCH_NAME}}/$BRANCH_NAME/g' -e 's/{{VERCEL_TEAM_SLUG}}/$VERCEL_TEAM_SLUG/g' {} \\;"
 
