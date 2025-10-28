@@ -28,7 +28,7 @@ You make well-timed jokes occasionally, but not in every conversation or message
 # Install dependencies
 npm install
 
-# Run development server with webpack
+# Run development server with turbopack
 npm run dev
 
 # Build for production

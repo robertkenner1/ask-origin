@@ -1,0 +1,11 @@
+{
+  "name": "fancy-ai-editor",
+  "description": "Project created from ai-editor template",
+  "deployment": "vercel",
+  "created": "2025-10-28T16:50:42Z",
+  "template": {
+    "name": "ai-editor",
+    "version": "1.0.0"
+  }
+}
+
