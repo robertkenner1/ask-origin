@@ -1,0 +1,133 @@
+---
+pagination_prev: null
+pagination_next: null
+---
+
+import PropsTable from "../_components/props_table";
+import { ComponentStatusRow } from "../_components/component_status_row";
+import ComponentPlayground from "../_components/comp_playground";
+import { Flex, Tag } from "@grammarly/design-system";
+
+# Color Scheme Provider
+
+<span>
+  Color Scheme Provider is a utility component that sets the color scheme for all contained
+  elements.
+</span>
+
+<ComponentStatusRow name="Color Scheme Provider" />
+
+:::caution Beta
+Dark mode is still in Beta and is being tested within GDS.
+:::
+
+## Usage
+
+Use this component to provide a color scheme (or theme) to your whole app or a section of your app. For example, to support light and dark modes.
+
+By default, the appropriate scheme is detected based on the user's OS settings. You can customize this using the `scheme` prop.
+
+Internally, it works by modifying token values used by GDS components. For example, the following CSS will result in a background color of `#FFFFFF` with scheme "light" and `#161719` in scheme "dark".
+
+```css
+background-color: var(--color-background-base-default);
+```
+
+Child components can also use the `useColorScheme` custom hook to access the current scheme.
+
+## Examples
+
+### Basic usage
+
+Wrap your app in `ColorSchemeProvider` to set the color scheme for all contained elements.
+
+<ComponentPlayground
+  noInline
+  code={`
+function ExampleContent({ setting }) {
+  const { scheme } = useColorScheme();
+  return (
+    <Flex padding={3} bgColor="background-base-default">
+      <Text as="p">
+        Scheme set to "{setting}", which resolved to "{scheme}"
+      </Text>
+    </Flex>
+  );
+}
+
+render(<ColorSchemeProvider scheme="auto">
+
+  <ExampleContent setting="auto" />
+</ColorSchemeProvider>)
+`}
+/>
+
+### Toggling color scheme
+
+The `useColorScheme` hook allows changing the color scheme dynamically.
+
+<ComponentPlayground
+  noInline
+  code={`
+function DarkModeToggle() {
+  const { scheme, setScheme } = useColorScheme();
+  const onToggle = () => {
+    setScheme(scheme === "dark" ? "light" : "dark");
+  };
+  return (
+    <Switch
+      isSelected={scheme === "dark"}
+      label="Dark mode"
+      onChange={() => onToggle()}
+    />
+  );
+}
+
+render(<ColorSchemeProvider>
+
+  <Flex bgColor="background-base-default" padding={3} gap={2} direction="column" align="start">
+    <DarkModeToggle />
+    <Text as="p" variant="text-small">This content will change color scheme when the switch is used.</Text>
+    <Button text="Cool!"/>
+  </Flex>
+</ColorSchemeProvider>)
+`}
+/>
+
+## Installation
+
+1. Import the CSS (if not done already).
+
+```css
+@import "@grammarly/design-system";
+```
+
+2. Import the component in JS.
+
+```tsx
+import { ColorSchemeProvider } from "@grammarly/design-system";
+```
+
+## API
+
+<PropsTable properties={
+[
+  {
+    propertyName: 'children',
+    isRequired: true,
+    isDeprecated: false,
+    description: 'Contents that make use of the color scheme.',
+    defaultValue: null,
+    typeDefinition: 'React.ReactNode'
+  },
+  {
+    propertyName: 'scheme',
+    isRequired: false,
+    isDeprecated: false,
+    description: `Color scheme to use. If not provided, the value is detected based on the user's OS settings ("auto").`,
+    defaultValue: "'auto'",
+    typeDefinition: "'light' | 'dark' | 'auto'"
+  }
+]
+
+}/>

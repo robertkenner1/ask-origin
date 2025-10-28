@@ -1,0 +1,95 @@
+---
+title: Support
+slug: /support
+sidebar_class_name: support
+sidebar_position: 8
+pagination_prev: null
+pagination_next: null
+---
+
+import Link from "@docusaurus/Link";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import DocCardList from "@theme/DocCardList";
+import { useCurrentSidebarCategory } from "@docusaurus/theme-common";
+import { Icon, AppsSlackIcon } from '@grammarly/design-system'
+
+# Support
+
+## News and updates
+
+You'll find the latest updates to GDS regularly shared in two places:
+
+- **Slack:** On Tuesdays, we post any announcements about component releases, bug fixes, or style updates in [#gds-support on Slack](https://grammarly.enterprise.slack.com/archives/C03MNHYDT5E). Turn on notifications for this channel to keep up with the latest.
+- **What’s new:** We also track changes by version number on the [**What’s new**](https://designsystem.grammarly.io/whats-new) page within the GDS doc site.
+
+## Request support from the GDS team
+
+Public requests and questions give GDS team members the broad visibility required to maintain a design system. Open discussions in Slack and Jira help us route your request to the right team member and avoid bottlenecks caused by any one person’s capacity. That is to say, **avoid sliding into DMs** please.
+
+Use one of these preferred ways to get work on the GDS roadmap.
+
+### Report a bug or issue
+
+We need to know about issues in code, design, or documentation. Only you can help us find them. Jira helps us track them.
+
+If you have found an issue or bug with the design system:
+
+1. Create a Jira ticket to report your issue
+2. Include your team, the feature you’re working on, and the specific element with an issue (examples: Analytics, Popover, Fonts)
+3. Add a due date (if applicable)
+4. Add any screenshots or references you have available that we can use to investigate the issue further
+
+<Link
+  to="https://grammarly.atlassian.net/secure/CreateIssue.jspa?issuetype=11551&pid=15316"
+  class="button-secondary"
+  style={{marginBottom: 'var(--space-5)'}}
+>
+  <img src={useBaseUrl("/img/icon-jira.svg")} alt="Jira" />
+  Report an issue
+</Link>
+
+We can usually respond to tickets within one business day—of course sometimes we have other priorities, too. If you haven’t heard from one of us after three days, follow up in [#gds-support on Slack](https://grammarly.slack.com/archives/C03MNHYDT5E).
+
+#### Known issues
+
+Here are some bugs that we are aware of and are actively working to resolve:
+
+```note
+Within Shadow DOM:
+- Button: onClick cannot be fired using space or enter keys
+- Combobox: does not open on focus or when typing
+- Link: focus outline is not styled correctly
+```
+
+### Request an addition or update
+
+Let us know as soon as you have an idea of what you need—no, seriously, sooner! We use our support channel on Slack to track and manage requests for new additions to the design system. Requests to update an existing component with new functionality are also welcome here.
+
+<Link
+  to="https://grammarly.enterprise.slack.com/archives/C03MNHYDT5E"
+  class="button-secondary"
+  style={{marginBottom: 'var(--space-5)'}}
+>
+  <Icon icon={AppsSlackIcon} accessibilityLabel="Slack" />
+  Request an asset
+</Link>
+
+To see what we're in progress of building now, [visit the status tracker](https://gram.ly/gds-status).
+
+### Office Hours
+
+Office hours are held every Thursday. We alternate each week between a 9:30 am PT session (to accommodate people in North America) and a 3 pm CEST session (to accommodate people in Europe). Join office hours to collaborate directly with the GDS team on topics like:
+
+- Ideas for new components, features, and patterns
+- Questions about the design system and how you’re using it
+- Help with identifying and resolving bugs
+
+Please share your questions in advance so the GDS team can prepare to address them within the given time slot. We appreciate having links to your work and as much context as possible!
+
+<Link
+  to="https://docs.google.com/spreadsheets/d/1OhfgTY7JEWJLLrX2gpXs29idOzEtb_GnyfoRYWEJx9M/edit?gid=284277421#gid=284277421"
+  class="button-secondary"
+>
+  <img src={useBaseUrl("/img/icon-sheets.svg")} alt="Google Sheets" />
+  Sign Up for Office Hours
+</Link>

@@ -1,0 +1,39 @@
+---
+pagination_prev: null
+pagination_next: null
+---
+
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import { Flex } from "@grammarly/design-system";
+
+# Elevation
+
+  Shadows add depth and give the appearance of elevation between surfaces in the UI. Elevation helps
+  establish a visual hierarchy between overlapping elements and, in some cases, indicates that an
+  element is interactive. 
+
+## Styles
+
+Three elevation heights are available—low, medium, and high.
+
+<Flex direction="row" gap={6}>
+  <div className="elevation e-low">Low</div>
+  <div className="elevation e-medium">Medium</div>
+  <div className="elevation e-high">High</div>
+</Flex>
+
+
+### Accessibility
+
+The boundary of overlay elements needs to achieve 3:1 contrast compared to the background. Our elevation styles use multiple drop shadows to meet the required contrast.
+
+### Using elevation
+
+**In Figma:** 
+- Turn on the **GDS Foundations** library
+- Select the frame or group you want to be elevated
+- Hover on **Effects** near the bottom of the the Design panel
+- Click the **Styles** Icon Button
+- Choose from low, medium, or high elevation
+
+**In code:** Elevation is available as tokens. [View the elevation tokens](/tokens/elevation).

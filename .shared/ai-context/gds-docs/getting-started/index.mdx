@@ -1,0 +1,120 @@
+---
+title: Getting Started
+sidebar_position: 1
+pagination_prev: null
+pagination_next: null
+---
+
+import DocCardList from "@theme/DocCardList";
+import { useCurrentSidebarCategory } from "@docusaurus/theme-common";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import { Flex, Icon, InterfaceTransformIcon, Link } from "@grammarly/design-system";
+
+# Getting Started
+
+Guides for designing for the Grammarly platform using the design system.
+
+## Tutorials and recordings
+
+### Building a Form in App Actions
+
+<Flex direction="column" gap={4}>
+  Learn about GDS at a high level and see a demo of using GDS components to build an App Action.
+  <Flex gap={1} align="center">
+    <Icon icon={ InterfaceTransformIcon } accessibilityLabel="" />
+    <Link href="https://grammarly.zoom.us/rec/share/KNL7qjw9oqCob5-ZSnB0wGIYrmi9_nBNxZKDV-XHUpABk-VOOdXLoab5HKrDGH6w.o4GB9VBFlUE99OTw">
+        View the Zoom recording
+    </Link>
+  </Flex>
+</Flex>
+
+### GDS Jeopardy
+
+Test your knowledge of some GDS concepts and learn new things!
+
+<Flex gap={1} align="center">
+    <Icon icon={ InterfaceTransformIcon } accessibilityLabel="" />
+    <Link href={useBaseUrl("/jeopardy")}>
+        Play GDS Jeopardy
+    </Link>
+  </Flex>
+
+
+## Guidelines
+
+### Design
+
+<DocCardList
+  items={[
+    {
+      type: "link",
+      label: "Designers",
+      href: "/getting-started/designers",
+      docId: "getting-started/designers",
+      unlisted: false,
+    },
+  ]}
+/>
+
+### Engineering
+
+<DocCardList
+  items={[
+    {
+      type: "link",
+      label: "Web (JavaScript)",
+      href: "/getting-started/engineers/web",
+      docId: "getting-started/engineers/web",
+      unlisted: false,
+    },
+    {
+      type: "link",
+      label: "C#",
+      href: "/getting-started/engineers/csharp",
+      docId: "getting-started/engineers/csharp",
+      unlisted: false,
+    },
+    {
+      type: "link",
+      label: "Swift",
+      href: "/getting-started/engineers/swift",
+      docId: "getting-started/engineers/swift",
+      unlisted: false,
+    },
+  ]}
+/>
+
+### Contributing
+
+<DocCardList
+  items={[
+    {
+      type: "link",
+      label: "Component conventions",
+      href: "/getting-started/contributing/component-conventions",
+      docId: "getting-started/contributing/component-conventions",
+      unlisted: false,
+    },
+    {
+      type: "link",
+      label: "Component page template",
+      href: "/getting-started/contributing/template",
+      docId: "getting-started/contributing/template",
+      unlisted: false,
+    },
+    {
+      type: "link",
+      label: "Writing conventions",
+      href: "/getting-started/contributing/writing-conventions",
+      docId: "getting-started/contributing/writing-conventions",
+      unlisted: false,
+    },
+    {
+      type: "link",
+      label: "Glossary",
+      href: "/getting-started/glossary",
+      docId: "getting-started/glossary",
+      unlisted: false,
+    },
+  ]}
+/>

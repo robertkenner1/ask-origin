@@ -1,0 +1,214 @@
+---
+pagination_prev: null
+pagination_next: null
+sidebar_position: 3
+---
+
+import { ComponentStatusRow } from "../_components/component_status_row";
+import Recommendations from "../_components/recommendations";
+import ComponentPlayground from "../_components/comp_playground";
+import { Badge } from "@grammarly/design-system";
+import Hero from "../_components/hero";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import PropsTable from "../_components/props_table";
+import ComponentList from "../_components/component_list";
+
+# Badge
+
+<span>A Badge displays numeric values, such as tallies that are calculated programmatically.</span>
+
+<ComponentStatusRow name="Badge" />
+
+<Hero
+  path={useBaseUrl("/img/components/badge_hero.svg")}
+  altText="Badges in a card indicate the number of Premium suggestions in each category."
+/>
+<p className="caption">These Badges show Premium suggestion tallies by category.</p>
+
+## Usage
+
+Use when displaying numerical data related to a paired element, such as a label or Icon.
+
+**Do not use when** displaying text. Instead, use a [Tag](/components/tag).
+
+<Recommendations
+  recommendations={[
+    {
+      image: useBaseUrl("/img/components/badge_do.svg"),
+      caption: "Use numbers to add helpful data.",
+      type: "do",
+    },
+    {
+      image: useBaseUrl("/img/components/badge_dont.svg"),
+      caption: "Do not display text in a Badge.",
+      type: "dont",
+    },
+  ]}
+/>
+
+## Examples
+
+<ComponentPlayground
+  code={`
+  <Flex gap={4}>
+  <Badge variant="neutral" count={10} getAriaLabelText={count => count + ' suggestions'}  />
+  <Badge
+    count={5}
+    variant="addition"
+    specialCharBefore="+"
+    getAriaLabelText={(count) => count + " new suggestions"}
+  />
+  <Badge
+    count={10}
+    variant="critical"
+    specialCharBefore="-"
+    specialCharAfter="%"
+    getAriaLabelText={(count) => count + " percent decrease in accuracy"}
+  />
+  </Flex>`}
+/>
+
+### Variants
+
+Use the `variant` prop to change a Badge's appearance based on your use case. Options include `addition`, `business`, `clarity`, `correctness`, `critical`, `deletion`, `delivery`, `engagement`, `neutral`, `plagiarism`, `premium`, `pro`, `success`, and `warning`.
+
+<ComponentPlayground
+  code={`<Flex gap={3} wrap>
+    <Badge count={10} variant="addition" getAriaLabelText={count => count + ' suggestions'} />
+    <Badge count={10} variant="business" getAriaLabelText={count => count + ' suggestions'} />
+    <Badge count={10} variant="clarity" getAriaLabelText={count => count + ' suggestions'} />
+    <Badge count={10} variant="correctness" getAriaLabelText={count => count + ' suggestions'} />
+    <Badge count={10} variant="critical" getAriaLabelText={count => count + ' suggestions'} />
+    <Badge count={10} variant="deletion" getAriaLabelText={count => count + ' suggestions'} />
+    <Badge count={10} variant="delivery" getAriaLabelText={count => count + ' suggestions'} />
+    <Badge count={10} variant="engagement" getAriaLabelText={count => count + ' suggestions'} />
+    <Badge count={10} variant="neutral" getAriaLabelText={count => count + ' suggestions'} />
+    <Badge count={10} variant="plagiarism" getAriaLabelText={count => count + ' suggestions'} />
+    <Badge count={10} variant="premium" getAriaLabelText={count => count + ' suggestions'} />
+    <Badge count={10} variant="pro" getAriaLabelText={count => count + ' suggestions'} />
+    <Badge count={10} variant="success" getAriaLabelText={count => count + ' suggestions'} />
+    <Badge count={10} variant="warning" getAriaLabelText={count => count + ' suggestions'} /> 
+  </Flex>`}
+/>
+
+## Behavior
+
+### Position
+
+Position a Badge so that it’s clear to a user what it quantifies. Typical alignments include:
+
+- Left of its related element
+- Right of its related element
+- Overlapping the top-right corner of its related element, ensuring that the underlying element remains clear
+
+<div className="diagram p-8">
+  <img
+    src={useBaseUrl("/img/components/badge_alignment.svg")}
+    alt="Badge examples showing different placement options."
+  />
+</div>
+
+### Maximum value
+
+A Badge can have up to two digits, and the maximum tally is 99. A Badge displays 99+ for values after 99, then 1K+ for all values after 1,000.
+
+Percentages can have up to three digits and a percentage sign (%).
+
+<div className="diagram p-8">
+  <img
+    src={useBaseUrl("/img/components/badge_maximums.svg")}
+    alt="Examples of a Badge displaying maximum values in the browser extension."
+  />
+</div>
+
+## Accessibility
+
+For Badges that display 99+ or 1K+, make sure that screen readers read the displayed value followed by the actual count. For example, 99+ should be read as “99+ suggestions, 107 suggestions in total.”
+
+<ComponentPlayground
+  code={
+    'function Example() { const total = 107; return <Badge variant="neutral" count={total} getAriaLabelText={count => `${count} suggestions, ${total} suggestions in total`}  /> }'
+  }
+/>
+
+## Writing
+
+When you design, we recommend using the badge with its maximum value or character count to avoid potential breaks or readability issues.
+
+### Accepted characters
+
+A Badge should only contain numbers and the special characters +, -, %, or K.
+
+<ComponentPlayground
+  code={`
+  <Flex gap={4}>
+    <Badge count={3000} variant="neutral" getAriaLabelText={count => count + ' suggestions, 3000 suggestions total'}  />
+    <Badge count={5} variant="addition" specialCharBefore="+" getAriaLabelText={count => count + ' new suggestions'}  />
+    <Badge count={10} variant="critical" specialCharBefore="-" specialCharAfter="%" getAriaLabelText={count => count + ' percent decrease in accuracy'}  />
+  </Flex>
+  `}
+/>
+
+## Installation
+
+1. Import the CSS (if not done already).
+
+```css
+@import "@grammarly/design-system";
+```
+
+2. Import the Badge component in JS.
+
+```tsx
+import { Badge } from "@grammarly/design-system";
+```
+
+## API
+
+<PropsTable
+  properties={[
+    {
+      propertyName: "count",
+      isRequired: true,
+      typeDefinition: "number",
+      description:
+        "Defines the count to display with formatting rules. If `specialCharBefore` or `specialCharAfter` are passed, the raw count value will be displayed unformatted.",
+    },
+    {
+      propertyName: "getAriaLabelText",
+      isRequired: true,
+      typeDefinition:
+        "(count: string | number,specialCharBefore?: string,specialCharAfter?: string) => string",
+      description:
+        "Used to format aria label on the Badge component for screen reader announcement. If a special character is passed, the raw count value is passed as number and special character. Otherwise, the count will be formatted and passed as a string.",
+    },
+    {
+      propertyName: "specialCharAfter",
+      typeDefinition: "'%'",
+      description: "Defines a special character to display after the count.",
+    },
+    {
+      propertyName: "specialCharBefore",
+      typeDefinition: "'+' | '-'",
+      description: "Defines a special character to display before the count.",
+    },
+    {
+      propertyName: "variant",
+      defaultValue: "neutral",
+      typeDefinition:
+        "'neutral' | 'business' | 'addition' | 'clarity' | 'correctness' | 'critical' | 'deletion' | 'delivery' | 'engagement' | 'plagiarism' | 'premium' | 'pro' | 'success' | 'warning'",
+      description: "Styles the Badge according to its use.",
+    },
+  ]}
+/>
+
+## Related components
+
+export const DataComponents = [
+  {
+    href: "/components/tag",
+    label: "Tag",
+  },
+];
+
+<ComponentList components={DataComponents} />

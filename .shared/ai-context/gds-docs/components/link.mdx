@@ -1,0 +1,662 @@
+---
+pagination_prev: null
+pagination_next: null
+---
+
+import Hero from "../_components/hero";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import PropsTable from "../_components/props_table";
+import RecommendationsTable from "../_components/recommendations_table";
+import ComponentList from "../_components/component_list";
+import ComponentPlayground from "../_components/comp_playground";
+import { ComponentStatusRow } from "../_components/component_status_row";
+import { Flex, Icon, InterfaceExternalLinkIcon, Link, Text } from "@grammarly/design-system";
+
+# Link
+
+<span>A Link navigates to another page or among sections of a page.</span>
+
+<style>
+  {`
+    .inline-icon {
+      margin-left: var(--space-1);
+      vertical-align: middle;
+    }
+    .no-wrap {
+      white-space: nowrap;  
+    }
+    .normal-wrap {
+      white-space: normal;
+    }
+  `}
+</style>
+
+<ComponentStatusRow name="Link" />
+<Hero
+  path={useBaseUrl("/img/components/link-hero.svg")}
+  altText="An inline Link navigates to a help center article about color-blind mode, while a standalone Link takes a user to their account settings to manage suggestions."
+/>
+<p class="caption">
+  An inline Link navigates a user to a help center article about color-blind mode, while a
+  standalone Link takes a user to their account settings to manage suggestions.
+</p>
+
+## Usage
+
+A Link can appear on its own, within a sentence or paragraph, or immediately following content.
+
+Use when:
+
+- Navigating to another page within the app or among sections within a page
+- Navigating to an external website outside of the app
+- Linking to emails and phone numbers
+
+Do not use when:
+
+- Allowing a user to perform an action. Instead, use a [Button](/components/button/).
+- Allowing a user to alter how content on a page is displayed. Instead, use a [Button](/components/button/) or [Switch](/components/switch/).
+
+### Is it a Link or a Button?
+
+Links are used to navigate among pages, within sections of the same page, or to a location outside the app. They are also used for phone numbers and email addresses.
+
+A [Button](/components/button/) allows a user to do something along their current path—it doesn't take them out of it like a Link does. Buttons perform actions like **Create**, **Save**, or **Delete**.
+
+## Examples
+
+### Variants
+
+Link variants set only the color of the text in a Link. Style the underline, weight, and font size according to your use case. [View recommended styles](#styling) based on placement.
+
+#### Primary
+
+By default, our primary brand color is applied to Links.
+
+<ComponentPlayground
+  code={`
+    <Link href="https://support.grammarly.com/">Visit the help center</Link>
+    `}
+/>
+
+#### Secondary
+
+Use `variant="secondary"` in rare cases when a Link requires less visual prominence.
+
+<ComponentPlayground
+  code={`
+      <Text as="p" color="base-subdued">
+        This site is protected by reCAPTCHA. {" "}
+        <Link href="https://policies.google.com/privacy" variant="secondary">
+          Google’s Privacy Policy
+        </Link>{" "}
+        and{" "}
+        <Link href="https://policies.google.com/terms" variant="secondary">
+          Google’s Terms of Service
+        </Link>{" "}
+        apply.
+      </Text>
+    `}
+/>
+
+#### Inherit
+
+Use `variant="inherit"` to make the font color match the surrounding text.
+
+<ComponentPlayground
+  code={`
+      <Flex bgColor="green-90" padding={4}>
+        <Text as="span" color="base-inverse">
+          We partner with the Cloud Security Alliance (CSA).{" "}
+          <span className='no-wrap'>
+            <Link
+              href="https://cloudsecurityalliance.org"
+              target="_blank"
+              variant="inherit"
+              display="inline"
+            >
+              <span class='normal-wrap'>Learn more about the Cloud Security </span>Alliance
+              <Icon icon={InterfaceExternalLinkIcon} accessibilityLabel="" variant="inherit" className="inline-icon"/>
+            </Link>
+            .
+          </span>
+        </Text>
+      </Flex>
+    `}
+/>
+
+### Underline
+
+By default, a Link is displayed with an underline in all states to provide a clear visual cue. However, you can set the underline to appear only when a user hovers over the Link with `underline="hover"`. 
+
+<ComponentPlayground
+  code={`
+  <Link
+        href="https://account.grammarly.com/security/devices"
+        underline="hover"
+        variant="secondary"
+        display="block"
+      >
+        <Flex gap={2} align="center">
+          <Text as="span">See all device sessions</Text>
+          <Icon icon={InterfaceRightIcon} accessibilityLabel="" variant="inherit" />
+        </Flex>
+      </Link>
+    `}
+/>
+
+### Weight and size
+
+Add emphasis to a Link with `weight="bold"`.
+
+To change the font size of a Link, use [Text](/components/text/) either inside or outside the Link. Set the Text component’s `variant` to your desired font size. 
+
+<ComponentPlayground
+  code={`
+      <Flex direction="column">
+        <Heading as="h1" variant="heading-medium" marginBottom={5}>
+          Communication
+        </Heading>
+        <Heading as="h2" variant="heading-small" marginBottom={3}>
+          Email
+        </Heading>
+
+        <Flex gap={5}>
+          <Text as="span" variant="text-small">
+            Choose the types of email you want to receive.{" "}
+          </Text>
+          <Text as="span" variant="text-small">
+            <Link
+              href=""
+              weight="bold"
+              accessibilityLabel="Update email preferences"
+            >
+              Update preferences
+            </Link>
+          </Text>
+        </Flex>
+      </Flex>
+    `}
+
+/>
+
+### Icon
+
+A Link will commonly include an [Icon](/components/icon/) alongside text. Both the Icon and any included text should activate the Link. Use [Flex](/components/flex/) to space apart the Icon and text as part of a Link. 
+
+Use an Icon on either the left or right side—but not both. An Icon should inherit the color of the Link’s text. [Learn about the icon for a new tab or window](#communicating-a-new-tab-or-window).
+
+<ComponentPlayground
+  code={`
+ <Link href="mailto:support@grammarly.com" display="inline-block">
+        <Flex gap={2} align="center">
+          <Text as="span">Contact Support</Text>
+          <Icon icon={InterfaceInboxIcon} accessibilityLabel="" variant="inherit" />
+        </Flex>
+      </Link>
+    `}
+/>
+
+## Behavior
+
+### Styling
+
+Use different styles for a Link based on its placement.
+
+#### Inline Links
+
+An inline Link appears within a sentence or as the last sentence of a paragraph. An underline should always be present, which is the component’s default.
+
+<ComponentPlayground
+  code={`
+        <Text as="p">
+          Use different underline styles to {" "}
+          <Link href="https://support.grammarly.com/hc/en-us/articles/360003474732-Grammarly-Editor-user-guide">
+            indicate suggestion types
+          </Link>{" "}
+          (Correctness, Clarity, Engagement, and Delivery)
+        </Text>
+    `}
+/>
+
+#### Standalone Links
+
+A standalone Link appears on its own instead of inline with other text. Display the underline only when a user hovers over the Link.
+
+Users can easily miss standalone Links. To improve scannability and usability, use visual cues like an Icon or bold text to make sure a Link commands attention. These visual cues are essential when a Link is placed between or adjacent to content.
+
+In other rare cases, such as inside a table cell, you might apply this styling to Links to avoid obscuring the surrounding UI.
+
+<ComponentPlayground
+  code={`
+      <Flex gap={4} direction="column">
+        <Text as="p">
+          The Cloud Security Alliance (CSA) is a non-profit organization that is dedicated to
+          promoting best practices for security in cloud computing.
+        </Text>
+        <Link
+          href="https://cloudsecurityalliance.org"
+          display="block"
+          target="_blank"
+          underline="hover"
+          weight="bold"
+        >
+          <Flex gap={2} align="center">
+            <Text as="span">Learn about Cloud Security Alliance</Text>
+            <Icon icon={InterfaceExternalLinkIcon} accessibilityLabel="" variant="brand" />
+          </Flex>
+        </Link>
+        <Text as="p">
+          The CSA was founded in 2008 and has since become a leading authority on cloud security,
+          providing education, research, and guidance to help organizations secure their cloud
+          environments.
+        </Text>
+      </Flex>
+    `}
+/>
+
+### Opening in a new tab or window
+
+When you set `target=_blank`, a Link automatically:
+
+- Sets `rel="noopener noreferrer"`. [Learn more at MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#target).
+- Adds hidden text for screen readers that says, “Opens a new window.”
+- Opens in a new tab or window based on a user’s browser settings.
+
+Opening a Link in a new tab by default can cause accessibility issues and general user confusion. Open a new tab only when necessary, such as when:
+
+- A user is allowed to choose this as their default preference.
+- A user is navigating from within Grammarly’s product experience to an outside page, such as from the Grammarly Editor to a help center article.
+
+## Accessibility
+
+In general, a Link needs to:
+
+- Stand out from adjacent content
+- Accurately describe the destination or action
+
+The color of a Link may vary but it must adhere to a 3:1 contrast ratio with the surrounding text unless an alternative method of identifying the Link is offered, such as underlining. Inline Links should always be underlined, regardless of color contrast, to afford a distinct visual indication for users, particularly those with low vision or who utilize a screen reader.
+
+In rare cases, you may need to limit the length of Link text in a way that wouldn’t provide sufficient context on its own. To remain accessible, provide any context otherwise unavailable for a person using a screen reader through the `accessibilityLabel` prop. For example, a Link with the visible text **Update** in Settings may have an `accessibilityLabel='Update email preferences'` in addition to the automatically added hidden text indicating that a Link opens in a new window. This content now provides the entire context for a person using a screen reader.
+
+### Communicating a new tab or window
+
+If a Link always opens in a new tab or window, the Link should communicate this information to users. 
+
+Add the [External Link Icon](/tokens) to help users understand the interaction. When `target=_blank`, hidden text that says “Opens a new window” is already included, so you don’t need additional alt text for this Icon.
+
+<ComponentPlayground
+  code={`
+      <Flex gap={4} direction="column">
+        <Text as="p">
+          The Cloud Security Alliance (CSA) is a non-profit organization that is dedicated to
+          promoting best practices for security in cloud computing.
+        </Text>
+        <Link
+          href="https://cloudsecurityalliance.org"
+          display="block"
+          target="_blank"
+          underline="hover"
+          weight="bold"
+        >
+          <Flex gap={2} align="center">
+            <Text as="span">Learn about Cloud Security Alliance</Text>
+            <Icon icon={InterfaceExternalLinkIcon} accessibilityLabel="" variant="brand" />
+          </Flex>
+        </Link>
+      </Flex>
+    `}
+/>
+
+### Downloads
+
+If a Link activates a download, the Link should communicate:
+
+- That a file will be downloaded 
+- Name and type of file that will be downloaded
+- Size of the file
+
+Present all of this information in a Link’s visible text. For example, “Download Grammarly Style Guide PDF (English, 1.5 MB)”. 
+
+Incorporating an Icon into a Link can help users understand that it is a download. It can be a generic download Icon or a document-specific Icon for .pdf, .doc, and other formats. It’s not a requirement, but it enhances the experience. If the visible text already includes the action verb “download,” you don’t need additional alt text for such an Icon and should treat it as decorative.
+
+### Keyboard interaction
+
+| Key              | Expected result                                 |
+| ---------------- | ----------------------------------------------- |
+| <kbd>Enter</kbd> | Activates a Link and moves focus to the target |
+
+## Writing
+
+In as few words as possible, a Link’s text should make clear:
+
+- Where a user will be taken, such as to a help center article
+- What action will be performed, such as downloading a document
+
+<RecommendationsTable
+  caption="Writing best practices for Link text"
+  recommendations={[
+    {
+      recommendationDo: "Use descriptive text that reflects a Link’s destination.",
+      exampleDo: (
+        <Text as="div" variant="text-small">
+          Limited data is shared with your admin.{" "}
+          <span className="no-wrap">
+            <Link href="" target="_blank" display="inline">
+              <span class="normal-wrap">Learn what data is </span>shared
+              <Icon
+                icon={InterfaceExternalLinkIcon}
+                accessibilityLabel=""
+                variant="inherit"
+                className="inline-icon"
+              />
+            </Link>
+            .
+          </span>
+        </Text>
+      ),
+      recommendationDont:
+        "Do not use generic or nondescript phrases that obscure a Link’s destination.",
+      exampleDont: (
+        <Text as="span" variant="text-small">
+          Limited data is shared with your administrator. <Link href="">Click here</Link> to learn
+          what data is shared.
+        </Text>
+      ),
+    },
+    {
+      recommendationDo: (
+        <Text as="span" variant="text-small">
+          Include additional information using an <code>accessibilityLabel</code> or text only for
+          screen readers.
+        </Text>
+      ),
+      exampleDo: (
+        <Flex gap={2} direction="column">
+          <Text as="p" variant="text-small">
+            Choose the types of email you want to receive.{" "}
+            <Link href="" accessibilityLabel="Update email preferences">
+              Update
+            </Link>
+          </Text>
+          <code>accessibilityLabel='Update email preferences'</code>
+        </Flex>
+      ),
+      recommendationDont:
+        "Do not assume a person who uses a screen reader has context provided in the surrounding text.",
+      exampleDont: (
+        <Text as="span" variant="text-small">
+          <Link href="">Update</Link>
+        </Text>
+      ),
+    },
+    {
+      recommendationDo:
+        "Explain the benefit of visiting a destination before providing the Link itself.",
+      exampleDo: (
+        <Text as="span" variant="text-small">
+          To add more seats to your license, <Link href="">email customer support</Link>.
+        </Text>
+      ),
+      recommendationDont: "Do not offer a Link until a user knows why it’s relevant.",
+      exampleDont: (
+        <Text as="span" variant="text-small">
+          <Link href="">Email customer support</Link> to add more seats to your license.
+        </Text>
+      ),
+    },
+    {
+      recommendationDo:
+        "Include details that help a user understand the destination, such as the download’s type, language, or size.",
+      exampleDo: (
+        <Text as="span" variant="text-small">
+          <Link href={useBaseUrl("")} download="StyleGuide">
+            Download style guide PDF (French, 1.5 MB)
+          </Link>
+        </Text>
+      ),
+      recommendationDont:
+        "Do not assume a user is aware of metadata with unintended consequences, such as a large file or a different language.",
+      exampleDont: (
+        <Text as="span" variant="text-small">
+          <Link href={useBaseUrl("")} download="StyleGuide">
+            Download document
+          </Link>
+        </Text>
+      ),
+    },
+    {
+      recommendationDo:
+        "Use up to five words in most cases. There is no strict limit to accommodate varied usage and maintain accessibility.",
+      exampleDo: (
+        <Text as="span" variant="text-small">
+          <Link href="">View all Iconography</Link>
+        </Text>
+      ),
+      recommendationDont:
+        "Do not use very long Link text without reason. If additional context is needed, include screen reader–only text.",
+      exampleDont: (
+        <Text as="span" variant="text-small">
+          <Link href="">View all of the Icons included in the Grammarly Design System</Link>
+        </Text>
+      ),
+    },
+    {
+      recommendationDo: "Use sentence case almost always.",
+      exampleDo: (
+        <Text as="span" variant="text-small">
+          Have more questions? <Link href="">Submit a request</Link>.
+        </Text>
+      ),
+      recommendationDont: "Do not use Title Case or ALL CAPS.",
+      exampleDont: (
+        <Text as="span" variant="text-small">
+          Have more questions? <Link href="">SUBMIT A REQUEST</Link>.
+        </Text>
+      ),
+    },
+    {
+      recommendationDo: "Use lowercase for URLs, but only use a URL when necessary to encourage recall of the destination.",
+      exampleDo: (
+        <Text as="span" variant="text-small">
+          Find answers to common questions at: <Link href="">www.grammarly.com/support</Link>
+        </Text>
+      ),
+      recommendationDont:
+        "Do not use end punctuation with a URL to avoid copy/paste issues. Avoid URLs in the middle of a paragraph for this reason.",
+      exampleDont: (
+        <Text as="span" variant="text-small">
+          To get support, visit <Link href="">www.grammarly.com/support</Link>. You’ll find articles
+          about the basics, billing, and more.
+        </Text>
+      ),
+    },
+    {
+      recommendationDo:
+        "Use end punctuation for an inline Link. Place periods or parentheses outside the linked phrase.",
+      exampleDo: (
+        <Text as="span" variant="text-small">
+          Grammarly is committed to a people-first approach to privacy and security.{" "}
+          <span className="no-wrap">
+            <Link href="" target="_blank" display="inline">
+              <span class="normal-wrap">Learn how we handle </span>data
+              <Icon
+                icon={InterfaceExternalLinkIcon}
+                accessibilityLabel=""
+                variant="inherit"
+                className="inline-icon"
+              />
+            </Link>
+            .
+          </span>
+        </Text>
+      ),
+      recommendationDont: "Do not use end punctuation for a standalone Link, even if it is a complete sentence.",
+      exampleDont: (
+        <Text as="span" variant="text-small">
+          <Link href="">Visit the help center</Link>.
+        </Text>
+      ),
+    },
+    {
+      recommendationDo:
+        "Include a question mark in the Link text when it’s part of the page’s or article’s title.",
+      exampleDo: (
+        <Text as="span" variant="text-small">
+          <Link href="">How can I cancel my subscription?</Link>
+        </Text>
+      ),
+      recommendationDont: "Do not use a question mark set outside of the linked phrase.",
+      exampleDont: (
+        <Text as="span" variant="text-small">
+          <Link href="">How can I cancel my subscription</Link>?
+        </Text>
+      ),
+    },
+  ]}
+/>
+
+## Installation
+
+1. Import the CSS (if not done already).
+
+```css
+@import "@grammarly/design-system";
+```
+
+2. Import the Link component in JS.
+
+```tsx
+import { Link } from "@grammarly/design-system";
+```
+
+## API
+
+<PropsTable
+  properties={[
+    {
+      propertyName: "href",
+      isRequired: true,
+      isDeprecated: false,
+      description: "Destination for the Link.",
+      defaultValue: null,
+      typeDefinition: "string",
+    },
+    {
+      propertyName: "accessibilityLabel",
+      isRequired: false,
+      isDeprecated: false,
+      description:
+        "Descriptive text to be read by screen readers. Used if the Link text does not provide sufficient context.",
+      defaultValue: null,
+      typeDefinition: "string",
+    },
+    {
+      propertyName: "children",
+      isRequired: false,
+      isDeprecated: false,
+      description: "The contents of the Link, most commonly a simple string with an optional Icon.",
+      defaultValue: null,
+      typeDefinition: "React.ReactNode",
+    },
+    {
+      propertyName: "display",
+      isRequired: false,
+      isDeprecated: false,
+      description:
+        "Determines how a Link is positioned relative to the elements around it. [Learn more at MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/display).",
+      defaultValue: '"inline"',
+      typeDefinition: '"inline" | "block" | "inline-block"',
+    },
+    {
+      propertyName: "download",
+      isRequired: false,
+      isDeprecated: false,
+      description:
+        "Indicates a file will be downloaded when the Link is activated." +
+        "<ul>" +
+        "<li>When true, the file will be downloaded.</li>" +
+        "<li>When a string is provided, the file will be downloaded with the given file name. [Learn more at MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#download).</li>" +
+        "</ul>",
+      defaultValue: null,
+      typeDefinition: "string | boolean",
+    },
+    {
+      propertyName: "id",
+      isRequired: false,
+      isDeprecated: false,
+      description:
+        "The unique ID for the Link. " +
+        "[Learn more at MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id).",
+      defaultValue: null,
+      typeDefinition: "string",
+    },
+    {
+      propertyName: "target",
+      isRequired: false,
+      isDeprecated: false,
+      description:
+        "Determines where the Link will be opened. [Learn more at MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#target).<br><br>" +
+        "When target is set to `_blank`, the Link component will automatically:<br>" +
+        "<ul>" +
+        '<li>Set `rel="noopener noreferrer"`. [Learn more at MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel).</li>' +
+        '<li>Add hidden text for screen readers that says "Opens a new window"</li>' +
+        "</ul>",
+      defaultValue: null,
+      typeDefinition: '"_blank" | "_self" | "_parent" | "_top"',
+    },
+    {
+      propertyName: "underline",
+      isRequired: false,
+      isDeprecated: false,
+      description:
+        "Determines whether an underline should always be added to Link text or only on hover.",
+      defaultValue: '"always"',
+      typeDefinition: '"always" | "hover"',
+    },
+    {
+      propertyName: "variant",
+      isRequired: false,
+      isDeprecated: false,
+      description:
+        "Sets the color of the Link text and any included Icons.<br>" +
+        "<ul>" +
+        "<li>Use `primary` by default.</li>" +
+        "<li>Use `secondary` when the surrounding content uses the `color-text-base-subdued` token color or if a standalone Link is meant to be visually subdued.</li>" +
+        "<li>Use `inherit` when you want the font color to match the surrounding Text.</li>" +
+        "</ul>",
+      defaultValue: '"primary"',
+      typeDefinition: '"primary" | "secondary" | "inherit"',
+    },
+    {
+      propertyName: "weight",
+      isRequired: false,
+      isDeprecated: false,
+      description: "Determines the font weight of the text.",
+      defaultValue: null,
+      typeDefinition: '"normal" | "bold"',
+    },
+    {
+      propertyName: "onClick",
+      isRequired: false,
+      isDeprecated: false,
+      description: "Event handler called when a Link is activated by a user.",
+      defaultValue: null,
+      typeDefinition: "React.MouseEventHandler <HTMLAnchorElement>",
+    },
+  ]}
+/>
+
+## Related components
+
+<ComponentList
+  components={[
+    {
+      href: "/components/button",
+      label: "Button",
+    },
+    {
+      href: "/components/switch",
+      label: "Switch",
+    },
+  ]}
+/>
