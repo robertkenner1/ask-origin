@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { OrchestraIconAnimated } from "@/components/icons/OrchestraIconAnimated";
+import { OrchestraIconAnimated } from "@/app/components/icons/OrchestraIconAnimated";
 import { X } from "lucide-react";
 
 interface StreamGenerationProgressProps {
@@ -29,7 +29,7 @@ export function StreamGenerationProgress({
       <div className="p-4">
         <div className="flex items-start">
           <div className="mr-3 h-8 w-8 flex-shrink-0">
-            <OrchestraIconAnimated size={32} animating={!isComplete} />
+            <OrchestraIconAnimated size={32} />
           </div>
 
           <div className="flex-1">

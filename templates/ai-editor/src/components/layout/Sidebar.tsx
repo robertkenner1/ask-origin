@@ -3,11 +3,11 @@
 import React, { useState } from "react";
 import AgentBench from "@/components/chat/AgentBench";
 import IconButton from "@/components/core/icon-button";
-import { OrchestraIcon } from "@/components/icons/OrchestraIcon";
-import ProofreaderIcon from "@/components/icons/ProofreaderIcon";
-import PlagiarismIcon from "@/components/icons/PlagiarismIcon";
-import AiDetectorIcon from "@/components/icons/AiDetectorIcon";
-import SettingsIcon from "@/components/icons/SettingsIcon";
+import { OrchestraIcon } from "@/app/components/icons/OrchestraIcon";
+import ProofreaderIcon from "@/app/components/icons/ProofreaderIcon";
+import PlagiarismIcon from "@/app/components/icons/PlagiarismIcon";
+import AiDetectorIcon from "@/app/components/icons/AiDetectorIcon";
+import SettingsIcon from "@/app/components/icons/SettingsIcon";
 import SettingsDialog from "@/components/core/SettingsDialog";
 import { useSidebarStore } from "@/stores/chat/sidebarStore";
 import { iconSizes } from "@/config/iconConfig";

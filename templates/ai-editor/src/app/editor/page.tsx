@@ -181,7 +181,7 @@ function EditorContent() {
       <div className="flex min-h-screen items-center justify-center bg-gray-50">
         <div className="text-center">
           <div className="mx-auto mb-4 h-32 w-32">
-            <OrchestraIconAnimated size={128} animating={true} />
+            <OrchestraIconAnimated size={128} />
           </div>
           <p className="text-xl font-medium text-gray-800">
             {progress.message}
@@ -203,7 +203,7 @@ function EditorContent() {
       <div className="flex min-h-screen items-center justify-center bg-gray-50">
         <div className="text-center">
           <div className="mx-auto mb-4 h-32 w-32">
-            <OrchestraIconAnimated size={128} animating={true} />
+            <OrchestraIconAnimated size={128} />
           </div>
           <p className="text-xl font-medium text-gray-800">
             Loading document...

@@ -106,7 +106,7 @@ export function DocumentInputBar({
             >
               {isGenerating || localLoading ? (
                 <div className="h-4 w-4">
-                  <OrchestraIconAnimated size={16} animating={true} />
+                  <OrchestraIconAnimated size={16} />
                 </div>
               ) : (
                 <ArrowRight className="h-5 w-5" />

@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
-import { OrchestraIconAnimated } from "@/components/icons/OrchestraIconAnimated";
+import { OrchestraIconAnimated } from "@/app/components/icons/OrchestraIconAnimated";
 import { cn } from "@/utils/common/cn";
 import { useDeepWriterDocument } from "@/hooks/document/useDeepWriterDocument";
 
@@ -106,7 +106,7 @@ export function DocumentInputBar({
             >
               {isGenerating || localLoading ? (
                 <div className="h-4 w-4">
-                  <OrchestraIconAnimated size={16} animating={true} />
+                  <OrchestraIconAnimated size={16} />
                 </div>
               ) : (
                 <ArrowRight className="h-5 w-5" />

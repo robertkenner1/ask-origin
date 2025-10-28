@@ -17,4 +17,7 @@ pages:
   environment:
     name: production
     url: $CI_PAGES_URL
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
 

@@ -29,7 +29,7 @@ export function StreamGenerationProgress({
       <div className="p-4">
         <div className="flex items-start">
           <div className="mr-3 h-8 w-8 flex-shrink-0">
-            <OrchestraIconAnimated size={32} animating={!isComplete} />
+            <OrchestraIconAnimated size={32} />
           </div>
 
           <div className="flex-1">

@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { ArrowLeft } from "lucide-react";
-import { OrchestraIcon } from "@/components/icons/OrchestraIcon";
+import { OrchestraIcon } from "@/app/components/icons/OrchestraIcon";
 import type { Suggestion } from "@/hooks/editor/useTextSuggestions";
 
 // Simpler Tab indicator component

@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { DragHandle } from "@tiptap/extension-drag-handle-react";
 import { Editor } from "@tiptap/react";
-import { DragHandleIcon } from "@/components/icons/DragHandleIcon";
+import { DragHandleIcon } from "@/app/components/icons/DragHandleIcon";
 
 interface TipTapDragHandleProps {
   editor: Editor;

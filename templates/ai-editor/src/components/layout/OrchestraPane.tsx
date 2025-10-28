@@ -5,7 +5,7 @@ import ChatMessage from "@/components/chat/ChatMessage";
 import ChatInput from "@/components/chat/ChatInput";
 import { useDocumentManager } from "@/hooks/document/useDocumentStore";
 import { useChatStore } from "@/stores/chat/chatStore";
-import { OrchestraIconAnimated } from "@/components/icons/OrchestraIconAnimated";
+import { OrchestraIconAnimated } from "@/app/components/icons/OrchestraIconAnimated";
 
 interface OrchestraPaneProps {
   isOpen: boolean;
