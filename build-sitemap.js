@@ -91,7 +91,7 @@ class SitemapBuilder {
                 const label = config.deployment === DEPLOYMENT_TYPES.VERCEL
                     ? 'Vercel (external)'
                     : config.deployment;
-                console.log(`⏭️  Skipping ${projectName} (${label})`);
+                console.log(`⏭️  Skipping copy for ${projectName} (${label})`);
                 continue;
             }
 
@@ -164,8 +164,21 @@ class SitemapBuilder {
             // GitLab Pages: read from public directory
             projectPath = path.join(this.publicDir, projectName);
             indexPath = path.join(projectPath, 'index.html');
+        } else if (deployment === DEPLOYMENT_TYPES.VERCEL) {
+            // Vercel: read from source directory to get metadata
+            projectPath = path.join(this.projectsDir, projectName, 'src');
+            indexPath = path.join(projectPath, 'index.html');
+
+            // For Vercel projects without src/index.html, try to get info from package.json
+            if (!fs.existsSync(indexPath)) {
+                const packageJsonPath = path.join(this.projectsDir, projectName, 'package.json');
+                if (fs.existsSync(packageJsonPath)) {
+                    return this.buildVercelProjectMetadataFromPackage(projectName, config, packageJsonPath);
+                }
+                return null;
+            }
         } else {
-            // External deployments: read from source
+            // Other external deployments: read from source
             projectPath = path.join(this.projectsDir, projectName, 'src');
             indexPath = path.join(projectPath, 'index.html');
         }
@@ -202,6 +215,43 @@ class SitemapBuilder {
         }
 
         return metadata;
+    }
+
+    buildVercelProjectMetadataFromPackage(projectName, config, packageJsonPath) {
+        try {
+            const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
+            const projectDir = path.join(this.projectsDir, projectName);
+            const stats = fs.statSync(projectDir);
+
+            const title = this.formatTitle(projectName);
+            const description = packageJson.description || 'Next.js application deployed on Vercel';
+
+            // Get list of key files for Next.js projects
+            const files = ['package.json', 'next.config.js', 'tsconfig.json'].filter(file =>
+                fs.existsSync(path.join(projectDir, file))
+            );
+
+            const metadata = {
+                name: projectName,
+                title,
+                description,
+                path: `./${projectName}/`,
+                files,
+                icon: title.charAt(0).toUpperCase(),
+                lastModified: stats.mtime.toISOString(),
+                type: 'Next.js App',
+                deployment: config.deployment
+            };
+
+            if (config.url) {
+                metadata.url = config.url;
+            }
+
+            return metadata;
+        } catch (error) {
+            console.warn(`⚠️  Could not read package.json for ${projectName}`);
+            return null;
+        }
     }
 
     // ============================================

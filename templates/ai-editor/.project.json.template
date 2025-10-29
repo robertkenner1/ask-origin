@@ -6,6 +6,7 @@
   "template": {
     "name": "ai-editor",
     "version": "1.0.0"
-  }
+  },
+  "url": "https://{{PROJECT_NAME}}-grammarly-0ad4c188.vercel.app"
 }
 

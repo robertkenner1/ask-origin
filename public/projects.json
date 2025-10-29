@@ -1,6 +1,6 @@
 {
-  "generated": "2025-10-29T09:05:06.075Z",
-  "count": 7,
+  "generated": "2025-10-29T09:30:27.150Z",
+  "count": 8,
   "projects": [
     {
       "name": "customer-support-agent",
@@ -13,9 +13,24 @@
         "script.js"
       ],
       "icon": "C",
-      "lastModified": "2025-10-29T09:05:06.067Z",
+      "lastModified": "2025-10-29T09:30:27.142Z",
       "type": "JavaScript App",
       "deployment": "gitlab-pages"
+    },
+    {
+      "name": "fancy-ai-editor",
+      "title": "Fancy Ai Editor",
+      "description": "Next.js application deployed on Vercel",
+      "path": "./fancy-ai-editor/",
+      "files": [
+        "package.json",
+        "tsconfig.json"
+      ],
+      "icon": "F",
+      "lastModified": "2025-10-29T09:30:11.199Z",
+      "type": "Next.js App",
+      "deployment": "vercel",
+      "url": "https://fancy-ai-editor-grammarly-0ad4c188.vercel.app"
     },
     {
       "name": "figma-farheen",
@@ -28,7 +43,7 @@
         "script.js"
       ],
       "icon": "F",
-      "lastModified": "2025-10-29T09:05:06.068Z",
+      "lastModified": "2025-10-29T09:30:27.142Z",
       "type": "JavaScript App",
       "deployment": "gitlab-pages"
     },
@@ -43,7 +58,7 @@
         "script.js"
       ],
       "icon": "G",
-      "lastModified": "2025-10-29T09:05:06.070Z",
+      "lastModified": "2025-10-29T09:30:27.143Z",
       "type": "UI Component",
       "deployment": "gitlab-pages"
     },
@@ -58,7 +73,7 @@
         "script.js"
       ],
       "icon": "G",
-      "lastModified": "2025-10-29T09:05:06.071Z",
+      "lastModified": "2025-10-29T09:30:27.144Z",
       "type": "UI Component",
       "deployment": "gitlab-pages"
     },
@@ -73,7 +88,7 @@
         "script.js"
       ],
       "icon": "M",
-      "lastModified": "2025-10-29T09:05:06.072Z",
+      "lastModified": "2025-10-29T09:30:27.145Z",
       "type": "JavaScript App",
       "deployment": "gitlab-pages"
     },
@@ -88,7 +103,7 @@
         "script.js"
       ],
       "icon": "G",
-      "lastModified": "2025-10-29T09:05:06.073Z",
+      "lastModified": "2025-10-29T09:30:27.145Z",
       "type": "UI Component",
       "deployment": "gitlab-pages"
     },
@@ -103,7 +118,7 @@
         "script.js"
       ],
       "icon": "T",
-      "lastModified": "2025-10-29T09:05:06.074Z",
+      "lastModified": "2025-10-29T09:30:27.146Z",
       "type": "UI Component",
       "deployment": "gitlab-pages"
     }
