@@ -1,0 +1,10 @@
+{
+  "name": "thinking-grammarly",
+  "description": "Thinking Grammarly",
+  "deployment": "gitlab-pages",
+  "created": "2025-10-29T09:04:39Z",
+  "template": {
+    "name": "static-website",
+    "version": "1.0.0"
+  }
+}
