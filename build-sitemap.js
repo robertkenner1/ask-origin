@@ -83,7 +83,7 @@ class SitemapBuilder {
             const config = this.readProjectConfig(projectName);
 
             if (!config) {
-                console.log(`⚠️  No project.json for ${projectName}, skipping`);
+                console.log(`⚠️  No .project.json for ${projectName}, skipping`);
                 continue;
             }
 
@@ -219,7 +219,7 @@ class SitemapBuilder {
     }
 
     readProjectConfig(projectName) {
-        const projectJsonPath = path.join(this.projectsDir, projectName, 'project.json');
+        const projectJsonPath = path.join(this.projectsDir, projectName, '.project.json');
 
         if (!fs.existsSync(projectJsonPath)) {
             return null;
@@ -232,7 +232,7 @@ class SitemapBuilder {
                 url: config.url || null
             };
         } catch (error) {
-            console.warn(`⚠️  Invalid project.json for ${projectName}`);
+            console.warn(`⚠️  Invalid .project.json for ${projectName}`);
             return null;
         }
     }

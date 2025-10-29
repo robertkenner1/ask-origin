@@ -1,0 +1,10 @@
+{
+  "name": "my-first-gr-design",
+  "description": "My First GR Design",
+  "deployment": "gitlab-pages",
+  "created": "2025-10-29T09:04:39Z",
+  "template": {
+    "name": "static-website",
+    "version": "1.0.0"
+  }
+}

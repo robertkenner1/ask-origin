@@ -1,7 +1,37 @@
 {
-  "generated": "2025-10-28T16:03:41.137Z",
-  "count": 3,
+  "generated": "2025-10-29T09:05:06.075Z",
+  "count": 7,
   "projects": [
+    {
+      "name": "customer-support-agent",
+      "title": "Customer Support AI Agent",
+      "description": "No description available",
+      "path": "./customer-support-agent/",
+      "files": [
+        "index.html",
+        "styles.css",
+        "script.js"
+      ],
+      "icon": "C",
+      "lastModified": "2025-10-29T09:05:06.067Z",
+      "type": "JavaScript App",
+      "deployment": "gitlab-pages"
+    },
+    {
+      "name": "figma-farheen",
+      "title": "Figma Farheen",
+      "description": "Frontend prototype for figma-farheen",
+      "path": "./figma-farheen/",
+      "files": [
+        "index.html",
+        "styles.css",
+        "script.js"
+      ],
+      "icon": "F",
+      "lastModified": "2025-10-29T09:05:06.068Z",
+      "type": "JavaScript App",
+      "deployment": "gitlab-pages"
+    },
     {
       "name": "golden-path-redesign",
       "title": "Golden Path - Step 2",
@@ -13,7 +43,7 @@
         "script.js"
       ],
       "icon": "G",
-      "lastModified": "2025-10-28T16:03:41.133Z",
+      "lastModified": "2025-10-29T09:05:06.070Z",
       "type": "UI Component",
       "deployment": "gitlab-pages"
     },
@@ -28,7 +58,7 @@
         "script.js"
       ],
       "icon": "G",
-      "lastModified": "2025-10-28T16:03:41.134Z",
+      "lastModified": "2025-10-29T09:05:06.071Z",
       "type": "UI Component",
       "deployment": "gitlab-pages"
     },
@@ -43,8 +73,38 @@
         "script.js"
       ],
       "icon": "M",
-      "lastModified": "2025-10-28T16:03:41.136Z",
+      "lastModified": "2025-10-29T09:05:06.072Z",
       "type": "JavaScript App",
+      "deployment": "gitlab-pages"
+    },
+    {
+      "name": "my-first-gr-design",
+      "title": "Grammarly Style Text Interaction",
+      "description": "No description available",
+      "path": "./my-first-gr-design/",
+      "files": [
+        "index.html",
+        "styles.css",
+        "script.js"
+      ],
+      "icon": "G",
+      "lastModified": "2025-10-29T09:05:06.073Z",
+      "type": "UI Component",
+      "deployment": "gitlab-pages"
+    },
+    {
+      "name": "thinking-grammarly",
+      "title": "Thinking Grammarly Prototype",
+      "description": "Prototype showing Grammarly-style popup with hover interaction",
+      "path": "./thinking-grammarly/",
+      "files": [
+        "index.html",
+        "styles.css",
+        "script.js"
+      ],
+      "icon": "T",
+      "lastModified": "2025-10-29T09:05:06.074Z",
+      "type": "UI Component",
       "deployment": "gitlab-pages"
     }
   ]
