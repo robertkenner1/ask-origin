@@ -100,15 +100,15 @@ class SitemapBuilder {
     }
 
     copyProjectToPublic(projectName) {
-        const srcDir = path.join(this.projectsDir, projectName, 'src');
+        const publicDir = path.join(this.projectsDir, projectName, 'public');
         const destDir = path.join(this.publicDir, projectName);
 
-        if (!fs.existsSync(srcDir)) {
-            console.log(`⚠️  No src directory for ${projectName}`);
+        if (!fs.existsSync(publicDir)) {
+            console.log(`⚠️  No public directory for ${projectName}, skipping copy`);
             return;
         }
 
-        this.copyDirectoryRecursive(srcDir, destDir);
+        this.copyDirectoryRecursive(publicDir, destDir);
         console.log(`📄 Copied ${projectName} to public`);
     }
 
@@ -161,25 +161,32 @@ class SitemapBuilder {
         let projectPath, indexPath;
 
         if (deployment === DEPLOYMENT_TYPES.GITLAB_PAGES) {
-            // GitLab Pages: read from public directory
-            projectPath = path.join(this.publicDir, projectName);
-            indexPath = path.join(projectPath, 'index.html');
-        } else if (deployment === DEPLOYMENT_TYPES.VERCEL) {
-            // Vercel: read from source directory to get metadata
-            projectPath = path.join(this.projectsDir, projectName, 'src');
+            // GitLab Pages: read from public directory (after build)
+            projectPath = path.join(this.projectsDir, projectName, 'public');
             indexPath = path.join(projectPath, 'index.html');
 
-            // For Vercel projects without src/index.html, try to get info from package.json
+            // If no public dir, project hasn't been built yet
+            if (!fs.existsSync(projectPath)) {
+                console.log(`⚠️  No public directory for ${projectName}, may need to run npm run build`);
+                return null;
+            }
+        } else if (deployment === DEPLOYMENT_TYPES.VERCEL) {
+            // Vercel: try to get info from package.json first
+            const packageJsonPath = path.join(this.projectsDir, projectName, 'package.json');
+            if (fs.existsSync(packageJsonPath)) {
+                return this.buildVercelProjectMetadataFromPackage(projectName, config, packageJsonPath);
+            }
+
+            // Fallback: read from public directory if available
+            projectPath = path.join(this.projectsDir, projectName, 'public');
+            indexPath = path.join(projectPath, 'index.html');
+
             if (!fs.existsSync(indexPath)) {
-                const packageJsonPath = path.join(this.projectsDir, projectName, 'package.json');
-                if (fs.existsSync(packageJsonPath)) {
-                    return this.buildVercelProjectMetadataFromPackage(projectName, config, packageJsonPath);
-                }
                 return null;
             }
         } else {
-            // Other external deployments: read from source
-            projectPath = path.join(this.projectsDir, projectName, 'src');
+            // Other external deployments: read from public directory
+            projectPath = path.join(this.projectsDir, projectName, 'public');
             indexPath = path.join(projectPath, 'index.html');
         }
 

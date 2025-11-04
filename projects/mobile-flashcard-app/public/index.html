@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Flashcard App</title>
+    <meta name="description" content="Interactive mobile flashcard app prototype with swipe gestures and animations">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="phone-container">
+        <div class="phone-frame">
+            <div class="status-bar">
+                <div class="status-left">
+                    <span class="time">9:41</span>
+                </div>
+                <div class="status-right">
+                    <span class="battery">100%</span>
+                    <span class="signal">📶</span>
+                </div>
+            </div>
+            
+            <div class="app-container">
+                <header class="app-header">
+                    <h1 class="app-title">Flashcards</h1>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="card-counter">
+                        <span id="currentCard">1</span> / <span id="totalCards">10</span>
+                    </div>
+                </header>
+                
+                <!-- Add Word Modal -->
+                <div class="modal-overlay" id="addWordModal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Add New Word</h2>
+                            <button class="close-btn" id="closeModal">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-group">
+                                <input type="text" id="wordInput" placeholder="Enter a word..." autocomplete="off">
+                                <button class="fetch-btn" id="fetchBtn">
+                                    <span class="btn-text">Fetch Definition</span>
+                                    <span class="spinner" id="spinner"></span>
+                                </button>
+                            </div>
+                            <div class="definition-preview" id="definitionPreview">
+                                <div class="preview-placeholder">
+                                    <span class="placeholder-icon">📖</span>
+                                    <p>Enter a word to see its definition and examples</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="cancel-btn" id="cancelBtn">Cancel</button>
+                            <button class="save-btn" id="saveBtn" disabled>Save Card</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-container">
+                    <div class="flashcard" id="flashcard">
+                        <div class="card-front">
+                            <div class="card-content">
+                                <h2 class="card-question">What is the capital of France?</h2>
+                                <p class="tap-hint">Tap to reveal answer</p>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-content">
+                                <h2 class="card-answer">Paris</h2>
+                                <p class="swipe-hint">Swipe left or right to continue</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="action-btn incorrect" id="incorrectBtn">
+                        <span class="btn-icon">❌</span>
+                        <span class="btn-text">Incorrect</span>
+                    </button>
+                    <button class="action-btn correct" id="correctBtn">
+                        <span class="btn-icon">✅</span>
+                        <span class="btn-text">Correct</span>
+                    </button>
+                </div>
+                
+                <div class="bottom-nav">
+                    <button class="nav-btn active">
+                        <span class="nav-icon">🎯</span>
+                        <span class="nav-text">Study</span>
+                    </button>
+                    <button class="nav-btn" id="addWordBtn">
+                        <span class="nav-icon">➕</span>
+                        <span class="nav-text">Add Word</span>
+                    </button>
+                    <button class="nav-btn">
+                        <span class="nav-icon">📊</span>
+                        <span class="nav-text">Stats</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

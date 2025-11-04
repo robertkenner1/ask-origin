@@ -28,7 +28,7 @@ You make well-timed jokes occasionally, but not in every conversation or message
 # Install dependencies
 npm install
 
-# Run development server with webpack
+# Run development server (port 3000)
 npm run dev
 
 # Build for production
@@ -47,42 +47,18 @@ npm run format
 # npm test
 ```
 
+### Stopping the Dev Server
+To stop the Next.js development server:
+```bash
+# Find and kill process on port 3000
+lsof -ti:3000 | xargs kill -9
+```
+
 ### Using Shared Scripts
 
 This project has access to shared scripts via symlink at `./scripts/` → `../../.shared/scripts/`.
 
-**Available scripts:**
-- `./scripts/build.sh` - Auto-detects Next.js, runs `npm run build`
-- `./scripts/start.sh` - Runs `npm run dev` (uses port from package.json)
-- `./scripts/stop.sh` - Stops dev server on configured port
-- `./scripts/deploy.sh` - Builds, commits, pushes to GitLab Pages
-- `./scripts/deploy-vercel.sh` - Deploys to Vercel preview
-
-**Makefile shortcuts:**
-- `make build` - Build project
-- `make start` - Start dev server
-- `make stop` - Stop dev server
-- `make deploy MESSAGE="..."` - Deploy to GitLab
-- `make deploy-vercel` - Deploy to Vercel
-
-**Configuration override:**
-```bash
-# Use different port (though Next.js uses package.json port)
-PROJECT_DEV_SERVER_PORT=3000 ./scripts/start.sh
-
-# Vercel team slug
-PROJECT_VERCEL_TEAM_SLUG="your-team" ./scripts/deploy-vercel.sh
-```
-
-Or edit `.project.json`:
-```json
-{
-  "config": {
-    "port": 3000,
-    "vercelTeam": "your-team-slug"
-  }
-}
-```
+Shared scripts are available but **npm scripts are recommended** for most tasks.
 
 All scripts use a common library with unified logging and robust path resolution.
 
@@ -95,7 +71,6 @@ Create a `.env.local` file in the root directory with your Claude API key:
 CLAUDE_API_KEY=your-claude-api-key-here
 # For backward compatibility, you can also use:
 # NEXT_PUBLIC_CLAUDE_API_KEY=your-claude-api-key-here
-PORT=2345
 ```
 
 > **Important Security Note**: The Claude API key is now only used server-side for security. While
