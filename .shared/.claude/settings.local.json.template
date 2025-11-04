@@ -19,7 +19,9 @@
       "Bash(mkdir:*)",
       "Bash(vercel:*)",
       "WebSearch",
-      "WebFetch(domain:docs.gitlab.com)"
+      "WebFetch(domain:docs.gitlab.com)",
+      "mcp__playwright__browser_take_screenshot",
+      "mcp__playwright__browser_navigate"
     ],
     "deny": []
   },
