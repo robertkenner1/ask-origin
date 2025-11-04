@@ -165,6 +165,35 @@ To stop the development server:
 lsof -ti:3000 | xargs kill -9
 ```
 
+### Deploying Changes
+
+This project has custom slash commands for streamlined deployment:
+
+**Push changes to Git:**
+```bash
+/push [optional context]
+```
+- Analyzes git diff and generates an intelligent commit message
+- If you provide context (e.g., "update homepage design"), it incorporates that into the message
+- Automatically stages, commits, and pushes changes to remote
+
+**Deploy to Vercel:**
+```bash
+/deploy
+```
+- Pushes environment variables from `.env.local` to Vercel (if needed)
+- Deploys the project to Vercel preview environment
+- Shows deployment URL when complete
+
+**Example workflow:**
+```bash
+# After making changes, push them
+/push improve button styling
+
+# Then deploy to Vercel (if project uses Vercel)
+/deploy
+```
+
 ## Project Structure
 
 ```

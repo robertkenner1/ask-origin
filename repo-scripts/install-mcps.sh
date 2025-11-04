@@ -7,8 +7,8 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/../.shared/scripts/lib/common.sh"
 
-log_info "🔌 MCP Server Configuration"
-echo ""
+# Visual separator
+print_separator "🔌 MCP Server Configuration" "Verify and configure MCP servers"
 
 # Check if .claude directory exists
 if [ ! -d ".claude" ]; then

@@ -45,6 +45,22 @@ log_error() {
     echo -e "${RED}${1}${NC}" >&2
 }
 
+# Print visual separator for script sections
+# Usage: print_separator "Script Title" "optional description"
+print_separator() {
+    local title="$1"
+    local description="$2"
+
+    echo ""
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo -e "${CYAN}  ${title}${NC}"
+    if [ -n "$description" ]; then
+        echo -e "${CYAN}  ${description}${NC}"
+    fi
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    echo ""
+}
+
 # ============================================================================
 # Status Printing
 # ============================================================================
@@ -297,4 +313,41 @@ get_current_branch() {
 # Check if we're in a git repository
 is_git_repo() {
     git rev-parse --git-dir >/dev/null 2>&1
+}
+
+# ============================================================================
+# Vercel Authentication
+# ============================================================================
+
+# Check Vercel authentication and set VERCEL_AUTH_ARGS
+# Returns: Sets VERCEL_AUTH_ARGS variable and returns 0 on success, 1 on failure
+# Usage: check_vercel_auth || exit 1
+check_vercel_auth() {
+    print_status "Checking Vercel authentication" ""
+    VERCEL_AUTH_ARGS=""
+
+    if [ -n "$VERCEL_TOKEN" ]; then
+        # Token provided - use it
+        VERCEL_AUTH_ARGS="--token $VERCEL_TOKEN"
+        print_status "Checking Vercel authentication" "success"
+        log_info "   (using token)"
+        return 0
+    elif vercel whoami >/dev/null 2>&1; then
+        # Already logged in
+        CURRENT_USER=$(vercel whoami 2>/dev/null | tail -1)
+        print_status "Checking Vercel authentication" "success"
+        log_info "   (logged in as $CURRENT_USER)"
+        return 0
+    else
+        # Not authenticated
+        print_status "Checking Vercel authentication" "error"
+        log_error "Error: Not authenticated with Vercel"
+        echo ""
+        echo "Please either:"
+        echo "  1. Login: vercel login"
+        echo "  2. Or set VERCEL_TOKEN: export VERCEL_TOKEN=your_token_here"
+        echo ""
+        echo "Get a token from: https://vercel.com/account/tokens"
+        return 1
+    fi
 }

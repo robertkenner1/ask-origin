@@ -8,6 +8,12 @@
     "description": "Grammarly style AI editor",
     "version": "1.0.0"
   },
-  "url": "https://{{PROJECT_NAME}}-grammarly-0ad4c188.vercel.app"
+  "url": "https://{{PROJECT_NAME}}-grammarly-0ad4c188.vercel.app",
+  "variables": [
+    {
+      "name": "CLAUDE_API_KEY",
+      "description": "Used for make calls to Anthrpoic LLM. Please follow this guide to generate it: https://guide"
+    }
+  ]
 }
 

@@ -7,6 +7,9 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/../.shared/scripts/lib/common.sh"
 
+# Visual separator
+print_separator "🔍 Prerequisites Check" "Checking and installing required tools"
+
 # Check a command and optionally install it
 check_command() {
     local name=$1
@@ -34,9 +37,6 @@ check_command() {
         return 1
     fi
 }
-
-log_info "🔍 Checking Prerequisites"
-echo ""
 
 # Check Homebrew
 check_command "Homebrew" "brew" '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
@@ -78,6 +78,18 @@ if command -v vercel >/dev/null 2>&1; then
 else
     printf "${YELLOW}${SYM_WARNING}${NC}\n"
     log_warning "Vercel CLI not installed - skipping team check"
+    echo ""
+fi
+
+# Check Artifactory npm authentication
+printf "%-40s" "Checking Artifactory npm access"
+if npm whoami --registry=https://artifactory.grammarly.io/artifactory/api/npm/common-npm/ >/dev/null 2>&1; then
+    printf "${GREEN}${SYM_SUCCESS}${NC}\n"
+else
+    printf "${YELLOW}${SYM_WARNING}${NC}\n"
+    log_warning "Not authenticated with Artifactory npm registry"
+    log_info "You will not be able to use @grammarly/design-system package for local development"
+    log_info "To authenticate, follow: https://coda.io/d/Grammarly-Engineering_de1L6FB9OYN/Artifactory-Getting-Started-Guide_suhj6IdR"
     echo ""
 fi
 

@@ -7,6 +7,9 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/lib/common.sh"
 
+# Visual separator
+print_separator "🚀 Vercel Deployment" "Deploy project to Vercel preview"
+
 # Get Vercel team slug from config
 VERCEL_TEAM_SLUG=$(get_config "VERCEL_TEAM_SLUG" "grammarly-0ad4c188")
 
@@ -47,9 +50,6 @@ REPO_ROOT=$(resolve_repo_root) || exit 1
 PROJECT_DIR="$REPO_ROOT/projects/$PROJECT_NAME"
 PROJECT_JSON="$PROJECT_DIR/.project.json"
 
-log_info "🚀 Vercel Deployment: $PROJECT_NAME"
-echo ""
-
 # Validate project directory exists
 exec_with_status "Checking project directory" "[ -d '$PROJECT_DIR' ]" || {
     log_error "Error: Project directory not found: $PROJECT_DIR"
@@ -88,30 +88,7 @@ exec_with_status "Checking Vercel CLI" "command -v vercel >/dev/null 2>&1" || {
 }
 
 # Check Vercel authentication
-print_status "Checking Vercel authentication" ""
-VERCEL_AUTH_ARGS=""
-if [ -n "$VERCEL_TOKEN" ]; then
-    # Token provided - use it
-    VERCEL_AUTH_ARGS="--token $VERCEL_TOKEN"
-    print_status "Checking Vercel authentication" "success"
-    log_info "   (using token)"
-elif vercel whoami >/dev/null 2>&1; then
-    # Already logged in
-    CURRENT_USER=$(vercel whoami 2>/dev/null | tail -1)
-    print_status "Checking Vercel authentication" "success"
-    log_info "   (logged in as $CURRENT_USER)"
-else
-    # Not authenticated
-    print_status "Checking Vercel authentication" "error"
-    log_error "Error: Not authenticated with Vercel"
-    echo ""
-    echo "Please either:"
-    echo "  1. Login: vercel login"
-    echo "  2. Or set VERCEL_TOKEN: export VERCEL_TOKEN=your_token_here"
-    echo ""
-    echo "Get a token from: https://vercel.com/account/tokens"
-    exit 1
-fi
+check_vercel_auth || exit 1
 
 echo ""
 log_info "📋 Vercel Project Details:"
