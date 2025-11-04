@@ -272,44 +272,6 @@ The ai-context contains complete design tokens:
 - Follow ESLint rules strictly - no disabling rules with comments unless absolutely necessary
 - When ESLint complains, fix code to follow rules instead of ignoring warnings
 
-### Verifying UI Changes
-
-After making UI modifications, **always use Playwright MCP to verify changes visually**:
-
-1. **Start the dev server** (if not already running):
-   ```bash
-   npm run dev
-   ```
-
-2. **Use Playwright MCP to verify**:
-   - Navigate to `http://localhost:3000` using `mcp__playwright__browser_navigate`
-   - Take screenshots using `mcp__playwright__browser_take_screenshot`
-   - Capture page snapshots using `mcp__playwright__browser_snapshot`
-   - Test interactions using `mcp__playwright__browser_click`, `mcp__playwright__browser_type`, etc.
-
-3. **Verify specific changes**:
-   - Check that new components render correctly
-   - Verify styling matches design system guidelines
-   - Test responsive behavior at different viewport sizes
-   - Confirm interactions work as expected
-
-4. **Stop the dev server** when done:
-   ```bash
-   lsof -ti:3000 | xargs kill -9
-   ```
-
-**Example verification workflow:**
-```
-1. Make UI changes to component
-2. npm run format && npm run lint
-3. npm run dev (in background)
-4. Use Playwright MCP to navigate and screenshot
-5. Verify changes look correct
-6. Stop dev server
-```
-
-This ensures all UI changes are visually verified before committing.
-
 ### Deploying Changes
 
 This project has custom slash commands for streamlined deployment:
