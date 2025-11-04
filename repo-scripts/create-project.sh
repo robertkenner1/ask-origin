@@ -262,7 +262,7 @@ fi
 # Start dev server for the project
 log_info "🚀 Starting development server..."
 echo ""
-npm run dev >/dev/null 2>&1 &
+npm run dev &
 sleep 2
 log_success "✅ Development server started at http://localhost:$DEV_SERVER_PORT"
 echo ""
