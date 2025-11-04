@@ -7,6 +7,9 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/../.shared/scripts/lib/common.sh"
 
+# Visual separator
+print_separator "📦 Create New Project" "Generate project from template"
+
 # Get configuration
 VERCEL_TEAM_SLUG=$(get_config "VERCEL_TEAM_SLUG" "grammarly-0ad4c188")
 TEMPLATES_DIR=$(get_config "TEMPLATES_DIR" "templates")
@@ -147,6 +150,10 @@ exec_with_status "Copying template files" "cp -r '$TEMPLATE_DIR'/* '$PROJECTS_DI
 exec_with_status "Creating symlink: scripts/" "ln -s '../../.shared/scripts' '$PROJECTS_DIR/$PROJECT_NAME/scripts'"
 exec_with_status "Creating symlink: ai-context/" "ln -s '../../.shared/ai-context' '$PROJECTS_DIR/$PROJECT_NAME/ai-context'"
 
+# Create .claude directory and symlink to shared commands
+mkdir -p "$PROJECTS_DIR/$PROJECT_NAME/.claude"
+exec_with_status "Creating symlink: .claude/commands/" "ln -s '../../../.shared/.claude/commands' '$PROJECTS_DIR/$PROJECT_NAME/.claude/commands'"
+
 # Copy Claude settings from shared template
 print_status "Copying Claude settings" ""
 if [ -f ".shared/.claude/settings.local.json.template" ]; then
@@ -200,6 +207,32 @@ exec_with_status "Processing template variables" "find '$PROJECTS_DIR/$PROJECT_N
 # All projects now have package.json - install dependencies
 exec_with_status "Installing dependencies" "(cd '$PROJECTS_DIR/$PROJECT_NAME' && npm install)" || print_status "Installing dependencies" "warning"
 
+# Generate .env.local from template variables if defined
+ENV_VARS_TO_CONFIGURE=""
+if [ -f "$PROJECTS_DIR/$PROJECT_NAME/.project.json" ]; then
+    # Parse variables array once and store as JSON string
+    VARIABLES_JSON=$(jq -c '.variables // []' "$PROJECTS_DIR/$PROJECT_NAME/.project.json" 2>/dev/null || echo "[]")
+    VARIABLES_COUNT=$(echo "$VARIABLES_JSON" | jq 'length')
+
+    if [ "$VARIABLES_COUNT" -gt 0 ]; then
+        print_status "Generating .env.local" ""
+
+        # Create .env.local file
+        ENV_FILE="$PROJECTS_DIR/$PROJECT_NAME/.env.local"
+        echo "# Environment Variables" > "$ENV_FILE"
+        echo "# Generated on $(date)" >> "$ENV_FILE"
+        echo "" >> "$ENV_FILE"
+
+        # Extract each variable from stored JSON and add to .env.local
+        echo "$VARIABLES_JSON" | jq -r '.[] | "\(.name)=PLACEHOLDER"' >> "$ENV_FILE"
+
+        print_status "Generating .env.local" "success"
+
+        # Store variables info for final message display (using same JSON)
+        ENV_VARS_TO_CONFIGURE=$(echo "$VARIABLES_JSON" | jq -r '.[] | "   • \(.name): \(.description)"')
+    fi
+fi
+
 echo ""
 log_success "✅ Project '$PROJECT_NAME' created successfully"
 echo ""
@@ -236,7 +269,18 @@ echo ""
 
 # Show next steps
 log_info "📝 Next Steps:"
-echo "   1. Start coding with your favorite AI tool!"
+
+# Show environment variable configuration if needed
+if [ -n "$ENV_VARS_TO_CONFIGURE" ]; then
+    echo "   1. Configure environment variables in .env.local:"
+    echo ""
+    echo "$ENV_VARS_TO_CONFIGURE"
+    echo ""
+    echo "   2. Start coding with your favorite AI tool!"
+else
+    echo "   1. Start coding with your favorite AI tool!"
+fi
+
 echo ""
 echo -e "   💡 Prefer Claude Code? Just type: ${GREEN}claude${NC}"
 echo ""

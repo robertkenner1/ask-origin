@@ -7,6 +7,9 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/../.shared/scripts/lib/common.sh"
 
+# Visual separator
+print_separator "🚀 Deploy to GitLab" "Build, commit, and push to remote"
+
 # Get commit message from argument or prompt
 if [ -z "$1" ]; then
     echo "Please provide a commit message:"
@@ -20,9 +23,6 @@ if [ -z "$COMMIT_MSG" ]; then
     log_error "❌ Commit message cannot be empty"
     exit 1
 fi
-
-log_info "🚀 Deploying changes"
-echo ""
 
 # Build projects
 exec_with_status "Building projects" "npm run build:sitemap"
