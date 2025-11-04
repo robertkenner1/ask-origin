@@ -1,0 +1,34 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const React = require("react");
+const createIcon = require("../createIcon.cjs");
+const helpers = require("../helpers.cjs");
+function _interopNamespaceDefault(e) {
+  const n = Object.create(null, { [Symbol.toStringTag]: { value: "Module" } });
+  if (e) {
+    for (const k in e) {
+      if (k !== "default") {
+        const d = Object.getOwnPropertyDescriptor(e, k);
+        Object.defineProperty(n, k, d.get ? d : {
+          enumerable: true,
+          get: () => e[k]
+        });
+      }
+    }
+  }
+  n.default = e;
+  return Object.freeze(n);
+}
+const React__namespace = /* @__PURE__ */ _interopNamespaceDefault(React);
+const IllustrationSpotIssue = /* @__PURE__ */ createIcon.createIcon("nocolor", ({
+  title,
+  titleId,
+  desc,
+  descId,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  resourcePrefix = helpers.generateId(),
+  ...props
+}) => {
+  return /* @__PURE__ */ React__namespace.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", width: 56, height: 56, fill: "none", viewBox: "0 0 56 56", "aria-hidden": "true", "data-icon": "IllustrationSpotIssue", stroke: "transparent", "aria-labelledby": titleId, "aria-describedby": descId, ...props }, desc ? /* @__PURE__ */ React__namespace.createElement("desc", { id: descId }, desc) : null, title ? /* @__PURE__ */ React__namespace.createElement("title", { id: titleId }, title) : null, /* @__PURE__ */ React__namespace.createElement("path", { fill: "#FFEBB8", d: "M54.659 10.023c0-1.07-.952-2.023-2.023-2.023H3.365c-1.072 0-2.024.952-2.024 2.023v5.237H54.66z" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-stroke-default)", fillRule: "evenodd", d: "M.991 10.023C.991 8.76 2.1 7.65 3.364 7.65h49.272c1.264 0 2.373 1.109 2.373 2.373v5.237a.35.35 0 0 1-.35.35H1.34a.35.35 0 0 1-.35-.35zM3.364 8.35c-.877 0-1.673.795-1.673 1.673v4.887H54.31v-4.887c0-.878-.796-1.673-1.673-1.673z", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-fill-2)", d: "M1.341 15.379v30.705c0 1.071.952 2.023 2.023 2.023h49.271c1.072 0 2.024-.952 2.024-2.023V15.38z" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-stroke-default)", fillRule: "evenodd", d: "M.991 15.379a.35.35 0 0 1 .35-.35H54.66a.35.35 0 0 1 .35.35v30.705c0 1.264-1.11 2.373-2.373 2.373H3.364C2.1 48.457.991 47.35.991 46.084zm.7.35v30.355c0 .878.796 1.673 1.673 1.673h49.272c.877 0 1.673-.795 1.673-1.673V15.73z", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#7D99F0", d: "M28 45.37c7.559 0 13.686-6.128 13.686-13.687S35.56 17.997 28 17.997s-13.686 6.128-13.686 13.686c0 7.56 6.127 13.687 13.686 13.687" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-stroke-default)", fillRule: "evenodd", d: "M28 18.347c-7.366 0-13.337 5.97-13.337 13.336S20.634 45.02 28 45.02s13.336-5.971 13.336-13.337S35.366 18.347 28 18.347M13.963 31.683c0-7.752 6.285-14.036 14.037-14.036s14.036 6.284 14.036 14.036S35.752 45.72 28 45.72s-14.037-6.285-14.037-14.037", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#fff", d: "M28 39.657a1.547 1.547 0 1 0 0-3.094 1.547 1.547 0 0 0 0 3.094M29.785 25.614c0-.952-.833-1.785-1.785-1.785s-1.785.833-1.785 1.785c0 .119 1.309 8.807 1.785 8.807s1.785-8.688 1.785-8.807" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#FF4D45", d: "M37.759 26.209a4.046 4.046 0 1 0 0-8.093 4.046 4.046 0 0 0 0 8.093" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-stroke-default)", fillRule: "evenodd", d: "M37.759 18.466a3.696 3.696 0 1 0 0 7.393 3.696 3.696 0 0 0 0-7.393m-4.397 3.696a4.396 4.396 0 1 1 8.793 0 4.396 4.396 0 0 1-8.793 0", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-fill-default)", d: "M5.5 13.25a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3M10 13.25a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3M14.5 13.25a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3M50.5 13.25a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3" }));
+});
+exports.IllustrationSpotIssue = IllustrationSpotIssue;

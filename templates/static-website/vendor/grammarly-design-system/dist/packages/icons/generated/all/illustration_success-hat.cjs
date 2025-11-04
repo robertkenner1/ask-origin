@@ -1,0 +1,34 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const React = require("react");
+const createIcon = require("../createIcon.cjs");
+const helpers = require("../helpers.cjs");
+function _interopNamespaceDefault(e) {
+  const n = Object.create(null, { [Symbol.toStringTag]: { value: "Module" } });
+  if (e) {
+    for (const k in e) {
+      if (k !== "default") {
+        const d = Object.getOwnPropertyDescriptor(e, k);
+        Object.defineProperty(n, k, d.get ? d : {
+          enumerable: true,
+          get: () => e[k]
+        });
+      }
+    }
+  }
+  n.default = e;
+  return Object.freeze(n);
+}
+const React__namespace = /* @__PURE__ */ _interopNamespaceDefault(React);
+const IllustrationSuccessHat = /* @__PURE__ */ createIcon.createIcon("nocolor", ({
+  title,
+  titleId,
+  desc,
+  descId,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  resourcePrefix = helpers.generateId(),
+  ...props
+}) => {
+  return /* @__PURE__ */ React__namespace.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", width: 80, height: 80, fill: "none", viewBox: "0 0 80 80", "aria-hidden": "true", "data-icon": "IllustrationSuccessHat", stroke: "transparent", "aria-labelledby": titleId, "aria-describedby": descId, ...props }, desc ? /* @__PURE__ */ React__namespace.createElement("desc", { id: descId }, desc) : null, title ? /* @__PURE__ */ React__namespace.createElement("title", { id: titleId }, title) : null, /* @__PURE__ */ React__namespace.createElement("g", { clipPath: `url(#${resourcePrefix}-sshata)` }, /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-shadow-default)", d: "M40 80c14.36 0 26-2.239 26-5s-11.64-5-26-5-26 2.239-26 5 11.64 5 26 5" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#FF4D45", d: "M48.417 41.228S59.712 25.142 62.87 18.03c4.373-9.964 1.863-14.832-.267-15.783s-7.453.495-11.827 10.459C47.543 20.008 42.6 38.985 42.6 38.985" }), /* @__PURE__ */ React__namespace.createElement("path", { stroke: "var(--color-illustration-stroke-default)", strokeLinecap: "round", strokeLinejoin: "round", strokeMiterlimit: 10, d: "M48.417 41.228S59.712 25.142 62.87 18.03c4.373-9.964 1.863-14.832-.267-15.783s-7.453.495-11.827 10.459C47.543 20.008 42.6 38.985 42.6 38.985" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-fill-2)", stroke: "var(--color-illustration-stroke-default)", strokeLinecap: "round", strokeLinejoin: "round", strokeMiterlimit: 10, d: "M46.402 38.68c-.647-.228-.99-.912-.76-1.52 1.406-4.488 6.578-20.88 8.176-24.53 2.548-5.78 5.856-7.188 7.111-6.656 1.255.57 2.472 3.956-.076 9.736-1.597 3.613-10.686 18.673-12.968 22.438a1.265 1.265 0 0 1-1.483.532" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#FF4D45", stroke: "var(--color-illustration-stroke-default)", strokeLinecap: "round", strokeLinejoin: "round", strokeMiterlimit: 10, d: "m40.85 39.441-5.705 2.548s-.723-1.217-1.826-3.194c-1.787-3.157-4.601-8.177-7.035-12.855a1.64 1.64 0 0 1 .418-2.015 7.75 7.75 0 0 1 4.982-1.826 7.79 7.79 0 0 1 6.427 3.385A357 357 0 0 1 40.85 39.44" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#00E0AC", stroke: "var(--color-illustration-stroke-default)", strokeLinecap: "round", strokeLinejoin: "round", strokeMiterlimit: 10, d: "M55.057 39.023H24.943l-4.597 32.602c-.212 1.503.486 2.944 1.934 3.399C24.995 75.877 30.501 77 40.684 77c10.32 0 15.297-1.153 17.57-2.01 1.168-.44 1.644-1.637 1.47-2.872z" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#D5FF00", stroke: "var(--color-illustration-stroke-default)", strokeLinecap: "round", strokeLinejoin: "round", strokeMiterlimit: 10, d: "m56.302 48.454-1.245-9.431H24.943l-1.245 9.431z" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#00E0AC", stroke: "var(--color-illustration-stroke-default)", strokeLinecap: "round", strokeLinejoin: "round", strokeMiterlimit: 10, d: "M64.479 37.501H15.52a1.521 1.521 0 0 0 0 3.043H64.48a1.521 1.521 0 1 0 0-3.043" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#FF4D45", stroke: "var(--color-illustration-stroke-default)", strokeLinecap: "round", strokeLinejoin: "round", strokeMiterlimit: 10, d: "M38.111 25.522c-1.255 4.26-2.586 8.405-3.727 11.029-.342.798-.684 1.56-1.065 2.244-4.069 7.986-8.67 9.165-10.686 8.29-2.168-.913-4.716-5.78-.418-15.782.646-1.483 1.635-3.347 2.776-5.4.418-.761 1.026-1.446 1.673-2.016a7.76 7.76 0 0 1 4.982-1.826c2.51.038 4.944 1.217 6.465 3.461" }), /* @__PURE__ */ React__namespace.createElement("path", { stroke: "var(--color-illustration-stroke-1)", strokeLinecap: "round", strokeLinejoin: "round", strokeMiterlimit: 10, d: "M8.29 27c-.09 0-.15-.075-.15-.165.135-5.306-1.684-7.23-6.99-7.38-.09 0-.15-.075-.15-.165s.075-.15.165-.15c5.306.134 7.23-1.684 7.38-6.99 0-.09.075-.15.165-.15s.15.075.15.165c-.135 5.306 1.684 7.23 6.99 7.365.09 0 .15.075.15.165s-.075.15-.165.15c-5.306-.135-7.23 1.684-7.38 6.99-.015.105-.075.165-.165.165M24.832 13c-.073 0-.12-.06-.12-.132.108-4.245-1.347-5.784-5.592-5.904-.072 0-.12-.06-.12-.132s.06-.12.132-.12c4.245.108 5.784-1.347 5.904-5.592 0-.072.06-.12.132-.12s.12.06.12.132c-.108 4.245 1.347 5.784 5.592 5.892.072 0 .12.06.12.132s-.06.12-.132.12c-4.245-.108-5.784 1.347-5.904 5.592-.012.084-.06.132-.132.132M71.29 65c-.09 0-.15-.075-.15-.165.135-5.306-1.684-7.23-6.99-7.38-.09 0-.15-.075-.15-.165s.075-.15.165-.15c5.306.135 7.23-1.684 7.38-6.99 0-.09.075-.15.165-.15s.15.075.15.165c-.135 5.306 1.684 7.23 6.99 7.365.09 0 .15.075.15.165s-.075.15-.165.15c-5.306-.135-7.23 1.684-7.38 6.99-.015.105-.075.165-.165.165" })), /* @__PURE__ */ React__namespace.createElement("defs", null, /* @__PURE__ */ React__namespace.createElement("clipPath", { id: `${resourcePrefix}-sshata` }, /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-fill-2)", d: "M0 0h80v80H0z" }))));
+});
+exports.IllustrationSuccessHat = IllustrationSuccessHat;

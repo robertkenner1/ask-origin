@@ -1,0 +1,34 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const React = require("react");
+const createIcon = require("../createIcon.cjs");
+const helpers = require("../helpers.cjs");
+function _interopNamespaceDefault(e) {
+  const n = Object.create(null, { [Symbol.toStringTag]: { value: "Module" } });
+  if (e) {
+    for (const k in e) {
+      if (k !== "default") {
+        const d = Object.getOwnPropertyDescriptor(e, k);
+        Object.defineProperty(n, k, d.get ? d : {
+          enumerable: true,
+          get: () => e[k]
+        });
+      }
+    }
+  }
+  n.default = e;
+  return Object.freeze(n);
+}
+const React__namespace = /* @__PURE__ */ _interopNamespaceDefault(React);
+const AppsCalendly = /* @__PURE__ */ createIcon.createIcon("nocolor", ({
+  title,
+  titleId,
+  desc,
+  descId,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  resourcePrefix = helpers.generateId(),
+  ...props
+}) => {
+  return /* @__PURE__ */ React__namespace.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", width: 20, height: 20, fill: "none", viewBox: "0 0 20 20", "aria-hidden": "true", "data-icon": "AppsCalendly", stroke: "transparent", "aria-labelledby": titleId, "aria-describedby": descId, ...props }, desc ? /* @__PURE__ */ React__namespace.createElement("desc", { id: descId }, desc) : null, title ? /* @__PURE__ */ React__namespace.createElement("title", { id: titleId }, title) : null, /* @__PURE__ */ React__namespace.createElement("g", { clipPath: `url(#${resourcePrefix}-endlya)` }, /* @__PURE__ */ React__namespace.createElement("path", { fill: "#006BFF", d: "M12.967 12.375c-.517.451-1.163 1.012-2.337 1.012h-.7c-.848 0-1.62-.302-2.171-.85a2.88 2.88 0 0 1-.836-2.067v-.94c0-.797.297-1.53.836-2.066.552-.549 1.323-.85 2.172-.85h.7c1.173 0 1.818.56 2.336 1.01.537.468 1.001.872 2.237.872q.284 0 .563-.045 0-.005-.004-.01a4 4 0 0 0-.26-.524l-.826-1.405a4.2 4.2 0 0 0-1.554-1.526A4.3 4.3 0 0 0 11 4.428H9.347c-.746 0-1.478.193-2.123.558A4.2 4.2 0 0 0 5.67 6.512l-.826 1.405a4.11 4.11 0 0 0 0 4.166l.826 1.406c.373.633.909 1.159 1.554 1.524a4.3 4.3 0 0 0 2.123.559H11c.745 0 1.477-.193 2.123-.559a4.2 4.2 0 0 0 1.554-1.524l.826-1.406q.149-.252.26-.524.001-.005.004-.01a3.6 3.6 0 0 0-.563-.044c-1.236 0-1.7.403-2.237.87" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#006BFF", d: "M10.63 7.465h-.7c-1.29 0-2.139.905-2.139 2.064v.941c0 1.158.849 2.063 2.14 2.063h.7c1.88 0 1.734-1.881 4.573-1.881q.405 0 .803.072a4.1 4.1 0 0 0 0-1.447 4.4 4.4 0 0 1-.803.072c-2.84 0-2.692-1.884-4.574-1.884" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#006BFF", d: "M17.638 11.412a4 4 0 0 0-1.632-.687l-.002.014c-.05.277-.13.55-.237.81.487.075.95.262 1.349.546q0 .006-.004.012a7 7 0 0 1-1.013 2.019 7.3 7.3 0 0 1-1.582 1.597 7.38 7.38 0 0 1-5.148 1.395 7.33 7.33 0 0 1-4.733-2.426 7.07 7.07 0 0 1-1.774-4.944 7.09 7.09 0 0 1 2.14-4.802 7.3 7.3 0 0 1 3.2-1.831 7.4 7.4 0 0 1 3.703-.051 7.3 7.3 0 0 1 3.25 1.743 7.13 7.13 0 0 1 1.962 3.1c-.4.284-.862.47-1.35.544a4 4 0 0 1 .24.825 4 4 0 0 0 1.631-.687c.465-.338.375-.72.304-.945C16.918 4.374 13.817 2 10.151 2 5.649 2 2 5.582 2 10s3.65 8 8.15 8c3.667 0 6.767-2.375 7.791-5.643.072-.226.163-.607-.303-.945" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#0AE9EF", d: "M15.767 8.451q-.28.044-.563.044c-1.236 0-1.7-.403-2.237-.87-.517-.451-1.163-1.012-2.337-1.012h-.7c-.848 0-1.62.302-2.171.85a2.88 2.88 0 0 0-.836 2.066v.941c0 .797.297 1.53.836 2.066.552.548 1.323.85 2.172.85h.7c1.173 0 1.818-.56 2.336-1.01.537-.468 1.001-.872 2.237-.872q.284 0 .563.044.161-.393.237-.81l.002-.015a4.5 4.5 0 0 0-.802-.072c-2.84 0-2.692 1.882-4.574 1.882h-.7c-1.29 0-2.139-.905-2.139-2.064v-.94c0-1.158.849-2.063 2.14-2.063h.7c1.88 0 1.734 1.882 4.573 1.882q.406 0 .802-.073 0-.006-.002-.013c-.05-.277-.13-.55-.237-.811" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#0AE9EF", d: "M15.767 8.451q-.28.044-.563.044c-1.236 0-1.7-.403-2.237-.87-.517-.451-1.163-1.012-2.337-1.012h-.7c-.848 0-1.62.302-2.171.85a2.88 2.88 0 0 0-.836 2.066v.941c0 .797.297 1.53.836 2.066.552.548 1.323.85 2.172.85h.7c1.173 0 1.818-.56 2.336-1.01.537-.468 1.001-.872 2.237-.872q.284 0 .563.044.161-.393.237-.81l.002-.015a4.5 4.5 0 0 0-.802-.072c-2.84 0-2.692 1.882-4.574 1.882h-.7c-1.29 0-2.139-.905-2.139-2.064v-.94c0-1.158.849-2.063 2.14-2.063h.7c1.88 0 1.734 1.882 4.573 1.882q.406 0 .802-.073 0-.006-.002-.013c-.05-.277-.13-.55-.237-.811" })), /* @__PURE__ */ React__namespace.createElement("defs", null, /* @__PURE__ */ React__namespace.createElement("clipPath", { id: `${resourcePrefix}-endlya` }, /* @__PURE__ */ React__namespace.createElement("path", { fill: "#fff", d: "M2 2h16v16H2z" }))));
+});
+exports.AppsCalendly = AppsCalendly;

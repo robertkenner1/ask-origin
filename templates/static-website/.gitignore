@@ -4,6 +4,9 @@ public/
 # Dependencies
 node_modules/
 
+# Keep vendor directory for offline GDS access
+!vendor/
+
 # OS files
 .DS_Store
 

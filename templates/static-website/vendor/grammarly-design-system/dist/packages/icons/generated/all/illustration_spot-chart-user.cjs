@@ -1,0 +1,34 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const React = require("react");
+const createIcon = require("../createIcon.cjs");
+const helpers = require("../helpers.cjs");
+function _interopNamespaceDefault(e) {
+  const n = Object.create(null, { [Symbol.toStringTag]: { value: "Module" } });
+  if (e) {
+    for (const k in e) {
+      if (k !== "default") {
+        const d = Object.getOwnPropertyDescriptor(e, k);
+        Object.defineProperty(n, k, d.get ? d : {
+          enumerable: true,
+          get: () => e[k]
+        });
+      }
+    }
+  }
+  n.default = e;
+  return Object.freeze(n);
+}
+const React__namespace = /* @__PURE__ */ _interopNamespaceDefault(React);
+const IllustrationSpotChartUser = /* @__PURE__ */ createIcon.createIcon("nocolor", ({
+  title,
+  titleId,
+  desc,
+  descId,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  resourcePrefix = helpers.generateId(),
+  ...props
+}) => {
+  return /* @__PURE__ */ React__namespace.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", width: 56, height: 56, fill: "none", viewBox: "0 0 56 56", "aria-hidden": "true", "data-icon": "IllustrationSpotChartUser", stroke: "transparent", "aria-labelledby": titleId, "aria-describedby": descId, ...props }, desc ? /* @__PURE__ */ React__namespace.createElement("desc", { id: descId }, desc) : null, title ? /* @__PURE__ */ React__namespace.createElement("title", { id: titleId }, title) : null, /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-fill-2)", d: "M14.56 19.68a4 4 0 0 1 4-4h31.2a4 4 0 0 1 4 4v24.48a4 4 0 0 1-4 4h-31.2a4 4 0 0 1-4-4z" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-stroke-default)", fillRule: "evenodd", d: "M14.21 19.68a4.35 4.35 0 0 1 4.35-4.35h31.2a4.35 4.35 0 0 1 4.35 4.35v24.48a4.35 4.35 0 0 1-4.35 4.35h-31.2a4.35 4.35 0 0 1-4.35-4.35zm4.35-3.65a3.65 3.65 0 0 0-3.65 3.65v24.48a3.65 3.65 0 0 0 3.65 3.65h31.2a3.65 3.65 0 0 0 3.65-3.65V19.68a3.65 3.65 0 0 0-3.65-3.65z", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-stroke-default)", fillRule: "evenodd", d: "M46.134 25.483a.35.35 0 0 1 .063.491l-9.52 12.32a.35.35 0 0 1-.484.068l-8.118-5.953-7.633 10.359a.35.35 0 0 1-.564-.416l7.84-10.64a.35.35 0 0 1 .489-.074l8.125 5.958 9.311-12.05a.35.35 0 0 1 .491-.063", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#D5FF00", d: "M45.92 28.56a2.8 2.8 0 1 0 0-5.6 2.8 2.8 0 0 0 0 5.6" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-stroke-default)", fillRule: "evenodd", d: "M45.92 23.31a2.45 2.45 0 1 0 0 4.9 2.45 2.45 0 0 0 0-4.9m-3.15 2.45a3.15 3.15 0 1 1 6.3 0 3.15 3.15 0 0 1-6.3 0", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#00E0AC", d: "M25.76 14c0 6.495-5.265 11.76-11.76 11.76S2.24 20.495 2.24 14 7.505 2.24 14 2.24 25.76 7.505 25.76 14" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-stroke-default)", fillRule: "evenodd", d: "M14 2.59C7.698 2.59 2.59 7.698 2.59 14S7.698 25.41 14 25.41 25.41 20.302 25.41 14 20.302 2.59 14 2.59M1.89 14C1.89 7.312 7.312 1.89 14 1.89S26.11 7.312 26.11 14 20.688 26.11 14 26.11 1.89 20.688 1.89 14", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#EAFAF9", d: "M7.84 18.32a6 6 0 0 1 6-6h.32a6 6 0 0 1 6 6v1.84H7.84z" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-stroke-default)", fillRule: "evenodd", d: "M7.49 18.32a6.35 6.35 0 0 1 6.35-6.35h.32a6.35 6.35 0 0 1 6.35 6.35v1.84a.35.35 0 0 1-.35.35H7.84a.35.35 0 0 1-.35-.35zm6.35-5.65a5.65 5.65 0 0 0-5.65 5.65v1.49h11.62v-1.49a5.65 5.65 0 0 0-5.65-5.65z", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#EAFAF9", d: "M10.08 9.52a3.92 3.92 0 1 0 7.84 0 3.92 3.92 0 0 0-7.84 0" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-stroke-default)", fillRule: "evenodd", d: "M14 5.95a3.57 3.57 0 1 1 0 7.14 3.57 3.57 0 0 1 0-7.14m4.27 3.57a4.27 4.27 0 1 0-8.54 0 4.27 4.27 0 0 0 8.54 0", clipRule: "evenodd" }));
+});
+exports.IllustrationSpotChartUser = IllustrationSpotChartUser;

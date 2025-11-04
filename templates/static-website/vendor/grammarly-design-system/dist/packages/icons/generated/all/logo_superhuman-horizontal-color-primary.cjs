@@ -1,0 +1,34 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const React = require("react");
+const createIcon = require("../createIcon.cjs");
+const helpers = require("../helpers.cjs");
+function _interopNamespaceDefault(e) {
+  const n = Object.create(null, { [Symbol.toStringTag]: { value: "Module" } });
+  if (e) {
+    for (const k in e) {
+      if (k !== "default") {
+        const d = Object.getOwnPropertyDescriptor(e, k);
+        Object.defineProperty(n, k, d.get ? d : {
+          enumerable: true,
+          get: () => e[k]
+        });
+      }
+    }
+  }
+  n.default = e;
+  return Object.freeze(n);
+}
+const React__namespace = /* @__PURE__ */ _interopNamespaceDefault(React);
+const LogoSuperhumanHorizontalColorPrimary = /* @__PURE__ */ createIcon.createIcon("nocolor", ({
+  title,
+  titleId,
+  desc,
+  descId,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  resourcePrefix = helpers.generateId(),
+  ...props
+}) => {
+  return /* @__PURE__ */ React__namespace.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", width: 225, height: 32, fill: "none", viewBox: "0 0 225 32", "aria-hidden": "true", "data-icon": "LogoSuperhumanHorizontalColorPrimary", stroke: "transparent", "aria-labelledby": titleId, "aria-describedby": descId, ...props }, title ? /* @__PURE__ */ React__namespace.createElement("title", { id: titleId }, title) : null, desc === void 0 ? /* @__PURE__ */ React__namespace.createElement("desc", { id: descId }, "Vector graphic: logo/Superhuman") : desc ? /* @__PURE__ */ React__namespace.createElement("desc", { id: descId }, desc) : null, /* @__PURE__ */ React__namespace.createElement("g", { clipPath: `url(#${resourcePrefix}-primaryclip0_28185_1181)` }, /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-logo-superhuman-primary)", d: "M31.706 8.544a8.995 8.995 0 0 0-8.28-8.259 97 97 0 0 0-14.883 0A8.995 8.995 0 0 0 .285 8.566a97 97 0 0 0 0 14.884 8.994 8.994 0 0 0 8.28 8.256c4.946.403 9.937.38 14.883 0a8.99 8.99 0 0 0 8.258-8.28c.402-4.946.38-9.936 0-14.882" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-logo-superhuman-default)", d: "M144.599 14.103V8.001h3.681v15.998h-3.681v-6.56h-6.515v6.56h-3.681V8.001h3.681v6.102zM51.686 19.04c.253 1.487 1.37 2.219 3.382 2.219 1.852 0 2.88-.709 2.88-1.92 0-.937-.48-1.37-1.83-1.668l-2.4-.526c-3.907-.868-5.417-2.194-5.417-4.801 0-2.857 2.537-4.709 6.421-4.709s6.445 1.783 6.605 4.982h-3.658c-.253-1.234-1.257-1.876-2.95-1.876-1.692 0-2.743.619-2.743 1.693 0 .821.456 1.187 2.059 1.576l2.26.502c3.978.845 5.328 2.102 5.328 4.938 0 3.04-2.491 4.915-6.56 4.915-4.274 0-6.904-1.962-7.064-5.324zM75.458 8h3.68v9.212c0 4.845-2.284 7.153-6.992 7.153s-6.993-2.308-6.993-7.153V8.001h3.68v9.301c0 2.607 1.005 3.748 3.316 3.748s3.315-1.144 3.315-3.748V8.001zM112.4 24h-12.068V8H112.4v3.293h-8.39v2.856h7.121v3.292h-7.121v3.27h8.39v3.291zM162.974 8h3.68v9.212c0 4.845-2.285 7.153-6.993 7.153s-6.993-2.308-6.993-7.153V8.001h3.681v9.301c0 2.607 1.005 3.748 3.315 3.748s3.316-1.144 3.316-3.748V8.001zM179.27 15.659l3.908-7.658h4.32v15.998h-3.588V13.418l-4.23 8.39h-.822l-4.229-8.39v10.581h-3.588V8.001h4.319l3.907 7.658zM206.484 24h-3.656l-.595-4.091h-6.561l-.595 4.09h-3.658l1.463-10.125c.708-4.572 2.307-6.239 6.058-6.239s5.37 1.67 6.055 6.239l1.488 10.125zm-10.307-7.427h5.553l-.342-2.4c-.367-2.424-.961-3.223-2.445-3.223-1.482 0-2.058.802-2.423 3.223zM220.694 18.423V8h3.589v15.998h-3.682l-6.603-10.421v10.421h-3.588V8.001h3.681zM121.772 17.58l3.431-1.3 5.259 7.705h-4.388z" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-logo-superhuman-default)", d: "M116.853 7.963h7.715q1.695 0 2.978.63a4.68 4.68 0 0 1 1.993 1.81q.71 1.18.71 2.783c0 1.069-.237 1.873-.71 2.66-.474.786-1.332 1.443-2.216 1.813-.957.4-8.552 2.695-8.552 2.695l.006-3.685s5.581-1.386 6.49-1.722c.398-.147 1.403-.481 1.403-1.761 0-1.53-1.516-1.672-2.473-1.672h-4.694l1.03-1.031v13.516h-3.68zM83.522 7.963h7.715q1.695 0 2.979.63a4.68 4.68 0 0 1 1.992 1.81q.71 1.18.71 2.783c0 1.069-.237 1.873-.71 2.66-.474.786-1.332 1.443-2.216 1.813-.957.4-8.552 2.695-8.552 2.695l.006-3.685s5.582-1.386 6.49-1.722c.398-.147 1.403-.481 1.403-1.761 0-1.53-1.516-1.672-2.472-1.672h-4.695l1.03-1.031v13.516h-3.68z" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-logo-hero-dark)", d: "M19.306 8.32a3.23 3.23 0 0 1-3.23 3.223c-1.795 0-3.252-1.456-3.252-3.224 0-1.79 1.457-3.221 3.252-3.221a3.21 3.21 0 0 1 3.23 3.221M22.177 26.335l-5.608-3.089a1.1 1.1 0 0 0-.986 0l-5.63 3.089c-.897.493-1.884-.514-1.368-1.41L15.2 13.759c.381-.65 1.346-.65 1.75 0l6.594 11.166c.538.896-.449 1.903-1.369 1.41" })));
+});
+exports.LogoSuperhumanHorizontalColorPrimary = LogoSuperhumanHorizontalColorPrimary;

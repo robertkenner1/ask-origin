@@ -1,0 +1,34 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const React = require("react");
+const createIcon = require("../createIcon.cjs");
+const helpers = require("../helpers.cjs");
+function _interopNamespaceDefault(e) {
+  const n = Object.create(null, { [Symbol.toStringTag]: { value: "Module" } });
+  if (e) {
+    for (const k in e) {
+      if (k !== "default") {
+        const d = Object.getOwnPropertyDescriptor(e, k);
+        Object.defineProperty(n, k, d.get ? d : {
+          enumerable: true,
+          get: () => e[k]
+        });
+      }
+    }
+  }
+  n.default = e;
+  return Object.freeze(n);
+}
+const React__namespace = /* @__PURE__ */ _interopNamespaceDefault(React);
+const LogoGrammarlyStackedColorPrimary = /* @__PURE__ */ createIcon.createIcon("nocolor", ({
+  title,
+  titleId,
+  desc,
+  descId,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  resourcePrefix = helpers.generateId(),
+  ...props
+}) => {
+  return /* @__PURE__ */ React__namespace.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", width: 106, height: 61, fill: "none", viewBox: "0 0 106 61", "aria-hidden": "true", "data-icon": "LogoGrammarlyStackedColorPrimary", stroke: "transparent", "aria-labelledby": titleId, "aria-describedby": descId, ...props }, title ? /* @__PURE__ */ React__namespace.createElement("title", { id: titleId }, title) : null, desc === void 0 ? /* @__PURE__ */ React__namespace.createElement("desc", { id: descId }, "Vector graphic: grammarly stacked color primary") : desc ? /* @__PURE__ */ React__namespace.createElement("desc", { id: descId }, desc) : null, /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-logo-grammarly-primary)", d: "M0 16.06C0 7.19 7.192 0 16.066 0S32.13 7.19 32.13 16.06c0 7.76-5.505 14.234-12.824 15.731a16 16 0 0 1-3.236.325H0z", className: "orprimaryprimary-element" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-logo-grammarly-default)", d: "M30.427 43.825v1.17a4.97 4.97 0 0 0-3.513-1.441c-3.086 0-5.45 2.545-5.45 5.695s2.364 5.65 5.45 5.65c1.374 0 2.589-.54 3.513-1.441v1.172h2.207V43.825zm-.503 7.15c-1.054 1.678-3.046 2.18-4.629 1.189-1.582-.995-2.006-2.986-.952-4.664s3.057-2.2 4.64-1.206 1.995 3.006.941 4.683zM77.694 43.825v1.17a4.97 4.97 0 0 0-3.513-1.441c-3.086 0-5.451 2.545-5.451 5.695s2.365 5.65 5.451 5.65c1.374 0 2.589-.54 3.513-1.441v1.172H79.9V43.825zm-.503 7.15c-1.054 1.678-3.047 2.18-4.629 1.189-1.583-.995-2.007-2.986-.952-4.664 1.054-1.678 3.057-2.2 4.64-1.206s1.992 3.006.94 4.683zM41.37 48.187c0-1.012-.224-1.509-.563-1.868-.34-.361-.857-.562-1.419-.562s-1.08.204-1.419.562c-.336.359-.562.856-.562 1.867v6.438H35.11V43.82h2.162v.766a3.44 3.44 0 0 1 2.498-1.037c1.237 0 2.342.585 3.04 1.486.744-.901 1.89-1.486 3.222-1.486 1.33 0 2.365.585 3.086 1.531.494.675.81 1.531.81 2.904v6.641h-2.297v-6.437c0-1.012-.226-1.509-.562-1.868-.34-.361-.856-.562-1.419-.562-.562 0-1.08.204-1.418.562s-.563.856-.563 1.867v6.438h-2.297v-6.437zM58.545 48.187c0-1.012-.226-1.509-.562-1.868-.34-.361-.856-.562-1.419-.562-.562 0-1.08.204-1.418.562s-.563.856-.563 1.867v6.438h-2.297V43.82h2.162v.766a3.45 3.45 0 0 1 2.5-1.037c1.238 0 2.343.585 3.041 1.486.744-.901 1.89-1.486 3.222-1.486 1.33 0 2.365.585 3.086 1.531.494.675.81 1.531.81 2.904v6.641H64.81v-6.437c0-1.012-.226-1.509-.562-1.868-.34-.361-.856-.562-1.419-.562-.562 0-1.08.204-1.418.562s-.563.856-.563 1.867v6.438h-2.297v-6.437zM90.81 37.116h2.297V54.63h-2.298zM8.964 43.825v1.17a4.97 4.97 0 0 0-3.513-1.441c-3.086 0-5.451 2.5-5.451 5.65s2.365 5.694 5.451 5.694c1.351 0 2.566-.52 3.468-1.395v1.127c0 1.847-1.15 3.24-2.866 3.466-1.34.178-2.814-.206-3.753-.977a3 3 0 0 1-.313-.297L.78 58.785q.046.038.088.077c1.19.977 2.86 1.53 4.524 1.53q.48 0 .955-.062c2.843-.375 4.824-2.72 4.824-5.7V43.825zm-3.287 8.87c-1.87 0-3.286-1.508-3.286-3.489s1.418-3.443 3.286-3.443 3.287 1.486 3.287 3.466-1.419 3.466-3.287 3.466M103.455 43.788l-3.402 7.718-3.14-7.718H94.61l4.245 10.435-2.677 6.07h2.332l7.279-16.505zM20.672 44.085c-.797-.35-1.673-.497-2.532-.322a4 4 0 0 0-2.015 1.087 2.4 2.4 0 0 0-.317.362v-1.396h-2.161v10.805h2.297v-5.38c0-1.26.316-1.981.834-2.5.54-.54 1.283-.857 2.139-.857.266 0 .952.074 1.695.557l1.091-1.777a6.3 6.3 0 0 0-1.031-.58M86.873 43.749a4 4 0 0 0-2.015 1.087c-.113.113-.227.226-.317.359V43.8H82.38v10.805h2.298v-5.382c0-1.26.313-1.98.833-2.5.54-.54 1.283-.856 2.14-.856.265 0 .898.006 1.687.314v-2.139c-.78-.33-1.63-.468-2.467-.299z", className: "orprimarycolor-group" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-logo-grammarly-light)", d: "m19.943 14.537-1.704 2.952h5.968c-.935 5.133-6.646 8.63-12.355 5.672a6.73 6.73 0 0 1-2.874-2.845C5.694 14.068 10.179 7.78 16.099 7.78a8.22 8.22 0 0 1 6.15 2.762l1.529-2.65a11.12 11.12 0 0 0-8.467-3.03C9.727 5.246 5.2 9.872 4.929 15.46c-.311 6.415 4.82 11.731 11.168 11.731s11.185-5.017 11.185-11.18c0-.5-.037-.992-.102-1.475z" }));
+});
+exports.LogoGrammarlyStackedColorPrimary = LogoGrammarlyStackedColorPrimary;

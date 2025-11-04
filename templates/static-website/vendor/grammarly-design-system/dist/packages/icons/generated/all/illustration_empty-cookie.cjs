@@ -1,0 +1,36 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const React = require("react");
+const createIcon = require("../createIcon.cjs");
+const helpers = require("../helpers.cjs");
+function _interopNamespaceDefault(e) {
+  const n = Object.create(null, { [Symbol.toStringTag]: { value: "Module" } });
+  if (e) {
+    for (const k in e) {
+      if (k !== "default") {
+        const d = Object.getOwnPropertyDescriptor(e, k);
+        Object.defineProperty(n, k, d.get ? d : {
+          enumerable: true,
+          get: () => e[k]
+        });
+      }
+    }
+  }
+  n.default = e;
+  return Object.freeze(n);
+}
+const React__namespace = /* @__PURE__ */ _interopNamespaceDefault(React);
+const IllustrationEmptyCookie = /* @__PURE__ */ createIcon.createIcon("nocolor", ({
+  title,
+  titleId,
+  desc,
+  descId,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  resourcePrefix = helpers.generateId(),
+  ...props
+}) => {
+  return /* @__PURE__ */ React__namespace.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", width: 80, height: 80, fill: "none", viewBox: "0 0 80 80", "aria-hidden": "true", "data-icon": "IllustrationEmptyCookie", stroke: "transparent", "aria-labelledby": titleId, "aria-describedby": descId, ...props }, desc ? /* @__PURE__ */ React__namespace.createElement("desc", { id: descId }, desc) : null, title ? /* @__PURE__ */ React__namespace.createElement("title", { id: titleId }, title) : null, /* @__PURE__ */ React__namespace.createElement("g", { clipPath: `url(#${resourcePrefix}-cookiea)` }, /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-shadow-default)", d: "M44.5 80C63.002 80 68 76.194 68 71.5S63.002 63 44.5 63 11 66.806 11 71.5 25.999 80 44.5 80" }), /* @__PURE__ */ React__namespace.createElement("ellipse", { cx: 40, cy: 33.5, fill: "#027E6F", stroke: "var(--color-illustration-stroke-default)", strokeLinecap: "round", strokeLinejoin: "round", rx: 39, ry: 7.5 }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#FFEBB8", stroke: "var(--color-illustration-stroke-default)", strokeLinecap: "round", strokeLinejoin: "round", d: "M26.127 31.288c2.21-1.52 5.087-2.709 8.54-3.14C43.75 27.012 49.26 32.81 49.26 32.81s5.843-2.675 11.52-1.255S71 36.098 71 42.913 55.104 52 55.104 52H30.892c-2.247 1.262-4.965 2-7.892 2-7.732 0-14-5.149-14-11.5S15.268 31 23 31c1.075 0 2.122.1 3.127.288" }), /* @__PURE__ */ React__namespace.createElement("ellipse", { cx: 40, cy: 33.5, stroke: "var(--color-illustration-stroke-default)", strokeLinecap: "round", strokeLinejoin: "round", rx: 39, ry: 7.5 }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#FF4D45", stroke: "var(--color-illustration-stroke-default)", strokeLinecap: "round", d: "M68.74 1.254a3 3 0 0 0-4.097 1.098l-10.14 17.562c-1.965 3.405-6.195 4.767-9.751 6.444a9.95 9.95 0 0 0-4.386 4.042l-2.5 4.33c-2.761 4.783-1.122 10.899 3.66 13.66 4.783 2.761 10.9 1.123 13.66-3.66l2.5-4.33a9.95 9.95 0 0 0 1.308-5.819c-.325-3.918-1.26-8.262.705-11.666L69.84 5.352a3 3 0 0 0-1.098-4.098Z" }), /* @__PURE__ */ React__namespace.createElement("path", { stroke: "var(--color-illustration-stroke-default)", strokeLinecap: "round", d: "m41.107 38.968 2.455-4.8a10.76 10.76 0 0 1 7.414-5.648" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#FFEBB8", d: "M62 36H34v12.5h28z" }), /* @__PURE__ */ React__namespace.createElement("path", { stroke: "var(--color-illustration-stroke-default)", strokeLinecap: "round", strokeLinejoin: "round", d: "M34 36h28" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#00E0AC", stroke: "var(--color-illustration-stroke-default)", strokeLinecap: "round", strokeLinejoin: "round", d: "M1.039 33.837H1V35c0 21.54 17.46 39 39 39s39-17.46 39-39v-1.163h-.039C78.046 37.823 60.952 41 40 41S1.955 37.823 1.039 33.837" }), /* @__PURE__ */ React__namespace.createElement("g", { opacity: 0.15, style: {
+    mixBlendMode: "multiply"
+  } }, /* @__PURE__ */ React__namespace.createElement("path", { fill: "#1C1C1C", d: "M40 54.5h22.412c.646 10.36 5.955 15.941 13.088 24H54c-8.573-4-14-11.5-14-24" }), /* @__PURE__ */ React__namespace.createElement("path", { stroke: "var(--color-illustration-stroke-default)", strokeLinecap: "round", strokeLinejoin: "round", strokeMiterlimit: 10, d: "M40 54.5h22.412c.646 10.36 5.955 15.941 13.088 24H54c-8.573-4-14-11.5-14-24" })), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-fill-2)", stroke: "var(--color-illustration-stroke-default)", strokeLinecap: "round", strokeLinejoin: "round", strokeMiterlimit: 10, d: "M44 52H67.41c.647 10.36 4.088 18.941 11.222 27H55.706C48.999 74.441 44.646 62.36 44 52" }), /* @__PURE__ */ React__namespace.createElement("path", { stroke: "var(--color-illustration-stroke-default)", strokeLinecap: "round", strokeLinejoin: "round", d: "M63.132 59H51M65.132 65H52.999M68.132 71H55.999" })), /* @__PURE__ */ React__namespace.createElement("defs", null, /* @__PURE__ */ React__namespace.createElement("clipPath", { id: `${resourcePrefix}-cookiea` }, /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-fill-2)", d: "M0 0h80v80H0z" }))));
+});
+exports.IllustrationEmptyCookie = IllustrationEmptyCookie;

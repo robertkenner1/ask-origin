@@ -1,0 +1,34 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const React = require("react");
+const createIcon = require("../createIcon.cjs");
+const helpers = require("../helpers.cjs");
+function _interopNamespaceDefault(e) {
+  const n = Object.create(null, { [Symbol.toStringTag]: { value: "Module" } });
+  if (e) {
+    for (const k in e) {
+      if (k !== "default") {
+        const d = Object.getOwnPropertyDescriptor(e, k);
+        Object.defineProperty(n, k, d.get ? d : {
+          enumerable: true,
+          get: () => e[k]
+        });
+      }
+    }
+  }
+  n.default = e;
+  return Object.freeze(n);
+}
+const React__namespace = /* @__PURE__ */ _interopNamespaceDefault(React);
+const IllustrationEmptyPainting = /* @__PURE__ */ createIcon.createIcon("nocolor", ({
+  title,
+  titleId,
+  desc,
+  descId,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  resourcePrefix = helpers.generateId(),
+  ...props
+}) => {
+  return /* @__PURE__ */ React__namespace.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", width: 80, height: 80, fill: "none", viewBox: "0 0 80 80", "aria-hidden": "true", "data-icon": "IllustrationEmptyPainting", stroke: "transparent", "aria-labelledby": titleId, "aria-describedby": descId, ...props }, desc ? /* @__PURE__ */ React__namespace.createElement("desc", { id: descId }, desc) : null, title ? /* @__PURE__ */ React__namespace.createElement("title", { id: titleId }, title) : null, /* @__PURE__ */ React__namespace.createElement("g", { clipPath: `url(#${resourcePrefix}-intinga)` }, /* @__PURE__ */ React__namespace.createElement("path", { fill: "#FF4D45", stroke: "var(--color-illustration-stroke-default)", strokeLinecap: "round", strokeLinejoin: "round", strokeMiterlimit: 10, d: "M36 1h8v91h-8zM6 88.856l6.928 4 16-27.712-6.928-4zM74 88.857l-6.928 4-16-27.713 6.928-4z" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-fill-2)", stroke: "var(--color-illustration-stroke-default)", strokeLinecap: "round", strokeLinejoin: "round", strokeMiterlimit: 10, d: "M8 8h64v64H8z" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#00E6E6", d: "M72 50.154V72H8V24.337a16.8 16.8 0 0 1 2.848-2.3c1.283-.808 3.849-1.95 6.905-.933 2.96.985 4.284 3.308 4.78 4.463.942 2.187.846 4.42.702 5.556-.323 2.546-1.222 4.566-2.234 6.839l-.134.302a17 17 0 0 1 .482-.371c-.05.037 1.236-.99 2.39-1.668.62-.363 1.643-.906 2.909-1.228 1.21-.307 3.599-.647 6.075.708 4.578 2.503 5.227 7.063 5.043 9.68-.119 1.698-.578 3.264-1.027 4.456a50 50 0 0 1 3.315-2.986c1.336-1.096 3.51-2.455 5.968-3.162 2.092-.602 7.739-1.507 11.219 3.584 1.203 1.76 1.677 3.548 1.742 5.204a21 21 0 0 1 3.227-1.946l.061-.03c.449-.22 2.076-1.014 3.878-1.319.925-.156 2.9-.374 5.03.554q.43.188.821.414" }), /* @__PURE__ */ React__namespace.createElement("path", { stroke: "var(--color-illustration-stroke-default)", strokeLinecap: "round", strokeLinejoin: "round", strokeMiterlimit: 10, d: "M8 8h64v64H8z" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#FF4D45", stroke: "var(--color-illustration-stroke-default)", strokeLinecap: "round", strokeLinejoin: "round", strokeMiterlimit: 10, d: "M4 64h72v8H4z" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-fill-2)", stroke: "var(--color-illustration-stroke-default)", strokeLinecap: "round", strokeLinejoin: "round", d: "M34.958 40.283c1.414-4.193 6.01-5.83 9.642-3.673 3.63 2.158 4.716 6.333.69 10.89-4.027 4.558-12.251 3.865-14.618 2.896 2.958-3.918 2.873-5.92 4.286-10.113" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#00E0AC", stroke: "var(--color-illustration-stroke-default)", strokeLinecap: "round", strokeLinejoin: "round", strokeMiterlimit: 10, d: "M54.495 17.727a4.346 4.346 0 1 1 6.918 5.225L47.122 39.326l-4.467-3.373z" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#00E6E6", stroke: "var(--color-illustration-stroke-default)", strokeLinecap: "round", strokeLinejoin: "round", d: "M46.169 46.4q-.391.547-.88 1.101c-4.027 4.558-12.25 3.864-14.618 2.895 2.189-2.898 2.712-4.748 3.408-7.213.126-.445.257-.91.405-1.405 1.632.102 2.706.269 4.706 3.237 1.675 2.487 4.42 2.08 6.979 1.386" })), /* @__PURE__ */ React__namespace.createElement("defs", null, /* @__PURE__ */ React__namespace.createElement("clipPath", { id: `${resourcePrefix}-intinga` }, /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-fill-2)", d: "M0 0h80v80H0z" }))));
+});
+exports.IllustrationEmptyPainting = IllustrationEmptyPainting;
