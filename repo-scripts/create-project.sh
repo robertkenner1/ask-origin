@@ -26,13 +26,13 @@ list_templates() {
     for template_dir in $TEMPLATES_DIR/*/; do
         if [ -d "$template_dir" ]; then
             local template_name=$(basename "$template_dir")
-            local template_json="$template_dir/template.json"
+            local template_json="$template_dir/.project.json.template"
 
             echo -e "  ${GREEN}$i)${NC} $template_name"
 
-            # Show description if template.json exists
+            # Show description if .project.json.template exists
             if [ -f "$template_json" ]; then
-                local description=$(cat "$template_json" | grep -o '"description": *"[^"]*"' | sed 's/"description": *"\(.*\)"/\1/' || echo "")
+                local description=$(jq -r '.template.description // empty' "$template_json" 2>/dev/null || echo "")
                 if [ -n "$description" ]; then
                     echo "     $description"
                 fi
@@ -231,13 +231,17 @@ fi
 echo ""
 log_success "✅ Project '$PROJECT_NAME' created successfully"
 echo ""
+
+# Change to project directory
+cd "$PROJECTS_DIR/$PROJECT_NAME"
+
 log_info "📋 Project Details:"
 echo "   📦 Template: $TEMPLATE_NAME"
 echo "   🌿 Branch: $BRANCH_NAME"
-echo "   📁 Location: $PROJECTS_DIR/$PROJECT_NAME/"
+echo "   📁 Location: $(pwd)"
 
 # Show URLs based on project type
-PROJECT_JSON="$PROJECTS_DIR/$PROJECT_NAME/.project.json"
+PROJECT_JSON=".project.json"
 if [ -f "$PROJECT_JSON" ]; then
     LOCAL_URL=$(cat "$PROJECT_JSON" | grep -o '"local": *"[^"]*"' | sed 's/"local": *"\(.*\)"/\1/' || echo "")
     if [ -n "$LOCAL_URL" ]; then
@@ -250,19 +254,19 @@ fi
 echo ""
 
 # Start dev server for the project
-if [ -f "$PROJECTS_DIR/$PROJECT_NAME/package.json" ]; then
+if [ -f "package.json" ]; then
     log_info "🚀 Starting development server..."
     echo ""
     # Start Node.js dev server in background
-    (cd "$PROJECTS_DIR/$PROJECT_NAME" && npm run dev >/dev/null 2>&1 &)
+    npm run dev >/dev/null 2>&1 &
     sleep 2
     log_success "✅ Development server started"
     echo ""
 else
-    # Start static dev server in background
+    # Start static dev server in background (from repo root)
     log_info "🚀 Starting development server..."
     echo ""
-    npm run dev >/dev/null 2>&1 &
+    (cd ../.. && npm run dev >/dev/null 2>&1 &)
     sleep 2
     log_success "✅ Development server started"
     if [ -f "$PROJECT_JSON" ]; then
@@ -276,11 +280,7 @@ fi
 
 # Show next steps
 log_info "📝 Next Steps:"
-echo "   1. cd $PROJECTS_DIR/$PROJECT_NAME/"
-echo "   2. Start coding with your favorite AI tool!"
+echo "   1. Start coding with your favorite AI tool!"
 echo ""
 echo "   💡 Prefer Claude Code? Just type: ${GREEN}claude${NC}"
 echo ""
-
-# Change to project directory
-cd "$PROJECTS_DIR/$PROJECT_NAME"

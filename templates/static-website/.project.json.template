@@ -5,6 +5,7 @@
   "created": "{{CREATED_DATE}}",
   "template": {
     "name": "static-website",
+    "description": "Simple HTML/CSS/JavaScript website for landing pages and prototypes",
     "version": "1.0.0"
   },
   "url": "{{PROJECT_NAME}}-grammarly-0ad4c188.vercel.app"
