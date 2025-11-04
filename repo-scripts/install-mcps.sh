@@ -12,14 +12,14 @@ echo ""
 
 # Check if .claude directory exists
 if [ ! -d ".claude" ]; then
-    log_error "❌ .claude/mcp.json file not found"
+    log_error "❌ .mcp.json file not found"
     exit 1
 fi
 
 # Check if config file exists
-exec_with_status "Checking MCP configuration" "[ -f '.claude/mcp.json' ]" || {
-    log_error "❌ .claude/mcp.json file not found"
-    log_info "Expected: .claude/mcp.json"
+exec_with_status "Checking MCP configuration" "[ -f '.mcp.json' ]" || {
+    log_error "❌ .mcp.json file not found"
+    log_info "Expected: .mcp.json"
     exit 1
 }
 
@@ -48,5 +48,5 @@ echo ""
 exec_with_status "Installing project dependencies" "npm install"
 
 echo ""
-log_success "✅ MCP servers are pre-configured in .claude/mcp.json"
+log_success "✅ MCP servers are pre-configured in .mcp.json"
 log_info "ℹ️  Claude Code will automatically use these MCP servers when running in this directory"

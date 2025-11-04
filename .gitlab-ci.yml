@@ -45,6 +45,9 @@ stages:
   - deploy
 
 
-include: .gitlab-ci/*.yml
+include: 
+  - local: .gitlab-ci/templates/deploy-vercel-common.yml
+  - local: .gitlab-ci/build.yml
+  - local: projects/**/.gitlab-ci/deploy.yml
 
 

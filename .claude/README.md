@@ -48,46 +48,6 @@ Pre-configured MCP (Model Context Protocol) servers that Claude Code will automa
 - Discovering internal libraries
 - Understanding code patterns
 
----
-
-#### 3. Cortex MCP
-**Type:** HTTP-based MCP
-**Purpose:** Service catalog and metadata access
-**URL:** `https://apigw.prod-platform-plane.grammarlyaws.com/cortex-mcp-server/mcp`
-
-**Capabilities:**
-- List services in catalog
-- Get service metadata
-- Find service owners
-- Access service documentation
-- View service dependencies
-
-**When to use:**
-- Finding service information
-- Identifying service owners
-- Understanding service architecture
-- Accessing service documentation
-
----
-
-#### 4. Workflows MCP
-**Type:** HTTP-based MCP
-**Purpose:** Engineering workflows and procedures
-**URL:** `https://apigw.prod-platform-plane.grammarlyaws.com/workflow-mcp/mcp`
-
-**Capabilities:**
-- Access incident investigation workflows
-- Code review procedures
-- Performance analysis workflows
-- Engineering best practices
-
-**When to use:**
-- Following engineering procedures
-- Incident investigation
-- Code reviews
-- Performance optimization
-
----
 
 ### Optional: Figma MCP
 
