@@ -1,0 +1,15 @@
+{
+  "name": "my-first-gr-design",
+  "version": "1.0.0",
+  "description": "My First GR Design",
+  "private": true,
+  "scripts": {
+    "dev": "http-server src -p 3000 -o -c-1",
+    "build": "mkdir -p public && cp -r src/* public/",
+    "start": "http-server public -p 3000",
+    "clean": "rm -rf public"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

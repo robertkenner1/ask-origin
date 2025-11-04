@@ -22,69 +22,13 @@ This project uses **symlinked resources** from the monorepo:
 
 Located at: `./scripts/` → `../../.shared/scripts/`
 
-All scripts use a common library with:
-- Unified status printing and logging
-- Robust path resolution (works via symlinks)
-- Configuration hierarchy: **ENV vars > .project.json > defaults**
+Shared scripts are available but **npm scripts are recommended** for most tasks.
 
-**Available scripts:**
-- `./scripts/build.sh` - Auto-detects project type, builds accordingly
-- `./scripts/start.sh` - Starts dev server with auto-detection
-- `./scripts/stop.sh` - Stops dev server gracefully
-- `./scripts/deploy.sh` - Builds, commits, pushes to GitLab Pages
-- `./scripts/deploy-vercel.sh` - Deploys Next.js projects to Vercel
-
-**Makefile shortcuts:**
-- `make build` - Build project
-- `make start` - Start dev server
-- `make stop` - Stop dev server
-- `make deploy MESSAGE="..."` - Deploy to GitLab
-- `make deploy-vercel` - Deploy to Vercel (Next.js only)
-
-#### How Scripts Work
-
-**build.sh:**
-- Detects if project is static (src/) or Node.js (package.json)
-- Static: Copies src/ to public/{{PROJECT_NAME}}/
-- Node.js: Runs `npm run build`
-- Auto-resolves repository root via git
-
-**start.sh:**
-- Static projects: Builds first, then serves on http://localhost:8181
-- Node.js projects: Runs `npm run dev`
-- Port configurable via .project.json or PROJECT_DEV_SERVER_PORT env var
-
-**stop.sh:**
-- Kills dev server on configured port (default 8181)
-- Uses port from .project.json config.port or PROJECT_DEV_SERVER_PORT
-
-**deploy.sh:**
-- Runs build.sh to build project
-- Builds master sitemap (npm run build:sitemap)
-- Git add, commit (with your message), and push
-- Displays GitLab Pages URL from .project.json
-
-#### Configuration Override
-
-Change behavior via environment variables:
+**Use npm scripts directly:**
 ```bash
-# Use different port
-PROJECT_DEV_SERVER_PORT=9000 ./scripts/start.sh
-
-# Custom GitLab Pages URL
-PROJECT_GITLAB_PAGES_URL_BASE="https://custom.url" ./scripts/deploy.sh
-
-# All config values follow pattern: PROJECT_<KEY>
-```
-
-Or edit `.project.json`:
-```json
-{
-  "config": {
-    "port": 9000,
-    "vercelTeam": "your-team-slug"
-  }
-}
+npm run dev     # Start development server
+npm run build   # Build for production
+npm start       # Serve production build
 ```
 
 ### AI Context (Symlinked)
@@ -190,43 +134,56 @@ Contains:
 
 ## Development Workflow
 
-### Starting Development
-```bash
-# From repository root, create and enter project
-make new PROJECT={{PROJECT_NAME}}
-cd projects/{{PROJECT_NAME}}/
+This project uses **npm** for all development tasks, with http-server for local preview.
 
-# Start Claude Code
-claude
+### Quick Start
+```bash
+# Install dependencies
+npm install
+
+# Start development server (port 3000)
+npm run dev
+# Opens http://localhost:3000
+
+# Build for production
+npm run build
+
+# Serve production build
+npm start
 ```
 
-### Building
-```bash
-make build
-# Copies src/ to public/{{PROJECT_NAME}}/
-```
+### Available npm Scripts
+- `npm run dev` - Start http-server on src/ directory (port 3000, auto-open)
+- `npm run build` - Copy src/ to public/ directory
+- `npm start` - Serve production build from public/
+- `npm run clean` - Remove public/ directory
 
-### Development Server
+### Stopping the Dev Server
+To stop the development server:
 ```bash
-make start
-# Opens http://localhost:8181/{{PROJECT_NAME}}/
-```
-
-### Deploying
-```bash
-make deploy MESSAGE="Your commit message"
-# Builds, commits, pushes to GitLab
-# Live at: https://ai-frontend-prototypes-c8939b.gpages.io/{{PROJECT_NAME}}/
+# Find and kill process on port 3000
+lsof -ti:3000 | xargs kill -9
 ```
 
 ## Project Structure
 
 ```
-src/
-├── index.html    # Main HTML file
-├── styles.css    # Styles
-└── script.js     # JavaScript
+{{PROJECT_NAME}}/
+├── src/                # 📄 Source files (edit these)
+│   ├── index.html      # Main HTML file
+│   ├── styles.css      # Styles
+│   └── script.js       # JavaScript
+├── public/             # 📦 Build output (generated, gitignored)
+├── package.json        # npm scripts and dependencies
+├── .project.json       # Project metadata
+└── CLAUDE.md           # This file
 ```
+
+### Development Notes
+- **Edit files in `src/` directory** - Changes are served live via http-server
+- **Build output goes to `public/`** - This directory is gitignored locally
+- **Port 3000** - All projects (static and Next.js) use the same port
+- **http-server features** - Auto-refresh, no caching (-c-1 flag)
 
 ## Customizing This Project
 

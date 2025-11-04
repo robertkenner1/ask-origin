@@ -11,6 +11,7 @@ source "$SCRIPT_DIR/../.shared/scripts/lib/common.sh"
 VERCEL_TEAM_SLUG=$(get_config "VERCEL_TEAM_SLUG" "grammarly-0ad4c188")
 TEMPLATES_DIR=$(get_config "TEMPLATES_DIR" "templates")
 PROJECTS_DIR=$(get_config "PROJECTS_DIR" "projects")
+DEV_SERVER_PORT="3000"
 
 # Function to slugify project name
 slugify() {
@@ -176,10 +177,6 @@ else
   "created": "$CREATED_DATE",
   "repository": {
     "branch": "$BRANCH_NAME"
-  },
-  "urls": {
-    "local": "http://localhost:8181/$PROJECT_NAME/",
-    "remote": "https://ai-frontend-prototypes-c8939b.gpages.io/$PROJECT_NAME/"
   }
 }
 EOF
@@ -200,33 +197,8 @@ fi
 # Process template variables in all files
 exec_with_status "Processing template variables" "find '$PROJECTS_DIR/$PROJECT_NAME' -type f \\( -name '*.md' -o -name '*.html' -o -name '*.js' -o -name '*.json' -o -name '*.ts' -o -name '*.tsx' \\) -exec sed -i '' -e 's/{{PROJECT_NAME}}/$PROJECT_NAME/g' -e 's/{{PROJECT_TITLE}}/$PROJECT_TITLE/g' -e 's/{{PROJECT_DESCRIPTION}}/$PROJECT_DESCRIPTION/g' -e 's/{{CREATED_DATE}}/$CREATED_DATE/g' -e 's/{{BRANCH_NAME}}/$BRANCH_NAME/g' -e 's/{{VERCEL_TEAM_SLUG}}/$VERCEL_TEAM_SLUG/g' {} \\;"
 
-# Get port configuration (will be used later)
-PORT=$(get_config "DEV_SERVER_PORT" "8181")
-
-# Determine if this is a static or Next.js project
-if [ -f "$PROJECTS_DIR/$PROJECT_NAME/package.json" ]; then
-    # Next.js or Node project - install dependencies
-    exec_with_status "Installing dependencies" "(cd '$PROJECTS_DIR/$PROJECT_NAME' && npm install)" || print_status "Installing dependencies" "warning"
-
-    # Build project if needed
-    if [ -f "$PROJECTS_DIR/$PROJECT_NAME/next.config.ts" ] || [ -f "$PROJECTS_DIR/$PROJECT_NAME/next.config.js" ]; then
-        # Don't build Next.js projects yet
-        echo ""
-        log_info "ℹ️  Next.js project created."
-    fi
-else
-    # Static website - build sitemap
-    exec_with_status "Building sitemap" "npm run build:sitemap"
-
-    # Stop existing dev server
-    if is_port_in_use "$PORT"; then
-        print_status "Stopping existing dev server" ""
-        kill_port "$PORT"
-        print_status "Stopping existing dev server" "success"
-    else
-        print_status "Stopping existing dev server" "note" "not running"
-    fi
-fi
+# All projects now have package.json - install dependencies
+exec_with_status "Installing dependencies" "(cd '$PROJECTS_DIR/$PROJECT_NAME' && npm install)" || print_status "Installing dependencies" "warning"
 
 echo ""
 log_success "✅ Project '$PROJECT_NAME' created successfully"
@@ -240,47 +212,31 @@ echo "   📦 Template: $TEMPLATE_NAME"
 echo "   🌿 Branch: $BRANCH_NAME"
 echo "   📁 Location: $(pwd)"
 
-# Show URLs based on project type
-PROJECT_JSON=".project.json"
-if [ -f "$PROJECT_JSON" ]; then
-    LOCAL_URL=$(cat "$PROJECT_JSON" | grep -o '"local": *"[^"]*"' | sed 's/"local": *"\(.*\)"/\1/' || echo "")
-    if [ -n "$LOCAL_URL" ]; then
-        echo "   🌐 Local: $LOCAL_URL"
-    fi
-else
-    echo "   🌐 Local: http://localhost:$PORT/$PROJECT_NAME/"
-fi
+# Show URLs
+echo "   🌐 Local: http://localhost:$DEV_SERVER_PORT"
 
 echo ""
 
-# Start dev server for the project
-if [ -f "package.json" ]; then
-    log_info "🚀 Starting development server..."
-    echo ""
-    # Start Node.js dev server in background
-    npm run dev >/dev/null 2>&1 &
-    sleep 2
-    log_success "✅ Development server started"
-    echo ""
-else
-    # Start static dev server in background (from repo root)
-    log_info "🚀 Starting development server..."
-    echo ""
-    (cd ../.. && npm run dev >/dev/null 2>&1 &)
-    sleep 2
-    log_success "✅ Development server started"
-    if [ -f "$PROJECT_JSON" ]; then
-        LOCAL_URL=$(cat "$PROJECT_JSON" | grep -o '"local": *"[^"]*"' | sed 's/"local": *"\(.*\)"/\1/' || echo "")
-        if [ -n "$LOCAL_URL" ]; then
-            log_info "   Visit: $LOCAL_URL"
-        fi
-    fi
+# Check if port is already in use
+if is_port_in_use "$DEV_SERVER_PORT"; then
+    print_status "Port $DEV_SERVER_PORT already in use" "warning"
+    log_info "Stopping existing process on port $DEV_SERVER_PORT..."
+    kill_port "$DEV_SERVER_PORT"
+    sleep 1
     echo ""
 fi
+
+# Start dev server for the project
+log_info "🚀 Starting development server..."
+echo ""
+npm run dev >/dev/null 2>&1 &
+sleep 2
+log_success "✅ Development server started at http://localhost:$DEV_SERVER_PORT"
+echo ""
 
 # Show next steps
 log_info "📝 Next Steps:"
 echo "   1. Start coding with your favorite AI tool!"
 echo ""
-echo "   💡 Prefer Claude Code? Just type: ${GREEN}claude${NC}"
+echo -e "   💡 Prefer Claude Code? Just type: ${GREEN}claude${NC}"
 echo ""
