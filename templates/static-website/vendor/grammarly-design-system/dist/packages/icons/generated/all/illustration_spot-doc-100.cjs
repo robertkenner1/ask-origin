@@ -1,0 +1,34 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const React = require("react");
+const createIcon = require("../createIcon.cjs");
+const helpers = require("../helpers.cjs");
+function _interopNamespaceDefault(e) {
+  const n = Object.create(null, { [Symbol.toStringTag]: { value: "Module" } });
+  if (e) {
+    for (const k in e) {
+      if (k !== "default") {
+        const d = Object.getOwnPropertyDescriptor(e, k);
+        Object.defineProperty(n, k, d.get ? d : {
+          enumerable: true,
+          get: () => e[k]
+        });
+      }
+    }
+  }
+  n.default = e;
+  return Object.freeze(n);
+}
+const React__namespace = /* @__PURE__ */ _interopNamespaceDefault(React);
+const IllustrationSpotDoc100 = /* @__PURE__ */ createIcon.createIcon("nocolor", ({
+  title,
+  titleId,
+  desc,
+  descId,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  resourcePrefix = helpers.generateId(),
+  ...props
+}) => {
+  return /* @__PURE__ */ React__namespace.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", width: 56, height: 56, fill: "none", viewBox: "0 0 56 56", "aria-hidden": "true", "data-icon": "IllustrationSpotDoc100", stroke: "transparent", "aria-labelledby": titleId, "aria-describedby": descId, ...props }, desc ? /* @__PURE__ */ React__namespace.createElement("desc", { id: descId }, desc) : null, title ? /* @__PURE__ */ React__namespace.createElement("title", { id: titleId }, title) : null, /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-fill-1)", d: "M1.12 19.68a4 4 0 0 1 4-4h23.36a4 4 0 0 1 4 4v31.2a4 4 0 0 1-4 4H5.12a4 4 0 0 1-4-4z" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-stroke-default)", fillRule: "evenodd", d: "M.77 19.68a4.35 4.35 0 0 1 4.35-4.35h23.36a4.35 4.35 0 0 1 4.35 4.35v31.2a4.35 4.35 0 0 1-4.35 4.35H5.12a4.35 4.35 0 0 1-4.35-4.35zm4.35-3.65a3.65 3.65 0 0 0-3.65 3.65v31.2a3.65 3.65 0 0 0 3.65 3.65h23.36a3.65 3.65 0 0 0 3.65-3.65v-31.2a3.65 3.65 0 0 0-3.65-3.65z", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-fill-2)", d: "M5.6 15.2a4 4 0 0 1 4-4h23.36a4 4 0 0 1 4 4v31.2a4 4 0 0 1-4 4H9.6a4 4 0 0 1-4-4z" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-stroke-default)", fillRule: "evenodd", d: "M5.25 15.2a4.35 4.35 0 0 1 4.35-4.35h23.36a4.35 4.35 0 0 1 4.35 4.35v31.2a4.35 4.35 0 0 1-4.35 4.35H9.6a4.35 4.35 0 0 1-4.35-4.35zm4.35-3.65a3.65 3.65 0 0 0-3.65 3.65v31.2a3.65 3.65 0 0 0 3.65 3.65h23.36a3.65 3.65 0 0 0 3.65-3.65V15.2a3.65 3.65 0 0 0-3.65-3.65z", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-stroke-default)", fillRule: "evenodd", d: "M10.85 24.64a.35.35 0 0 1 .35-.35h10.08a.35.35 0 1 1 0 .7H11.2a.35.35 0 0 1-.35-.35M10.85 32.48a.35.35 0 0 1 .35-.35h20.16a.35.35 0 1 1 0 .7H11.2a.35.35 0 0 1-.35-.35M10.85 40.32a.35.35 0 0 1 .35-.35h20.16a.35.35 0 1 1 0 .7H11.2a.35.35 0 0 1-.35-.35", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#FFF6E0", d: "M40.32 29.12c7.423 0 13.44-6.017 13.44-13.44S47.743 2.24 40.32 2.24 26.88 8.257 26.88 15.68s6.017 13.44 13.44 13.44" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-stroke-default)", fillRule: "evenodd", d: "M40.32 2.59c-7.23 0-13.09 5.86-13.09 13.09s5.86 13.09 13.09 13.09 13.09-5.86 13.09-13.09S47.55 2.59 40.32 2.59M26.53 15.68c0-7.616 6.174-13.79 13.79-13.79s13.79 6.174 13.79 13.79-6.174 13.79-13.79 13.79-13.79-6.174-13.79-13.79", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#FF4D45", fillRule: "evenodd", d: "M42.326 10.57c.016 1.17-.252 2.575-.622 3.617-.257.724-.666 1.392-1.182 1.87-.515.474-1.191.806-1.942.699a1.8 1.8 0 0 1-.94-.412 1.9 1.9 0 0 1-.545-.843c-.208-.62-.188-1.402-.051-2.251.144-.895.565-2.138 1.141-3.167.288-.516.633-1.009 1.025-1.38.387-.366.886-.675 1.473-.676.674 0 1.108.422 1.34.915.218.464.295 1.05.303 1.628m-1.64-1.293h-.002c-.134 0-.34.074-.614.334-.268.253-.54.628-.794 1.082-.509.91-.878 2.014-.998 2.756-.128.787-.108 1.326.002 1.655.052.154.116.241.177.294a.56.56 0 0 0 .3.12c.257.037.574-.063.916-.38.34-.315.65-.798.853-1.369.327-.921.564-2.18.55-3.182-.007-.509-.077-.886-.184-1.114-.093-.196-.159-.196-.206-.196m-3.879-.555a.625.625 0 0 1 .222.718l-3.743 10.364a.625.625 0 1 1-1.175-.424l3.004-8.321-1.6 1.252a.625.625 0 0 1-.77-.984l3.31-2.591a.625.625 0 0 1 .752-.014m10.577 5.465c.37-1.042.638-2.447.622-3.617-.008-.578-.085-1.164-.303-1.628-.232-.493-.666-.916-1.34-.915-.587 0-1.086.31-1.473.676-.392.371-.736.864-1.025 1.38-.576 1.029-.997 2.272-1.141 3.166-.138.85-.157 1.632.05 2.252.108.321.282.615.546.843a1.8 1.8 0 0 0 .94.412c.75.107 1.427-.225 1.941-.7.517-.477.926-1.145 1.183-1.87m-1.02-4.91h.002c.047 0 .113 0 .206.196.106.228.177.605.184 1.114.014 1.002-.223 2.26-.55 3.182-.202.571-.512 1.054-.853 1.37-.343.316-.66.416-.916.38a.56.56 0 0 1-.3-.121.64.64 0 0 1-.177-.294c-.11-.329-.13-.868-.002-1.655.12-.742.489-1.846.998-2.756.254-.454.526-.829.794-1.082.274-.26.48-.334.614-.334m-1.424 9.785c-2.785-.279-5.86.141-8.223.975a.625.625 0 1 1-.416-1.179c2.531-.893 5.79-1.337 8.763-1.04a.625.625 0 0 1-.124 1.244M34.306 23.19c2.366-1.002 7.299-2.1 11.351-1.681a.625.625 0 1 0 .129-1.243c-4.296-.445-9.44.703-11.968 1.773a.625.625 0 0 0 .488 1.151", clipRule: "evenodd" }));
+});
+exports.IllustrationSpotDoc100 = IllustrationSpotDoc100;

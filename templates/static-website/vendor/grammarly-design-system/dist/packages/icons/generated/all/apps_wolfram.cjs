@@ -1,0 +1,34 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const React = require("react");
+const createIcon = require("../createIcon.cjs");
+const helpers = require("../helpers.cjs");
+function _interopNamespaceDefault(e) {
+  const n = Object.create(null, { [Symbol.toStringTag]: { value: "Module" } });
+  if (e) {
+    for (const k in e) {
+      if (k !== "default") {
+        const d = Object.getOwnPropertyDescriptor(e, k);
+        Object.defineProperty(n, k, d.get ? d : {
+          enumerable: true,
+          get: () => e[k]
+        });
+      }
+    }
+  }
+  n.default = e;
+  return Object.freeze(n);
+}
+const React__namespace = /* @__PURE__ */ _interopNamespaceDefault(React);
+const AppsWolfram = /* @__PURE__ */ createIcon.createIcon("nocolor", ({
+  title,
+  titleId,
+  desc,
+  descId,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  resourcePrefix = helpers.generateId(),
+  ...props
+}) => {
+  return /* @__PURE__ */ React__namespace.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", width: 20, height: 20, fill: "none", viewBox: "0 0 20 20", "aria-hidden": "true", "data-icon": "AppsWolfram", stroke: "transparent", "aria-labelledby": titleId, "aria-describedby": descId, ...props }, desc ? /* @__PURE__ */ React__namespace.createElement("desc", { id: descId }, desc) : null, title ? /* @__PURE__ */ React__namespace.createElement("title", { id: titleId }, title) : null, /* @__PURE__ */ React__namespace.createElement("path", { fill: "#F16850", fillRule: "evenodd", d: "m17.789 12.484-3.319.697.338 3.297-3.107-1.331L9.99 18l-1.712-2.853-3.107 1.331.339-3.297-3.319-.697 2.262-2.473L2.19 7.538 5.51 6.84 5.17 3.543l3.107 1.331L9.99 2.021l1.712 2.853 3.107-1.331-.338 3.297 3.319.698-2.262 2.473z", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#FD694F", fillRule: "evenodd", d: "M9.99 6.988 8.278 4.853 5.17 3.522l1.86 2.43z", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#FF3413", fillRule: "evenodd", d: "m5.509 6.819-3.319.697L4.452 9.99l2.663-.972z", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#DC1D23", fillRule: "evenodd", d: "M7.03 5.953 5.17 3.521l.339 3.297 1.606 2.22z", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#FF9281", fillRule: "evenodd", d: "M11.702 4.853 9.99 2 8.278 4.853 9.99 6.988z", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#FF8B79", fillRule: "evenodd", d: "m15.527 9.99 2.262-2.474-3.319-.697-1.606 2.22z", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#FD694F", fillRule: "evenodd", d: "m12.885 9.038 1.606-2.219.338-3.297-1.86 2.43z", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#EF5240", fillRule: "evenodd", d: "m12.97 5.953 1.86-2.431-3.107 1.331-1.713 2.135z", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#FF482C", fillRule: "evenodd", d: "m14.808 11.469 3.002.993-2.262-2.473-2.663-.972z", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#EC2101", fillRule: "evenodd", d: "m7.115 9.038-2.663.973-2.262 2.473 3.002-.994z", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#D21C22", fillRule: "evenodd", d: "M9.99 14.893V18l1.711-2.853.064-2.811z", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#C90901", fillRule: "evenodd", d: "m14.808 11.469-3.022.867 2.705.845 3.319-.697z", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#EC2101", fillRule: "evenodd", d: "m11.702 15.147 3.107 1.331-.338-3.297-2.706-.845z", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#B6171E", fillRule: "evenodd", d: "m5.192 11.469-3.002.993 3.319.698 2.705-.824z", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#B4151B", fillRule: "evenodd", d: "m8.214 12.336.064 2.81L9.99 18v-3.107z", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#D21C22", fillRule: "evenodd", d: "m5.509 13.181-.338 3.297 3.107-1.331-.064-2.811z", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#E63320", fillRule: "evenodd", d: "m12.885 9.038.085-3.086-2.96 1.036V9.99z", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#FF4527", fillRule: "evenodd", d: "M9.99 6.988 7.031 5.952l.085 3.086 2.874.951z", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#FF9281", fillRule: "evenodd", d: "m8.214 12.336 1.776 2.536 1.775-2.536L9.99 9.968z", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#FD684D", fillRule: "evenodd", d: "m9.99 9.99 1.775 2.367 3.022-.867-1.923-2.43z", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#FD745C", fillRule: "evenodd", d: "M7.116 9.038 5.192 11.47l3.023.867L9.99 9.968z", clipRule: "evenodd" }));
+});
+exports.AppsWolfram = AppsWolfram;

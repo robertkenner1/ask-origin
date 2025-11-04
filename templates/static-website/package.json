@@ -10,7 +10,7 @@
     "clean": "rm -rf public"
   },
   "dependencies": {
-    "@grammarly/design-system": "7.0.0-beta.4"
+    "@grammarly/design-system": "file:./vendor/grammarly-design-system"
   },
   "devDependencies": {
     "http-server": "^14.1.1"

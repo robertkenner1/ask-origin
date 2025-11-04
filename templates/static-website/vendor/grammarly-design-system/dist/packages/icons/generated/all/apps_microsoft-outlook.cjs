@@ -1,0 +1,34 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const React = require("react");
+const createIcon = require("../createIcon.cjs");
+const helpers = require("../helpers.cjs");
+function _interopNamespaceDefault(e) {
+  const n = Object.create(null, { [Symbol.toStringTag]: { value: "Module" } });
+  if (e) {
+    for (const k in e) {
+      if (k !== "default") {
+        const d = Object.getOwnPropertyDescriptor(e, k);
+        Object.defineProperty(n, k, d.get ? d : {
+          enumerable: true,
+          get: () => e[k]
+        });
+      }
+    }
+  }
+  n.default = e;
+  return Object.freeze(n);
+}
+const React__namespace = /* @__PURE__ */ _interopNamespaceDefault(React);
+const AppsMicrosoftOutlook = /* @__PURE__ */ createIcon.createIcon("nocolor", ({
+  title,
+  titleId,
+  desc,
+  descId,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  resourcePrefix = helpers.generateId(),
+  ...props
+}) => {
+  return /* @__PURE__ */ React__namespace.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", width: 20, height: 20, fill: "none", viewBox: "0 0 20 20", "aria-hidden": "true", "data-icon": "AppsMicrosoftOutlook", stroke: "transparent", "aria-labelledby": titleId, "aria-describedby": descId, ...props }, desc ? /* @__PURE__ */ React__namespace.createElement("desc", { id: descId }, desc) : null, title ? /* @__PURE__ */ React__namespace.createElement("title", { id: titleId }, title) : null, /* @__PURE__ */ React__namespace.createElement("path", { fill: "#0A2767", d: "M17.083 10.335a.32.32 0 0 0-.15-.272h-.002l-.006-.003-4.91-2.906a.659.659 0 0 0-.736 0L6.372 10.06l-.006.003a.32.32 0 0 0 .008.548l4.909 2.906a.659.659 0 0 0 .736 0l4.909-2.906a.32.32 0 0 0 .156-.276" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#0364B8", d: "M6.943 8.395h3.222v2.953H6.943zm9.481-3.002v-1.35a.61.61 0 0 0-.597-.626h-8.36a.61.61 0 0 0-.597.626v1.35l4.942 1.318z" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#0078D4", d: "M6.87 5.393h3.295V8.36H6.87z" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#28A8EA", d: "M13.46 5.393h-3.295V8.36l3.294 2.965h2.965V8.359z" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#0078D4", d: "M10.165 8.359h3.294v2.965h-3.294z" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#0364B8", d: "M10.165 11.324h3.294v2.965h-3.294z" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#14447D", d: "M6.943 11.348h3.222v2.684H6.943z" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#0078D4", d: "M13.46 11.324h2.964v2.965H13.46z" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: `url(#${resourcePrefix}-tlooka)`, d: "m16.932 10.593-.006.004-4.909 2.76-.066.037a.7.7 0 0 1-.266.066l-.268-.157a1 1 0 0 1-.066-.038l-4.975-2.839h-.002l-.163-.09v5.588a.675.675 0 0 0 .68.671h9.523q.008-.002.017-.003a.8.8 0 0 0 .23-.048 1 1 0 0 0 .093-.048c.022-.012.06-.04.06-.04a.67.67 0 0 0 .27-.532v-5.589a.3.3 0 0 1-.152.258" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#0A2767", d: "M16.82 10.313v.343l-5.133 3.534-5.314-3.761a.003.003 0 0 0-.004-.004l-.487-.293v-.247l.2-.003.426.243.01.004.036.023s4.994 2.85 5.008 2.856l.19.112.053-.02 4.959-2.79z", opacity: 0.5 }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#1490DF", d: "m16.932 10.593-.006.004-4.909 2.76-.066.038a.69.69 0 0 1-.67-.037l-4.909-2.761-.006-.004a.3.3 0 0 1-.155-.258v5.59a.675.675 0 0 0 .68.67h9.513a.675.675 0 0 0 .68-.67v-5.59a.3.3 0 0 1-.152.258" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#000", d: "m12.089 13.317-.074.041-.066.037a.7.7 0 0 1-.259.069l1.868 2.208 3.258.786a.7.7 0 0 0 .207-.258z", opacity: 0.1 }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#000", d: "m12.422 13.13-.407.228-.066.037a.7.7 0 0 1-.259.069l.876 2.412 4.251.58a.67.67 0 0 0 .266-.532v-.072z", opacity: 0.05 }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#28A8EA", d: "M6.9 16.595h9.503a.7.7 0 0 0 .407-.132l-5.393-3.159a1 1 0 0 1-.066-.038l-4.975-2.84h-.002l-.163-.09v5.57c0 .38.308.689.689.689" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#000", d: "M10.824 6.656v7.028a.606.606 0 0 1-.603.606H6.21V6.382h.66v-.33h3.35a.605.605 0 0 1 .603.604", opacity: 0.1 }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#000", d: "M10.494 6.986v7.027q.001.121-.05.23a.6.6 0 0 1-.553.375h-3.68V6.382h3.68a.55.55 0 0 1 .274.069c.202.102.33.309.33.535", opacity: 0.2 }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#000", d: "M10.494 6.986v6.368a.61.61 0 0 1-.603.605h-3.68V6.382h3.68a.55.55 0 0 1 .274.069c.202.102.33.309.33.535", opacity: 0.2 }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#000", d: "M10.165 6.986v6.368c0 .333-.27.604-.603.605h-3.35V6.382h3.35c.333 0 .603.27.603.603", opacity: 0.2 }), /* @__PURE__ */ React__namespace.createElement("path", { fill: `url(#${resourcePrefix}-tlookb)`, d: "M3.52 6.382h6.04c.334 0 .605.27.605.604v6.04c0 .334-.27.604-.604.604H3.52a.604.604 0 0 1-.604-.604v-6.04c0-.334.27-.604.604-.604" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#fff", d: "M4.804 8.915c.149-.317.39-.583.69-.762.333-.191.712-.286 1.096-.275.356-.008.707.082 1.015.26.289.173.522.426.67.729.162.333.243.7.236 1.07a2.5 2.5 0 0 1-.242 1.12 1.8 1.8 0 0 1-.692.754c-.32.184-.684.276-1.052.267a2 2 0 0 1-1.037-.263 1.77 1.77 0 0 1-.68-.73 2.3 2.3 0 0 1-.238-1.058 2.55 2.55 0 0 1 .234-1.112m.735 1.789c.08.2.214.374.389.501.177.124.39.188.606.182.23.01.457-.056.647-.188.172-.127.303-.301.377-.501.082-.224.123-.461.12-.7.003-.24-.036-.48-.113-.708a1.1 1.1 0 0 0-.365-.523 1 1 0 0 0-.642-.197 1.05 1.05 0 0 0-.62.184 1.15 1.15 0 0 0-.396.506c-.18.464-.18.979-.002 1.444" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#50D9FF", d: "M13.46 5.393h2.964V8.36H13.46z" }), /* @__PURE__ */ React__namespace.createElement("defs", null, /* @__PURE__ */ React__namespace.createElement("linearGradient", { id: `${resourcePrefix}-tlooka`, x1: 11.647, x2: 11.647, y1: 10.335, y2: 16.595, gradientUnits: "userSpaceOnUse" }, /* @__PURE__ */ React__namespace.createElement("stop", { stopColor: "#35B8F1" }), /* @__PURE__ */ React__namespace.createElement("stop", { offset: 1, stopColor: "#28A8EA" })), /* @__PURE__ */ React__namespace.createElement("linearGradient", { id: `${resourcePrefix}-tlookb`, x1: 4.176, x2: 8.906, y1: 5.91, y2: 14.102, gradientUnits: "userSpaceOnUse" }, /* @__PURE__ */ React__namespace.createElement("stop", { stopColor: "#1784D9" }), /* @__PURE__ */ React__namespace.createElement("stop", { offset: 0.5, stopColor: "#107AD5" }), /* @__PURE__ */ React__namespace.createElement("stop", { offset: 1, stopColor: "#0A63C9" }))));
+});
+exports.AppsMicrosoftOutlook = AppsMicrosoftOutlook;

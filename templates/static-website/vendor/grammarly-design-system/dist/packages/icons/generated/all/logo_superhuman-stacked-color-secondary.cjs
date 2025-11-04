@@ -1,0 +1,34 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const React = require("react");
+const createIcon = require("../createIcon.cjs");
+const helpers = require("../helpers.cjs");
+function _interopNamespaceDefault(e) {
+  const n = Object.create(null, { [Symbol.toStringTag]: { value: "Module" } });
+  if (e) {
+    for (const k in e) {
+      if (k !== "default") {
+        const d = Object.getOwnPropertyDescriptor(e, k);
+        Object.defineProperty(n, k, d.get ? d : {
+          enumerable: true,
+          get: () => e[k]
+        });
+      }
+    }
+  }
+  n.default = e;
+  return Object.freeze(n);
+}
+const React__namespace = /* @__PURE__ */ _interopNamespaceDefault(React);
+const LogoSuperhumanStackedColorSecondary = /* @__PURE__ */ createIcon.createIcon("nocolor", ({
+  title,
+  titleId,
+  desc,
+  descId,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  resourcePrefix = helpers.generateId(),
+  ...props
+}) => {
+  return /* @__PURE__ */ React__namespace.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", width: 165, height: 65, fill: "none", viewBox: "0 0 165 65", "aria-hidden": "true", "data-icon": "LogoSuperhumanStackedColorSecondary", stroke: "transparent", "aria-labelledby": titleId, "aria-describedby": descId, ...props }, title ? /* @__PURE__ */ React__namespace.createElement("title", { id: titleId }, title) : null, desc === void 0 ? /* @__PURE__ */ React__namespace.createElement("desc", { id: descId }, "Vector graphic: superhuman stacked color secondary") : desc ? /* @__PURE__ */ React__namespace.createElement("desc", { id: descId }, desc) : null, /* @__PURE__ */ React__namespace.createElement("g", { clipPath: `url(#${resourcePrefix}-ondaryclip0_28185_1014)` }, /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-logo-superhuman-secondary)", d: "M100.597 10.072A10.61 10.61 0 0 0 90.843.336a112 112 0 0 0-17.565.017 10.605 10.605 0 0 0-9.737 9.753 112 112 0 0 0 .017 17.566 10.61 10.61 0 0 0 9.754 9.736c5.847.452 11.718.449 17.565-.017a10.61 10.61 0 0 0 9.737-9.753c.452-5.848.448-11.719-.017-17.566M82.124 6.015a3.805 3.805 0 0 1 3.81 3.8c0 2.099-1.705 3.8-3.81 3.8a3.805 3.805 0 0 1-3.81-3.8c0-2.098 1.704-3.8 3.81-3.8m7.189 25.036h.003l-6.614-3.622a1.2 1.2 0 0 0-1.157 0l-6.614 3.622c-1.065.582-2.225-.6-1.613-1.64l7.772-13.167a1.2 1.2 0 0 1 2.064 0l7.771 13.167c.613 1.04-.544 2.222-1.612 1.64M89.953 54.766v-5.682h3.428v14.897h-3.428v-6.109h-6.067v6.11H80.46V49.083h3.427v5.682zM3.433 59.364c.235 1.384 1.276 2.066 3.15 2.066 1.724 0 2.68-.66 2.68-1.787 0-.873-.445-1.276-1.702-1.555L5.325 57.6C1.687 56.791.281 55.556.281 53.13c0-2.66 2.363-4.385 5.98-4.385 3.616 0 6 1.66 6.15 4.638H9.003c-.235-1.149-1.17-1.746-2.746-1.746s-2.555.576-2.555 1.576c0 .765.425 1.105 1.917 1.468l2.106.468c3.703.786 4.96 1.957 4.96 4.597 0 2.83-2.32 4.577-6.11 4.577-3.978 0-6.427-1.827-6.576-4.958zM25.57 49.084h3.427v8.577c0 4.512-2.128 6.661-6.512 6.661-4.385 0-6.512-2.149-6.512-6.66v-8.578H19.4v8.661c0 2.428.935 3.49 3.087 3.49 2.151 0 3.087-1.065 3.087-3.49v-8.66zM59.97 63.981H48.731V49.084H59.97v3.066h-7.812v2.66h6.631v3.065h-6.63v3.044h7.811v3.065zM107.064 49.084h3.427v8.577c0 4.512-2.128 6.661-6.512 6.661s-6.512-2.149-6.512-6.66v-8.578h3.428v8.661c0 2.428.935 3.49 3.087 3.49s3.087-1.065 3.087-3.49v-8.66zM122.239 56.215l3.639-7.13h4.022V63.98h-3.341V54.13l-3.939 7.812h-.765l-3.938-7.812v9.852h-3.341V49.084h4.022l3.638 7.131zM147.581 63.981h-3.405l-.555-3.808h-6.109l-.554 3.808h-3.406l1.362-9.428c.659-4.258 2.149-5.81 5.642-5.81 3.492 0 5 1.555 5.638 5.81l1.385 9.428zm-9.598-6.914h5.171l-.319-2.236c-.342-2.257-.895-3-2.277-3-1.38 0-1.916.746-2.256 3zM160.813 58.789v-9.705h3.342v14.897h-3.429l-6.149-9.704v9.704h-3.341V49.085h3.428zM68.697 58.004l3.194-1.21 4.897 7.174h-4.085z", className: "ondarycolor-group" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-logo-superhuman-secondary)", d: "M64.116 49.049H71.3q1.578 0 2.773.586a4.36 4.36 0 0 1 1.856 1.686q.66 1.098.66 2.592c0 .995-.22 1.744-.66 2.476-.442.732-1.24 1.344-2.065 1.689-.89.372-7.963 2.51-7.963 2.51l.006-3.433s5.197-1.29 6.044-1.603c.37-.136 1.305-.448 1.305-1.64 0-1.424-1.411-1.557-2.302-1.557h-4.371l.96-.96v12.586h-3.428zM33.078 49.049h7.185q1.578 0 2.773.586a4.36 4.36 0 0 1 1.856 1.686q.66 1.098.661 2.592c0 .995-.22 1.744-.661 2.476s-1.24 1.344-2.064 1.689c-.89.372-7.963 2.51-7.963 2.51l.005-3.433s5.198-1.29 6.044-1.603c.37-.136 1.306-.448 1.306-1.64 0-1.424-1.412-1.557-2.302-1.557h-4.372l.96-.96v12.586h-3.428z", className: "ondarycolor-group" })));
+});
+exports.LogoSuperhumanStackedColorSecondary = LogoSuperhumanStackedColorSecondary;

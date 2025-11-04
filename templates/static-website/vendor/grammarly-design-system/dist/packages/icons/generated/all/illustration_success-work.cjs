@@ -1,0 +1,34 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const React = require("react");
+const createIcon = require("../createIcon.cjs");
+const helpers = require("../helpers.cjs");
+function _interopNamespaceDefault(e) {
+  const n = Object.create(null, { [Symbol.toStringTag]: { value: "Module" } });
+  if (e) {
+    for (const k in e) {
+      if (k !== "default") {
+        const d = Object.getOwnPropertyDescriptor(e, k);
+        Object.defineProperty(n, k, d.get ? d : {
+          enumerable: true,
+          get: () => e[k]
+        });
+      }
+    }
+  }
+  n.default = e;
+  return Object.freeze(n);
+}
+const React__namespace = /* @__PURE__ */ _interopNamespaceDefault(React);
+const IllustrationSuccessWork = /* @__PURE__ */ createIcon.createIcon("nocolor", ({
+  title,
+  titleId,
+  desc,
+  descId,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  resourcePrefix = helpers.generateId(),
+  ...props
+}) => {
+  return /* @__PURE__ */ React__namespace.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", width: 80, height: 80, fill: "none", viewBox: "0 0 80 80", "aria-hidden": "true", "data-icon": "IllustrationSuccessWork", stroke: "transparent", "aria-labelledby": titleId, "aria-describedby": descId, ...props }, desc ? /* @__PURE__ */ React__namespace.createElement("desc", { id: descId }, desc) : null, title ? /* @__PURE__ */ React__namespace.createElement("title", { id: titleId }, title) : null, /* @__PURE__ */ React__namespace.createElement("path", { fill: "#D5FF00", stroke: "var(--color-illustration-stroke-default)", strokeLinecap: "round", strokeLinejoin: "round", strokeMiterlimit: 10, d: "M19.147 31.796c-1.492-2.523-4.037-.988-3.423 1.228-1.338-2.04-.592-3.73-1.294-5.046-.834-1.58-3.006-1.03-2.918.812-.592-1.667.154-3.62-.11-4.673-.416-1.82-2.566-1.426-2.413.263A18 18 0 0 1 6.4 15.057c0-4.63 2.019-8.447 4.849-8.447 2.325 0 3.532 2.282 2.72 4.235-.373-1.032-1.031-1.58-2.106-1.58-1.25 0-2.04 1.228-2.04 2.742 0 2.194 1.82 3.445 4.037 3.467 2.566 0 4.256-2.501 4.256-5.397 0-3.861-2.852-7.679-7.394-7.064 1.25-1.01-.197-2.83-1.733-1.602C5.325 4.285 3 9.2 3 14.771c0 14.085 13.58 29.42 27.182 25.954l-2.326-4.06c-3.949 0-6.67-1.425-8.71-4.87M71.17 1.411c-1.535-1.228-2.983.592-1.733 1.602-4.54-.637-7.393 3.18-7.393 7.042 0 2.896 1.667 5.397 4.256 5.397 2.194 0 4.037-1.25 4.037-3.445 0-1.514-.79-2.742-2.04-2.742-1.075 0-1.734.548-2.106 1.58-.812-1.953.394-4.213 2.72-4.213 2.83 0 4.848 3.818 4.848 8.447 0 3.312-.921 6.537-2.567 9.345.132-1.689-1.996-2.084-2.413-.263-.241 1.053.483 3.006-.11 4.673.088-1.843-2.106-2.391-2.917-.812-.702 1.317.022 3.006-1.295 5.046.615-2.194-1.908-3.73-3.422-1.228-2.062 3.422-4.76 4.87-8.71 4.848L50 40.746c13.602 3.467 27.204-11.846 27.204-25.93-.066-5.573-2.37-10.487-6.034-13.405" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-shadow-default)", d: "M40 79c16.016 0 29-2.015 29-4.5S56.016 70 40 70s-29 2.015-29 4.5S23.984 79 40 79" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#D5FF00", stroke: "var(--color-illustration-stroke-default)", strokeLinecap: "round", strokeLinejoin: "round", strokeMiterlimit: 10, d: "M59 69H21a3 3 0 1 0 0 6h38a3 3 0 1 0 0-6M18.467 5.799c-2.055 17.852 3.719 31.596 11.859 38.556.473.404.97.8 1.467 1.196 2.366 1.883 4.756 3.785 4.706 6.742-.066 3.992-.64 6.013-.64 6.013-1.02 3.873-4.52 5.08-7.629 6.153-2.842.981-5.36 1.85-5.36 4.541h34.258c0-2.69-2.517-3.56-5.36-4.54-3.109-1.074-6.607-2.281-7.627-6.154 0 0-.575-2.021-.641-6.013-.05-2.957 2.34-4.859 4.706-6.742.498-.397.995-.792 1.467-1.196 8.14-6.96 13.914-20.704 11.86-38.556z" }), /* @__PURE__ */ React__namespace.createElement("path", { stroke: "var(--color-illustration-stroke-default)", strokeLinecap: "round", strokeLinejoin: "round", strokeMiterlimit: 10, d: "M38.5 50h3" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#D5FF00", stroke: "var(--color-illustration-stroke-default)", strokeLinecap: "round", strokeLinejoin: "round", strokeMiterlimit: 10, d: "M61.477 6h-42.98c-.262 1.905-.419 4.06-.497 5.777.784.565 1.83.984 3.033 1.172 2.143.335 4.209-.188 5.385-1.235.602 1.319 2.144 2.323 4.053 2.449 1.777.104 3.372-.544 4.287-1.612.758 1.423 2.798 2.449 5.255 2.449 2.431 0 4.497-1.026 5.255-2.449.915 1.068 2.51 1.737 4.288 1.612 1.908-.126 3.477-1.13 4.052-2.449 1.176 1.047 3.216 1.57 5.36 1.235 1.202-.188 2.221-.607 3.032-1.172A99 99 0 0 0 61.477 6" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-illustration-fill-default)", stroke: "var(--color-illustration-stroke-default)", strokeLinecap: "round", strokeLinejoin: "round", strokeMiterlimit: 10, d: "M40 6H19c4.558 2.423 12.267 4 21 4s16.441-1.577 21-4z" }), /* @__PURE__ */ React__namespace.createElement("path", { stroke: "var(--color-illustration-stroke-1)", strokeMiterlimit: 10, d: "M11.205 65c-.126 0-.21-.105-.21-.231.19-7.428-2.357-10.122-9.785-10.332-.126 0-.21-.105-.21-.232 0-.126.105-.21.231-.21 7.428.19 10.122-2.357 10.332-9.785 0-.126.105-.21.232-.21.126 0 .21.105.21.231-.19 7.428 2.357 10.122 9.785 10.311.126 0 .21.105.21.231 0 .127-.105.211-.232.211-7.427-.19-10.12 2.357-10.331 9.785-.021.147-.105.231-.232.231ZM70.318 68c-.078 0-.13-.065-.13-.143.117-4.599-1.46-6.266-6.058-6.396-.078 0-.13-.065-.13-.143s.065-.13.143-.13c4.599.117 6.266-1.46 6.396-6.058 0-.078.065-.13.143-.13s.13.065.13.143c-.117 4.599 1.46 6.266 6.058 6.383.078 0 .13.065.13.143 0 .079-.065.13-.143.13-4.599-.117-6.266 1.46-6.396 6.058-.013.09-.065.143-.143.143Z" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#fff", stroke: "var(--color-illustration-stroke-default)", strokeMiterlimit: 10, d: "M49.804 33c-.085 0-.14-.07-.14-.154.126-4.952-1.572-6.748-6.524-6.888-.084 0-.14-.07-.14-.154 0-.085.07-.14.154-.14 4.952.126 6.748-1.572 6.888-6.524 0-.084.07-.14.154-.14.085 0 .14.07.14.154-.126 4.952 1.572 6.748 6.524 6.874.084 0 .14.07.14.154 0 .085-.07.14-.154.14-4.952-.126-6.748 1.572-6.888 6.524-.014.098-.07.154-.154.154Z" }));
+});
+exports.IllustrationSuccessWork = IllustrationSuccessWork;

@@ -1,0 +1,34 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const React = require("react");
+const createIcon = require("../createIcon.cjs");
+const helpers = require("../helpers.cjs");
+function _interopNamespaceDefault(e) {
+  const n = Object.create(null, { [Symbol.toStringTag]: { value: "Module" } });
+  if (e) {
+    for (const k in e) {
+      if (k !== "default") {
+        const d = Object.getOwnPropertyDescriptor(e, k);
+        Object.defineProperty(n, k, d.get ? d : {
+          enumerable: true,
+          get: () => e[k]
+        });
+      }
+    }
+  }
+  n.default = e;
+  return Object.freeze(n);
+}
+const React__namespace = /* @__PURE__ */ _interopNamespaceDefault(React);
+const FlagIn = /* @__PURE__ */ createIcon.createIcon("nocolor", ({
+  title,
+  titleId,
+  desc,
+  descId,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  resourcePrefix = helpers.generateId(),
+  ...props
+}) => {
+  return /* @__PURE__ */ React__namespace.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", width: 24, height: 24, fill: "none", viewBox: "0 0 24 24", "aria-hidden": "true", "data-icon": "FlagIn", stroke: "transparent", "aria-labelledby": titleId, "aria-describedby": descId, ...props }, desc ? /* @__PURE__ */ React__namespace.createElement("desc", { id: descId }, desc) : null, title ? /* @__PURE__ */ React__namespace.createElement("title", { id: titleId }, title) : null, /* @__PURE__ */ React__namespace.createElement("g", { clipPath: `url(#${resourcePrefix}-lagina)` }, /* @__PURE__ */ React__namespace.createElement("path", { fill: "#F9FAFF", fillRule: "evenodd", d: "M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#128807", fillRule: "evenodd", d: "M18.037 17.25A7.98 7.98 0 0 1 12 20a7.98 7.98 0 0 1-6.036-2.75z", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#fff", fillRule: "evenodd", d: "M5.963 17.25h12.074A7.97 7.97 0 0 0 20 12c0-2.009-.74-3.845-1.963-5.25H5.963A7.97 7.97 0 0 0 4 12a7.97 7.97 0 0 0 1.963 5.25", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#F93", fillRule: "evenodd", d: "M18.037 6.75H5.964A7.98 7.98 0 0 1 12 4c2.41 0 4.57 1.065 6.037 2.75", clipRule: "evenodd" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#008", d: "M16.2 12a4.2 4.2 0 1 1-8.4 0 4.2 4.2 0 0 1 8.4 0" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#fff", d: "M12 15.675a3.675 3.675 0 1 0 0-7.35 3.675 3.675 0 0 0 0 7.35" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#008", d: "M15.619 12.668a.19.19 0 1 0 .05-.375.19.19 0 0 0-.05.375M15.323 13.582a.189.189 0 1 0 .144-.35.189.189 0 0 0-.145.35M14.8 14.388a.19.19 0 1 0 .23-.3.19.19 0 0 0-.23.3M14.086 15.031a.189.189 0 1 0 .3-.23.189.189 0 0 0-.3.23M10.77 8.532a.19.19 0 1 0-.35.144.19.19 0 0 0 .35-.144M11.71 8.332a.19.19 0 1 0-.376.049.19.19 0 0 0 .375-.05M15.468 10.77a.189.189 0 1 0-.144-.35.189.189 0 0 0 .144.35M12.668 8.381a.189.189 0 1 0-.374-.05.189.189 0 0 0 .374.05M13.582 8.677a.19.19 0 1 0-.35-.144.19.19 0 0 0 .35.144M14.388 9.2a.19.19 0 1 0-.3-.23.19.19 0 0 0 .3.23M13.23 15.468a.189.189 0 1 0 .35-.145.189.189 0 0 0-.35.145M12.291 15.668a.189.189 0 1 0 .375-.049.189.189 0 0 0-.375.05M11.332 15.619a.189.189 0 1 0 .374.05.189.189 0 0 0-.374-.05M10.418 15.322a.19.19 0 1 0 .35.145.19.19 0 0 0-.35-.145M15.032 9.914a.189.189 0 1 0-.23-.3.189.189 0 0 0 .23.3M9.612 14.8a.189.189 0 1 0 .3.23.189.189 0 0 0-.3-.23M8.968 14.086a.189.189 0 1 0 .23.3.189.189 0 0 0-.23-.3M8.532 13.23a.19.19 0 1 0 .145.35.19.19 0 0 0-.145-.35M8.331 12.29a.189.189 0 1 0 .05.375.189.189 0 0 0-.05-.374M15.669 11.709a.189.189 0 1 0-.05-.375.189.189 0 0 0 .05.375M8.381 11.331a.189.189 0 1 0-.05.375.189.189 0 0 0 .05-.375M8.678 10.418a.19.19 0 1 0-.145.349.19.19 0 0 0 .145-.35M9.2 9.611a.189.189 0 1 0-.23.3.189.189 0 0 0 .23-.3M9.914 8.968a.189.189 0 1 0-.3.23.189.189 0 0 0 .3-.23M11.874 10.53 12 8.325l.126 2.205L12 11.58zM12.95 10.872l1.649-1.47-1.47 1.648-.832.653zM13.838 8.818l-1.212 1.846-.416.973.634-.847zM12.259 10.548l.692-2.097-.449 2.162-.393.982zM12.951 15.55l-.449-2.163-.393-.981.15 1.047zM11.498 10.613l-.45-2.163.693 2.098.15 1.046zM10.163 8.818l.993 1.972.634.846-.416-.972zM10.872 11.05 9.401 9.4l1.648 1.47.653.832zM8.817 10.163l1.847 1.211.972.416-.846-.634zM13.129 12.95l1.47 1.649-1.649-1.47-.653-.832zM8.45 11.05l2.098.691 1.046.15-.981-.393zM10.53 12.126 8.325 12l2.205-.126 1.05.126zM8.45 12.951l2.163-.449.981-.393-1.046.15zM10.79 12.844l-1.973.994 1.847-1.212.972-.416zM15.55 12.951l-2.097-.692-1.047-.15.981.393zM13.336 12.626l1.847 1.212-1.973-.994-.846-.634zM15.675 12l-2.205-.126-1.05.126 1.05.126zM12.844 13.21l.994 1.973-1.212-1.847-.416-.972zM15.55 11.05l-2.163.448-.981.394 1.047-.15zM13.21 11.156l1.973-.993-1.847 1.211-.972.416zM9.401 14.599l1.649-1.47.653-.832-.832.654zM11.374 13.336l-1.212 1.847.994-1.973.634-.846zM11.049 15.55l.692-2.097.15-1.047-.393.981zM12.126 13.47 12 15.675l-.126-2.205.126-1.05z" })), /* @__PURE__ */ React__namespace.createElement("defs", null, /* @__PURE__ */ React__namespace.createElement("clipPath", { id: `${resourcePrefix}-lagina` }, /* @__PURE__ */ React__namespace.createElement("path", { fill: "#fff", d: "M4 4h16v16H4z" }))));
+});
+exports.FlagIn = FlagIn;

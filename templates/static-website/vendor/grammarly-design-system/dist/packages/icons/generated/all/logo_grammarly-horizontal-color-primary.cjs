@@ -1,0 +1,34 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const React = require("react");
+const createIcon = require("../createIcon.cjs");
+const helpers = require("../helpers.cjs");
+function _interopNamespaceDefault(e) {
+  const n = Object.create(null, { [Symbol.toStringTag]: { value: "Module" } });
+  if (e) {
+    for (const k in e) {
+      if (k !== "default") {
+        const d = Object.getOwnPropertyDescriptor(e, k);
+        Object.defineProperty(n, k, d.get ? d : {
+          enumerable: true,
+          get: () => e[k]
+        });
+      }
+    }
+  }
+  n.default = e;
+  return Object.freeze(n);
+}
+const React__namespace = /* @__PURE__ */ _interopNamespaceDefault(React);
+const LogoGrammarlyHorizontalColorPrimary = /* @__PURE__ */ createIcon.createIcon("nocolor", ({
+  title,
+  titleId,
+  desc,
+  descId,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  resourcePrefix = helpers.generateId(),
+  ...props
+}) => {
+  return /* @__PURE__ */ React__namespace.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", width: 149, height: 32, fill: "none", viewBox: "0 0 149 32", "aria-hidden": "true", "data-icon": "LogoGrammarlyHorizontalColorPrimary", stroke: "transparent", "aria-labelledby": titleId, "aria-describedby": descId, ...props }, title ? /* @__PURE__ */ React__namespace.createElement("title", { id: titleId }, title) : null, desc === void 0 ? /* @__PURE__ */ React__namespace.createElement("desc", { id: descId }, "Vector graphic: grammarly horizontal color primary") : desc ? /* @__PURE__ */ React__namespace.createElement("desc", { id: descId }, desc) : null, /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-logo-grammarly-primary)", d: "M0 16C0 7.164 7.163 0 16 0c8.839 0 16 7.163 16 16 0 7.733-5.482 14.183-12.773 15.676-1.041.214-2.12.324-3.222.324H0z", className: "lorprimaryprimary-element" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-logo-grammarly-default)", d: "M73.303 11.088v1.166a4.95 4.95 0 0 0-3.5-1.435c-3.072 0-5.428 2.535-5.428 5.675s2.355 5.63 5.429 5.63c1.368 0 2.579-.539 3.499-1.436v1.167H75.5V11.09zm-.502 7.124c-1.05 1.672-3.034 2.174-4.61 1.184s-1.998-2.976-.949-4.647c1.05-1.672 3.045-2.193 4.622-1.203s1.986 2.995.937 4.666M120.38 11.088v1.166a4.96 4.96 0 0 0-3.499-1.435c-3.073 0-5.428 2.535-5.428 5.675s2.354 5.63 5.428 5.63a4.96 4.96 0 0 0 3.499-1.436v1.167h2.198V11.09zm-.501 7.124c-1.05 1.672-3.034 2.174-4.61 1.184s-1.998-2.976-.949-4.647c1.05-1.672 3.046-2.193 4.622-1.203s1.986 2.995.937 4.666M84.203 15.435c0-1.009-.224-1.503-.56-1.862-.338-.36-.853-.56-1.414-.56s-1.076.2-1.413.56c-.336.359-.56.852-.56 1.862v6.414h-2.288V11.083h2.152v.762c.606-.628 1.48-1.031 2.49-1.031 1.233 0 2.333.583 3.028 1.48.74-.897 1.884-1.48 3.207-1.48s2.355.583 3.072 1.525c.494.672.808 1.525.808 2.893v6.617h-2.288v-6.414c0-1.009-.224-1.503-.56-1.862-.338-.36-.853-.56-1.414-.56s-1.076.2-1.413.56c-.336.359-.56.852-.56 1.862v6.414h-2.288v-6.414zM101.308 15.435c0-1.009-.224-1.503-.561-1.862s-.852-.56-1.413-.56c-.56 0-1.076.2-1.413.56-.336.359-.56.852-.56 1.862v6.414h-2.288V11.083h2.152v.762c.606-.628 1.48-1.031 2.49-1.031 1.233 0 2.333.583 3.028 1.48.74-.897 1.884-1.48 3.207-1.48s2.355.583 3.072 1.525c.494.672.807 1.525.807 2.893v6.617h-2.287v-6.414c0-1.009-.224-1.503-.561-1.862s-.852-.56-1.413-.56-1.076.2-1.413.56c-.336.359-.561.852-.561 1.862v6.414h-2.287v-6.414zM133.44 4.404h2.288v17.449h-2.288zM51.927 11.088v1.166a4.95 4.95 0 0 0-3.499-1.435c-3.072 0-5.428 2.49-5.428 5.63s2.355 5.675 5.428 5.675a4.9 4.9 0 0 0 3.454-1.391v1.121c0 1.84-1.146 3.229-2.855 3.455-1.335.176-2.803-.206-3.738-.974a3 3 0 0 1-.312-.295l-1.201 1.955.087.075c1.186.974 2.85 1.526 4.507 1.526q.479 0 .95-.062c2.831-.374 4.804-2.71 4.804-5.68V11.088h-2.198zm-3.274 8.837c-1.862 0-3.274-1.503-3.274-3.476s1.413-3.432 3.274-3.432 3.274 1.48 3.274 3.454-1.413 3.454-3.274 3.454M146.037 11.05l-3.39 7.69-3.126-7.69h-2.294l4.227 10.398-2.667 6.05h2.323l7.25-16.448zM63.588 11.35c-.794-.35-1.667-.496-2.522-.321a4 4 0 0 0-2.007 1.084c-.112.112-.224.224-.314.359V11.08h-2.153v10.766h2.288v-5.36c0-1.257.314-1.975.83-2.49.538-.539 1.277-.853 2.13-.853.265 0 .947.075 1.688.554l1.087-1.77a6.3 6.3 0 0 0-1.027-.579M129.52 11.012a4 4 0 0 0-2.007 1.083c-.113.113-.225.224-.315.358v-1.39h-2.153v10.766h2.289v-5.361c0-1.256.313-1.974.829-2.49.539-.538 1.277-.852 2.131-.852.265 0 .894.006 1.682.312v-2.13c-.776-.33-1.624-.469-2.456-.298z", className: "lorprimarycolor-group" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "var(--color-logo-grammarly-light)", d: "m19.862 14.485-1.697 2.94h5.945c-.932 5.116-6.62 8.599-12.305 5.653a6.7 6.7 0 0 1-2.861-2.833c-3.27-6.227 1.197-12.491 7.092-12.491 2.431 0 4.62 1.064 6.124 2.752l1.523-2.64a11.08 11.08 0 0 0-8.433-3.02c-5.562.383-10.07 4.993-10.342 10.56C4.6 21.798 9.71 27.093 16.033 27.093s11.14-4.998 11.14-11.14c0-.5-.038-.989-.101-1.468z" }));
+});
+exports.LogoGrammarlyHorizontalColorPrimary = LogoGrammarlyHorizontalColorPrimary;

@@ -1,0 +1,34 @@
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const React = require("react");
+const createIcon = require("../createIcon.cjs");
+const helpers = require("../helpers.cjs");
+function _interopNamespaceDefault(e) {
+  const n = Object.create(null, { [Symbol.toStringTag]: { value: "Module" } });
+  if (e) {
+    for (const k in e) {
+      if (k !== "default") {
+        const d = Object.getOwnPropertyDescriptor(e, k);
+        Object.defineProperty(n, k, d.get ? d : {
+          enumerable: true,
+          get: () => e[k]
+        });
+      }
+    }
+  }
+  n.default = e;
+  return Object.freeze(n);
+}
+const React__namespace = /* @__PURE__ */ _interopNamespaceDefault(React);
+const EmojiDirect = /* @__PURE__ */ createIcon.createIcon("nocolor", ({
+  title,
+  titleId,
+  desc,
+  descId,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  resourcePrefix = helpers.generateId(),
+  ...props
+}) => {
+  return /* @__PURE__ */ React__namespace.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", width: 24, height: 24, fill: "none", viewBox: "0 0 24 24", "aria-hidden": "true", "data-icon": "EmojiDirect", stroke: "transparent", "aria-labelledby": titleId, "aria-describedby": descId, ...props }, desc ? /* @__PURE__ */ React__namespace.createElement("desc", { id: descId }, desc) : null, title ? /* @__PURE__ */ React__namespace.createElement("title", { id: titleId }, title) : null, /* @__PURE__ */ React__namespace.createElement("g", { clipPath: `url(#${resourcePrefix}-irecta)` }, /* @__PURE__ */ React__namespace.createElement("path", { fill: `url(#${resourcePrefix}-irectb)`, d: "M12 21.375a9.375 9.375 0 1 0 0-18.75 9.375 9.375 0 1 0 0 18.75" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#fff", d: "M12 18.875a6.875 6.875 0 1 0 0-13.75 6.875 6.875 0 0 0 0 13.75" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: `url(#${resourcePrefix}-irectc)`, d: "M12 16.688a4.688 4.688 0 1 0 0-9.376 4.688 4.688 0 0 0 0 9.375" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#fff", d: "M12 14.188a2.188 2.188 0 1 0 0-4.376 2.188 2.188 0 0 0 0 4.376" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#302C3B", d: "M11.688 11.896s.312 6.094 4.02 8.717c0 0 1.537-.611 2.834-1.898-1.277-3.101-3.699-3.258-6.855-6.819", opacity: 0.2 }), /* @__PURE__ */ React__namespace.createElement("path", { fill: "#99A8AE", d: "M12.23 12.238c-.257.258-.725-.21-.467-.469 1.484-1.484 1.952-1.016.468.469" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: `url(#${resourcePrefix}-irectd)`, d: "M19.361 4.64 15.709 8.29s2.902.756 4.626-.968c2.814-2.815-.974-2.684-.974-2.684" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: `url(#${resourcePrefix}-irecte)`, d: "M13.803 11.59c-1.246 1.245-2.638-.147-1.392-1.392 2.473-2.473 7.273-6.384 7.524-6.133.25.25-3.66 5.052-6.132 7.525" }), /* @__PURE__ */ React__namespace.createElement("path", { fill: `url(#${resourcePrefix}-irectf)`, d: "M15.604 7.714c-.124-.934-.175-2.8 1.073-4.049 2.404-2.403 2.659.009 2.683.764.003.13-3.709 3.641-3.756 3.285" })), /* @__PURE__ */ React__namespace.createElement("defs", null, /* @__PURE__ */ React__namespace.createElement("linearGradient", { id: `${resourcePrefix}-irectb`, x1: 2.625, x2: 21.375, y1: 12, y2: 12, gradientUnits: "userSpaceOnUse" }, /* @__PURE__ */ React__namespace.createElement("stop", { stopColor: "#FF000E" }), /* @__PURE__ */ React__namespace.createElement("stop", { offset: 0.728, stopColor: "#DD0004" }), /* @__PURE__ */ React__namespace.createElement("stop", { offset: 1, stopColor: "#CF0000" })), /* @__PURE__ */ React__namespace.createElement("linearGradient", { id: `${resourcePrefix}-irectc`, x1: 7.313, x2: 16.688, y1: 12, y2: 12, gradientUnits: "userSpaceOnUse" }, /* @__PURE__ */ React__namespace.createElement("stop", { stopColor: "#FF000E" }), /* @__PURE__ */ React__namespace.createElement("stop", { offset: 0.728, stopColor: "#DD0004" }), /* @__PURE__ */ React__namespace.createElement("stop", { offset: 1, stopColor: "#CF0000" })), /* @__PURE__ */ React__namespace.createElement("linearGradient", { id: `${resourcePrefix}-irectd`, x1: 15.709, x2: 21.375, y1: 6.547, y2: 6.547, gradientUnits: "userSpaceOnUse" }, /* @__PURE__ */ React__namespace.createElement("stop", { stopColor: "#009AF7" }), /* @__PURE__ */ React__namespace.createElement("stop", { offset: 0.121, stopColor: "#0DA3F4" }), /* @__PURE__ */ React__namespace.createElement("stop", { offset: 0.495, stopColor: "#30BAEC" }), /* @__PURE__ */ React__namespace.createElement("stop", { offset: 0.802, stopColor: "#46C9E8" }), /* @__PURE__ */ React__namespace.createElement("stop", { offset: 1, stopColor: "#4ECEE6" })), /* @__PURE__ */ React__namespace.createElement("linearGradient", { id: `${resourcePrefix}-irecte`, x1: 15.358, x2: 16.75, y1: 7.251, y2: 8.642, gradientUnits: "userSpaceOnUse" }, /* @__PURE__ */ React__namespace.createElement("stop", { stopColor: "#2289C7" }), /* @__PURE__ */ React__namespace.createElement("stop", { offset: 1, stopColor: "#005687" })), /* @__PURE__ */ React__namespace.createElement("linearGradient", { id: `${resourcePrefix}-irectf`, x1: 15.544, x2: 19.36, y1: 5.182, y2: 5.182, gradientUnits: "userSpaceOnUse" }, /* @__PURE__ */ React__namespace.createElement("stop", { stopColor: "#009AF7" }), /* @__PURE__ */ React__namespace.createElement("stop", { offset: 0.121, stopColor: "#0DA3F4" }), /* @__PURE__ */ React__namespace.createElement("stop", { offset: 0.495, stopColor: "#30BAEC" }), /* @__PURE__ */ React__namespace.createElement("stop", { offset: 0.802, stopColor: "#46C9E8" }), /* @__PURE__ */ React__namespace.createElement("stop", { offset: 1, stopColor: "#4ECEE6" })), /* @__PURE__ */ React__namespace.createElement("clipPath", { id: `${resourcePrefix}-irecta` }, /* @__PURE__ */ React__namespace.createElement("path", { fill: "#fff", d: "M2 2h20v20H2z" }))));
+});
+exports.EmojiDirect = EmojiDirect;
