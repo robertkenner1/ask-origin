@@ -262,23 +262,27 @@ fi
 # Start dev server for the project
 log_info "🚀 Starting development server..."
 echo ""
-npm run dev &
+npm run dev 2>&1 >/dev/null &
 sleep 2
 log_success "✅ Development server started at http://localhost:$DEV_SERVER_PORT"
 echo ""
 
 # Show next steps
 log_info "📝 Next Steps:"
+echo ""
+echo -e "   ${CYAN}cd projects/$PROJECT_NAME${NC}"
+echo ""
 
 # Show environment variable configuration if needed
 if [ -n "$ENV_VARS_TO_CONFIGURE" ]; then
+    echo "   Then:"
     echo "   1. Configure environment variables in .env.local:"
     echo ""
     echo "$ENV_VARS_TO_CONFIGURE"
     echo ""
     echo "   2. Start coding with your favorite AI tool!"
 else
-    echo "   1. Start coding with your favorite AI tool!"
+    echo "   Then start coding with your favorite AI tool!"
 fi
 
 echo ""
