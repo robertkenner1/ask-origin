@@ -2,6 +2,16 @@
 
 A monorepo for rapid UI prototyping with AI assistance.
 
+## Prerequisites
+
+**Configure GitLab and Git access** - Before you begin, ensure you have GitLab access and SSH keys configured. See [docs/setup_gitlab.md](./docs/setup_gitlab.md) for detailed setup instructions.
+
+**IDE Setup** - This setup works best with [Claude Code CLI](https://docs.claude.com/en/docs/claude-code). If you use Cursor, VS Code, or JetBrains IDEs, consider using the Claude Code plugin:
+- [VS Code/Cursor Extension](https://docs.claude.com/en/docs/claude-code/vs-code)
+- [JetBrains Plugin](https://docs.claude.com/en/docs/claude-code/jetbrains)
+
+**Vercel Account** - Corporate Vercel account is required for deployments. As we are in PoC stage with Vercel, please contact artur.kiryiak to add you to the Vercel PoC program.
+
 ## Quick Start
 
 ```bash

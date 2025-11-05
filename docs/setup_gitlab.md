@@ -1,14 +1,14 @@
-Accessing GitLab
+# Accessing GitLab
 
 1. Make sure you are connected to VPN.
-2. Navigate to https://gitlab.grammarly.io/data
+2. Navigate to https://gitlab.grammarly.io/
 3. Log in with Okta. If you do not have GitLab in Okta, submit an IT ticket.
 
-Generating your SSH keys
+# Generating your SSH keys
 
 You only need to do this once. You will use the same public key for all applications that need it (mainly GitLab, but there may be others in the future)
 
-Instructions:
+# Instructions:
 
 * Open Terminal (Launchpad → Terminal)
 * Type ssh-keygen -t rsa -C first.last@grammarly.com
@@ -21,7 +21,7 @@ Instructions:
 * To copy the public key to your clipboard, open Terminal and type pbcopy < ~/.ssh/id_rsa.pub
 * [Only if you have a Windows laptop] Save private key as id_rsa to your user folder C:\Users\{$USER}\.ssh 
 
-Adding your SSH key to Gitlab
+# Adding your SSH key to Gitlab
 
 Once you generate your .ssh key, you will need to add it to your GitLab profile.
 

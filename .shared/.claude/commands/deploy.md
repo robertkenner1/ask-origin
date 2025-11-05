@@ -1,5 +1,5 @@
 ---
-description: Push environment variables to Vercel and deploy the project
+description: Deploy environment variables to Vercel and deploy the project
 allowed-tools: Bash(./scripts/push-env-to-vercel.sh:*), Bash(./scripts/deploy-vercel.sh:*), Bash(test:*), Bash(cat:*), Read
 ---
 
