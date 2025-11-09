@@ -227,6 +227,52 @@ vercel-deploy-$[[ inputs.project-name ]]:
       fi
       echo ""
 
+      # Configure SSO Protection via Vercel API (if requested)
+      if [ "$VERCEL_SSO_PROTECTION" = "all" ]; then
+        echo "=================================================="
+        echo "⚙️  Vercel Project Configuration (API)"
+        echo "=================================================="
+        echo ""
+
+        # Build API URL with optional team ID
+        API_URL="https://api.vercel.com/v9/projects/$PROJECT_NAME"
+        if [ -n "$VERCEL_ORG_ID" ]; then
+          API_URL="$API_URL?teamId=$VERCEL_ORG_ID"
+        fi
+
+        echo "Project: $PROJECT_NAME"
+        [ -n "$VERCEL_ORG_ID" ] && echo "Team ID: $VERCEL_ORG_ID"
+        echo ""
+
+        echo "🔒 Configuring SSO Protection..."
+        echo "   Deployment type: all"
+        echo "   (Requires Vercel login + team access for ALL deployments)"
+        echo ""
+
+        HTTP_CODE=$(curl -X PATCH "$API_URL" \
+          -H "Authorization: Bearer $VERCEL_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{"ssoProtection": {"deploymentType": "all"}}' \
+          --silent --show-error \
+          --write-out "%{http_code}" \
+          --output /tmp/vercel-sso-response.json)
+
+        if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
+          echo "✅ SSO Protection enabled successfully (HTTP $HTTP_CODE)"
+        else
+          echo "❌ SSO Protection API failed (HTTP $HTTP_CODE)"
+          echo ""
+          echo "Response:"
+          cat /tmp/vercel-sso-response.json 2>/dev/null || echo "(no response body)"
+          echo ""
+          exit 1
+        fi
+        echo ""
+        echo "✅ Project configuration complete"
+        echo "=================================================="
+        echo ""
+      fi
+
       # Conditional build based on prebuild setting
       if [ "$PREBUILD" = "true" ]; then
         echo "🔨 Building project locally..."
