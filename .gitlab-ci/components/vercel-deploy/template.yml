@@ -61,11 +61,6 @@ spec:
       default: ""
 
 ---
-# # Include internal configuration template for Vercel API operations
-# include:
-#   - local: .gitlab-ci/components/vercel-deploy/configure-project.yml
-
----
 # Main deployment job
 vercel-deploy-$[[ inputs.project-name ]]:
   stage: $[[ inputs.stage ]]
@@ -232,11 +227,6 @@ vercel-deploy-$[[ inputs.project-name ]]:
       fi
       echo ""
 
-    # # Apply Vercel project configuration via API (if requested)
-    # - !reference [.configure_vercel_project, script]
-
-    # # Continue with build and deployment
-    # - |
       # Conditional build based on prebuild setting
       if [ "$PREBUILD" = "true" ]; then
         echo "🔨 Building project locally..."
