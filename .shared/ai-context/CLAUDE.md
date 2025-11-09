@@ -1,4 +1,4 @@
-# AI Context Directory - Shared Resources for Prototypes
+# AI Context Directory - Shared Resources for Prototypes.
 
 This directory contains shared AI assistant resources and documentation used across all projects in the monorepo
 
