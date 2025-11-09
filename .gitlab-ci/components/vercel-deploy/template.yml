@@ -91,12 +91,12 @@ vercel-deploy:
       echo ""
 
       # Export variables for use in script sections
-      export VERCEL_TOKEN="${[[ inputs.vercel-token | expand_vars ]]}"
-      export PROJECT_NAME="${[[ inputs.project-name ]]}"
-      export TEAM_SLUG="${[[ inputs.team-slug ]]}"
-      export PROJECT_PATH="${[[ inputs.project-path ]]}"
-      export ENVIRONMENT="${[[ inputs.environment ]]}"
-      export PREBUILD="${[[ inputs.prebuild ]]}"
+      export VERCEL_TOKEN="$[[ inputs.vercel-token ]]"
+      export PROJECT_NAME="$[[ inputs.project-name ]]"
+      export TEAM_SLUG="$[[ inputs.team-slug ]]"
+      export PROJECT_PATH="$[[ inputs.project-path ]]"
+      export ENVIRONMENT="$[[ inputs.environment ]]"
+      export PREBUILD="$[[ inputs.prebuild ]]"
 
       # Validation: Check required inputs
       echo "🔍 Validating configuration..."
