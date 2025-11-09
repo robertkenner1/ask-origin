@@ -10,11 +10,8 @@ include:
       project-path: "projects/{{PROJECT_NAME}}"
       team-slug: $VERCEL_TEAM_SLUG
       environment: "preview"
-
-deploy-{{PROJECT_NAME}}:
-  extends: vercel-deploy
-  rules:
-    # Only deploy on non-main branches when this project has changes
-    - if: $CI_COMMIT_BRANCH != "main" && $VERCEL_TOKEN
-      changes:
-        - projects/{{PROJECT_NAME}}/**/*
+      rules:
+        # Only deploy on non-main branches when this project has changes
+        - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
+          changes:
+            - projects/{{PROJECT_NAME}}/**/*

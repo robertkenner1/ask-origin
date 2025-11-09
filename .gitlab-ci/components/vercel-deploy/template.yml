@@ -49,11 +49,18 @@ spec:
       description: "Vercel CLI version to install. Use 'latest' or specific version like '33.0.0'."
       default: "latest"
 
+    # Job Execution Rules
+    rules:
+      description: "GitLab CI rules for when to run the deployment job. Define conditions like branch patterns and file changes."
+      type: array
+      default: []
+
 ---
 # Main deployment job
 vercel-deploy-$[[ inputs.project-name ]]:
   stage: $[[ inputs.stage ]]
   image: node:$[[ inputs.node-version ]]-alpine
+  rules: $[[ inputs.rules ]]
 
   before_script:
     - |
