@@ -192,6 +192,9 @@ vercel-deploy:
         echo "   Team: $TEAM_SLUG"
       fi
 
+      echo "Projects list:"
+      vercel project ls $TEAM_ARG --token $VERCEL_TOKEN
+
       echo "vercel link --yes \
         --project $PROJECT_NAME \
         $TEAM_ARG \
