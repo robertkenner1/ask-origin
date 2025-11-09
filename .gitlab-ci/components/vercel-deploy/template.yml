@@ -51,7 +51,7 @@ spec:
 
 ---
 # Main deployment job
-vercel-deploy:
+vercel-deploy-$[[ inputs.project-name ]]:
   stage: $[[ inputs.stage ]]
   image: node:$[[ inputs.node-version ]]-alpine
 
@@ -257,7 +257,7 @@ vercel-deploy:
         fi
 
         # Export for potential use by other jobs
-        echo "DEPLOYMENT_URL=$DEPLOYMENT_URL" >> deployment.env 2>/dev/null || true
+        echo "DEPLOYMENT_URL=$DEPLOYMENT_URL" >> $CI_PROJECT_DIR/deployment.env 2>/dev/null || true
       else
         echo "⚠️  Deployment completed but URL extraction failed"
         echo "Check the output above for the deployment URL"
@@ -266,7 +266,7 @@ vercel-deploy:
 
   artifacts:
     reports:
-      dotenv: $PROJECT_PATH/deployment.env
+      dotenv: ./deployment.env
     expire_in: 1 hour
     when: always
 

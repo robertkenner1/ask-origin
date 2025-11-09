@@ -10,11 +10,8 @@ include:
       project-path: "projects/fancy-ai-editor"
       team-slug: $VERCEL_TEAM_SLUG
       environment: "preview"
-
-deploy-fancy-ai-editor:
-  extends: vercel-deploy
-  rules:
-    # Only deploy on non-main branches when this project has changes
-    - if: $CI_COMMIT_BRANCH != "main" && $VERCEL_TOKEN
-      changes:
-        - projects/fancy-ai-editor/**/*
+    rules:
+      # Only deploy on non-main branches when this project has changes
+      - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
+        changes:
+          - projects/fancy-ai-editor/**/*
