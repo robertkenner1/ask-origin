@@ -195,6 +195,9 @@ vercel-deploy:
       echo "Projects list:"
       vercel project ls $TEAM_ARG --token $VERCEL_TOKEN
 
+      echo "VERCEL_ORG_ID: $VERCEL_ORG_ID"
+      echo "VERCEL_PROJECT_ID: $VERCEL_PROJECT_ID"
+
       echo "vercel link --yes \
         --project $PROJECT_NAME \
         $TEAM_ARG \
