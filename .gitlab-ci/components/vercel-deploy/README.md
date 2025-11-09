@@ -31,6 +31,7 @@ include:
    - `VERCEL_TOKEN` (required) - Vercel authentication token
    - `ARTIFACTORY_USER` (optional) - For private npm packages from Artifactory
    - `ARTIFACTORY_PASSWORD` (optional) - Artifactory API token
+   - `VERCEL_SSO_PROTECTION` (optional) - Set to `all` to require Vercel login for all deployments
 4. **Node.js Project** - Project must have `package.json`
 
 ## Inputs
@@ -160,6 +161,37 @@ deploy-project-b:
 ```
 
 ## Configuration Details
+
+### SSO Protection
+
+Enable SSO protection to require Vercel team login for accessing deployments. This ensures only authenticated team members can view your deployed applications.
+
+**To enable SSO protection:**
+
+1. Add GitLab CI/CD variable:
+   - `VERCEL_SSO_PROTECTION` = `all`
+
+2. The component will automatically:
+   - Call Vercel API after project linking
+   - Configure SSO protection for all deployments (preview + production)
+   - Require Vercel login + team access to view any deployment
+
+3. **Valid deployment types:**
+   - `all` - Protect all deployments (currently the only supported value)
+
+**Example:**
+```yaml
+variables:
+  VERCEL_SSO_PROTECTION: "all"
+
+include:
+  - local: .gitlab-ci/components/vercel-deploy/template.yml
+    inputs:
+      vercel-token: $VERCEL_TOKEN
+      project-name: "my-secure-app"
+```
+
+**API Documentation:** [Vercel SSO Protection API](https://vercel.com/docs/rest-api/reference/endpoints/projects/update-an-existing-project#body-sso-protection)
 
 ### Artifactory Authentication
 
