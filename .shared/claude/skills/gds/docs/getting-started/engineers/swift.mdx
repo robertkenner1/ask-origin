@@ -1,0 +1,139 @@
+---
+title: Swift
+pagination_prev: null
+pagination_next: null
+---
+
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import Link from "@docusaurus/Link";
+import CorePaletteUsage from "./_components/core_palette_usage.mdx";
+import IntegrationExamples from "./_components/integration_examples.mdx";
+import ArtifactoryHint from "./_components/artifactory_hint.mdx";
+import CodeBlock from "@theme/CodeBlock";
+
+# Swift
+
+The design system tokens for v6 are not yet available in an xcframework.
+
+Please refer to the [v5 Swift library](../../5.x/getting-started/engineers/swift) for now.
+
+{/* prettier-ignore */}
+{/* The design system tokens are available as individual values in an xcframework.
+
+## Installation
+
+Using [Carthage](https://github.com/Carthage/Carthage)
+
+```bash
+[ios, macos] binary "https://artifactory.grammarly.io/artifactory/mobile-binaries/grammarly/design-system/DesignSystem.json" == 2.4.0
+```
+
+### Resources
+
+The design system delivers images and semantic colors as `xcassets` and fonts as `otf`. These `xcassets` and `otfs` are located in the `DesignSystem.bundle` inside the ` DesignSystem.xcframework`. Use Build Phases in Xcode and copy `DesignSystem.bundle` to your app resources with a base script.
+
+Note: to use semantic colors or images in Xcode previews that live in a framework, you have to explicitly specify `Bundle`.
+
+See [Grammarly for macOS](https://gitlab.grammarly.io/mobile/GRKeyboard/-/merge_requests/3352) integration example for inspiration. (Requires VPN and access to `GRKeyboard` repository)
+
+## Usage
+
+#### Import xcframework
+
+<CodeBlock language={"ts"} children={"import DesignSystem"} />
+
+### Border Radius
+
+Radius tokens are available to use with `CALayer` objects. Use the `.setCornerRadius` method to add a radius value. For support using radius tokens with other views, contact us in the [#gds-support](https://grammarly.slack.com/archives/C03MNHYDT5E) Slack channel.
+
+##### Example
+
+<CodeBlock language={"ts"} children={"layer?.setCornerRadius(.radius1)"} />
+
+### Color
+
+<CorePaletteUsage
+  code={`
+func setup() {
+  // Use of Core palette tokens
+  color = Color.palette(.blue50) // return NSColor
+}
+  `.trim()}
+/>
+
+#### Semantic palette
+
+The Semantic palette for macOS is integrated using `xcassets` with the Swift API. To use the Semantic palette, include `DesktopSemanticColorPalette.xcassets` in your Xcode project.
+
+Reference colors using the Swift API:
+
+<CodeBlock
+  language={"ts"}
+  children={`
+func setup() {
+  // Using Semantic palette tokens
+  let color = Colors.semantic(.color(.border(.base(.default)))) // return reference NSColor in .xcassets or fallback color for unsupported macOS versions
+  let color2 = Colors.semantic(.color(.border(.base(.default)))), in: Bundle.current)
+}
+  `.trim()}
+/>
+
+### Elevation
+
+Elevation is available for macOS and IOS platforms. Use elevation tokens with `NSView` entities on macOS platform, and with `UIView` entities on IOS.
+
+##### Example
+
+<CodeBlock language={"ts"} children={"view.setElevation(.elevation300)"} />
+
+### Iconography
+
+Iconography for macOS is available as `xcassets` file. To use icons, include the specific `xcassets` file in your Xcode project.
+
+Reference images using the Swift API:
+
+<CodeBlock
+  language={"ts"}
+  children={`
+let image = Images.flag(.gb)
+let image2 = Images.flag(.gb, in: Bundle.current)
+  `.trim()}
+/>
+
+### Space
+
+Space tokens are available to use with `NSStackView`. Use the `.setSpacing` method to add a space value. For support using space tokens with additional views, contact us in the [#gds-support](https://grammarly.slack.com/archives/C03MNHYDT5E) Slack channel.
+
+##### Example
+
+<CodeBlock language={"ts"} children={`$0.setSpacing(.space2)`} />
+
+### Typography
+
+Typography is available with the `NSFont` extension:
+
+- `NSFont.grammarlyFont(ofSize: CGFloat, weight: Weight)`
+- `NSFont.grammarlyFont(_: TextStyle)`
+- `NSFont.grammarlyItalicFont(ofSize: CGFloat, weight: Weight)`
+- `NSFont.grammarlyItalicFont(_: TextStyle)`
+
+Or via `Fonts` type:
+
+- `Fonts.grammarlyFont(size: CGFloat, weight: NSFont.Weight, isItalic: Bool = false)`
+
+For fonts to work correctly in your AppKit application you need to include new key in `Info.plist` file:
+
+<CodeBlock
+  language="ts"
+  children={`<key>ATSApplicationFontsPath</key>
+<string>.</string>
+`}
+/>
+
+<IntegrationExamples />
+
+- [Color](https://gitlab.grammarly.io/mobile/GRKeyboard/-/merge_requests/2888)
+- [Space](https://gitlab.grammarly.io/mobile/GRKeyboard/-/merge_requests/3325)
+- [Semantic Palette](https://gitlab.grammarly.io/mobile/GRKeyboard/-/merge_requests/3352)
+- [Iconography](https://gitlab.grammarly.io/mobile/GRKeyboard/-/merge_requests/3379)
+- [Typography](https://gitlab.grammarly.io/mobile/GRKeyboard/-/merge_requests/3437) \*/}

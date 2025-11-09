@@ -1,0 +1,320 @@
+---
+pagination_prev: null
+pagination_next: null
+sidebar_position: 1
+description: Key points about content to consider when creating accessible experiences.
+---
+
+import Hero from "../_components/hero";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import { Link } from "@grammarly/design-system";
+import RecommendationsTable from "../_components/recommendations_table";
+import Recommendations from "../_components/recommendations";
+import ComponentList from "../_components/component_list";
+import ComponentPlayground from "../_components/comp_playground";
+
+
+# Accessibility in Content Design
+
+<span>The <Link href="https://www.w3.org/WAI/standards-guidelines/wcag/">Web Content Accessibility Guidelines</Link> (WCAG) provide technical specifications for creating accessible digital experiences. Here, you’ll find a summary of key points to consider when creating accessible content.</span>
+
+<Hero
+  path={useBaseUrl("/img/content/emoji2-hero.svg")}
+  altText="Low vision is simulated through the use of a blur effect to demonstrate how emoji are illegible for some users."
+/>
+<p class="caption">Emoji present unique accessibility challenges for content and comprehension. In this case, a blur simulates what a person with vision issues—temporary or permanent—could perceive for emoji meant to convey joy, skepticism, and sadness.</p>
+
+## Context on disabilities
+
+Disabilities are not rare. In the U.S. alone, about <Link href="https://archive.cdc.gov/#/details?url=https://www.cdc.gov/media/releases/2018/p0816-disability.html">25% of the adult population lives with a disability</Link>. 
+
+The <Link href="https://www.cdc.gov/ncbddd/disabilityandhealth/disability.html">CDC</Link> defines a disability as “any condition of the body or mind (impairment) that makes it more difficult for the person with the condition to do certain activities (activity limitation) and interact with the world around them (participation restrictions).”
+
+Everyone experiences disabilities in a different way. Obviously, it would be impossible to capture the whole of this complex human experience in this guide, nor would it be appropriate to try. However, some context about disabilities is helpful to keep in mind when designing accessible products.
+
+### Disability can be permanent, temporary, or situational
+
+Everyone experiences some degree of disability at some point in their life. It may be a permanent disability, like ADHD. It may be a temporary disability, like a broken leg. Or it may be a situational disability, like poor cognitive functioning due to lack of sleep.
+
+### Assistive technology vs. adaptive strategies
+
+Our goal is to design products that work with assistive technology (like screen readers) as well as adaptive strategies—the ways a person might change their environment to make it more accessible. 
+
+**Assistive technology (AT):** Specialized software or hardware that helps people perceive and understand their environment. A screen reader, for example, will read the content of websites aloud or convert it to braille for a person who is blind.
+
+**Adaptive strategies:** Preference settings in browsers, apps, and operating systems that can customize a user’s experience. Someone with low vision, for example, may magnify a web page by 400% to read the information. 
+
+### Categories of disability
+
+When designing for accessibility, it’s helpful to think about five categories.
+
+<div class="docs-comparison-table">
+| Category     | Related conditions | Helpful AT and adaptive strategies    |
+| :---        |    :----   |      :---- |
+| **Seeing**      | <ul><li>Low vision</li><li>Blindness</li><li>Deafblindness</li><li>Color vision deficiency (color blindness)</li></ul>       | <ul><li>Screen readers</li><li>Zoom/magnification settings</li><li>Font size or color settings</li><li>Brightness adjustment</li></ul>   |
+| **Moving**   | <ul><li>Chronic pain</li><li>Paralysis or amputation</li><li>Physical injury</li><li>Cognitive or neurological conditions</li></ul>        | <ul><li>Speech input</li><li>Specialized keyboards</li><li>Eye tracking devices</li><li>Assistive typing software</li><li>Touchscreen settings</li></ul>      |
+| **Thinking**      | <ul><li>Autism</li><li>Dyslexia</li><li>ADHD</li><li>Many others</li></ul>    | <ul><li>Reading software or browser extensions</li><li>Screen filters</li><li>Font size and color settings</li></ul><br></br>**Note:** Many people who are neurodivergent don’t use AT, so it’s especially important to design for their needs.   |
+| **Hearing**      | <ul><li>Hard of hearing</li><li>Deafness</li></ul>       | <ul><li>Captions</li><li>Subtitles</li><li>Transcripts</li><li>Haptic feedback</li><li>Contact forms</li><li>Chatbots </li></ul>   |
+| **Speaking**      | <ul><li>Neurological conditions that impair speech</li><li>Deafness</li><li>Cognitive disabilities</li><li>Physical injury</li><li>Many others</li></ul>       | <ul><li>Contact forms</li><li>Emails</li><li>Chatbots</li><li>Captioned videos</li></ul>   |
+</div>
+
+## Organizing information
+
+Presenting information in a logical, consistent manner helps everyone—disabled or not—understand what they need to know. These techniques are particularly helpful for designing accessible content.
+
+### Signposting
+
+Signposts help a user navigate content by indicating where they are and what to expect next. Signposts may take the form of:
+
+- Informative headings and logical heading hierarchy for content sections
+- Breadcrumbs that indicate the user’s navigation path
+- Screen reader–only content to label or describe sections that are only distinguished visually
+
+<Recommendations
+  recommendations={[
+    {
+      image: useBaseUrl("/img/content/signposting-do1.svg"),
+      caption: "Use headings, subheadings, and bullets to break up long blocks of text and make information more scannable and digestible.",
+      type: "do",
+    },
+    {
+      image: useBaseUrl("/img/content/signposting-dont1.svg"),
+      caption:
+        "Do not display large walls of text—this makes it harder to scan high-level info and skip what’s not needed.",
+      type: "dont",
+    },
+  ]}
+/>
+
+#### What not to do
+
+<div className="diagram p-8">
+  <img
+    src={useBaseUrl("/img/content/signposting-dont.svg")}
+    alt="On the Yale School of Art’s disorganized website, an image of a chair is repeated in the background. Seemingly random blocks of text are scattered about the page without a clear visual structure or logic."
+  />
+</div>
+<p className="caption">
+  The Yale School of Art’s homepage lacks headings for many sections. Opening the quick links menu pushes other content below the fold. Menu items are in fairly random order. All this makes it difficult to know how to navigate the page. (July 24, 2024)
+</p>
+
+#### Do this instead
+
+<div className="diagram p-8">
+  <img
+    src={useBaseUrl("/img/content/signposting-do2.svg")}
+    alt="A section of the grammarly.com website shows a bolded heading followed by an unbolded sentence in a smaller font size. A bulleted list explains key features. Lastly, a button allows a user to contact sales if they're pleased with all this well-structured information."
+  />
+</div>
+<p className="caption">
+  The grammarly.com marketing website breaks up information about the Enterprise plan using a well-structured heading, description, and bullets. A companion image is placed next to the text, enhancing the information by demonstrating functionality without taking attention away from the key message.
+</p>
+
+### Consistency
+
+Consistency, the agreement of parts among a whole, is critical for helping users understand and process information. Content should follow the pattern a user expects based on precedent or general convention. For instance:
+
+- Parallel structure in headings, lists, and other components
+- Consistent typography, casing, styling, and length
+- Standard names for buttons and settings
+
+#### What not to do
+
+Steam, the leading storefront and platform for PC gaming, has unpredictable content in menus and buttons across their features for web, mobile, and desktop apps. Typography, colors, casing, and content are often inconsistent, creating a disorienting experience for all users—not just those with disabilities.
+
+<div className="diagram p-8">
+  <img
+    src={useBaseUrl("/img/content/consistency-dont1.svg")}
+    alt="Two dropdown menus from the Steam gaming platform are displayed. In some, labels use title casing with an initial capital letter for each word. Visual styling like color and font also change."
+  />
+</div>
+<p className="caption">
+  Labels in different menus alternate between first-person and second-person pronouns. One menu uses sentence case, while another is using title casing where the first letter of each word is capitalized. (July 24, 2024)
+</p>
+
+Buttons in the Steam store also highlight the importance of consistency in content.
+
+<div className="diagram p-8">
+  <img
+    src={useBaseUrl("/img/content/consistency-dont2.svg")}
+    alt="Many different buttons from the Steam gaming platform are displayed. In some, labels use all capital letters, but others use sentence case. Visual styling like color, icon usage, and font also change."
+  />
+</div>
+<p className="caption">
+  Differences between identical actions, “Manage store preference” compared to “Update store preferences,” yield a disjointed experience that can be difficult to navigate for gamers who use assistive technology as well as those who don’t. (July 24, 2024)
+</p>
+
+#### Do this instead
+
+In contrast, the account settings for Grammarly use second-person pronouns consistently when speaking to the customer. This creates a clear mental model by referring to users with a standard, unchanging term. 
+
+<div className="diagram p-8">
+  <img
+    src={useBaseUrl("/img/content/consistency-do.svg")}
+    alt="A representation of account.grammarly.com shows a menu with emphasis on the label for “your account” and the accompanying settings. The word “you” is circled in several instances where it’s used on the page."
+  />
+</div>
+<p className="caption">
+  The content of Grammarly’s account settings speaks to the user, as if having a conversation, by using second-person pronouns.
+</p>
+
+## Writing
+
+When written with attention to accessibility, product content will naturally be clear and understandable—accessible content helps everyone! Here are a few things to keep in mind:
+
+- Aim for a 7th-grade reading level or lower. Shorter sentences and simpler vocabulary help reduce reading level.
+- Avoid introducing proper names that are written in title case needlessly, for example “Select your preferred Billing Cycle.” They increase cognitive load for users, dilute brand equity, and are difficult to maintain consistently across surfaces.
+- Use active voice wherever possible and appropriate.
+- Choose words carefully. Avoid exclusionary, offensive terms like “blacklist” and “whitelist.” Notably, Grammarly does not use “disabled” or “enabled” to describe active and inactive states in user-facing content. Refer to the <Link href="https://grammarly.atlassian.net/wiki/spaces/DES/pages/3814457527/Grammarly+Company+Style+Guide#Word-and-Term-List">Company Style Guide</Link> and [the GDS term list](/content/terminology) for more examples.
+
+### Alt text
+
+- Alt text allows users with visual impairments to understand information that is conveyed visually to sighted users through images.
+- Purely decorative images don’t need alt text.
+- If a photo or illustration adds key information, shows an example, or significantly contributes to the mood and tone of the page, it should have alt text.
+
+<RecommendationsTable
+  caption="Writing best practices for alt text"
+  textOnly={true}
+  recommendations={[
+    {
+      recommendationDo:
+        "Be clear and concise.",
+      recommendationDont:
+        "Don’t write alt text longer than about two sentences.",
+    },
+    {
+      recommendationDo: "Focus on the information the user needs to know.",
+      recommendationDont: "Don’t include extraneous or irrelevant details.",
+    },
+    {
+      recommendationDo: "Use proper punctuation so screen readers properly read out the information.",
+      recommendationDont: "Don’t begin descriptions with “Image of …”",
+    },
+  ]}
+/>
+
+### Spatial or directional descriptions
+
+- “Open the menu in the *top-left* corner.” 
+- “Update your settings *below*.” 
+- “Submit your question using the form on the *right*.” 
+
+These descriptions all rely on relative directions like above/below or left/right. **Avoid them**, because they don’t work for users who can’t see the page visually. They also may become inaccurate if the components on the page move around like with smaller screens or in a mobile layout.
+
+Ideally, the page should be organized logically enough that you don’t need to describe exactly where everything is. If the page design is good, “Open the menu,” “Update your settings,” or “Submit your question using the form” should suffice.
+
+### Naming and labeling
+
+Assistive technology uses element names to help users navigate an interface. When writing element names, you should:
+
+- Describe function, not appearance—for example, “**Edit** icon” not “**Pen** icon”
+- Lead with action verbs
+- Be concise
+- Use unique labels for each element unless they perform an identical function
+- Begin each label with a capital letter and omit end punctuation
+
+<Link href="https://grammarly.atlassian.net/wiki/spaces/DP/pages/3483896692/Writing+accessible+names+and+labels" weight="bold">Learn more about accessible names and labels</Link>
+
+### Emoji
+
+**Avoid emoji whenever possible.** They are inconsistent and unclear—two qualities to avoid in any user experience. 
+
+<RecommendationsTable
+  caption="Writing best practices for emoji"
+  textOnly={true}
+  recommendations={[
+    {
+      recommendationDo: "Avoid emoji or use them very sparingly.",
+      recommendationDont: "Don’t replace words with emoji.",
+    },
+    {
+      recommendationDo: "Put emoji at the end of your text to avoid disrupting the content.",
+      recommendationDont: "Don’t use emoji as bullet points.",
+    },
+    {
+      recommendationDo: "Check the name of each emoji to understand how a screen reader will read it aloud.",
+      recommendationDont: "Don’t rely on emoji to convey important information.",
+    },
+  ]}
+/>
+
+Screen readers handle emoji in different ways, and this makes them undesirable for in-product content. In some cases, the screen reader simply reads out the name of the emoji along with its surrounding text. The result can be confusing and annoying for assistive technology users.
+
+<ComponentPlayground
+  hideCodePreview
+  code={`<Flex gap={4} direction="column">
+  <Text as="p">Visible text: 💪 confident</Text>
+  <Text as="p">Screen reader announcement:<Text as="em">“Flexed bicep confident”</Text></Text>
+  </Flex>`}
+/>
+<p className="caption">
+  Visually, the flexed bicep emoji conveys an image of strength. When read aloud, however, the emoji’s description adds confusing extra words that don’t make sense in context.
+</p>
+
+#### Inconsistencies by platform cause miscommunication
+
+Emoji render very differently in apperance on different platforms, which causes miscommunications due to changes in meaning and emotion. 
+
+Consider the different versions of the “<Link href="https://emojipedia.org/nerd-face">nerd face</Link>” emoji. Recently, some platforms have acknowledged that bucktoothed representations evoke anti-Asian stereotypes. A beaming smile replaces the racist trope in Google’s updated version, giving it a more joyful and excited appearance than the others. Regardless, using this particular emoji in the product would never be worth the risk of offending Grammarly customers who use an Apple device. <Link href="https://grouplens.org/blog/investigating-the-potential-for-miscommunication-using-emoji/">Investigating the Potential for Miscommunication Using Emoji, Hannah Miller, 2016</Link>.
+
+<div className="diagram p-8">
+  <img
+    src={useBaseUrl("/img/content/emoji1.svg")}
+    alt="The emoji for “nerd face” is shown from Apple, Google, Samsung, Microsoft, WhatsApp, Facebook, and JoyPixels."
+  />
+</div>
+<p className="caption">
+  Notice how the facial features change on each platform. Some glasses are circular, others rectangular, and Facebook’s glasses appear more like goggles. Notably, WhatsApp’s nerd face looks a bit disheveled. All these differences yield varied, unpredictable reactions among users.
+</p>
+
+#### Vision issues blur meaning
+
+Users with low vision may have trouble distinguishing different emoji. Notice in the example how very distinct emotions—joy, skepticism, and sadness—appear surprisingly similar when out of focus, obscuring the intended meaning.
+
+<div className="diagram p-8">
+  <img
+    src={useBaseUrl("/img/content/emoji2.svg")}
+    alt="Three emoji are shown in and out of focus. The emoji are joy, skeptical, and sad."
+  />
+</div>
+<p className="caption">
+  The emoji for joy, skepticism, and sadness seem unmistakable in focus. When stimulating low vision with a blur, the expressions become difficult to understand.
+</p>
+
+#### Definitions vary by context
+
+Emoji also do not have universal definitions—across cultures and equally among communities within a culture. It's important to consider how many different types of users could interpret (and misinterpret) your intentions, as well as how they could find the implications of an emoji offensive.
+
+<div className="diagram p-8">
+  <img
+    src={useBaseUrl("/img/content/emoji3.svg")}
+    alt="A waving hand emoji."
+  />
+</div>
+<p className="caption">
+  The waving hand emoji typically means “hello” or “goodbye” in the US—no matter what platform is being used. In China, it often means something more akin to “good riddance,” which is exactly how you should feel now about emoji in product content.
+</p>
+
+## Helpful resources
+
+<ComponentList
+  components={[
+    {
+      href: "https://grammarly.atlassian.net/wiki/spaces/DP/pages/3880125741/Perform+an+accessibility+self-assessment",
+      label: "Accessibility self-assessment",
+    },
+    {
+      href: "https://grammarly.atlassian.net/wiki/spaces/DP/pages/3698459419/Set+up+your+screen+reader+testing+environment",
+      label: "Setting up a screen reader",
+    },
+    {
+      href: "https://grammarly.atlassian.net/wiki/spaces/DP/pages/3483896692/Writing+accessible+names+and+labels",
+      label: "Writing accessible names and labels",
+    },
+    {
+      href: "https://grammarly.atlassian.net/wiki/spaces/DP/pages/4191650025/Design+annotations",
+      label: "About design annotations",
+    },
+  ]}
+/>

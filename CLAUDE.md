@@ -9,7 +9,7 @@ You are experienced Frontend Developer and mature designer.
 
 **Key concepts:**
 - Projects are self-sufficient (work in project directory)
-- `scripts/` and `ai-context/` are symlinks to `.shared/`
+- `scripts/` and `.claude/` are symlinks to `.shared/`
 - `.mcp.json` and `Makefile` are template-specific (real files)
 - Updates to `.shared/` propagate to all projects automatically
 
@@ -21,7 +21,11 @@ This is a **monorepo** for frontend experiments with symlink-based architecture:
 ai-frontend-prototypes/
 ├── .shared/                      # 🔗 Shared resources (symlinked)
 │   ├── scripts/                 # Executable scripts for all projects
-│   └── ai-context/              # AI documentation (328KB)
+│   └── claude/                  # Claude Code configuration (no dot prefix)
+│       ├── commands/            # Custom slash commands
+│       ├── skills/              # Claude Code skills
+│       │   └── gds/             # Grammarly Design System skill
+│       └── settings.local.json
 │
 ├── repo-scripts/                 # 📦 Repository management
 │   ├── create-project.sh
@@ -39,7 +43,7 @@ ai-frontend-prototypes/
 │   └── my-project/              # ✅ Self-sufficient
 │       ├── src/                 # Real files
 │       ├── scripts/             # 🔗 → ../../.shared/scripts/
-│       ├── ai-context/          # 🔗 → ../../.shared/ai-context/
+│       ├── .claude/             # 🔗 → ../../.shared/claude/
 │       ├── .mcp.json            # Real file (from template)
 │       ├── Makefile             # Real file (from template)
 │       └── CLAUDE.md
@@ -52,8 +56,8 @@ ai-frontend-prototypes/
 
 **Key Rules:**
 - **Work from project directory:** `cd projects/[project-name]/` before starting
-- **Symlinked resources:** `scripts/` and `ai-context/` are symlinks to `.shared/`
-- **Read through symlinks:** Use `Read(ai-context/gds/llms.txt)` explicitly
+- **Symlinked resources:** `scripts/` and `.claude/` are symlinks to `.shared/`
+- **GDS Skill auto-activates:** No need to explicitly reference GDS documentation
 - **Don't edit symlinks:** To customize, remove symlink and create real directory
 - Run `make build` from project dir to build
 - Built projects auto-appear in `public/` and main directory listing
@@ -122,34 +126,34 @@ Use: mcp__playwright__browser_snapshot
 - Testing responsive behavior
 - Pixel-perfect validation
 
-### 3. Grammarly Design System (GDS)
-**Documentation:** Read(ai-context/gds-docs/llm.txt)
-**Website:** https://uifoundation.gpages.io/grammarly-design-system
+### 3. Grammarly Design System (GDS) Skill
+**Documentation:** https://uifoundation.gpages.io/grammarly-design-system
 **Source:** https://gitlab.grammarly.io/uifoundation/grammarly-design-system
+**Skill Location:** `.shared/claude/skills/gds/`
 
-**Available in this monorepo:**
-- Complete component documentation: `ai-context/gds-docs/`
-- 40+ components with usage examples
-- Design tokens and foundations
+**Available through GDS Skill:**
+- 40+ React components with complete documentation
+- Design tokens (colors, spacing, typography, elevation)
+- Design foundations and accessibility guidelines
 - UI patterns and best practices
+- Content guidelines (voice, tone, terminology)
 
-**Usage:**
-```
-# Read GDS overview
-Read(ai-context/gds-docs/llm.txt)
+**How it works:**
+The GDS Skill **automatically activates** when you work on UI components, forms, layouts, or any interface implementation. You don't need to explicitly reference documentation - Claude will load relevant GDS information as needed.
 
-# Read specific component
-Read(ai-context/gds-docs/components/buttons/button.mdx)
+**The skill provides:**
+- Component selection guidance
+- Implementation examples
+- Design token lookups
+- Accessibility best practices
+- Grammarly branding standards
 
-# Browse all components
-Glob(ai-context/gds-docs/components/**/*.mdx)
-```
-
-**When to use:**
+**When it activates:**
 - Creating Grammarly-style or professional interfaces
 - Building production-quality UI with established patterns
+- Implementing React components (Button, TextField, Modal, etc.)
 - Need consistent, accessible components
-- Want Superhuman-style clean, modern design
+- Working with forms, layouts, or any UI elements
 
 ## Prototyping Workflow
 

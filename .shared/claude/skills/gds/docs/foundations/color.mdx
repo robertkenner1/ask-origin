@@ -1,0 +1,168 @@
+---
+pagination_prev: null
+pagination_next: null
+---
+
+import Recommendations from "../_components/recommendations";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import SemanticPalettes from "/img/foundations/color/semantic_palettes.svg";
+import SemanticColorApplication from "/img/foundations/color/semantic_color_application.svg";
+import SemanticColorVariants from "/img/foundations/color/semantic_color_variants.svg";
+import SemanticColorRoles from "/img/foundations/color/semantic_color_roles.svg";
+import SemanticColorRolesDark from "/img/foundations/color/semantic_color_role_dark.svg";
+
+# Color
+
+<span>
+  Color is a fundamental piece of Grammarly’s visual language. It distinguishes our brand and helps
+  us create consistent experiences across products.
+</span>
+
+## Color token
+Tokens are a method of applying color in a consistent and meaningful way across the admin. They provide a layer of abstraction from the hex values themselves, making it easy to implement large scale changes across the admin. See the [token section](/tokens/color) for the full list of color tokens and their descriptions. 
+
+## Semantic color 
+Semantic token names describe where they should be applied in the UI, but the value applied to them is generic. For example, the token `color.background.brand.default` is the default brand-level color applied broadly in the UI to backgrounds styled with the primary brand color. Semantic tokens can accept multiple values to enable mode (light/dark) switching by using GDS utility component [Color Scheme Provider](/utilities/color-scheme-provider).
+
+<div className="diagram">
+  <img
+    src={useBaseUrl("/img/foundations/color/color_tokens.svg")}
+    alt="Two primitive color tokens share the same semantic token and render out different results in light and dark mode."
+  />
+</div>
+<p class="caption">
+  This example shows how a semantic color token stores a primitive color token value to enable mode switching.
+</p>
+
+## Semantic color token breakdown
+Semantic color token names are more complex than others, but they’re also critical for proper application. The most common color tokens have four segments beginning with color. We’ve broken down the rest of the segments using visual diagrams to make their application more straightforward to understand.
+
+<div className="diagram">
+  <img
+    src={useBaseUrl("/img/foundations/color/semantic_breakdown.svg")}
+    alt="Two primitive color tokens share the same semantic token and render out different results in light and dark mode."
+  />
+</div>
+
+
+### Property
+Color.**property**.concept.variant
+
+The most common properties you’ll use include text, background, icon, and border. These are typically the easiest things to identify in an interface, so it narrows down the group of tokens to look at when choosing the correct one to apply. 
+
+<div className="diagram">
+  <img
+    src={useBaseUrl("/img/foundations/color/semantic_color_property.svg")}
+    alt="A module with user name and information on the registration date and activity with functionality to assign roles. Use case of different colors are marked up with the application of property variants."
+  />
+</div>
+
+<br />
+### Concept
+Color.property.**concept**.variant
+
+Concepts vary broadly since this segment of the token name is very specific to the element to which it’s applied. The most common concept is base used for all default properties.
+<div className="diagram">
+  <img
+    src={useBaseUrl("/img/foundations/color/semantic_color_concept.svg")}
+    alt="A setting window with content of tabs and error message. Use cases of different colors are marked up with the application of concept variants."
+  />
+</div>
+
+<br />
+### Variant
+Color.property.concept.**variant**
+
+Variants can typically be thought of as the shade or level of contrast of the color expressed in different words, depending on the theme. For example, “default” is the darkest gray (neutralgray.100) in light mode and white in dark mode. The “subdued” color provides less contrast, and inverse is used to ensure elements have enough contrast on their background. 
+
+<div className="diagram">
+  <img
+    src={useBaseUrl("/img/foundations/color/semantic_color_variants_2.svg")}
+    alt="Three use cases with text colors showing how variants are applied."
+  />
+</div>
+
+<br />
+### Modes
+Light mode is the current default mode that Grammarly products use. Dark mode is in beta with Figma variables available for designers to test using exploratory, non-production work.
+
+#### Light mode
+<div className="diagram">
+  <SemanticColorRoles />
+</div>
+
+#### Dark mode
+<div className="diagram color-semantic-dark">
+  <SemanticColorRolesDark/>
+</div>
+
+
+## Primitive color
+These tokens map to a single value and are named, for example, `blue.40` or `green.60`. Primitive tokens allow us to easily adjust their values without scouring the codebase for hex values. Notice that primitives specifically describe the value they represent. (Ex. `green.60` always maps to a green color) Primitive tokens can then be applied to any number of semantic tokens. 
+
+<div className="diagram">
+  <img
+    src={useBaseUrl("/img/foundations/color/color_primitive.svg")}
+  />
+</div>
+<p class="caption">
+  The brand green hex value translated through the primitive token `green.60` can be used in component-specific semantic tokens like the one for Button, or more universally used semantic tokens for things like borders, icons, text, or backgrounds.
+</p>
+
+## Application
+
+[Color tokens](/tokens/color) (example: Background.Success.Subdued) are used to apply color values in components and other UI elements.
+
+<div className="diagram">
+  <img
+    src={useBaseUrl("/img/foundations/color/semantic_color_applied.svg")}
+    alt="Color tokens applied to success, critical, and premium tags showing how different values can be applied to the same name to create multiple variations."
+  />
+</div>
+<p class="caption">
+  Tags use colors from various roles that can be applied in components. These colors are granularly
+  applied to backgrounds, borders, text, and the icon for a Premium Tag.
+</p>
+
+## Combining Colors and Accessibility
+
+Not all colors pair well together, so we provide combinations of background, border, and foreground colors that guarantee compliance with [WCAG 2.2](https://www.w3.org/TR/WCAG22/) AA color contrast guidelines. Never rely on color alone to convey a message or meaning. For example, use explicit text or icons to visually reinforce the message.
+
+Always follow these guidelines:
+
+1. Text against its background should always pass a contrast ratio of 4.5:1 unless it meets one of the following criteria:
+   1. Text has a font size larger than 24px or 19px with a bold weight. Using this criteria, the contrast ratio requirement decreases to 3:1.
+   2. Text is purely decorative, part of a deactivated component, or part of a picture that contains significant other visual content.\*
+   3. Text is part of a logo or brand name that has no contrast requirement.
+2. Non-text against its adjacent color(s) should always pass a contrast ratio of 3:1 unless it meets one of the following criteria:
+   1. The visual element is not a UI component, meaning it’s not a control for a distinct function in our products.
+   2. The visual element is not required to understand the content, such as an icon paired with a label, as long as the label meets the adequate text contrast ratio.
+
+\*As a rule of thumb, text that would be part of the image’s alt text should meet contrast requirements, while text that would not be added to alt text can usually be considered incidental.
+
+### Best practices
+
+<Recommendations
+  recommendations={[
+    {
+      image: useBaseUrl("/img/foundations/color/recommendation_do_pairing_01.svg"),
+      caption: "Use default-colored text with subdued or base background colors.",
+      type: "do",
+    },
+    {
+      image: useBaseUrl("/img/foundations/color/recommendation_do_pairing_04.svg"),
+      caption: "Use inverse-colored text with default background colors.",
+      type: "do",
+    },
+    {
+      image: useBaseUrl("/img/foundations/color/recommendation_dont_pairing_03.svg"),
+      caption: "Do not use default-colored text with default background colors.",
+      type: "dont",
+    },
+    {
+      image: useBaseUrl("/img/foundations/color/recommendation_dont_pairing_05.svg"),
+      caption: "Do not use two default colors next to each other.",
+      type: "dont",
+    },
+  ]}
+/>
