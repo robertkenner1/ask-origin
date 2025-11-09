@@ -192,11 +192,31 @@ vercel-deploy:
         echo "   Team: $TEAM_SLUG"
       fi
 
+      echo "vercel link --yes \
+        --project $PROJECT_NAME \
+        $TEAM_ARG \
+        --token $VERCEL_TOKEN"
+
       vercel link --yes \
         --project "$PROJECT_NAME" \
         $TEAM_ARG \
         --token "$VERCEL_TOKEN"
       echo "✅ Project linked successfully"
+      echo ""
+
+      # Extract project and org IDs from .vercel/project.json
+      echo "📋 Extracting project configuration..."
+      if [ -f ".vercel/project.json" ]; then
+        export VERCEL_ORG_ID=$(cat .vercel/project.json | jq -r '.orgId')
+        export VERCEL_PROJECT_ID=$(cat .vercel/project.json | jq -r '.projectId')
+        echo "✅ Extracted IDs from .vercel/project.json"
+        echo "   Org ID: $VERCEL_ORG_ID"
+        echo "   Project ID: $VERCEL_PROJECT_ID"
+      else
+        echo "❌ ERROR: .vercel/project.json not found after linking"
+        echo "   This file should be created by 'vercel link' command"
+        exit 1
+      fi
       echo ""
 
       # Conditional build based on prebuild setting
