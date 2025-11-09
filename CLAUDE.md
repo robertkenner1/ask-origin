@@ -21,11 +21,11 @@ This is a **monorepo** for frontend experiments with symlink-based architecture:
 ai-frontend-prototypes/
 ├── .shared/                      # 🔗 Shared resources (symlinked)
 │   ├── scripts/                 # Executable scripts for all projects
-│   └── .claude/                 # Claude Code configuration
+│   └── claude/                  # Claude Code configuration (no dot prefix)
 │       ├── commands/            # Custom slash commands
 │       ├── skills/              # Claude Code skills
 │       │   └── gds/             # Grammarly Design System skill
-│       └── settings.local.json.template
+│       └── settings.local.json
 │
 ├── repo-scripts/                 # 📦 Repository management
 │   ├── create-project.sh
@@ -43,7 +43,7 @@ ai-frontend-prototypes/
 │   └── my-project/              # ✅ Self-sufficient
 │       ├── src/                 # Real files
 │       ├── scripts/             # 🔗 → ../../.shared/scripts/
-│       ├── .claude/             # 🔗 → ../../.shared/.claude/
+│       ├── .claude/             # 🔗 → ../../.shared/claude/
 │       ├── .mcp.json            # Real file (from template)
 │       ├── Makefile             # Real file (from template)
 │       └── CLAUDE.md
@@ -129,7 +129,7 @@ Use: mcp__playwright__browser_snapshot
 ### 3. Grammarly Design System (GDS) Skill
 **Documentation:** https://uifoundation.gpages.io/grammarly-design-system
 **Source:** https://gitlab.grammarly.io/uifoundation/grammarly-design-system
-**Skill Location:** `.shared/.claude/skills/gds/`
+**Skill Location:** `.shared/claude/skills/gds/`
 
 **Available through GDS Skill:**
 - 40+ React components with complete documentation

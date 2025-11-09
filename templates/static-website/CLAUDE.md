@@ -8,7 +8,7 @@ This project uses **symlinked resources** from the monorepo:
 {{PROJECT_NAME}}/
 ├── src/              # 📄 Your project files (edit these)
 ├── scripts/          # 🔗 Symlink → ../../.shared/scripts/
-├── .claude/          # 🔗 Symlink → ../../.shared/.claude/
+├── .claude/          # 🔗 Symlink → ../../.shared/claude/
 ├── .mcp.json         # 📄 MCP servers (customizable)
 ├── Makefile          # 📄 Build commands (customizable)
 └── CLAUDE.md         # 📄 This file
@@ -33,7 +33,7 @@ npm start       # Serve production build
 
 ### Claude Code Skills (Symlinked)
 
-Located at: `./.claude/` → `../../.shared/.claude/`
+Located at: `./.claude/` → `../../.shared/claude/`
 
 This symlink provides access to:
 - **Skills** - Claude Code skills (including GDS skill)
@@ -219,10 +219,10 @@ When building Grammarly-style or Superhuman-style clean, modern interfaces:
 # Check symlink exists
 ls -la .claude
 
-# Should show: .claude -> ../../.shared/.claude
+# Should show: .claude -> ../../.shared/claude
 
 # If broken, recreate:
-ln -s ../../.shared/.claude .claude
+ln -s ../../.shared/claude .claude
 ```
 
 ### "Script not executable"

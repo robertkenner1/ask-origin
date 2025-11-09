@@ -1,0 +1,241 @@
+---
+pagination_prev: null
+pagination_next: null
+---
+
+import { Heading, Text } from "@grammarly/design-system";
+import TypographyCopyHint from "../_components/typography_copy_hint.js";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import ComponentPlayground from "../_components/comp_playground";
+
+# Typography
+
+<span>
+  Typography is a fundamental design element in our product. When applied systematically, type
+  establishes visual hierarchy and gives structure to content. It also maximizes readability when
+  paired with Grammarly’s signature editorial markup.
+</span>
+
+## Fonts
+
+Grammarly’s product offerings use Matter for headings and Inter for body text. Our bespoke font Glyph may be be used for brand and marketing purposes—as well as in the Growth focus area. We know that in some instances, there needs to be clarity about whether to use Glyph or Inter for body font.
+
+**Use Inter:**
+
+- When a user is signed in to the product
+- In product demos, even if a user is signed out
+- Static product images used for promotional purposes
+
+**Use Glyph:**
+
+- For signed-out experiences that are not examples of the product
+- In marketing or sales websites and collateral
+
+[Visit the Brand Vault page on typography](https://brand.grammarly.com/document/6#/visual-language/typography-1/brand-body) for more information. If you have a question about a specific scenario, [reach out to the Growth design team at #growth](https://app.slack.com/client/E06GHNPFX4L/C02GQUFQN).
+
+### Matter
+
+<Text as="span" variant="heading-small">
+  ABCDEFGHIJKLMNOPQRSTUVWXYZ
+  <br /> The quick brown fox jumps over the lazy dog.
+  <br /> !@#$%^&\*() 0123456789
+</Text>
+
+### Inter
+
+<Text as="span" variant="text-medium">
+  ABCDEFGHIJKLMNOPQRSTUVWXYZ
+  <br /> The quick brown fox jumps over the lazy dog.
+  <br /> !@#$%^&\*() 0123456789
+</Text>
+
+## Sizes
+
+Grammarly’s product offerings use a 14px (0.875rem) font size by default. This differs from the browser default of 16px; however, the smaller size has proven to scale well in the UI. This 14px font is juxtaposed with the large text size (Text Large) where users apply a majority of their focus.
+
+## Text color
+
+Apply color to text according to the purpose assigned to the color. Never use color for decoration or visual appeal. Following the information provided in [our Color documentation](/foundations/color), text should always meet the accessible contrast ratio of 4.5:1.
+
+Color isn’t defined in the text specification, but rather applied on a per-component basis. This is done to account for each specific state in the experience where color is necessary. For example, Buttons use white, brand green, and neutral gray depending on the type of Button.
+
+## Variants
+
+<table className="typography-table">
+  <tbody>
+    <tr>
+      <th>Example</th>
+      <th>Style</th>
+      <th>Attributes</th>
+      <th>Code</th>
+    </tr>
+    <tr>
+      <td>
+        <Heading variant="heading-large" as="p" children="Easier said. Done." />
+      </td>
+      <td>Heading Large</td>
+      <td>
+        font-size: 2rem <i>(28px)</i>
+        <br />
+        line-height: 2.286rem <i>(32px)</i>
+        <br />
+        font-weight: 700
+        <br />
+        letter-spacing: -0.0025em
+      </td>
+      <TypographyCopyHint
+        react={`import { Heading } from "@grammarly/design-system"\n\n<Heading variant="heading-large" as="h1" />`}
+      />
+    </tr>
+    <tr>
+      <td>
+        <Heading variant="heading-medium" as="p" children="Easier said. Done." />
+      </td>
+      <td>Heading Medium</td>
+      <td>
+        font-size: 1.714rem <i>(24px)</i>
+        <br />
+        line-height: 2.286rem <i>(32px)</i>
+        <br />
+        font-weight: 700
+        <br />
+        letter-spacing: -0.002em
+      </td>
+      <TypographyCopyHint
+        react={`import { Heading } from "@grammarly/design-system"\n\n<Heading variant="heading-medium" as="h2" />`}
+      />
+    </tr>
+    <tr>
+      <td>
+        <Heading variant="heading-small" as="p" children="Easier said. Done." />
+      </td>
+      <td>Heading Small</td>
+      <td>
+        font-size: 1.429rem <i>(20px)</i>
+        <br />
+        line-height: 1.714rem <i>(24px)</i>
+        <br />
+        font-weight: 600
+      </td>
+      <TypographyCopyHint
+        react={`import { Heading } from "@grammarly/design-system"\n\n<Heading variant="heading-small" as="h3" />`}
+      />
+    </tr>
+    <tr>
+      <td>
+        <Heading variant="heading-xsmall" as="p" children="Easier said. Done." />
+      </td>
+      <td>Heading XSmall</td>
+      <td>
+        font-size: 1.143rem <i>(16px)</i>
+        <br />
+        line-height: 1.714rem <i>(24px)</i>
+        <br />
+        font-weight: 600
+      </td>
+      <TypographyCopyHint
+        react={`import { Heading } from "@grammarly/design-system"\n\n<Heading variant="heading-xsmall" as="h4" />`}
+      />
+    </tr>
+   <tr>
+      <td>
+        <Heading variant="heading-xxsmall" as="p" children="Easier said. Done." />
+      </td>
+      <td>Heading XXSmall</td>
+      <td>
+        font-size: 1rem <i>(14px)</i>
+        <br />
+        line-height: 1.5rem <i>(21px)</i>
+        <br />
+        font-weight: 600
+      </td>
+      <TypographyCopyHint
+        react={`import { Heading } from "@grammarly/design-system"\n\n<Heading variant="heading-xxsmall" as="h5" />`}
+      />
+    </tr>
+
+    <tr>
+      <td>
+        <Text variant="text-large" as="p" children="Easier said. Done." />
+      </td>
+      <td>Text Large</td>
+      <td>
+        font-size: 1.286rem <i>(18px)</i>
+        <br />
+        line-height: 2.286rem <i>(32px)</i>
+        <br />
+        font-weight: 400
+      </td>
+      <TypographyCopyHint
+        react={`import { Text } from "@grammarly/design-system"\n\n<Text variant="text-large" as="p" />`}
+      />
+    </tr>
+    <tr>
+      <td>
+        <Text variant="text-medium" as="p" children="Easier said. Done." />
+      </td>
+      <td>Text Medium</td>
+      <td>
+        font-size: 1.143rem <i>(16px)</i>
+        <br />
+        line-height: 1.714rem <i>(24px)</i>
+        <br />
+        font-weight: 400
+        <br />
+      </td>
+      <TypographyCopyHint
+        react={`import { Text } from "@grammarly/design-system"\n\n<Text variant="text-medium" as="p" />`}
+      />
+    </tr>
+    <tr>
+      <td>
+        <Text variant="text-small" as="p" children="Easier said. Done." />
+      </td>
+      <td>Text Small</td>
+      <td>
+        font-size: 1rem <i>(14px)</i>
+        <br />
+        line-height: 1.5rem <i>(21px)</i>
+        <br />
+        font-weight: 400
+      </td>
+      <TypographyCopyHint
+        react={`import { Text } from "@grammarly/design-system"\n\n<Text variant="text-small" as="p" />`}
+      />
+    </tr>
+    <tr>
+      <td>
+        <Text variant="text-xsmall" as="p" children="Easier said. Done." />
+      </td>
+      <td>Text XSmall</td>
+      <td>
+        font-size: 0.86rem <i>(12px)</i>
+        <br />
+        line-height: 1.286rem <i>(18px)</i>
+        <br />
+        font-weight: 400
+      </td>
+      <TypographyCopyHint
+        react={`import { Text } from "@grammarly/design-system"\n\n<Text variant="text-xsmall" as="p" />`}
+      />
+    </tr>
+
+  </tbody>
+</table>
+
+### Style
+
+Apply bolding with `weight`, italics with `italic`, and a strikethrough with `decoration`.
+
+<ComponentPlayground
+  code={`
+<Flex direction="column" gap={4}>
+  <Text as="p">normal</Text>
+  <Text as="p" weight="medium">medium</Text>
+  <Text as="p" weight="semibold">semibold</Text>
+  <Text as="p" weight="bold">bold</Text>
+  <Text as="p" italic>italic</Text>
+  <Text as="p" decoration="line-through">strikethrough</Text>
+</Flex>
+  `}
+/>

@@ -1,0 +1,356 @@
+---
+pagination_prev: null
+pagination_next: null
+slug: /components/circular-loader
+keywords: ['spinner']
+---
+
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import PropsTable from "../../_components/props_table";
+import RecommendationsTable from "../../_components/recommendations_table";
+import ComponentList from "../../_components/component_list";
+import ComponentPlayground from "../../_components/comp_playground";
+import { ComponentStatusRow } from "../../_components/component_status_row";
+import DoDontList from "../../_components/do_dont_list";
+import { Loader } from "@grammarly/design-system";
+import { 
+  Link, 
+  Icon, 
+  InterfaceDownloadIcon,
+  Text, 
+  Flex, 
+  ButtonAsLink } from "@grammarly/design-system";
+
+# Circular Loader
+
+A Circular Loader shows an animated, spinning circle indicating content on a page is loading or a user’s request is being processed.
+
+<ComponentStatusRow name="Circular Loader" />
+
+<ComponentPlayground
+  showAsHero
+  hideCodePreview
+  code={`
+  <Flex 
+    direction="column"
+    elevation="high" 
+    borderRadius={2} 
+    bgColor="background-base-default" 
+    width={400} 
+    height={275} 
+    align="center" 
+    justify="start"
+    padding={4}
+    gap={4}
+  >
+    <Flex justify="space-between" width="100%" >
+        <Flex gap={2} align="center">
+          <LogoLogomarkColorDefaultIcon
+            style={{ height: 20, width: "auto" }}
+            aria-label="Grammarly logo"
+            aria-hidden={false}
+          />
+          <Text variant="text-xsmall" color="base-subdued" as="p">DeepL Translate</Text>
+        </Flex>
+        <Flex>
+          <Icon accessibilityLabel="" icon={InterfaceCloseIcon} size="small"/>
+        </Flex>
+      </Flex>
+    <Flex width="100%" gap={2} align="end">
+      <Select label="From">
+        <Select.Option value="dl" label="Detect language" />
+      </Select>
+      <Icon style={{marginBottom: "8px"}} accessibilityLabel="" icon={InterfaceSortHorizontalIcon} size="small"/>
+      <Select label="To">
+        <Select.Option value="eng" label="English" />
+      </Select>
+    </Flex>
+    <Flex width="100%">
+      <Textarea label="Detected language" value="Der schnelle braune Fuchs sprang über den faulen Hund"/>
+    </Flex>
+    <Flex gap={2} justify="start" width="100%">
+      <Loader accessibilityLabel="Translating text">
+        <Loader.Circular />
+      </Loader>
+      <Text as="p" color="base-subdued" variant="text-xsmall">Translating …</Text>
+    </Flex>
+  </Flex>
+`}
+/>
+
+
+<p class="caption" style={{marginTop: "1rem"}}>
+  Certain actions, like translating text and generating AI responses, will introduce delays into the product. In cases like these requests, a Circular Loader appears to indicate that activity is happening.
+</p>
+
+
+## Usage
+
+A Circular Loader gives feedback indicating that the system is working on a task. By communicating this status to a user, it lessens confusion or frustration they may feel when an immediate response is not possible. [Learn about perceived performance on MDN](https://developer.mozilla.org/en-US/docs/Learn/Performance/Perceived_performance).
+
+**Use when**:
+
+ - You want to indicate to a user that the system is loading data or processing their request, such as generating the response to a user’s AI prompt.
+ - It’s unhelpful to provide an abstract preview of underlying content, such as a video, before it loads fully.
+
+**Do not use when**:
+
+ - You are providing a visual representation of the expected information hierarchy before the content loads fully. Instead, use a [Skeleton Loader](https://designsystem.grammarly.io/components/skeleton-loader/).
+ - Underlying content often takes longer than 10 seconds to load. Instead, use a progress bar to indicate loading.
+
+## Examples
+
+### Default
+
+By default, a Circular Loader appears at `medium` size. The `accessibilityLabel` prop is recommended to provide context regarding what is currently loading.
+
+<ComponentPlayground
+  code={`
+    <Loader accessibilityLabel="Loading analytics table">
+      <Loader.Circular  />
+    </Loader>
+`}
+/>
+
+### Size
+
+Circular Loader is available in three sizes: `small` (16 x 16px), `medium` (20 x 20px), and `large` (24 x 24px).
+
+<ComponentPlayground
+  code={`
+    <Flex gap={4}>
+        <Loader accessibilityLabel="Loading analytics table">
+            <Loader.Circular size="small"/>
+        </Loader>
+        <Loader accessibilityLabel="Loading analytics table">
+            <Loader.Circular size="medium"/>
+        </Loader>
+        <Loader accessibilityLabel="Loading analytics table">
+            <Loader.Circular size="large" />
+        </Loader>
+    </Flex>
+`}
+/>
+
+### Variants
+
+Use `variant="inverse"` to manually control the appearance of a Circular Loader. Otherwise, it uses [Color Scheme Provider](/utilities/color-scheme-provider) to appear in its `default` or `inverse` color based on context.
+
+<ComponentPlayground
+  code={`
+    <Flex gap={4} bgColor="background-base-inverse" padding={4} width={300} align="center" justify="center">
+        <Loader accessibilityLabel="Loading analytics table">
+            <Loader.Circular size="small" variant="inverse"/>
+        </Loader>
+        <Loader accessibilityLabel="Loading analytics table">
+            <Loader.Circular size="medium" variant="inverse"/>
+        </Loader>
+        <Loader accessibilityLabel="Loading analytics table">
+            <Loader.Circular size="large" variant="inverse"/>
+        </Loader>
+    </Flex>
+`}
+/>
+
+## Accessibility
+
+### Labeling
+
+The Circular Loader component intentionally lacks a visible label; however, the `accessibilityLabel` prop is required to supply the value of `aria-label`. This is what communicates the context of what is currently loading to people using a screen reader. If a separate [Text](/components/text) component labels the Circular Loader, repeat the same or similar content in the `accessibilityLabel`.
+
+<ComponentPlayground
+  code={`
+    <Flex direction="column" align="space-between" padding={4} gap={4} borderRadius={2} borderColor="base-subdued" width={400}>
+        <Flex justify="space-between">
+            <Flex gap={2}>
+                <LogoLogomarkColorDefaultIcon
+                    style={{ height: 20, width: "auto" }}
+                    aria-label="Grammarly logo"
+                    aria-hidden={false}
+                />
+                <Text variant="text-small" as="p" color="base-subdued">Neutral</Text>
+            </Flex>
+            <Flex>
+                <Text variant="text-small" as="p" color="base-subdued">10 prompts</Text>
+            </Flex>
+        </Flex>
+        <Flex borderRadius={1} borderColor="base-subdued" padding={4} gap={2}>
+            <Loader accessibilityLabel="Working on generating prompt options">
+                <Loader.Circular />
+            </Loader>
+            <Text variant="text-small" as="p" color="base-subdued">Working on it … </Text>
+        </Flex>
+        <TextField labelDisplay="hidden" label="Write a prompt" />
+    </Flex>
+`}
+/>
+
+### User settings for contrast and motion
+
+A Circular Loader will account for a user’s browser or system settings with regard to contrast and motion.
+
+| User setting                     | Loader response                                     |
+| -------------------------------- | ------------------------------------------------------------ |
+| No preferences set               | Show the animation                                  |
+| Reduced motion                   | Turn off the animation                              |
+
+## Writing
+
+Although a Circular Loader does not have a visible label, you can add explanatory context nearby. For example, you can use [Flex](/components/flex) to position a complementary [Text](/components/text) component next to a Circular Loader.
+
+Follow these guidelines when writing adjoining content:
+
+- Start with an _-ing_ verb in most cases.
+- Focus on the action in progress or the object being loaded.
+- Write in a neutral, direct tone and maintain our brand voice principles.
+- Avoid unnecessary courtesies like “Please wait” and overly forceful phrases like “Hold on.”
+- Aspire to use five words or less.
+
+**Examples**
+
+<DoDontList
+  items={[
+    {
+      content: "Detecting your top tones … ",
+      type: "do",
+    },
+    {
+      content: "Hold on while we analyze your writing corpus to provide an analysis of tone …",
+      type: "dont",
+    },
+    {
+      spaceAbove: true,
+      content: "Working on it … ",
+      type: "do",
+    },
+    {
+      content: "Please wait while we facilitate your request …",
+      type: "dont",
+    }
+  ]}
+/>
+
+If used, format an ellipsis as the horizontal ellipsis Unicode character “…”, which is three periods in a row. Insert a space between the ellipsis and any adjacent text. In HTML, the code for a horizontal ellipsis is `&hellip;`. [Learn more about ellipses](https://designsystem.grammarly.io/content/style/punctuation#ellipses).
+
+**Examples**
+
+<DoDontList
+  items={[
+    {
+      content: "Reviewing your text … [Unicode character]",
+      type: "do",
+    },
+    {
+      content: "Reviewing your text . . . [has spaces between periods]",
+      type: "dont",
+    },
+    {
+      content: "Reviewing your text ... [uses three individually typed periods instead of the Unicode character]",
+      type: "dont",
+    }
+  ]}
+/>
+
+## Installation
+
+### Javascript (Standard)
+1. Import the CSS (if not done already).
+
+```css
+@import "@grammarly/design-system";
+```
+
+2. Import the Loader component in JS, which includes Loader.Circular.
+
+```tsx
+import { Loader } from "@grammarly/design-system";
+```
+
+### With LottieFiles
+
+Lottie animations are a good solution for native clients, but can be used anywhere as needed. Follow the implementation instructions for your scenario. 
+
+- <Link target="_blank" href="https://lottiefiles.com/blog/working-with-lottie-animations/how-to-add-lottie-animation-in-web-page-html">HTML</Link>
+- <Link target="_blank" href="https://lottiefiles.com/blog/working-with-lottie-animations/how-to-use-lottie-in-react-app">React</Link>
+- <Link target="_blank" href="https://lottiefiles.com/blog/working-with-lottie-animations/how-to-add-lottie-animation-ios-app-swift">Swift</Link>
+- <Link target="_blank" href="https://lottiefiles.com/blog/working-with-lottie-animations/getting-started-with-lottie-animations-in-android-app">Android</Link>
+
+
+#### Self-hosted
+Download the Lottie files if you need a self-hosted solution. 
+
+<ButtonAsLink 
+  href={require("/files/circular-loader-lottie.zip").default}
+  variant="secondary" 
+  iconStart={InterfaceDownloadIcon} 
+  text="Download Lottie files" 
+  />
+
+## API
+
+### Loader props
+
+<PropsTable properties={[
+  {
+    propertyName: 'children',
+    isRequired: true,
+    description: 'Content that is one of the types of loaders, either Branded or Circular.',
+    typeDefinition: 'React.ReactNode'
+  },
+  {
+    propertyName: 'accessibilityLabel',
+    isRequired: false,
+    description: 'Sets `aria-label` to convey the context of visible text related to a Circular Loader. The `accessibilityLabel` and any nearby visible text should be the same or align closely.',
+    defaultValue: "'Loading'",
+    typeDefinition: 'string'
+  },
+  {
+    propertyName: 'shouldFocus',
+    isRequired: false,
+    description: 'When true, moves focus to the progress container when loading starts. Only needed when multiple Circular Loaders appear together on a page.',
+    defaultValue: 'false',
+    typeDefinition: 'boolean'
+  },
+  {
+    propertyName: 'onLoaded',
+    isRequired: false,
+    description: 'Event handler that is called when a Circular Loader is unmounted. Can be used to move focus to a relevant element when loading is complete. This prop should be set in most cases to make sure a user lands at the correct place in the UI. Do not use this prop when multiple Circular Loaders appear together on a page.',
+    defaultValue: null,
+    typeDefinition: '() => void'
+  }
+]} />
+
+### Loader.Circular props
+
+<PropsTable properties={[
+
+  {
+    propertyName: 'size',
+    isRequired: false,
+    description: 'Determines the size of the Circular Loader to be displayed.',
+    defaultValue: "'medium'",
+    typeDefinition: '"small" | "medium" | "large"'
+  },
+  {
+    propertyName: 'variant',
+    isRequired: false,
+    description: 'Determines the color of the Circular Loader.',
+    defaultValue: '"default"',
+    typeDefinition: '"default" | "inverse"'
+  }
+]} />
+
+## Related components
+
+<ComponentList
+  components={[
+    {
+      href: "/components/branded-loader",
+      label: "Branded Loader",
+    },
+    {
+      href: "/components/skeleton-loader",
+      label: "Skeleton Loader",
+    },
+  ]}
+/>

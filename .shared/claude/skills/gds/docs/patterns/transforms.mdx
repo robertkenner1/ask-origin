@@ -1,0 +1,126 @@
+---
+title: Transforms
+sidebar_position: 5
+pagination_prev: null
+pagination_next: null
+hide_title: true
+---
+
+import Link from "@docusaurus/Link";
+import Hero from "../_components/hero";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import DocCardList from "@theme/DocCardList";
+import Recommendations from "../_components/recommendations";
+import RecommendationsTable from "../_components/recommendations_table";
+import ComponentList from "../_components/component_list";
+import ComponentPlayground from "../_components/comp_playground";
+
+# Transforms
+
+A Transform is the text that Grammarly recommends adding or deleting.
+
+<Hero
+  path={useBaseUrl("/img/patterns/transforms_hero.svg")}
+  altText="A card displays transforms that indicate the suggested changes to the user's text."
+/>
+<p class="caption">
+  The transforms highlighted in the suggestion card tell the user what will change when the
+  suggestion is accepted.
+</p>
+
+## Anatomy
+
+<div class="diagram">
+  <img
+    src={useBaseUrl("/img/patterns/transforms_anatomy.svg")}
+    alt="Anatomy diagram of transforms in a suggestion card"
+  />
+</div>
+<ol class="diagram-legend small">
+  <li>Deletion transform</li>
+  <li>Addition transform</li>
+</ol>
+
+## Deletions
+
+Deletions are the text that Grammarly is suggesting that the user remove.
+
+<img style={{width: '100%'}}
+  src={useBaseUrl("/img/patterns/transforms_deletions.svg")}
+  alt="Deletion transforms have a strikethrough and a gray background color."
+/>
+
+### Deletion Styles
+
+Deletion text is `Text S` regular with a strikethrough using the `text-deletion` color token. The text color is `#696969` to meet contrast requirements against the highlight. Borders are added around punctuation to improve visibility.
+
+
+<img style={{width: '100%'}}
+  src={useBaseUrl("/img/patterns/transforms_deletions_styles.svg")}
+  alt="Deletion text is gray with a strikethrough."
+/>
+
+<br/>
+<br/>
+Deletion highlights are rendered as a background color on the text. The highlight is `#9C9C9C` at 20% opacity for both light and dark modes.
+
+<img style={{width: '100%'}}
+  src={useBaseUrl("/img/patterns/transforms_deletions_highlights.svg")}
+  alt="Deletion highlights are a transparent gray background around the text."
+/>
+
+
+## Additions
+
+Additions are the text that Grammarly is suggesting that the user add.
+
+<img style={{width: '100%'}}
+  src={useBaseUrl("/img/patterns/transforms_additions.svg")}
+  alt="Addition transforms have bolded text and a green background color."
+/>
+
+### Addition Styles
+
+Addition text is `Text S` semibold using the `text-addition` color token. Borders are added around punctuation to improve visibility.
+
+<img style={{width: '100%'}}
+  src={useBaseUrl("/img/patterns/transforms_additions_styles.svg")}
+  alt="Addition text is green and bolded."
+/>
+
+<br/>
+<br/>
+Addition highlights are rendered as a background-color on the text. The highlight is `#27DCCD` at 20% opacity for both light and dark modes.
+
+<img style={{width: '100%'}}
+  src={useBaseUrl("/img/patterns/transforms_additions_highlights.svg")}
+  alt="Addition highlights are a transparent gray background around the text."
+/>
+
+## Examples
+
+Transforms should be the same across all Grammarly platforms. These are notional examples and not all platforms may reflect these designs yet.
+
+<img
+  src={useBaseUrl("/img/patterns/transforms_examples.svg")}
+  alt="Transform treatment is the same across all Grammarly platforms."
+/>
+
+<img
+  src={useBaseUrl("/img/patterns/transforms_editor_examples.svg")}
+  alt="Transform treatment is shown in the Editor app."
+/>
+
+### Inline Card Exceptions
+
+Inline cards use buttons to apply text suggestions and therefore require a different stylistic treatment. Text colors remain consistent with other suggestions but don't include a highlight color. Addition and deletion text both use a semibold font weight.
+
+<img
+  src={useBaseUrl("/img/patterns/transforms_inline_examples.svg")}
+  alt="Transform treatment is slightly different in inline surfaces."
+/>
+
+## References
+
+- [V-bar Card Diffs (Figma)](https://www.figma.com/design/dOBwawrUlkftxgNrWZ4VRc/V-bar-card-diffs?t=D9ESLJcoDw42fIb2-0)
+- [Consistent Suggestion Diffs (Figma)](https://www.figma.com/design/kOgeNMvUGX0OSindMjTMYz/Consistent-Suggestion-Diffs?node-id=1-7246&t=xdBYrWXOghBD7X0m-1)

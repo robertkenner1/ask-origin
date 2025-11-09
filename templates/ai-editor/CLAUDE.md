@@ -194,7 +194,7 @@ The codebase is currently being refactored with:
 
 ### GDS Skill - Automatic Documentation Access
 
-The **GDS Skill automatically activates** when you work on UI components, forms, layouts, or any interface implementation. Complete documentation is available through Claude Code's skills system at `./.claude/skills/gds/`.
+The **GDS Skill automatically activates** when you work on UI components, forms, layouts, or any interface implementation. Complete documentation is available through Claude Code's skills system (symlinked from `.shared/claude/skills/gds/`).
 
 **Available through GDS Skill:**
 - 40+ React components (Button, TextField, Modal, Flex, Text, etc.)

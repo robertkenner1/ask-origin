@@ -148,7 +148,7 @@ exec_with_status "Copying template files" "cp -r '$TEMPLATE_DIR'/* '$PROJECTS_DI
 
 # Create symlinks to shared resources
 exec_with_status "Creating symlink: scripts/" "ln -s '../../.shared/scripts' '$PROJECTS_DIR/$PROJECT_NAME/scripts'"
-exec_with_status "Creating symlink: .claude/" "ln -s '../../.shared/.claude' '$PROJECTS_DIR/$PROJECT_NAME/.claude'"
+exec_with_status "Creating symlink: .claude/" "ln -s '../../.shared/claude' '$PROJECTS_DIR/$PROJECT_NAME/.claude'"
 
 # Create .project.json from template
 print_status "Creating project metadata" ""

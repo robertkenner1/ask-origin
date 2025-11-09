@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(ai-context/**)",
+      "Read(scripts/**)",
+      "Bash(./scripts/*.sh:*)",
+      "Bash(make:*)",
+      "Bash(git add:*)",
+      "Bash(git reset:*)",
+      "Bash(git commit:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git branch:*)",
+      "Bash(git checkout:*)",
+      "Bash(npm:*)",
+      "Bash(pnpm:*)",
+      "Bash(chmod:*)",
+      "Bash(mkdir:*)",
+      "Bash(vercel:*)",
+      "WebSearch",
+      "WebFetch(domain:docs.gitlab.com)",
+      "mcp__playwright__browser_take_screenshot",
+      "mcp__playwright__browser_navigate"
+    ],
+    "deny": []
+  },
+  "enabledMcpjsonServers": [
+    "playwright",
+    "sourcegraph",
+    "figma-dev-mode-mcp-server"
+  ]
+}
