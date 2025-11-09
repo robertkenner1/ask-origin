@@ -55,6 +55,11 @@ spec:
       type: array
       default: []
 
+    # Project Configuration
+    sso-protection:
+      description: "Enable SSO protection for deployments. Set to 'all' to require Vercel login + team access for all deployments (preview and production)."
+      default: ""
+
 ---
 # Include internal configuration template for Vercel API operations
 include:
@@ -109,6 +114,7 @@ vercel-deploy-$[[ inputs.project-name ]]:
       export PROJECT_PATH="$[[ inputs.project-path ]]"
       export ENVIRONMENT="$[[ inputs.environment ]]"
       export PREBUILD="$[[ inputs.prebuild ]]"
+      export VERCEL_SSO_PROTECTION="$[[ inputs.sso-protection ]]"
 
       # Validation: Check required inputs
       echo "🔍 Validating configuration..."

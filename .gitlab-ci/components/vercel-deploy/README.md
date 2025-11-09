@@ -42,7 +42,10 @@ include:
 | `project-name` | Vercel project name | - | ✅ |
 | `team-slug` | Vercel team/organization slug | `grammarly-0ad4c188` | ❌ |
 | `project-path` | Path to project directory | `.` | ❌ |
+| `environment` | Deployment environment (`preview` or `production`) | `preview` | ❌ |
 | `prebuild` | Run local prebuild (for private packages) | `true` | ❌ |
+| `sso-protection` | Enable SSO protection (`all` or empty) | `""` | ❌ |
+| `rules` | GitLab CI rules for job execution | `[]` | ❌ |
 | `stage` | GitLab CI stage | `deploy` | ❌ |
 | `node-version` | Node.js version | `20` | ❌ |
 | `vercel-cli-version` | Vercel CLI version | `latest` | ❌ |
@@ -168,18 +171,31 @@ Enable SSO protection to require Vercel team login for accessing deployments. Th
 
 **To enable SSO protection:**
 
-1. Add GitLab CI/CD variable:
-   - `VERCEL_SSO_PROTECTION` = `all`
+Pass `sso-protection: "all"` as an input parameter:
 
-2. The component will automatically:
-   - Call Vercel API after project linking
-   - Configure SSO protection for all deployments (preview + production)
-   - Require Vercel login + team access to view any deployment
+```yaml
+include:
+  - local: .gitlab-ci/components/vercel-deploy/template.yml
+    inputs:
+      vercel-token: $VERCEL_TOKEN
+      project-name: "my-secure-app"
+      team-slug: $VERCEL_TEAM_SLUG
+      sso-protection: "all"
+```
 
-3. **Valid deployment types:**
-   - `all` - Protect all deployments (currently the only supported value)
+**How it works:**
 
-**Example:**
+1. The component automatically calls Vercel API after project linking
+2. Configures SSO protection for all deployments (preview + production)
+3. Requires Vercel login + team access to view any deployment
+
+**Valid values:**
+- `"all"` - Protect all deployments (preview and production)
+- `""` (empty) - No SSO protection (default)
+
+**Alternative: Environment Variable**
+
+You can also use the `VERCEL_SSO_PROTECTION` environment variable:
 ```yaml
 variables:
   VERCEL_SSO_PROTECTION: "all"
