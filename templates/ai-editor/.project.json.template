@@ -1,14 +1,13 @@
 {
   "name": "{{PROJECT_NAME}}",
   "description": "{{PROJECT_DESCRIPTION}}",
-  "deployment": "vercel",
+  "deployments": ["vercel"],
   "created": "{{CREATED_DATE}}",
   "template": {
     "name": "ai-editor",
     "description": "Grammarly style AI editor",
     "version": "1.0.0"
   },
-  "url": "https://{{PROJECT_NAME}}-grammarly-0ad4c188.vercel.app",
   "variables": [
     {
       "name": "CLAUDE_API_KEY",

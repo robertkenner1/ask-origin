@@ -13,6 +13,8 @@ variables:
   KUBERNETES_CPU_LIMIT: 4
   KUBERNETES_MEMORY_REQUEST: 4Gi
   KUBERNETES_MEMORY_LIMIT: 4Gi
+  # Vercel deployment defaults
+  VERCEL_TEAM_SLUG: "grammarly-0ad4c188"
 
 
 # https://docs.gitlab.com/ee/ci/yaml/workflow.html#switch-between-branch-pipelines-and-merge-request-pipelines
@@ -46,7 +48,6 @@ stages:
 
 
 include: 
-  - local: .gitlab-ci/templates/deploy-vercel-common.yml
   - local: .gitlab-ci/build.yml
   - local: projects/**/.gitlab-ci/deploy.yml
 

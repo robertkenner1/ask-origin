@@ -1,6 +1,6 @@
-# AI Context Directory - Shared Resources for Prototypes
+# AI Context Directory - Shared Resources for Prototypes.
 
-This directory contains shared AI assistant resources and documentation used across all projects in the monorepo.
+This directory contains shared AI assistant resources and documentation used across all projects in the monorepo
 
 > **Purpose**: Centralized knowledge base for Claude Code and other AI assistants working on frontend prototypes
 >

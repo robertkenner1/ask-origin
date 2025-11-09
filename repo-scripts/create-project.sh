@@ -180,7 +180,7 @@ else
 {
   "name": "$PROJECT_NAME",
   "description": "$PROJECT_DESCRIPTION",
-  "deployment": "static",
+  "deployments": ["gitlab-pages"],
   "created": "$CREATED_DATE",
   "repository": {
     "branch": "$BRANCH_NAME"

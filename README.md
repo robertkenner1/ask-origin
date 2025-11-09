@@ -6,6 +6,13 @@ A monorepo for rapid UI prototyping with AI assistance.
 
 **Configure GitLab and Git access** - Before you begin, ensure you have GitLab access and SSH keys configured. See [docs/setup_gitlab.md](./docs/setup_gitlab.md) for detailed setup instructions.
 
+**Configure npm to access Artifactory packages** - If you plan to use Grammarly Design System (GDS) or other internal packages, you need to configure npm to access Artifactory:
+
+```bash
+./.shared/scripts/setup-artifactory-npm.sh
+```
+
+
 **IDE Setup** - This setup works best with [Claude Code CLI](https://docs.claude.com/en/docs/claude-code). If you use Cursor, VS Code, or JetBrains IDEs, consider using the Claude Code plugin:
 - [VS Code/Cursor Extension](https://docs.claude.com/en/docs/claude-code/vs-code)
 - [JetBrains Plugin](https://docs.claude.com/en/docs/claude-code/jetbrains)
@@ -36,9 +43,45 @@ During the development you can preview result here: http://127.0.0.1:8181/ (Open
 When you finish development ask claude to publish the result or just run "make publish", finish MR creation and merge it.
 
 
+## What This Repo Provides
+
+### 🛠️ Automated Development Tools
+`make` installs: Node.js, http-server, Vercel CLI, and MCP servers automatically.
+
+### 📦 Project Templates
+- **static-website** - HTML/CSS/JS for simple prototypes
+- **ai-editor** - Next.js for interactive applications
+
+```bash
+make new PROJECT=my-prototype
+```
+
+### 🤖 AI Development Context
+
+**GDS Documentation** - Complete Grammarly Design System docs in `.shared/ai-context/gds-docs/` with 40+ components optimized for AI parsing.
+
+**MCP Servers** - Pre-configured in `.claude/claude_mcp_config.json`:
+- **Playwright** - Browser automation, testing, screenshots
+- **Sourcegraph** - Code search across Grammarly repos
+- **Figma** - Design integration (requires manual setup)
+
+**Claude Slash Commands** - Custom workflows in `.shared/.claude/commands/`:
+- `/deploy` - Deploy project to Vercel with environment variables
+- `/push [message]` - Git add, commit, and push changes
+
+**CLAUDE.md Files** - AI instructions at repo, project, and template levels with architecture, workflows, and tool usage guidelines.
+
+### 🚀 Deployment
+
+**GitLab Pages** - Automatic on merge to `main` → https://ai-frontend-prototypes-c8939b.gpages.io/
+
+**Vercel** - Conditional per-project deployment on feature branches. Configure in `.project.json`:
+```
+
 ## Live Demo
 
-🚀 **Deployed at:** https://ai-frontend-prototypes-c8939b.gpages.io/
+🚀 **GitLab Pages:** https://ai-frontend-prototypes-c8939b.gpages.io/
+🚀 **Vercel:** https://vercel.com/grammarly-0ad4c188
 
 ## Project Structure
 
@@ -86,8 +129,6 @@ Ask: "Create a new project called 'grammarly-tooltip' with hover effects"
 Pre-configured in `.claude/claude_mcp_config.json`:
 - **Playwright** - Browser automation and testing
 - **Sourcegraph** - Code search across repositories
-- **Cortex** - Service catalog and metadata
-- **Workflows** - Engineering workflows and procedures
 - **Figma** - Design integration (manual setup required)
 
 See [`.claude/README.md`](./.claude/README.md) for detailed documentation.

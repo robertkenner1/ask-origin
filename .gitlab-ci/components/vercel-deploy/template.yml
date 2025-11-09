@@ -1,0 +1,329 @@
+---
+# Universal Vercel Deployment Component
+# Pure YAML - no external script dependencies
+# Can be moved to central repository for organization-wide use
+
+spec:
+  inputs:
+    # Required Inputs
+    vercel-token:
+      description: "Vercel authentication token (required). Set as GitLab CI/CD variable."
+      default: ""
+
+    project-name:
+      description: "Vercel project name (required). Must match your Vercel project."
+      default: ""
+
+    # Team/Organization Configuration
+    team-slug:
+      description: "Vercel team or organization slug. Leave empty for personal projects."
+      default: ""
+
+    # Path Configuration
+    project-path:
+      description: "Path to project directory relative to repository root. Use '.' for root, or 'projects/my-app' for monorepo."
+      default: "."
+
+    # Environment Configuration
+    environment:
+      description: "Deployment environment: 'preview' (default) or 'production'. Production deployments use --prod flag."
+      default: "preview"
+
+    # Build Configuration
+    prebuild:
+      description: "Run local prebuild before deployment. Set to true for projects with private npm packages or Artifactory dependencies."
+      default: true
+      type: boolean
+
+    # CI Configuration
+    stage:
+      description: "GitLab CI stage for the deployment job."
+      default: "deploy"
+
+    # Version Configuration
+    node-version:
+      description: "Node.js version to use for deployment. Supports any valid Node Docker tag."
+      default: "20"
+
+    vercel-cli-version:
+      description: "Vercel CLI version to install. Use 'latest' or specific version like '33.0.0'."
+      default: "latest"
+
+    # Job Execution Rules
+    rules:
+      description: "GitLab CI rules for when to run the deployment job. Define conditions like branch patterns and file changes."
+      type: array
+      default: []
+
+    # Project Configuration
+    sso-protection:
+      description: "Enable SSO protection for deployments. Set to 'all' to require Vercel login + team access for all deployments (preview and production)."
+      default: ""
+
+---
+# Main deployment job
+vercel-deploy-$[[ inputs.project-name ]]:
+  stage: $[[ inputs.stage ]]
+  image: node:$[[ inputs.node-version ]]-alpine
+  rules: $[[ inputs.rules ]]
+
+  before_script:
+    - |
+      echo "=================================================="
+      echo "⚙️  Setting up Vercel Deployment Environment"
+      echo "=================================================="
+      echo ""
+
+      # Install required system packages
+      echo "📦 Installing system dependencies..."
+      apk add --no-cache bash curl jq git sed
+      echo "✅ System dependencies installed"
+      echo ""
+
+      # Configure Artifactory for npm (if credentials available)
+      if [ -n "$ARTIFACTORY_USER" ] && [ -n "$ARTIFACTORY_PASSWORD" ]; then
+        echo "🔐 Configuring Artifactory authentication..."
+        ARTIFACTORY_NPM_URL="https://artifactory.grammarly.io/artifactory/api/npm"
+
+        echo "registry=${ARTIFACTORY_NPM_URL}/common-npm/" > ~/.npmrc
+        curl -u $ARTIFACTORY_USER:$ARTIFACTORY_PASSWORD $ARTIFACTORY_NPM_URL/auth >> ~/.npmrc
+        sed -i 's/_auth/\/\/artifactory.grammarly.io\/artifactory\/api\/npm\/common-npm\/:_auth/g' ~/.npmrc
+
+        echo "✅ Artifactory authentication configured"
+      else
+        echo "ℹ️  Artifactory credentials not provided (ARTIFACTORY_USER/ARTIFACTORY_PASSWORD)"
+        echo "   Using default npm registry for public packages"
+      fi
+      echo ""
+
+      # Install Vercel CLI
+      echo "📦 Installing Vercel CLI (version: $[[ inputs.vercel-cli-version ]])..."
+      npm install --global vercel@$[[ inputs.vercel-cli-version ]]
+      echo "✅ Vercel CLI installed: $(vercel --version)"
+      echo ""
+
+      # Export variables for use in script sections
+      export VERCEL_TOKEN="$[[ inputs.vercel-token ]]"
+      export PROJECT_NAME="$[[ inputs.project-name ]]"
+      export TEAM_SLUG="$[[ inputs.team-slug ]]"
+      export PROJECT_PATH="$[[ inputs.project-path ]]"
+      export ENVIRONMENT="$[[ inputs.environment ]]"
+      export PREBUILD="$[[ inputs.prebuild ]]"
+      export VERCEL_SSO_PROTECTION="$[[ inputs.sso-protection ]]"
+
+      # Validation: Check required inputs
+      echo "🔍 Validating configuration..."
+
+      if [ -z "$VERCEL_TOKEN" ]; then
+        echo "❌ ERROR: vercel-token is required"
+        echo ""
+        echo "Please set VERCEL_TOKEN in GitLab CI/CD variables:"
+        echo "  Settings → CI/CD → Variables → Add Variable"
+        echo "  Get token from: https://vercel.com/account/tokens"
+        exit 1
+      fi
+
+      if [ -z "$PROJECT_NAME" ]; then
+        echo "❌ ERROR: project-name is required"
+        echo ""
+        echo "Please specify the Vercel project name in component inputs:"
+        echo "  inputs:"
+        echo "    project-name: \"your-project-name\""
+        exit 1
+      fi
+
+      # Validation: Check project directory exists
+      if [ ! -d "$PROJECT_PATH" ]; then
+        echo "❌ ERROR: Project directory does not exist: $PROJECT_PATH"
+        echo ""
+        echo "Please verify:"
+        echo "  1. The project-path input is correct"
+        echo "  2. The directory exists in your repository"
+        echo ""
+        echo "Current directory: $(pwd)"
+        echo "Directory contents:"
+        ls -la
+        exit 1
+      fi
+
+      # Validation: Check package.json exists
+      if [ ! -f "$PROJECT_PATH/package.json" ]; then
+        echo "❌ ERROR: No package.json found in $PROJECT_PATH"
+        echo ""
+        echo "Vercel requires a Node.js project with package.json"
+        echo "Directory contents of $PROJECT_PATH:"
+        ls -la "$PROJECT_PATH"
+        exit 1
+      fi
+
+      # Validation: Check environment value
+      if [ "$ENVIRONMENT" != "preview" ] && [ "$ENVIRONMENT" != "production" ]; then
+        echo "❌ ERROR: Invalid environment value: $ENVIRONMENT"
+        echo ""
+        echo "Allowed values: 'preview' or 'production'"
+        exit 1
+      fi
+
+      echo "✅ All validations passed"
+      echo ""
+
+      echo "Configuration:"
+      echo "  • Project: $PROJECT_NAME"
+      echo "  • Team: ${TEAM_SLUG:-<none>}"
+      echo "  • Path: $PROJECT_PATH"
+      echo "  • Environment: $ENVIRONMENT"
+      echo "  • Prebuild: $PREBUILD"
+      echo "  • Node: $[[ inputs.node-version ]]"
+      echo "  • Vercel CLI: $[[ inputs.vercel-cli-version ]]"
+      echo ""
+
+  script:
+    - |
+      set -e
+
+      echo "=================================================="
+      echo "🚀 Vercel Deployment"
+      echo "=================================================="
+      echo ""
+
+      # Change to project directory
+      echo "📁 Changing to project directory: $PROJECT_PATH"
+      cd "$PROJECT_PATH"
+      echo "✅ In project directory"
+      echo ""
+
+      # Build team slug argument
+      TEAM_ARG=""
+      if [ -n "$TEAM_SLUG" ]; then
+        TEAM_ARG="--scope $TEAM_SLUG"
+      fi
+
+      # Link Vercel project
+      echo "🔗 Linking Vercel project..."
+      echo "   Project: $PROJECT_NAME"
+      if [ -n "$TEAM_SLUG" ]; then
+        echo "   Team: $TEAM_SLUG"
+      fi
+
+      vercel link --yes \
+        --project "$PROJECT_NAME" \
+        $TEAM_ARG \
+        --token "$VERCEL_TOKEN"
+      echo "✅ Project linked successfully"
+      echo ""
+
+      # Extract project and org IDs from .vercel/project.json
+      echo "📋 Extracting project configuration..."
+      if [ -f ".vercel/project.json" ]; then
+        export VERCEL_ORG_ID=$(cat .vercel/project.json | jq -r '.orgId')
+        export VERCEL_PROJECT_ID=$(cat .vercel/project.json | jq -r '.projectId')
+        echo "✅ Extracted IDs from .vercel/project.json"
+        echo "   Org ID: $VERCEL_ORG_ID"
+        echo "   Project ID: $VERCEL_PROJECT_ID"
+      else
+        echo "❌ ERROR: .vercel/project.json not found after linking"
+        echo "   This file should be created by 'vercel link' command"
+        exit 1
+      fi
+      echo ""
+
+      # Configure SSO Protection via Vercel API (if requested)
+      if [ "$VERCEL_SSO_PROTECTION" = "all" ]; then
+        echo "=================================================="
+        echo "⚙️  Vercel Project Configuration (API)"
+        echo "=================================================="
+        echo ""
+
+        # Build API URL with optional team ID
+        API_URL="https://api.vercel.com/v9/projects/$PROJECT_NAME"
+        if [ -n "$VERCEL_ORG_ID" ]; then
+          API_URL="$API_URL?teamId=$VERCEL_ORG_ID"
+        fi
+
+        echo "Project: $PROJECT_NAME"
+        [ -n "$VERCEL_ORG_ID" ] && echo "Team ID: $VERCEL_ORG_ID"
+        echo ""
+
+        echo "🔒 Configuring SSO Protection..."
+        echo "   Deployment type: all"
+        echo "   (Requires Vercel login + team access for ALL deployments)"
+        echo ""
+
+        HTTP_CODE=$(curl -X PATCH "$API_URL" \
+          -H "Authorization: Bearer $VERCEL_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{"ssoProtection": {"deploymentType": "all"}}' \
+          --silent --show-error \
+          --write-out "%{http_code}" \
+          --output /tmp/vercel-sso-response.json)
+
+        if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
+          echo "✅ SSO Protection enabled successfully (HTTP $HTTP_CODE)"
+        else
+          echo "❌ SSO Protection API failed (HTTP $HTTP_CODE)"
+          echo ""
+          echo "Response:"
+          cat /tmp/vercel-sso-response.json 2>/dev/null || echo "(no response body)"
+          echo ""
+          exit 1
+        fi
+        echo ""
+        echo "✅ Project configuration complete"
+        echo "=================================================="
+        echo ""
+      fi
+
+      # Conditional build based on prebuild setting
+      if [ "$PREBUILD" = "true" ]; then
+        echo "🔨 Building project locally..."
+        vercel build --yes --token "$VERCEL_TOKEN"
+        echo "✅ Build completed successfully"
+        echo ""
+      else
+        echo "ℹ️  Skipping local prebuild (prebuild: false)"
+        echo ""
+      fi
+
+      # Deploy based on environment
+      echo "🚀 Deploying to Vercel ($ENVIRONMENT)..."
+
+      if [ "$ENVIRONMENT" = "production" ]; then
+        echo "   Mode: PRODUCTION deployment"
+        if [ "$PREBUILD" = "true" ]; then
+          DEPLOY_OUTPUT=$(vercel deploy --prebuilt --prod $TEAM_ARG --token "$VERCEL_TOKEN" 2>&1 | tee /dev/stderr)
+        else
+          DEPLOY_OUTPUT=$(vercel deploy --prod $TEAM_ARG --token "$VERCEL_TOKEN" 2>&1 | tee /dev/stderr)
+        fi
+      else
+        echo "   Mode: PREVIEW deployment"
+        if [ "$PREBUILD" = "true" ]; then
+          DEPLOY_OUTPUT=$(vercel deploy --prebuilt $TEAM_ARG --token "$VERCEL_TOKEN" 2>&1 | tee /dev/stderr)
+        else
+          DEPLOY_OUTPUT=$(vercel deploy $TEAM_ARG --token "$VERCEL_TOKEN" 2>&1 | tee /dev/stderr)
+        fi
+      fi
+
+      # Extract and display deployment URL
+      echo ""
+      echo "=================================================="
+      DEPLOYMENT_URL=$(echo "$DEPLOY_OUTPUT" | grep -Eo 'https://[a-zA-Z0-9.-]+\.vercel\.app' | head -1)
+      if [ -n "$DEPLOYMENT_URL" ]; then
+        echo "✅ Deployment successful!"
+        if [ "$ENVIRONMENT" = "production" ]; then
+          echo "🌐 Production URL: $DEPLOYMENT_URL"
+        else
+          echo "🌐 Preview URL: $DEPLOYMENT_URL"
+        fi
+      else
+        echo "⚠️  Deployment completed but URL extraction failed"
+        echo "Check the output above for the deployment URL"
+      fi
+      echo "=================================================="
+
+  retry:
+    max: 1
+    when:
+      - runner_system_failure
+      - stuck_or_timeout_failure
+
+  timeout: 30m

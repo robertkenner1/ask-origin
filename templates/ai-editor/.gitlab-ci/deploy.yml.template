@@ -2,12 +2,16 @@
 # This file is auto-generated from template during project creation
 # Triggers only when files in this project change
 
-deploy-vercel-{{PROJECT_NAME}}:
-  extends: .deploy_vercel_template
-  variables:
-    PROJECT_NAME: "{{PROJECT_NAME}}"
-  rules:
-    # Only deploy on non-main branches when this project has changes
-    - if: $CI_COMMIT_BRANCH != "main" && $VERCEL_TOKEN
-      changes:
-        - projects/{{PROJECT_NAME}}/**/*
+include:
+  - local: .gitlab-ci/components/vercel-deploy/template.yml
+    inputs:
+      vercel-token: $VERCEL_TOKEN
+      project-name: "{{PROJECT_NAME}}"
+      project-path: "projects/{{PROJECT_NAME}}"
+      team-slug: $VERCEL_TEAM_SLUG
+      environment: "preview"
+      rules:
+        # Only deploy on non-main branches when this project has changes
+        - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
+          changes:
+            - projects/{{PROJECT_NAME}}/**/*
