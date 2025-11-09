@@ -278,20 +278,11 @@ vercel-deploy-$[[ inputs.project-name ]]:
         else
           echo "🌐 Preview URL: $DEPLOYMENT_URL"
         fi
-
-        # Export for potential use by other jobs
-        echo "DEPLOYMENT_URL=$DEPLOYMENT_URL" >> $CI_PROJECT_DIR/deployment.env 2>/dev/null || true
       else
         echo "⚠️  Deployment completed but URL extraction failed"
         echo "Check the output above for the deployment URL"
       fi
       echo "=================================================="
-
-  artifacts:
-    reports:
-      dotenv: ./deployment.env
-    expire_in: 1 hour
-    when: always
 
   retry:
     max: 1
