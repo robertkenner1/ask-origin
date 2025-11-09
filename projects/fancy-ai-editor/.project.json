@@ -1,12 +1,12 @@
 {
   "name": "fancy-ai-editor",
   "description": "Project created from ai-editor template",
-  "deployment": "vercel",
   "created": "2025-10-28T16:50:42Z",
   "template": {
     "name": "ai-editor",
     "version": "1.0.0"
   },
-  "url": "https://fancy-ai-editor-grammarly-0ad4c188.vercel.app"
+  "deployments": [
+    "vercel"
+  ]
 }
-

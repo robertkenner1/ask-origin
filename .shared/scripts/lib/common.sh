@@ -184,7 +184,7 @@ load_project_config() {
     # Use jq for robust JSON parsing (// "" returns empty string for missing fields)
     export PROJECT_CONFIG_NAME=$(jq -r '.name // ""' "$config_file" 2>/dev/null || echo "")
     export PROJECT_CONFIG_DESCRIPTION=$(jq -r '.description // ""' "$config_file" 2>/dev/null || echo "")
-    export PROJECT_CONFIG_DEPLOYMENT=$(jq -r '.deployment // ""' "$config_file" 2>/dev/null || echo "")
+    export PROJECT_CONFIG_DEPLOYMENTS=$(jq -r '.deployments | join(",") // ""' "$config_file" 2>/dev/null || echo "")
     export PROJECT_CONFIG_LOCAL_URL=$(jq -r '.urls.local // ""' "$config_file" 2>/dev/null || echo "")
     export PROJECT_CONFIG_REMOTE_URL=$(jq -r '.urls.remote // ""' "$config_file" 2>/dev/null || echo "")
 

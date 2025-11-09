@@ -1,0 +1,176 @@
+---
+# Monorepo-Specific Vercel Deployment Component
+# Wraps generic vercel-deploy component with .project.json validation
+# This component is specific to this monorepo structure
+
+spec:
+  inputs:
+    # Required: Project name (directory under projects/)
+    project-name:
+      description: "Project name (must match directory in projects/)"
+      default: ""
+
+    # Optional: Override environment
+    environment:
+      description: "Deployment environment: 'preview' (default) or 'production'"
+      default: "preview"
+
+    # Optional: Override node version
+    node-version:
+      description: "Node.js version"
+      default: "20"
+
+---
+# Include generic Vercel deployment component
+include:
+  - local: .gitlab-ci/components/vercel-deploy/template.yml
+
+---
+# Monorepo deployment job - extends generic component with validation
+deploy-$[[ inputs.project-name ]]:
+  extends: vercel-deploy
+  stage: deploy
+
+  # Override before_script to add monorepo validation
+  before_script:
+    - |
+      set -e
+
+      echo "=================================================="
+      echo "📋 Monorepo Project Validation"
+      echo "=================================================="
+      echo ""
+
+      PROJECT_NAME="${[[ inputs.project-name ]]}"
+      echo "Project: $PROJECT_NAME"
+      echo ""
+
+      # Install jq for JSON parsing
+      echo "📦 Installing validation tools..."
+      apk add --no-cache jq bash curl git sed
+      echo "✅ Tools installed"
+      echo ""
+
+      # Validate project directory exists
+      echo "🔍 Validating project structure..."
+      if [ ! -d "projects/$PROJECT_NAME" ]; then
+        echo "❌ ERROR: Project directory not found: projects/$PROJECT_NAME"
+        echo ""
+        echo "Available projects:"
+        ls -1 projects/ 2>/dev/null || echo "  (none)"
+        exit 1
+      fi
+      echo "✅ Project directory exists"
+
+      # Validate .project.json exists
+      if [ ! -f "projects/$PROJECT_NAME/.project.json" ]; then
+        echo "❌ ERROR: .project.json not found in projects/$PROJECT_NAME"
+        echo ""
+        echo "This project is not configured for deployment."
+        echo "Create .project.json with deployment configuration."
+        exit 1
+      fi
+      echo "✅ .project.json found"
+      echo ""
+
+      # Parse .project.json configuration
+      echo "📄 Reading project configuration..."
+      PROJECT_CONFIG="projects/$PROJECT_NAME/.project.json"
+
+      # Extract deployment configuration
+      DEPLOYMENTS=$(jq -r '.deployments // [] | join(",")' "$PROJECT_CONFIG" 2>/dev/null || echo "")
+      TEAM_SLUG_FROM_CONFIG=$(jq -r '.config.vercelTeam // "grammarly-0ad4c188"' "$PROJECT_CONFIG" 2>/dev/null || echo "grammarly-0ad4c188")
+      PROJECT_DESCRIPTION=$(jq -r '.description // ""' "$PROJECT_CONFIG" 2>/dev/null || echo "")
+
+      echo "Configuration from .project.json:"
+      echo "  • Deployments: $DEPLOYMENTS"
+      echo "  • Team: $TEAM_SLUG_FROM_CONFIG"
+      echo "  • Description: $PROJECT_DESCRIPTION"
+      echo ""
+
+      # Check if Vercel deployment is enabled for this project
+      if ! echo "$DEPLOYMENTS" | grep -q "vercel"; then
+        echo "⚠️  Vercel deployment not enabled for this project"
+        echo "   Configured deployments: $DEPLOYMENTS"
+        echo ""
+        echo "To enable Vercel deployment, update .project.json:"
+        echo '  "deployments": ["vercel"]'
+        echo ""
+        echo "Skipping deployment..."
+        exit 0
+      fi
+
+      echo "✅ Vercel deployment is enabled"
+      echo ""
+
+      # Export configuration for generic component
+      # These override the component inputs
+      export PROJECT_NAME="$PROJECT_NAME"
+      export PROJECT_PATH="projects/$PROJECT_NAME"
+      export TEAM_SLUG="$TEAM_SLUG_FROM_CONFIG"
+      export ENVIRONMENT="${[[ inputs.environment ]]}"
+
+      echo "=================================================="
+      echo "⚙️  Continuing with Generic Vercel Component Setup"
+      echo "=================================================="
+      echo ""
+
+      # Configure Artifactory for npm (if credentials available)
+      if [ -n "$ARTIFACTORY_USER" ] && [ -n "$ARTIFACTORY_PASSWORD" ]; then
+        echo "🔐 Configuring Artifactory authentication..."
+        ARTIFACTORY_NPM_URL="https://artifactory.grammarly.io/artifactory/api/npm"
+
+        echo "registry=${ARTIFACTORY_NPM_URL}/common-npm/" > ~/.npmrc
+        curl -u $ARTIFACTORY_USER:$ARTIFACTORY_PASSWORD $ARTIFACTORY_NPM_URL/auth >> ~/.npmrc
+        sed -i 's/_auth/\/\/artifactory.grammarly.io\/artifactory\/api\/npm\/common-npm\/:_auth/g' ~/.npmrc
+
+        echo "✅ Artifactory authentication configured"
+      else
+        echo "ℹ️  Artifactory credentials not provided (ARTIFACTORY_USER/ARTIFACTORY_PASSWORD)"
+        echo "   Using default npm registry for public packages"
+      fi
+      echo ""
+
+      # Install Vercel CLI
+      echo "📦 Installing Vercel CLI..."
+      npm install --global vercel@latest
+      echo "✅ Vercel CLI installed: $(vercel --version)"
+      echo ""
+
+      # Validate VERCEL_TOKEN
+      if [ -z "$VERCEL_TOKEN" ]; then
+        echo "❌ ERROR: VERCEL_TOKEN is required"
+        echo ""
+        echo "Please set VERCEL_TOKEN in GitLab CI/CD variables:"
+        echo "  Settings → CI/CD → Variables → Add Variable"
+        echo "  Get token from: https://vercel.com/account/tokens"
+        exit 1
+      fi
+      echo "✅ VERCEL_TOKEN is configured"
+      echo ""
+
+      # Validate package.json exists in project
+      if [ ! -f "$PROJECT_PATH/package.json" ]; then
+        echo "❌ ERROR: No package.json found in $PROJECT_PATH"
+        echo ""
+        echo "Vercel requires a Node.js project with package.json"
+        exit 1
+      fi
+      echo "✅ package.json found"
+      echo ""
+
+      echo "Final configuration:"
+      echo "  • Project: $PROJECT_NAME"
+      echo "  • Team: $TEAM_SLUG"
+      echo "  • Path: $PROJECT_PATH"
+      echo "  • Environment: $ENVIRONMENT"
+      echo ""
+
+  # Inherit script section from generic component (vercel-deploy job)
+  # The script will use the exported variables above
+
+  variables:
+    # These are fallbacks; exported env vars take precedence
+    PROJECT_NAME: "$[[ inputs.project-name ]]"
+    PROJECT_PATH: "projects/$[[ inputs.project-name ]]"
+    ENVIRONMENT: "$[[ inputs.environment ]]"

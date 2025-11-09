@@ -62,12 +62,12 @@ exec_with_status "Checking project metadata" "[ -f '$PROJECT_JSON' ]" || {
     exit 1
 }
 
-# Check if deployment type is vercel
+# Check if vercel is in deployments array
 print_status "Validating deployment type" ""
-DEPLOYMENT_TYPE=$(get_config "DEPLOYMENT" "vercel")
-if [ "$DEPLOYMENT_TYPE" != "vercel" ]; then
-    print_status "Validating deployment type" "note" "type is '$DEPLOYMENT_TYPE'"
-    log_warning "Warning: Project deployment type is '$DEPLOYMENT_TYPE', not 'vercel'"
+DEPLOYMENTS=$(get_config "DEPLOYMENTS" "")
+if ! echo "$DEPLOYMENTS" | grep -q "vercel"; then
+    print_status "Validating deployment type" "note" "deployments: '$DEPLOYMENTS'"
+    log_warning "Warning: Project deployments do not include 'vercel'"
     log_warning "Skipping deployment"
     exit 0
 fi

@@ -87,10 +87,10 @@ class SitemapBuilder {
                 continue;
             }
 
-            if (config.deployment !== DEPLOYMENT_TYPES.GITLAB_PAGES) {
-                const label = config.deployment === DEPLOYMENT_TYPES.VERCEL
+            if (!config.deployments.includes(DEPLOYMENT_TYPES.GITLAB_PAGES)) {
+                const label = config.deployments.includes(DEPLOYMENT_TYPES.VERCEL)
                     ? 'Vercel (external)'
-                    : config.deployment;
+                    : config.deployments.join(', ');
                 console.log(`⏭️  Skipping copy for ${projectName} (${label})`);
                 continue;
             }
@@ -146,7 +146,7 @@ class SitemapBuilder {
             const project = await this.buildProjectMetadata(projectName, config);
             if (project) {
                 projects.push(project);
-                const label = config.deployment === DEPLOYMENT_TYPES.VERCEL ? ' (external)' : '';
+                const label = config.deployments.includes(DEPLOYMENT_TYPES.VERCEL) ? ' (external)' : '';
                 console.log(`📁 Found ${projectName}${label}`);
             }
         }
@@ -155,12 +155,12 @@ class SitemapBuilder {
     }
 
     async buildProjectMetadata(projectName, config) {
-        const { deployment } = config;
+        const { deployments } = config;
 
-        // Determine where to find the project files
+        // Determine where to find the project files based on available deployments
         let projectPath, indexPath;
 
-        if (deployment === DEPLOYMENT_TYPES.GITLAB_PAGES) {
+        if (deployments.includes(DEPLOYMENT_TYPES.GITLAB_PAGES)) {
             // GitLab Pages: read from public directory (after build)
             projectPath = path.join(this.projectsDir, projectName, 'public');
             indexPath = path.join(projectPath, 'index.html');
@@ -170,7 +170,7 @@ class SitemapBuilder {
                 console.log(`⚠️  No public directory for ${projectName}, may need to run npm run build`);
                 return null;
             }
-        } else if (deployment === DEPLOYMENT_TYPES.VERCEL) {
+        } else if (deployments.includes(DEPLOYMENT_TYPES.VERCEL)) {
             // Vercel: try to get info from package.json first
             const packageJsonPath = path.join(this.projectsDir, projectName, 'package.json');
             if (fs.existsSync(packageJsonPath)) {
@@ -213,13 +213,8 @@ class SitemapBuilder {
             icon,
             lastModified: stats.mtime.toISOString(),
             type: this.inferProjectType(files, htmlContent),
-            deployment: config.deployment
+            deployments: config.deployments
         };
-
-        // Add URL for external deployments
-        if (config.url) {
-            metadata.url = config.url;
-        }
 
         return metadata;
     }
@@ -247,12 +242,8 @@ class SitemapBuilder {
                 icon: title.charAt(0).toUpperCase(),
                 lastModified: stats.mtime.toISOString(),
                 type: 'Next.js App',
-                deployment: config.deployment
+                deployments: config.deployments
             };
-
-            if (config.url) {
-                metadata.url = config.url;
-            }
 
             return metadata;
         } catch (error) {
@@ -285,8 +276,7 @@ class SitemapBuilder {
         try {
             const config = JSON.parse(fs.readFileSync(projectJsonPath, 'utf-8'));
             return {
-                deployment: config.deployment || DEPLOYMENT_TYPES.UNKNOWN,
-                url: config.url || null
+                deployments: config.deployments || [DEPLOYMENT_TYPES.UNKNOWN]
             };
         } catch (error) {
             console.warn(`⚠️  Invalid .project.json for ${projectName}`);
