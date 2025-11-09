@@ -2,14 +2,19 @@
 # This file is auto-generated from template during project creation
 # Triggers only when files in this project change
 
-# Include monorepo-specific Vercel deployment component
 include:
-  - local: .gitlab-ci/components/vercel-deploy-monorepo/template.yml
+  - local: .gitlab-ci/components/vercel-deploy/template.yml
     inputs:
+      vercel-token: $VERCEL_TOKEN
       project-name: "{{PROJECT_NAME}}"
+      project-path: "projects/{{PROJECT_NAME}}"
+      team-slug: $VERCEL_TEAM_SLUG
       environment: "preview"
-    rules:
-      # Only deploy on non-main branches when this project has changes
-      - if: $CI_COMMIT_BRANCH != "main" && $VERCEL_TOKEN
-        changes:
-          - projects/{{PROJECT_NAME}}/**/*
+
+deploy-{{PROJECT_NAME}}:
+  extends: vercel-deploy
+  rules:
+    # Only deploy on non-main branches when this project has changes
+    - if: $CI_COMMIT_BRANCH != "main" && $VERCEL_TOKEN
+      changes:
+        - projects/{{PROJECT_NAME}}/**/*

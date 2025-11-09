@@ -99,7 +99,7 @@ include:
       node-version: "18"
 ```
 
-### With Rules
+### With Conditional Deployment
 
 Deploy only on specific branches with file changes:
 
@@ -110,32 +110,53 @@ include:
       vercel-token: $VERCEL_TOKEN
       project-name: "my-app"
       project-path: "projects/my-app"
-    rules:
-      - if: $CI_COMMIT_BRANCH != "main" && $VERCEL_TOKEN
-        changes:
-          - projects/my-app/**/*
+      team-slug: $VERCEL_TEAM_SLUG
+
+deploy-my-app:
+  extends: vercel-deploy
+  rules:
+    - if: $CI_COMMIT_BRANCH != "main" && $VERCEL_TOKEN
+      changes:
+        - projects/my-app/**/*
 ```
 
-### Multiple Projects
+### Multiple Projects (Monorepo)
 
-Deploy multiple projects in parallel:
+Deploy multiple projects in parallel with unique job names:
 
 ```yaml
-# Deploy Project A
+# Set defaults at repo level
+variables:
+  VERCEL_TEAM_SLUG: "grammarly-0ad4c188"
+
 include:
   - local: .gitlab-ci/components/vercel-deploy/template.yml
     inputs:
       vercel-token: $VERCEL_TOKEN
       project-name: "project-a"
       project-path: "projects/project-a"
+      team-slug: $VERCEL_TEAM_SLUG
 
-# Deploy Project B
-include:
   - local: .gitlab-ci/components/vercel-deploy/template.yml
     inputs:
       vercel-token: $VERCEL_TOKEN
       project-name: "project-b"
       project-path: "projects/project-b"
+      team-slug: $VERCEL_TEAM_SLUG
+
+deploy-project-a:
+  extends: vercel-deploy
+  rules:
+    - if: $CI_COMMIT_BRANCH != "main" && $VERCEL_TOKEN
+      changes:
+        - projects/project-a/**/*
+
+deploy-project-b:
+  extends: vercel-deploy
+  rules:
+    - if: $CI_COMMIT_BRANCH != "main" && $VERCEL_TOKEN
+      changes:
+        - projects/project-b/**/*
 ```
 
 ## Configuration Details
