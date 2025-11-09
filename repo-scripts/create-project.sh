@@ -148,21 +148,7 @@ exec_with_status "Copying template files" "cp -r '$TEMPLATE_DIR'/* '$PROJECTS_DI
 
 # Create symlinks to shared resources
 exec_with_status "Creating symlink: scripts/" "ln -s '../../.shared/scripts' '$PROJECTS_DIR/$PROJECT_NAME/scripts'"
-exec_with_status "Creating symlink: ai-context/" "ln -s '../../.shared/ai-context' '$PROJECTS_DIR/$PROJECT_NAME/ai-context'"
-
-# Create .claude directory and symlink to shared commands
-mkdir -p "$PROJECTS_DIR/$PROJECT_NAME/.claude"
-exec_with_status "Creating symlink: .claude/commands/" "ln -s '../../../.shared/.claude/commands' '$PROJECTS_DIR/$PROJECT_NAME/.claude/commands'"
-
-# Copy Claude settings from shared template
-print_status "Copying Claude settings" ""
-if [ -f ".shared/.claude/settings.local.json.template" ]; then
-    mkdir -p "$PROJECTS_DIR/$PROJECT_NAME/.claude"
-    cp ".shared/.claude/settings.local.json.template" "$PROJECTS_DIR/$PROJECT_NAME/.claude/settings.local.json"
-    print_status "Copying Claude settings" "success"
-else
-    print_status "Copying Claude settings" "note" "template not found"
-fi
+exec_with_status "Creating symlink: .claude/" "ln -s '../../.shared/.claude' '$PROJECTS_DIR/$PROJECT_NAME/.claude'"
 
 # Create .project.json from template
 print_status "Creating project metadata" ""

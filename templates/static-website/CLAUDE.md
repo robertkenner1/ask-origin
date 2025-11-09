@@ -8,7 +8,7 @@ This project uses **symlinked resources** from the monorepo:
 {{PROJECT_NAME}}/
 ├── src/              # 📄 Your project files (edit these)
 ├── scripts/          # 🔗 Symlink → ../../.shared/scripts/
-├── ai-context/       # 🔗 Symlink → ../../.shared/ai-context/
+├── .claude/          # 🔗 Symlink → ../../.shared/.claude/
 ├── .mcp.json         # 📄 MCP servers (customizable)
 ├── Makefile          # 📄 Build commands (customizable)
 └── CLAUDE.md         # 📄 This file
@@ -31,51 +31,37 @@ npm run build   # Build for production
 npm start       # Serve production build
 ```
 
-### AI Context (Symlinked)
+### Claude Code Skills (Symlinked)
 
-Located at: `./ai-context/` → `../../.shared/ai-context/`
+Located at: `./.claude/` → `../../.shared/.claude/`
 
-#### Grammarly Design System Documentation
+This symlink provides access to:
+- **Skills** - Claude Code skills (including GDS skill)
+- **Commands** - Custom slash commands
+- **Settings** - Claude configuration templates
 
-The `ai-context/gds-docs/` directory contains complete Grammarly Design System documentation optimized for AI consumption.
+#### Grammarly Design System (GDS) Skill
 
-**Quick reference:**
-```bash
-# Read complete GDS reference (40+ components)
-Read(ai-context/gds-docs/llm.txt)
+The **GDS Skill automatically activates** when you work on UI components, forms, layouts, or any interface implementation. You don't need to explicitly reference documentation.
 
-# List all component docs
-Glob(ai-context/gds-docs/components/**/*.mdx)
+**Available through GDS Skill:**
+- 40+ React components (Button, TextField, Modal, Flex, Text, etc.)
+- Design tokens (colors, spacing, typography, elevation)
+- Design foundations and accessibility guidelines
+- UI patterns and best practices
+- Content guidelines (voice, tone, terminology)
 
-# Read specific component
-Read(ai-context/gds-docs/components/buttons/button.mdx)
-Read(ai-context/gds-docs/components/modal.mdx)
-```
+**How to use GDS in this project:**
 
-**Available components:** Button, ButtonAsLink, IconButton, TextField, Textarea, Checkbox, RadioButton, RadioButtonGroup, RadioGroup, Switch, SearchField, Select, Combobox, VerificationCode, Flex, Box, Text, Heading, Link, Toast, Notification, Modal, Popover, Tooltip, OnboardingTooltip, Tabs, Menu, SegmentedControl, Badge, Tag, PlanTag, Rating, Accordion, CircularLoader, BrandedLoader, SkeletonLoader, Icon, Illustration, Logo, Sticker, SuggestionToggle, Form, and more.
+1. **For HTML/CSS prototypes** (this template):
+   - Claude automatically accesses GDS documentation as needed
+   - Design tokens, patterns, and components are available on demand
+   - Simply describe what you want to build, Claude handles the rest
 
-#### How to Use GDS in Your Project
+   Example: "Create a primary button with GDS styling"
+   → Claude automatically references GDS button docs and design tokens
 
-1. **For HTML/CSS prototypes** (static projects):
-   - Read component docs to understand structure and styling
-   - Reference design tokens (colors, spacing, typography)
-   - Replicate component patterns in vanilla HTML/CSS
-
-   Example workflow:
-   ```bash
-   # 1. Read button component docs
-   Read(ai-context/gds-docs/components/buttons/button.mdx)
-
-   # 2. Implement button with GDS styling
-   # - Use exact colors from design tokens
-   # - Match spacing, typography, interactions
-   # - Follow accessibility patterns
-   ```
-
-2. **For React projects** (if using @grammarly/design-system):
-   - Import components directly from the package
-   - Reference docs for prop APIs and usage patterns
-
+2. **For React projects** (if migrating to React):
    ```typescript
    import { Button, Text, Flex } from '@grammarly/design-system';
 
@@ -87,50 +73,14 @@ Read(ai-context/gds-docs/components/modal.mdx)
    </Flex>
    ```
 
-#### GDS Design Tokens
-
-```bash
-# Read full design system reference for:
-Read(ai-context/gds-docs/llm.txt)
-
-# Read tokens documentation
-Read(ai-context/gds-docs/tokens/)
-
-# Read foundations
-Read(ai-context/gds-docs/foundations/)
-```
-
-Contains:
-- **Colors:** Primary, secondary, semantic colors (success, error, warning)
-- **Typography:** Font families, sizes, weights, line heights
-- **Spacing:** Consistent spacing scale (4px base unit)
-- **Border radius:** Standard corner radius values
-- **Shadows:** Elevation shadows for depth
+**GDS Design Tokens Reference:**
+- **Colors:** Primary green (#15C39A), semantic colors (success, error, warning)
+- **Typography:** Inter font family, heading scales (xs-xxxlarge)
+- **Spacing:** 4px base unit, scale from xs (4px) to xxl (48px)
+- **Shadows:** Elevation system for depth
 - **Breakpoints:** Responsive design breakpoints
 
-#### Common GDS Patterns
-
-**Buttons:**
-- Primary, secondary, tertiary variants
-- Sizes: small, medium, large
-- States: default, hover, active, disabled, loading
-
-**Colors:**
-- Primary: Green (#15C39A)
-- Text: Dark gray (#1C1C1C)
-- Background: White, light grays
-- Semantic: Success (green), Error (red), Warning (yellow)
-
-**Spacing:**
-- Base unit: 4px
-- Scale: xs=4px, sm=8px, md=16px, lg=24px, xl=32px, xxl=48px
-
-**Typography:**
-- Font family: Inter, system fonts fallback
-- Heading scales: xs, sm, md, lg, xl, xxl
-- Body text: regular, medium, bold weights
-
-**Note:** Symlinked files won't appear in @ autocomplete, use explicit `Read()` or `Glob()`.
+The GDS Skill provides this information automatically when you build components.
 
 ## Development Workflow
 
@@ -250,33 +200,29 @@ vim .mcp.json
 When building Grammarly-style or Superhuman-style clean, modern interfaces:
 
 1. **Use Grammarly Design System:**
-   ```
-   Read(ai-context/gds-docs/llm.txt)
-   ```
+   - The GDS Skill automatically activates
+   - Simply describe what you want: "Create a modal with GDS styling"
+   - Claude handles the documentation lookup automatically
 
-2. **Check component docs:**
-   ```
-   Glob(ai-context/gds-docs/components/**/*.mdx)
-   ```
+2. **Reference design patterns:**
+   - Claude accesses component docs, design tokens, and patterns on demand
+   - No need to explicitly reference files
 
-3. **Read design foundations:**
-   ```
-   Read(ai-context/gds-docs/foundations/)
-   ```
-
-4. **Reference logos and assets:** Check Icon, Illustration, Logo components
+3. **Access logos and assets:**
+   - GDS provides Icon, Illustration, Logo, and Sticker components
+   - Available automatically through the GDS Skill
 
 ## Common Issues
 
-### "File not found: ai-context/..."
+### "Symlink broken: .claude"
 ```bash
 # Check symlink exists
-ls -la ai-context
+ls -la .claude
 
-# Should show: ai-context -> ../../.shared/ai-context
+# Should show: .claude -> ../../.shared/.claude
 
 # If broken, recreate:
-ln -s ../../.shared/ai-context ai-context
+ln -s ../../.shared/.claude .claude
 ```
 
 ### "Script not executable"
@@ -284,12 +230,8 @@ ln -s ../../.shared/ai-context ai-context
 chmod +x scripts/*.sh
 ```
 
-### "Can't find file in @ autocomplete"
-Symlinked files don't show in autocomplete. Use explicit commands:
-```
-Read(ai-context/gds-docs/llm.txt)
-Glob(ai-context/gds-docs/components/**/*.mdx)
-```
+### "GDS Skill not activating"
+The GDS Skill activates automatically when working with UI components. If you need to explicitly trigger it, mention GDS, components, or interface implementation in your request.
 
 ## See Also
 

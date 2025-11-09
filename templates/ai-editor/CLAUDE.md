@@ -192,27 +192,21 @@ The codebase is currently being refactored with:
 
 **CRITICAL:** When building UI components for this project, always use the `@grammarly/design-system` package where possible.
 
-### Available Components Documentation
+### GDS Skill - Automatic Documentation Access
 
-Complete component documentation is available via symlink at `./ai-context/gds-docs/` → `../../.shared/ai-context/gds-docs/`.
+The **GDS Skill automatically activates** when you work on UI components, forms, layouts, or any interface implementation. Complete documentation is available through Claude Code's skills system at `./.claude/skills/gds/`.
 
-**Quick reference:**
-```bash
-# Read complete GDS reference (40+ components)
-Read(ai-context/gds-docs/llm.txt)
+**Available through GDS Skill:**
+- 40+ React components (Button, TextField, Modal, Flex, Text, etc.)
+- Design tokens (colors, spacing, typography, elevation)
+- Design foundations and accessibility guidelines
+- UI patterns and best practices
+- Content guidelines (voice, tone, terminology)
 
-# List all component docs
-Glob(ai-context/gds-docs/components/**/*.mdx)
+**How it works:**
+You don't need to explicitly reference documentation. Simply describe what you want to build, and Claude automatically accesses relevant GDS information.
 
-# Read specific component
-Read(ai-context/gds-docs/components/buttons/button.mdx)
-Read(ai-context/gds-docs/components/modal.mdx)
-Read(ai-context/gds-docs/components/text-field.mdx)
-```
-
-**Available components:** Button, ButtonAsLink, IconButton, TextField, Textarea, Checkbox, RadioButton, RadioButtonGroup, RadioGroup, Switch, SearchField, Select, Combobox, VerificationCode, Flex, Box, Text, Heading, Link, Toast, Notification, Modal, Popover, Tooltip, OnboardingTooltip, Tabs, Menu, SegmentedControl, Badge, Tag, PlanTag, Rating, Accordion, CircularLoader, BrandedLoader, SkeletonLoader, Icon, Illustration, Logo, Sticker, SuggestionToggle, Form, and more.
-
-**Note:** Symlinked files won't appear in @ autocomplete, use explicit `Read()` or `Glob()`.
+Example: "Create a modal with a form" → Claude automatically references Modal and Form component docs
 
 ### Usage Example
 
@@ -227,40 +221,36 @@ import { Button, Text, Flex, Modal } from '@grammarly/design-system';
 </Flex>
 ```
 
-### GDS Design Tokens
+### GDS Design Tokens Reference
 
-The ai-context contains complete design tokens:
-- **Colors:** Primary (#15C39A), text, backgrounds, semantic colors
-- **Typography:** Inter font family, heading/body scales
+The GDS Skill provides automatic access to complete design tokens:
+- **Colors:** Primary green (#15C39A), semantic colors (success, error, warning)
+- **Typography:** Inter font family, heading scales (xs-xxxlarge)
 - **Spacing:** 4px base unit (xs=4px, sm=8px, md=16px, lg=24px, xl=32px, xxl=48px)
-- **Border radius:** Standard corner radius values
-- **Shadows:** Elevation shadows for depth
+- **Shadows:** Elevation system for depth
 - **Breakpoints:** Responsive design breakpoints
 
 ### How to Use GDS Components
 
-1. **Check documentation first:**
-   ```bash
-   Read(ai-context/gds-docs/components/[component-name].mdx)
-   ```
+1. **Simply request what you need:**
+   - "Add a primary button"
+   - "Create a text field with validation"
+   - "Build a modal with error handling"
+
+   Claude automatically loads relevant component documentation.
 
 2. **Import components:**
    ```typescript
    import { ComponentName } from '@grammarly/design-system';
    ```
 
-3. **Follow prop APIs from docs:**
-   - Component variants (primary, secondary, etc.)
-   - Size options (small, medium, large)
-   - State props (disabled, loading, error, etc.)
-   - Event handlers (onClick, onChange, etc.)
+3. **Follow GDS patterns:**
+   - Component variants are provided automatically
+   - Accessibility built-in
+   - Design tokens applied consistently
+   - Best practices followed
 
-4. **Use design tokens for consistency:**
-   - Colors: Use semantic colors from GDS
-   - Spacing: Use GDS spacing scale
-   - Typography: Use Text/Heading components
-
-**Always check the component documentation in `ai-context/gds-docs/` before implementing UI elements.**
+**The GDS Skill ensures you always use correct component APIs and follow Grammarly design standards.**
 
 ## Important Rules
 
