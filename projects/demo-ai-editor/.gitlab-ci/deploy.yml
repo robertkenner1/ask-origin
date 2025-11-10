@@ -1,0 +1,18 @@
+# Vercel deployment for demo-ai-editor
+# This file is auto-generated from template during project creation
+# Triggers only when files in this project change
+
+include:
+  - local: .gitlab-ci/components/vercel-deploy/template.yml
+    inputs:
+      vercel-token: $VERCEL_TOKEN
+      project-name: "demo-ai-editor"
+      project-path: "projects/demo-ai-editor"
+      team-slug: $VERCEL_TEAM_SLUG
+      environment: "production"
+      sso-protection: "all"
+      rules:
+        # Only deploy on non-main branches when this project has changes
+        - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
+          changes:
+            - projects/demo-ai-editor/**/*
