@@ -31,6 +31,8 @@
   "enabledMcpjsonServers": [
     "playwright",
     "sourcegraph",
-    "figma-dev-mode-mcp-server"
-  ]
+    "figma-dev-mode-mcp-server",
+    "next-devtools"
+  ],
+  "enableAllProjectMcpServers": true
 }

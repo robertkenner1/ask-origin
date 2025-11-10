@@ -280,7 +280,13 @@ vercel-deploy-$[[ inputs.project-name ]]:
       # Conditional build based on prebuild setting
       if [ "$PREBUILD" = "true" ]; then
         echo "🔨 Building project locally..."
-        vercel build --yes --token "$VERCEL_TOKEN"
+        if [ "$ENVIRONMENT" = "production" ]; then
+          echo "   Mode: PRODUCTION build"
+          vercel build --yes --prod --token "$VERCEL_TOKEN"
+        else
+          echo "   Mode: PREVIEW build"
+          vercel build --yes --token "$VERCEL_TOKEN"
+        fi
         echo "✅ Build completed successfully"
         echo ""
       else
