@@ -44,6 +44,17 @@ check_command "Homebrew" "brew" '/bin/bash -c "$(curl -fsSL https://raw.githubus
 # Check Node.js
 check_command "Node.js" "node" "brew install node"
 
+# Check npx (comes with npm/node)
+printf "%-40s" "Checking npx"
+if command -v npx >/dev/null 2>&1; then
+    printf "${GREEN}${SYM_SUCCESS}${NC}\n"
+else
+    printf "${RED}${SYM_ERROR}${NC}\n"
+    log_error "npx not found (should come with Node.js/npm)"
+    log_info "Try reinstalling Node.js or updating npm: npm install -g npm@latest"
+    exit 1
+fi
+
 # Check Git
 check_command "Git" "git" "brew install git"
 
@@ -92,9 +103,6 @@ else
     log_info "To authenticate, follow: https://coda.io/d/Grammarly-Engineering_de1L6FB9OYN/Artifactory-Getting-Started-Guide_suhj6IdR"
     echo ""
 fi
-
-# Install project dependencies
-exec_with_status "Installing project dependencies" "npm install"
 
 echo ""
 log_success "✅ All prerequisites checked"

@@ -213,17 +213,17 @@ exec_with_status "Creating symlink: scripts/" "ln -s '../../.shared/scripts' '$P
 exec_with_status "Creating symlink: .claude/" "ln -s '../../.shared/claude' '$PROJECTS_DIR/$PROJECT_NAME/.claude'"
 
 # Create .project.json from template
-print_status "Creating project metadata" ""
 if [ -f "$TEMPLATE_DIR/.project.json.template" ]; then
     # Use template if exists
-    sed -e "s/{{PROJECT_NAME}}/$PROJECT_NAME/g" \
-        -e "s/{{PROJECT_DESCRIPTION}}/$PROJECT_DESCRIPTION/g" \
-        -e "s/{{CREATED_DATE}}/$CREATED_DATE/g" \
-        -e "s/{{BRANCH_NAME}}/$BRANCH_NAME/g" \
-        -e "s/{{VERCEL_TEAM_SLUG}}/$VERCEL_TEAM_SLUG/g" \
-        "$TEMPLATE_DIR/.project.json.template" > "$PROJECTS_DIR/$PROJECT_NAME/.project.json"
+    exec_with_status "Creating project metadata" "sed -e 's/{{PROJECT_NAME}}/$PROJECT_NAME/g' \
+        -e 's/{{PROJECT_DESCRIPTION}}/$PROJECT_DESCRIPTION/g' \
+        -e 's/{{CREATED_DATE}}/$CREATED_DATE/g' \
+        -e 's/{{BRANCH_NAME}}/$BRANCH_NAME/g' \
+        -e 's/{{VERCEL_TEAM_SLUG}}/$VERCEL_TEAM_SLUG/g' \
+        '$TEMPLATE_DIR/.project.json.template' > '$PROJECTS_DIR/$PROJECT_NAME/.project.json'"
 else
     # Create default .project.json
+    print_status "Creating project metadata" ""
     cat > "$PROJECTS_DIR/$PROJECT_NAME/.project.json" <<EOF
 {
   "name": "$PROJECT_NAME",
@@ -235,16 +235,12 @@ else
   }
 }
 EOF
+    print_status "Creating project metadata" "success"
 fi
-print_status "Creating project metadata" "success"
 
 # Generate GitLab CI deploy file from template
-print_status "Generating GitLab CI configuration" ""
 if [ -f "$TEMPLATE_DIR/.gitlab-ci/deploy.yml.template" ]; then
-    mkdir -p "$PROJECTS_DIR/$PROJECT_NAME/.gitlab-ci"
-    sed -e "s/{{PROJECT_NAME}}/$PROJECT_NAME/g" \
-        "$TEMPLATE_DIR/.gitlab-ci/deploy.yml.template" > "$PROJECTS_DIR/$PROJECT_NAME/.gitlab-ci/deploy.yml"
-    print_status "Generating GitLab CI configuration" "success"
+    exec_with_status "Generating GitLab CI configuration" "mkdir -p '$PROJECTS_DIR/$PROJECT_NAME/.gitlab-ci' && sed -e 's/{{PROJECT_NAME}}/$PROJECT_NAME/g' '$TEMPLATE_DIR/.gitlab-ci/deploy.yml.template' > '$PROJECTS_DIR/$PROJECT_NAME/.gitlab-ci/deploy.yml'"
 else
     print_status "Generating GitLab CI configuration" "note" "template not found"
 fi

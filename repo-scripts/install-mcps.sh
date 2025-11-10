@@ -38,9 +38,3 @@ echo "   📝 Note: If you don't see the option to enable MCP, upgrade your user
 echo "         (Home>Your User>Settings>Your Spaces>Upgrade to Dev) and restart Figma"
 echo ""
 
-# Install project dependencies
-exec_with_status "Installing project dependencies" "npm install"
-
-echo ""
-log_success "✅ MCP servers are pre-configured in .mcp.json"
-log_info "ℹ️  Claude Code will automatically use these MCP servers when running in this directory"

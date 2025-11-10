@@ -95,6 +95,10 @@ vercel-deploy-$[[ inputs.project-name ]]:
         echo "   Using default npm registry for public packages"
       fi
       echo ""
+      echo "Installing pnpm for vercel templates"
+      npm install --global pnpm@latest 
+      echo "✅ pnpm installed: $(pnpm --version)"
+      echo ""
 
       # Install Vercel CLI
       echo "📦 Installing Vercel CLI (version: $[[ inputs.vercel-cli-version ]])..."
