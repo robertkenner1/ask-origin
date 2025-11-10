@@ -125,8 +125,12 @@ BRANCH_NAME="proj-$PROJECT_NAME"
 CREATED_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 PROJECT_TITLE=$(echo "$PROJECT_NAME" | sed 's/-/ /g' | awk '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) tolower(substr($i,2)); print}')
 
-# Stash current changes
-exec_with_status "Stashing current changes" "git stash push -m 'Auto-stash before creating $PROJECT_NAME'" || print_status "Stashing current changes" "note" "nothing to stash"
+# Stash current changes if needed
+if ! git diff --quiet || ! git diff --cached --quiet; then
+    exec_with_status "Stashing current changes" "git stash push -m 'Auto-stash before creating $PROJECT_NAME'"
+else
+    print_status "Stashing current changes" "note" "nothing to stash"
+fi
 
 # Switch to main branch
 exec_with_status "Switching to main branch" "git checkout main"
@@ -137,8 +141,12 @@ exec_with_status "Pulling latest changes" "git pull origin main" || print_status
 # Create new branch with proj- prefix
 exec_with_status "Creating new branch: $BRANCH_NAME" "git checkout -b '$BRANCH_NAME'"
 
-# Restore stashed changes
-exec_with_status "Restoring stashed changes" "git stash pop" || print_status "Restoring stashed changes" "note" "nothing to restore"
+# Restore stashed changes if any exist
+if git stash list | grep -q "Auto-stash before creating $PROJECT_NAME"; then
+    exec_with_status "Restoring stashed changes" "git stash pop"
+else
+    print_status "Restoring stashed changes" "note" "nothing to restore"
+fi
 
 # Create project directory
 exec_with_status "Creating project directory" "mkdir -p '$PROJECTS_DIR/$PROJECT_NAME'"
@@ -302,10 +310,32 @@ fi
 # Start dev server for the project
 log_info "🚀 Starting development server..."
 echo ""
-npm run dev 2>&1 >/dev/null &
+
+# Create temp file for logs
+DEV_LOG_FILE=$(mktemp)
+
+# Start dev server in background and capture output
+npm run dev > "$DEV_LOG_FILE" 2>&1 &
+DEV_SERVER_PID=$!
+
+# Wait a bit for server to start
 sleep 2
-log_success "✅ Development server started at http://localhost:$DEV_SERVER_PORT"
-echo ""
+
+# Check if process is still running
+if ! kill -0 $DEV_SERVER_PID 2>/dev/null; then
+    # Process died - show error
+    print_status "Development server startup" "warning"
+    log_warning "Server failed to start. Last 20 lines of output:"
+    echo ""
+    tail -20 "$DEV_LOG_FILE"
+    echo ""
+else
+    log_success "✅ Development server started at http://localhost:$DEV_SERVER_PORT"
+    echo ""
+fi
+
+# Clean up temp log file
+rm -f "$DEV_LOG_FILE"
 
 # Show next steps
 log_info "📝 Next Steps:"

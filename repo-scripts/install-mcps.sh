@@ -25,14 +25,8 @@ exec_with_status "Checking MCP configuration" "[ -f '.mcp.json' ]" || {
 
 echo ""
 log_info "📋 Pre-configured MCP Servers:"
-echo ""
-log_success "  ✅ Playwright MCP"
-echo "     Browser automation and testing"
-echo "     Command: npx @playwright/mcp@latest"
-echo ""
-log_success "  ✅ Sourcegraph MCP"
-echo "     Code search across repositories"
-echo "     URL: https://apigw.prod-platform-plane.grammarlyaws.com/sourcegraph-mcp-server/mcp/"
+echo "   • Playwright MCP (browser automation)"
+echo "   • Sourcegraph MCP (code search)"
 echo ""
 
 # Check for Figma MCP (optional, requires manual setup)
