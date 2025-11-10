@@ -1,18 +1,15 @@
 {
   "mcpServers": {
     "playwright": {
-      "type": "stdio",
       "command": "npx",
       "args": [
         "@playwright/mcp@latest"
       ]
     },
     "sourcegraph": {
-      "type": "http",
       "url": "https://apigw.prod-platform-plane.grammarlyaws.com/sourcegraph-mcp-server/mcp/"
     },
     "next-devtools": {
-      "type": "stdio",
       "command": "npx",
       "args": [
         "-y",

@@ -20,6 +20,9 @@
       "Bash(vercel:*)",
       "WebSearch",
       "WebFetch(domain:docs.gitlab.com)",
+      "Skill(gds)",
+      "mcp__playwright__browser_type",
+      "mcp__playwright__browser_click",
       "mcp__playwright__browser_take_screenshot",
       "mcp__playwright__browser_navigate"
     ],
