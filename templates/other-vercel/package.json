@@ -1,0 +1,11 @@
+{
+  "name": "{{PROJECT_NAME}}",
+  "version": "0.1.0",
+  "description": "{{PROJECT_DESCRIPTION}}",
+  "private": true,
+  "scripts": {
+    "dev": "echo 'This will be replaced by Vercel template'",
+    "build": "echo 'This will be replaced by Vercel template'",
+    "start": "echo 'This will be replaced by Vercel template'"
+  }
+}

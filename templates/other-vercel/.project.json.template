@@ -1,0 +1,14 @@
+{
+  "name": "{{PROJECT_NAME}}",
+  "description": "{{PROJECT_DESCRIPTION}}",
+  "deployments": ["vercel"],
+  "created": "{{CREATED_DATE}}",
+  "repository": {
+    "branch": "{{BRANCH_NAME}}"
+  },
+  "template": {
+    "name": "other-vercel",
+    "description": "Project initialized from Vercel template",
+    "version": "1.0.0"
+  }
+}

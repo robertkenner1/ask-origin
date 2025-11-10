@@ -143,8 +143,62 @@ exec_with_status "Restoring stashed changes" "git stash pop" || print_status "Re
 # Create project directory
 exec_with_status "Creating project directory" "mkdir -p '$PROJECTS_DIR/$PROJECT_NAME'"
 
-# Copy template source files to project directory
-exec_with_status "Copying template files" "cp -r '$TEMPLATE_DIR'/* '$PROJECTS_DIR/$PROJECT_NAME/'"
+# Special handling for Vercel templates
+if [ "$TEMPLATE_NAME" = "other-vercel" ]; then
+    # Check if vercel CLI is installed
+    if ! command -v vercel >/dev/null 2>&1; then
+        log_error "❌ Vercel CLI not found. Please install it first:"
+        echo ""
+        echo "  npm install -g vercel"
+        echo ""
+        exit 1
+    fi
+
+    # Create temporary directory for vercel init
+    TEMP_DIR="/tmp/vercel-init-$(date +%s)-$PROJECT_NAME"
+    mkdir -p "$TEMP_DIR"
+
+    # Set up cleanup trap
+    cleanup_temp() {
+        if [ -d "$TEMP_DIR" ]; then
+            rm -rf "$TEMP_DIR"
+        fi
+    }
+    trap cleanup_temp EXIT ERR
+
+    echo ""
+    log_info "🎯 Initializing from Vercel template..."
+    log_info "   Please select a template from the interactive menu"
+    echo ""
+
+    # Run vercel init interactively
+    if ! (cd "$TEMP_DIR" && vercel init); then
+        log_error "❌ Vercel init failed or was cancelled"
+        exit 1
+    fi
+
+    # Find the created directory (first subdirectory in temp)
+    VERCEL_TEMPLATE_DIR=$(find "$TEMP_DIR" -mindepth 1 -maxdepth 1 -type d | head -1)
+
+    if [ -z "$VERCEL_TEMPLATE_DIR" ] || [ ! -d "$VERCEL_TEMPLATE_DIR" ]; then
+        log_error "❌ No template directory found. Vercel init may have failed."
+        exit 1
+    fi
+
+    echo ""
+    log_info "📦 Copying Vercel template to project directory..."
+
+    # Copy vercel template contents to project directory
+    exec_with_status "Copying Vercel template files" "cp -r '$VERCEL_TEMPLATE_DIR'/* '$PROJECTS_DIR/$PROJECT_NAME/'"
+
+    # Now overlay monorepo template files on top
+    exec_with_status "Overlaying monorepo files" "cp -r '$TEMPLATE_DIR'/* '$PROJECTS_DIR/$PROJECT_NAME/'"
+
+    echo ""
+else
+    # Standard template copy for non-Vercel templates
+    exec_with_status "Copying template files" "cp -r '$TEMPLATE_DIR'/* '$PROJECTS_DIR/$PROJECT_NAME/'"
+fi
 
 # Create symlinks to shared resources
 exec_with_status "Creating symlink: scripts/" "ln -s '../../.shared/scripts' '$PROJECTS_DIR/$PROJECT_NAME/scripts'"
