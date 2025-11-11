@@ -1,7 +1,7 @@
 # AI Frontend Development Makefile
 # Streamlined workflow for frontend prototyping
 
-.PHONY: help prereqs install new start stop deploy deploy-vercel clean list build delete default
+.PHONY: help prereqs install setup-vercel setup-artifactory new start stop deploy deploy-vercel clean list build delete default
 
 # Default target - full setup (runs when just "make" is typed)
 default: prereqs install new
@@ -11,8 +11,10 @@ help:
 	@echo "🚀 AI Frontend Development Commands"
 	@echo ""
 	@echo "Setup:"
-	@echo "  make prereqs     - Check prerequisites (MCP servers)"
-	@echo "  make install     - Install required MCP servers"
+	@echo "  make prereqs            - Check prerequisites (MCP servers)"
+	@echo "  make install            - Install required MCP servers"
+	@echo "  make setup-vercel       - Set up Vercel CLI and team access"
+	@echo "  make setup-artifactory  - Set up Artifactory npm authentication"
 	@echo ""
 	@echo "Development:"
 	@echo "  make new         - Create new project (interactive)"
@@ -40,6 +42,14 @@ prereqs:
 # Install required MCP servers
 install:
 	@./repo-scripts/install-mcps.sh
+
+# Set up Vercel CLI and team access
+setup-vercel:
+	@./repo-scripts/setup-vercel.sh
+
+# Set up Artifactory npm authentication
+setup-artifactory:
+	@./repo-scripts/setup-artifactory-npm.sh
 
 # Create new project
 new:
