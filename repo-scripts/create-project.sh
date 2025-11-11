@@ -256,30 +256,11 @@ exec_with_status "Processing template variables" "find '$PROJECTS_DIR/$PROJECT_N
 # All projects now have package.json - install dependencies
 exec_with_status "Installing dependencies" "(cd '$PROJECTS_DIR/$PROJECT_NAME' && npm install)" || print_status "Installing dependencies" "warning"
 
-# Generate .env.local from template variables if defined
-ENV_VARS_TO_CONFIGURE=""
-if [ -f "$PROJECTS_DIR/$PROJECT_NAME/.project.json" ]; then
-    # Parse variables array once and store as JSON string
-    VARIABLES_JSON=$(jq -c '.variables // []' "$PROJECTS_DIR/$PROJECT_NAME/.project.json" 2>/dev/null || echo "[]")
-    VARIABLES_COUNT=$(echo "$VARIABLES_JSON" | jq 'length')
-
-    if [ "$VARIABLES_COUNT" -gt 0 ]; then
-        print_status "Generating .env.local" ""
-
-        # Create .env.local file
-        ENV_FILE="$PROJECTS_DIR/$PROJECT_NAME/.env.local"
-        echo "# Environment Variables" > "$ENV_FILE"
-        echo "# Generated on $(date)" >> "$ENV_FILE"
-        echo "" >> "$ENV_FILE"
-
-        # Extract each variable from stored JSON and add to .env.local
-        echo "$VARIABLES_JSON" | jq -r '.[] | "\(.name)=PLACEHOLDER"' >> "$ENV_FILE"
-
-        print_status "Generating .env.local" "success"
-
-        # Store variables info for final message display (using same JSON)
-        ENV_VARS_TO_CONFIGURE=$(echo "$VARIABLES_JSON" | jq -r '.[] | "   • \(.name): \(.description)"')
-    fi
+# Copy .env.local.template if it exists
+ENV_FILE_CREATED=""
+if [ -f "$TEMPLATE_DIR/.env.local.template" ]; then
+    exec_with_status "Copying .env.local template" "cp '$TEMPLATE_DIR/.env.local.template' '$PROJECTS_DIR/$PROJECT_NAME/.env.local'"
+    ENV_FILE_CREATED="true"
 fi
 
 echo ""
@@ -345,12 +326,9 @@ echo -e "   ${CYAN}cd projects/$PROJECT_NAME${NC}"
 echo ""
 
 # Show environment variable configuration if needed
-if [ -n "$ENV_VARS_TO_CONFIGURE" ]; then
+if [ -n "$ENV_FILE_CREATED" ]; then
     echo "   Then:"
-    echo "   1. Configure environment variables in .env.local:"
-    echo ""
-    echo "$ENV_VARS_TO_CONFIGURE"
-    echo ""
+    echo "   1. Configure environment variables in .env.local"
     echo "   2. Start coding with your favorite AI tool!"
 else
     echo "   Then start coding with your favorite AI tool!"

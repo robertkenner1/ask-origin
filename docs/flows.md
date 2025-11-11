@@ -223,10 +223,12 @@ When complete:
 
 If your project needs environment variables (API keys, etc.):
 
-1. Navigate to: `https://vercel.com/grammarly-0ad4c188/{your-project}`
-2. Go to **Settings** → **Environment Variables**
-3. Add or link variables
-4. Redeploy if needed for build/runtime
+1. Navigate to: `https://vercel.com/grammarly-0ad4c188/{your-project}/settings/environment-variables`
+2. Add  new variable on `Create New` tab or link existing variable on `Link Shared Environment Variables` tab
+3. Redeploy if needed for build/runtime:
+   - Navigate to https://vercel.com/grammarly-0ad4c188/{your-project}/deployments
+   - Click 3 dots on the right side of the latest deployment and choose "Redeploy"
+   - CLick "Redeploy"
 
 See [Vercel Environment Variables Guide](https://vercel.com/docs/environment-variables) for details.
 

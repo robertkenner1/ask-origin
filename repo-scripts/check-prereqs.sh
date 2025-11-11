@@ -100,7 +100,40 @@ else
     printf "${YELLOW}${SYM_WARNING}${NC}\n"
     log_warning "Not authenticated with Artifactory npm registry"
     log_info "You will not be able to use @grammarly/design-system package for local development"
-    log_info "To authenticate, follow: https://coda.io/d/Grammarly-Engineering_de1L6FB9OYN/Artifactory-Getting-Started-Guide_suhj6IdR"
+    echo ""
+
+    # Ask if user wants to set up Artifactory now
+    read -p "Would you like to set up Artifactory npm authentication now? (y/n): " -n 1 -r
+    echo ""
+
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        echo ""
+        log_info "Running Artifactory setup..."
+        echo ""
+
+        # Run the setup script
+        if "$SCRIPT_DIR/setup-artifactory-npm.sh"; then
+            echo ""
+            log_success "Artifactory setup completed!"
+            echo ""
+
+            # Re-check authentication
+            printf "%-40s" "Re-checking Artifactory npm access"
+            if npm whoami --registry=https://artifactory.grammarly.io/artifactory/api/npm/common-npm/ >/dev/null 2>&1; then
+                printf "${GREEN}${SYM_SUCCESS}${NC}\n"
+            else
+                printf "${YELLOW}${SYM_WARNING}${NC}\n"
+                log_warning "Authentication still not working. Please contact Developer Experience team in #platform slack channel."
+            fi
+        else
+            echo ""
+            log_warning "Artifactory setup was cancelled or failed"
+            log_info "You can run it manually later: ./repo-scripts/setup-artifactory-npm.sh"
+        fi
+    else
+        log_info "Skipping Artifactory setup"
+        log_info "You can run it manually later: ./repo-scripts/setup-artifactory-npm.sh"
+    fi
     echo ""
 fi
 

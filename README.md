@@ -9,7 +9,7 @@ A monorepo for rapid UI prototyping with AI assistance.
 **Configure npm to access Artifactory packages** - If you plan to use Grammarly Design System (GDS) or other internal packages, you need to configure npm to access Artifactory:
 
 ```bash
-./.shared/scripts/setup-artifactory-npm.sh
+./repo-scripts/setup-artifactory-npm.sh
 ```
 
 
