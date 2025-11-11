@@ -26,16 +26,20 @@ Add all changes, create a commit, and push to the remote repository.
 **Important:**
 - Always analyze the actual changes before generating a message
 - If $ARGUMENTS is provided (e.g., "fix login bug"), incorporate that context
-- After successful push, show deployment information in this format:
-  ```
-  ✅ Pushed to [branch-name]
+- After successful push, output deployment information as plain text with proper line breaks:
 
-  📦 Deployment URLs:
-     🌐 App: https://[project-name]-grammarly-0ad4c188.vercel.app/
-     🔧 CI/CD: https://gitlab.grammarly.io/sandbox/ai-frontend-prototypes/-/jobs
+**Output the following lines (not as code block, as plain text with newlines):**
 
-  🔗 Merge Request:
-     [MR URL from git push output, or "Create MR: [URL]"]
+✅ Pushed to [branch-name]
 
-  ⏱️  Deployment takes 1-2 minutes. Track progress at the CI/CD link above.
-  ```
+📦 Deployment URLs:
+   🌐 App: https://[project-name]-grammarly-0ad4c188.vercel.app/
+   🔧 CI/CD: https://gitlab.grammarly.io/sandbox/ai-frontend-prototypes/-/jobs
+
+🔗 Merge Request:
+   [MR URL from git push output, or "Create MR: [URL]"]
+
+⏱️  Deployment takes 1-2 minutes. Track progress at the CI/CD link above.
+
+💡 If app doesn't work: check .env.local vars are configured in Vercel
+   https://gitlab.grammarly.io/sandbox/ai-frontend-prototypes/-/blob/main/docs/flows.md#environment-variables

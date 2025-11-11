@@ -238,22 +238,7 @@ projects/test/
 projects/new-thing/
 ```
 
-### 2. Figma Integration
-```javascript
-// Extract nodeId from Figma URL
-// https://figma.com/design/fileKey/fileName?node-id=1-2
-// nodeId = "1:2"
-
-// Use MCP server to get code
-await mcp__figma-dev-mode-mcp-server__get_code({
-  nodeId: "1:2",
-  clientName: "claude code",
-  clientLanguages: "html,css,javascript",
-  clientFrameworks: "unknown"
-});
-```
-
-### 3. Reference Implementation
+### 2. Reference Implementation
 When user provides a website URL:
 1. Use Playwright to navigate to it
 2. Take screenshots for reference
@@ -261,7 +246,7 @@ When user provides a website URL:
 4. Build pixel-perfect replica
 5. Compare screenshots to validate
 
-### 4. Design System Usage
+### 3. Design System Usage
 For Grammarly-style projects:
 1. Reference: https://gitlab.grammarly.io/uifoundation/grammarly-design-system/-/tree/main/packages/design-system/src/components
 Icons: https://gitlab.grammarly.io/uifoundation/grammarly-design-system/-/tree/main/packages/icons/assets  and https://gitlab.grammarly.io/uifoundation/grammarly-design-system/-/tree/main/packages/icons/generated/all

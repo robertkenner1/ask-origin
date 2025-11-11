@@ -58,12 +58,11 @@ git push -u origin HEAD
    [MR URL or Create MR link]
 
 ⏱️  Deployment takes 1-2 minutes. Track progress at the CI/CD link above.
+
+💡 If app doesn't work: check .env.local vars are configured in Vercel
+   https://gitlab.grammarly.io/sandbox/ai-frontend-prototypes/-/blob/main/docs/flows.md#environment-variables
 ```
 
 ## Integration
 
 **See also:** `.shared/claude/commands/push.md` for automated push command
-
-## Complete Documentation
-
-For comprehensive push workflow, see: `.shared/claude/skills/git/README.md`

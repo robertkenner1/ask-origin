@@ -22,8 +22,7 @@ print_separator "Step 1: Generate Artifactory API Token"
 log_info "Please follow these steps to generate your API token:"
 echo ""
 echo "  1. Visit: https://grammarly.atlassian.net/wiki/spaces/PL/pages/657948789/Artifactory+Getting+Started+Guide"
-echo "  2. Navigate to section: 'How to get Artifactory credentials (user-password)'"
-echo "     to download artifacts locally"
+echo "  2. Navigate to section: 'How to get Artifactory credentials (user-password) to download artifacts locally'"
 echo "  3. Generate your API token"
 echo ""
 read -p "Press ENTER when you have your API token ready... "
@@ -35,7 +34,7 @@ echo ""
 # ============================================================================
 print_separator "Step 2: Enter Artifactory Username"
 
-read -p "Enter your ARTIFACTORY_USER (usually your Grammarly email): " ARTIFACTORY_USER
+read -p "Enter your ARTIFACTORY_USER (example: john.doe): " ARTIFACTORY_USER
 
 if [ -z "$ARTIFACTORY_USER" ]; then
     log_error "Artifactory username cannot be empty!"
