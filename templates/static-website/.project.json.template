@@ -5,7 +5,7 @@
   "created": "{{CREATED_DATE}}",
   "template": {
     "name": "static-website",
-    "description": "Simple HTML/CSS/JavaScript website for landing pages and prototypes",
+    "description": "Simple HTML/CSS/JavaScript website deployed on GitLab Pages",
     "version": "1.0.0"
   }
 }
