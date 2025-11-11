@@ -27,21 +27,36 @@ cd ./ai-frontend-prototypes
 make
 ```
 
-That's it! Now you can ask Claude to help you with your prototype.
-For example:
-```
-create a prototype of the web page with demo text at the center and popup window that appear when user hovering cursor over the text. Popup window should be 100% the same like in figma:
-  https://www.figma.com/design/JqBLpfjQnFwef7BiXzMA2u/Clean-UX-UI?node-id=2028-891&t=3xIpuQ8XOUW2Pg1L-4, with excatly the same grammarly logo svg and fonts that you can find in desygn systems.
-  iterate how many times you need and use Playwright mcp to compare result and original.
-  After that modify the popup window, so it will look like the thinking cloud.
-```
+That's it! Now follow the steps provided by the script to finish with your project setup. 
 
-And that what we have in result from one prompt: https://ai-frontend-prototypes-c8939b.gpages.io/thinking-grammarly/
+During the development you can preview result here: http://127.0.0.1:3000/ (Open in Incognito to avoid cache issue)
 
-During the development you can preview result here: http://127.0.0.1:8181/ (Open in Incognito to avoid cache issue)
+Once you're ready to deploy your prototype, type `/push` in your claude code session. This command will send your code to the GitLab repository, where GitLab CI will manage the deployment process.
 
-When you finish development ask claude to publish the result or just run "make publish", finish MR creation and merge it.
+**📖 For detailed workflows (new projects, iterations, deployments), see [Development Workflows](./docs/flows.md)**
 
+## Vercel Deployment
+
+This repository uses Vercel for automated deployments. All projects are deployed to the Grammarly Vercel team.
+
+**Team Information:**
+- **Team Name:** Grammarly
+- **Team ID:** `grammarly-0ad4c188`
+- **Team Dashboard:** https://vercel.com/grammarly-0ad4c188
+
+### Environment Variables
+
+If your project requires environment variables (API keys, configuration values, etc.), you'll need to configure them in the Vercel dashboard:
+
+1. Navigate to your project: https://vercel.com/grammarly-0ad4c188/[your-project-name]
+2. Go to **Settings** → **Environment Variables**
+3. Add or link environment variables as needed
+
+**Documentation:** Follow the official [Vercel Environment Variables Guide](https://vercel.com/docs/environment-variables) for detailed instructions on:
+- Adding environment variables
+- Scoping variables by environment (Production, Preview, Development)
+- Using environment variables in your code
+- Linking shared environment variables across projects
 
 ## What This Repo Provides
 
@@ -51,18 +66,18 @@ When you finish development ask claude to publish the result or just run "make p
 ### 📦 Project Templates
 - **static-website** - HTML/CSS/JS for simple prototypes
 - **ai-editor** - Next.js for interactive applications
+- **other-vercel** - Allows users to create projects using any framework supported by Vercel.
 
-```bash
-make new PROJECT=my-prototype
-```
 
 ### 🤖 AI Development Context
 
-**GDS Documentation** - Complete Grammarly Design System docs in `.shared/ai-context/gds-docs/` with 40+ components optimized for AI parsing.
+**Claude Code Skills**
+ - **GDS Documentation** - Complete Grammarly Design System docs with 40+ components optimized for AI parsing.
 
 **MCP Servers** - Pre-configured in `.claude/claude_mcp_config.json`:
 - **Playwright** - Browser automation, testing, screenshots
 - **Sourcegraph** - Code search across Grammarly repos
+- **next-devtools** - NextJS debug and coding
 - **Figma** - Design integration (requires manual setup)
 
 **Claude Slash Commands** - Custom workflows in `.shared/.claude/commands/`:
@@ -75,84 +90,29 @@ make new PROJECT=my-prototype
 
 **GitLab Pages** - Automatic on merge to `main` → https://ai-frontend-prototypes-c8939b.gpages.io/
 
-**Vercel** - Conditional per-project deployment on feature branches. Configure in `.project.json`:
-```
+**Vercel Deployment** - Automatic deployment via CI with:
+- Automatic deployment on branch push (triggered by file changes in project directory)
+- Production environment with SSO protection enabled
+- Per-project deployment URLs: `https://[project-name]-grammarly-0ad4c188.vercel.app/`
+
 
 ## Live Demo
 
 🚀 **GitLab Pages:** https://ai-frontend-prototypes-c8939b.gpages.io/
 🚀 **Vercel:** https://vercel.com/grammarly-0ad4c188
 
-## Project Structure
+## Known Issues
 
-```
-ai-frontend-prototypes/
-├── projects/                  # Source files
-│   └── my-project/
-│       ├── src/              # Edit files here
-│       ├── prompts/          # AI prompts
-│       └── CLAUDE.md         # Project settings
-├── public/                   # Built files (auto-generated)
-├── templates/                # Project templates
-└── Makefile                  # Build automation
-```
+### Vercel Environment Variables
 
-## Commands
+**Manual Configuration Required** - Shared environment variables in Vercel need to be manually attached to each project:
 
-```bash
-make                         # Full setup (first time)
-make new PROJECT=my-project  # Create new project
-make start                   # Build and start server
-make build                   # Build all projects
-make list                    # List all projects
-make deploy                  # Git commit and push
-```
+1. Navigate to your project in Vercel dashboard: https://vercel.com/grammarly-0ad4c188/[your-project]
+2. Go to **Settings** → **Environment Variables**
+3. Link existing shared environment variables or create project-specific ones
+4. Redeploy if variables are needed for build/runtime
 
-## Creating Projects
-
-### With Make (Recommended)
-```bash
-make new PROJECT=button-animations
-```
-
-### With AI
-Ask: "Create a new project called 'grammarly-tooltip' with hover effects"
-
-## Development
-
-- **Edit files in:** `projects/[project-name]/src/`
-- **Local server:** http://localhost:8181
-- **Auto-builds:** Changes in `src/` → `public/`
-
-## MCP Servers
-
-Pre-configured in `.claude/claude_mcp_config.json`:
-- **Playwright** - Browser automation and testing
-- **Sourcegraph** - Code search across repositories
-- **Figma** - Design integration (manual setup required)
-
-See [`.claude/README.md`](./.claude/README.md) for detailed documentation.
-
-## Git Workflow
-
-`make new` automatically:
-1. Stashes current changes
-2. Switches to main branch
-3. Pulls latest changes
-4. Creates new branch from main
-5. Restores stashed changes
-
-## Troubleshooting
-
-**Project not appearing?**
-```bash
-make build
-```
-
-**Development server issues?**
-```bash
-make start
-```
+**Note:** This is a current limitation of Vercel's API - environment variables cannot be automatically linked during project creation via CLI or API.
 
 ---
 

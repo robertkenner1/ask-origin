@@ -291,11 +291,10 @@ After making UI modifications, **always use Playwright MCP to verify changes vis
 **Example verification workflow:**
 ```
 1. Make UI changes to component
-2. npm run format && npm run lint
-3. npm run dev (in background)
-4. Use Playwright MCP to navigate and screenshot
-5. Verify changes look correct
-6. Stop dev server
+2. npm run dev (in background)
+3. Use Playwright MCP to navigate and screenshot
+4. Verify changes look correct
+5. Stop dev server
 ```
 
 This ensures all UI changes are visually verified before committing.
@@ -311,22 +310,13 @@ This project has custom slash commands for streamlined deployment:
 - Analyzes git diff and generates an intelligent commit message
 - If you provide context (e.g., "fix login bug"), it incorporates that into the message
 - Automatically stages, commits, and pushes changes to remote
+- CI pipeline deploys to Vercel and provide link as an output
 
-**Deploy to Vercel:**
-```bash
-/deploy
-```
-- Pushes environment variables from `.env.local` to Vercel (if needed)
-- Deploys the project to Vercel preview environment
-- Shows deployment URL when complete
 
 **Example workflow:**
 ```bash
 # After making changes, push them
 /push refactor editor components
-
-# Then deploy to Vercel
-/deploy
 ```
 
 ### Code Standards

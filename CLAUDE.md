@@ -5,11 +5,13 @@ You are experienced Frontend Developer and mature designer.
 
 ## Architecture
 
-**IMPORTANT:** This monorepo uses **symlinks** for shared resources. See `ARCHITECTURE.md` for complete details.
+**IMPORTANT:** This monorepo uses **symlinks** for shared resources.
 
 **Key concepts:**
 - Projects are self-sufficient (work in project directory)
-- `scripts/` and `.claude/` are symlinks to `.shared/`
+- `scripts/` is symlinked to `.shared/scripts/`
+- `.claude/commands/` and `.claude/skills/` are symlinked to `.shared/claude/`
+- `.claude/settings.local.json` is copied (real file, modified by Claude Code)
 - `.mcp.json` and `Makefile` are template-specific (real files)
 - Updates to `.shared/` propagate to all projects automatically
 
@@ -43,22 +45,26 @@ ai-frontend-prototypes/
 │   └── my-project/              # ✅ Self-sufficient
 │       ├── src/                 # Real files
 │       ├── scripts/             # 🔗 → ../../.shared/scripts/
-│       ├── .claude/             # 🔗 → ../../.shared/claude/
+│       ├── .claude/             # 📁 Real directory
+│       │   ├── commands/        # 🔗 → ../../../.shared/claude/commands/
+│       │   ├── skills/          # 🔗 → ../../../.shared/claude/skills/
+│       │   └── settings.local.json  # Real file (copied)
 │       ├── .mcp.json            # Real file (from template)
 │       ├── Makefile             # Real file (from template)
 │       └── CLAUDE.md
 │
 ├── public/                       # 🌐 Built/deployed versions
 ├── build-sitemap.js             # Master index generator
-├── Makefile                     # Repository commands
+├���─ Makefile                     # Repository commands
 └── package.json
 ```
 
 **Key Rules:**
 - **Work from project directory:** `cd projects/[project-name]/` before starting
-- **Symlinked resources:** `scripts/` and `.claude/` are symlinks to `.shared/`
+- **Symlinked resources:** `scripts/`, `.claude/commands/`, and `.claude/skills/` are symlinks
 - **GDS Skill auto-activates:** No need to explicitly reference GDS documentation
 - **Don't edit symlinks:** To customize, remove symlink and create real directory
+- **Settings are per-project:** `.claude/settings.local.json` is a real file, safe to customize
 - Run `make build` from project dir to build
 - Built projects auto-appear in `public/` and main directory listing
 - Edit source files in `projects/*/src/`, not `public/`
@@ -179,14 +185,6 @@ When user provides a reference (website, screenshot, or Figma):
 ```bash
 # Create new project using Makefile (recommended)
 make new PROJECT=descriptive-project-name
-
-# Or create manually:
-mkdir -p projects/[descriptive-project-name]/src
-mkdir -p projects/[descriptive-project-name]/prompts
-cd projects/[descriptive-project-name]/src
-
-# Create basic structure
-touch index.html styles.css script.js
 ```
 
 ### Step 3: Implementation
@@ -215,14 +213,6 @@ Create pixel-perfect replicas with these priorities:
 
 ### Step 4: Validation & Build
 ```bash
-# Build projects from source to public
-make build
-
-# Start development server
-make start
-
-# Or use npm commands directly
-npm run build:sitemap
 npm run dev
 ```
 
@@ -232,52 +222,6 @@ Use Playwright to:
 - Test responsive behavior
 - Verify interactions work correctly
 
-## Code Templates
-
-### Basic Project Structure
-```html
-<!-- index.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[Descriptive Project Title]</title>
-    <meta name="description" content="[Project description for sitemap]">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <!-- Your implementation here -->
-    <script src="script.js"></script>
-</body>
-</html>
-```
-
-### CSS Organization
-```css
-/* styles.css */
-/* 1. CSS Reset/Normalize */
-* { box-sizing: border-box; }
-
-/* 2. CSS Custom Properties */
-:root {
-  --primary-color: #...;
-  --font-family: ...;
-  --spacing-unit: ...;
-}
-
-/* 3. Base Styles */
-body { ... }
-
-/* 4. Layout Components */
-.container { ... }
-
-/* 5. UI Components */
-.button { ... }
-
-/* 6. Responsive Design */
-@media (max-width: 768px) { ... }
-```
 
 ## Best Practices
 
@@ -390,20 +334,11 @@ cd projects/my-awesome-component/src/
 # Edit index.html, styles.css, script.js
 
 # 3. Build and test
-make build
-make start
+npm run dev
 
 # 4. Deploy (optional)
-make deploy MESSAGE="Add awesome component"
+/push
 ```
-
-### Available Make Commands
-- `make new PROJECT=name` - Create new project from templates
-- `make build` - Build all projects from source to public
-- `make start` - Build and start development server
-- `make list` - List all projects
-- `make deploy` - Git add, commit, and push
-- `make clean` - Clean build artifacts
 
 ## Remember
 

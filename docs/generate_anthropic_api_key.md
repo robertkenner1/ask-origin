@@ -10,8 +10,8 @@ To generate an Anthropic API key, you'll need to access the Anthropic Console, n
 
 ### Step 1: Access the Console
 
-1. Go to the [Anthropic Console](https://console.anthropic.com)
-2. Sign in to your account or create a new one if you don't have an account yet
+1. Go to the Claude Code console via Okta
+2. If you don't have Claude Code in Okta - [request it via Opal](https://coda.io/d/Coding-with-AI_dIs9Y03OBBQ/Account-Setup_sufrIu8n#_luIaJl3f).
 
 ### Step 2: Navigate to API Keys
 
@@ -24,9 +24,10 @@ To generate an Anthropic API key, you'll need to access the Anthropic Console, n
 
 1. Click the **"Create Key"** or **"+ Create Key"** button
 2. A pop-up dialog will appear
-3. Enter a descriptive name for your API key:
+3. Choose "Default" workspace
+4. Enter a descriptive name for your API key:
    - Examples: `"Project X"`, `"AI Editor App"`, `"Development Environment"`
-4. Click **"Create Key"** to generate the key
+5. Click **"Create Key"** to generate the key
 
 ### Step 4: Save Your Key Securely
 
