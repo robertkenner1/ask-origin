@@ -83,15 +83,15 @@ class SitemapBuilder {
             const config = this.readProjectConfig(projectName);
 
             if (!config) {
-                console.log(`⚠️  No .project.json for ${projectName}, skipping`);
+                console.log(`⚠️  Could not read config for ${projectName}, skipping`);
                 continue;
             }
 
             if (!config.deployments.includes(DEPLOYMENT_TYPES.GITLAB_PAGES)) {
                 const label = config.deployments.includes(DEPLOYMENT_TYPES.VERCEL)
-                    ? 'Vercel (external)'
+                    ? 'Vercel-only deployment'
                     : config.deployments.join(', ');
-                console.log(`⏭️  Skipping copy for ${projectName} (${label})`);
+                console.log(`⏭️  Skipping GitLab Pages copy for ${projectName} (${label})`);
                 continue;
             }
 
@@ -267,21 +267,19 @@ class SitemapBuilder {
     }
 
     readProjectConfig(projectName) {
-        const projectJsonPath = path.join(this.projectsDir, projectName, '.project.json');
+        const projectDir = path.join(this.projectsDir, projectName);
+        const vercelJsonPath = path.join(projectDir, 'vercel.json');
 
-        if (!fs.existsSync(projectJsonPath)) {
-            return null;
-        }
+        // Determine deployment type based on vercel.json file presence:
+        // - If vercel.json exists → Vercel deployment
+        // - If vercel.json doesn't exist → GitLab Pages deployment
+        const deploymentType = fs.existsSync(vercelJsonPath)
+            ? DEPLOYMENT_TYPES.VERCEL
+            : DEPLOYMENT_TYPES.GITLAB_PAGES;
 
-        try {
-            const config = JSON.parse(fs.readFileSync(projectJsonPath, 'utf-8'));
-            return {
-                deployments: config.deployments || [DEPLOYMENT_TYPES.UNKNOWN]
-            };
-        } catch (error) {
-            console.warn(`⚠️  Invalid .project.json for ${projectName}`);
-            return null;
-        }
+        return {
+            deployments: [deploymentType]
+        };
     }
 
     // ============================================

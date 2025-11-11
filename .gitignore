@@ -54,3 +54,7 @@ out/
 
 # Vercel
 .vercel/
+.env.local
+
+# Playwright MCP
+.playwright-mcp/

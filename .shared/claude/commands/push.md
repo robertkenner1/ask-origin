@@ -14,12 +14,14 @@ Add all changes, create a commit, and push to the remote repository.
    - Follow conventional commit style if appropriate (feat:, fix:, refactor:, etc.)
 3. Run `git add .` to stage all changes
 4. Create a commit with the generated message
-5. Push to the remote with `git push -u origin HEAD`
+5. Push to the remote with `git push -u origin HEAD` and capture the output
 6. Show deployment information:
    - Display: "✅ Pushed to [branch-name]"
    - Extract project name from current branch (remove "proj-" prefix if present)
+   - Parse git push output for merge request URLs (look for "https://" lines containing "merge_requests")
    - Show Vercel deployment URL: https://[project-name]-grammarly-0ad4c188.vercel.app/
    - Show GitLab CI jobs URL: https://gitlab.grammarly.io/sandbox/ai-frontend-prototypes/-/jobs
+   - Note: Deployment takes 1-2 minutes, track progress via CI/CD link
 
 **Important:**
 - Always analyze the actual changes before generating a message
@@ -31,4 +33,9 @@ Add all changes, create a commit, and push to the remote repository.
   📦 Deployment URLs:
      🌐 App: https://[project-name]-grammarly-0ad4c188.vercel.app/
      🔧 CI/CD: https://gitlab.grammarly.io/sandbox/ai-frontend-prototypes/-/jobs
+
+  🔗 Merge Request:
+     [MR URL from git push output, or "Create MR: [URL]"]
+
+  ⏱️  Deployment takes 1-2 minutes. Track progress at the CI/CD link above.
   ```

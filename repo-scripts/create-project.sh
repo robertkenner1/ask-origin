@@ -210,7 +210,12 @@ fi
 
 # Create symlinks to shared resources
 exec_with_status "Creating symlink: scripts/" "ln -s '../../.shared/scripts' '$PROJECTS_DIR/$PROJECT_NAME/scripts'"
-exec_with_status "Creating symlink: .claude/" "ln -s '../../.shared/claude' '$PROJECTS_DIR/$PROJECT_NAME/.claude'"
+
+# Create .claude directory structure with selective symlinks
+exec_with_status "Creating .claude directory" "mkdir -p '$PROJECTS_DIR/$PROJECT_NAME/.claude'"
+exec_with_status "Creating symlink: .claude/commands/" "ln -s '../../../.shared/claude/commands' '$PROJECTS_DIR/$PROJECT_NAME/.claude/commands'"
+exec_with_status "Creating symlink: .claude/skills/" "ln -s '../../../.shared/claude/skills' '$PROJECTS_DIR/$PROJECT_NAME/.claude/skills'"
+exec_with_status "Copying settings.local.json" "cp '.shared/claude/settings.local.json' '$PROJECTS_DIR/$PROJECT_NAME/.claude/settings.local.json'"
 
 # Create .project.json from template
 if [ -f "$TEMPLATE_DIR/.project.json.template" ]; then

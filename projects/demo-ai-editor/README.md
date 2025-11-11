@@ -10,7 +10,6 @@ First, create a `.env.local` file in the root directory with your Claude API key
 CLAUDE_API_KEY=your-claude-api-key-here
 # For backward compatibility, you can also use:
 # NEXT_PUBLIC_CLAUDE_API_KEY=your-claude-api-key-here
-PORT=2345
 ```
 
 > **Important Security Note**: The Claude API key is now only used server-side for security. While
