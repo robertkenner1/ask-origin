@@ -82,8 +82,8 @@ if command -v vercel >/dev/null 2>&1; then
         printf "${GREEN}${SYM_SUCCESS}${NC}\n"
     else
         printf "${YELLOW}${SYM_WARNING}${NC}\n"
-        log_warning "Not a member of Grammarly Vercel team"
-        log_info "Please contact artur.kiryiak to be added to the Grammarly team in Vercel"
+        log_warning "Not a member of Grammarly Vercel team or user is not logged in"
+        log_info "Vercel CLI is not required to be configured, but if you want to manage Vercel projects manually, you can run: make setup-vercel from root of the repository"
         echo ""
     fi
 else

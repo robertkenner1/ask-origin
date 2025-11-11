@@ -133,6 +133,27 @@ if [ -z "$AUTH_RESPONSE" ]; then
     exit 1
 fi
 
+# Validate authentication response
+if echo "$AUTH_RESPONSE" | grep -q '"errors"' || ! echo "$AUTH_RESPONSE" | grep -q '@'; then
+    print_status "Authenticating with Artifactory" "error"
+    log_error "Authentication failed! Server response:"
+    echo ""
+    echo "$AUTH_RESPONSE"
+    echo ""
+    log_info "💡 You can configure Artifactory access later by running:"
+    log_info "   make setup-artifactory"
+    log_info "   (from repository root)"
+    echo ""
+
+    # Restore backup if it exists
+    if [ -n "$BACKUP_PATH" ] && [ -f "$BACKUP_PATH" ]; then
+        log_info "Restoring backup..."
+        cp "$BACKUP_PATH" "$NPMRC_PATH"
+    fi
+
+    exit 1
+fi
+
 echo "$AUTH_RESPONSE" >> "$NPMRC_PATH"
 print_status "Authenticating with Artifactory" "success"
 
