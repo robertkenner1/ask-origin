@@ -60,6 +60,10 @@ spec:
       description: "Enable SSO protection for deployments. Set to 'all' to require Vercel login + team access for all deployments (preview and production)."
       default: ""
 
+    shared-env-vars:
+      description: "Comma-separated list of shared environment variable keys to link to this project (e.g., 'CLAUDE_API_KEY,DATABASE_URL'). These must already exist as shared env vars in your Vercel team."
+      default: ""
+
 ---
 # Main deployment job
 vercel-deploy-$[[ inputs.project-name ]]:
@@ -114,6 +118,7 @@ vercel-deploy-$[[ inputs.project-name ]]:
       export ENVIRONMENT="$[[ inputs.environment ]]"
       export PREBUILD="$[[ inputs.prebuild ]]"
       export VERCEL_SSO_PROTECTION="$[[ inputs.sso-protection ]]"
+      export SHARED_ENV_VARS="$[[ inputs.shared-env-vars ]]"
 
       # Validation: Check required inputs
       echo "🔍 Validating configuration..."
@@ -231,47 +236,187 @@ vercel-deploy-$[[ inputs.project-name ]]:
       fi
       echo ""
 
-      # Configure SSO Protection via Vercel API (if requested)
-      if [ "$VERCEL_SSO_PROTECTION" = "all" ]; then
+      # Configure project settings via Vercel API (if requested)
+      if [ "$VERCEL_SSO_PROTECTION" = "all" ] || [ -n "$SHARED_ENV_VARS" ]; then
         echo "=================================================="
         echo "⚙️  Vercel Project Configuration (API)"
         echo "=================================================="
         echo ""
 
-        # Build API URL with optional team ID
-        API_URL="https://api.vercel.com/v9/projects/$PROJECT_NAME"
-        if [ -n "$VERCEL_ORG_ID" ]; then
-          API_URL="$API_URL?teamId=$VERCEL_ORG_ID"
-        fi
-
         echo "Project: $PROJECT_NAME"
+        echo "Project ID: $VERCEL_PROJECT_ID"
         [ -n "$VERCEL_ORG_ID" ] && echo "Team ID: $VERCEL_ORG_ID"
         echo ""
 
-        echo "🔒 Configuring SSO Protection..."
-        echo "   Deployment type: all"
-        echo "   (Requires Vercel login + team access for ALL deployments)"
-        echo ""
+        # Configure SSO Protection
+        if [ "$VERCEL_SSO_PROTECTION" = "all" ]; then
+          # Build API URL with optional team ID
+          API_URL="https://api.vercel.com/v9/projects/$PROJECT_NAME"
+          if [ -n "$VERCEL_ORG_ID" ]; then
+            API_URL="$API_URL?teamId=$VERCEL_ORG_ID"
+          fi
 
-        HTTP_CODE=$(curl -X PATCH "$API_URL" \
-          -H "Authorization: Bearer $VERCEL_TOKEN" \
-          -H "Content-Type: application/json" \
-          -d '{"ssoProtection": {"deploymentType": "all"}}' \
-          --silent --show-error \
-          --write-out "%{http_code}" \
-          --output /tmp/vercel-sso-response.json)
+          echo "🔒 Configuring SSO Protection..."
+          echo "   Deployment type: all"
+          echo "   (Requires Vercel login + team access for ALL deployments)"
+          echo ""
 
-        if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
-          echo "✅ SSO Protection enabled successfully (HTTP $HTTP_CODE)"
-        else
-          echo "❌ SSO Protection API failed (HTTP $HTTP_CODE)"
+          HTTP_CODE=$(curl -X PATCH "$API_URL" \
+            -H "Authorization: Bearer $VERCEL_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d '{"ssoProtection": {"deploymentType": "all"}}' \
+            --silent --show-error \
+            --write-out "%{http_code}" \
+            --output /tmp/vercel-sso-response.json)
+
+          if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
+            echo "✅ SSO Protection enabled successfully (HTTP $HTTP_CODE)"
+          else
+            echo "❌ SSO Protection API failed (HTTP $HTTP_CODE)"
+            echo ""
+            echo "Response:"
+            cat /tmp/vercel-sso-response.json 2>/dev/null || echo "(no response body)"
+            echo ""
+            exit 1
+          fi
           echo ""
-          echo "Response:"
-          cat /tmp/vercel-sso-response.json 2>/dev/null || echo "(no response body)"
-          echo ""
-          exit 1
         fi
-        echo ""
+
+        # Link Shared Environment Variables
+        if [ -n "$SHARED_ENV_VARS" ]; then
+          echo "🔗 Linking Shared Environment Variables..."
+          echo "   Variables to link: $SHARED_ENV_VARS"
+          echo ""
+
+          # Build API URL for listing env vars
+          ENV_API_URL="https://api.vercel.com/v1/env"
+          if [ -n "$VERCEL_ORG_ID" ]; then
+            ENV_API_URL="$ENV_API_URL?teamId=$VERCEL_ORG_ID"
+          fi
+
+          # Fetch all shared environment variables
+          echo "📋 Fetching shared environment variables..."
+          curl -X GET "$ENV_API_URL" \
+            -H "Authorization: Bearer $VERCEL_TOKEN" \
+            --silent --show-error \
+            --output /tmp/vercel-env-list.json
+
+          if [ ! -s /tmp/vercel-env-list.json ]; then
+            echo "❌ Failed to fetch environment variables"
+            exit 1
+          fi
+
+          # Check if response contains an error
+          if jq -e '.error' /tmp/vercel-env-list.json > /dev/null 2>&1; then
+            echo "❌ API Error:"
+            jq -r '.error.message' /tmp/vercel-env-list.json
+            exit 1
+          fi
+
+          # Check if data array exists and is not null
+          if ! jq -e '.data' /tmp/vercel-env-list.json > /dev/null 2>&1; then
+            echo "⚠️  No environment variables found in API response"
+            echo ""
+            echo "API Response structure:"
+            jq '.' /tmp/vercel-env-list.json | head -20
+            echo ""
+            echo "This usually means:"
+            echo "  1. No shared environment variables exist in the team"
+            echo "  2. The API endpoint or response format has changed"
+            echo "  3. The token lacks permissions to read env vars"
+            echo ""
+            exit 1
+          fi
+
+          echo "✅ Fetched environment variables list"
+          echo ""
+
+          # Build updates JSON for PATCH request
+          echo "🔍 Matching requested variables with shared env vars..."
+          UPDATES_JSON="{\"updates\":{}}"
+
+          # Split comma-separated list and process each variable
+          # Save to temp file for POSIX-compliant iteration
+          echo "$SHARED_ENV_VARS" | tr ',' '\n' > /tmp/vercel-env-keys.txt
+
+          while IFS= read -r VAR_KEY; do
+            # Trim whitespace
+            VAR_KEY=$(echo "$VAR_KEY" | xargs)
+
+            if [ -z "$VAR_KEY" ]; then
+              continue
+            fi
+
+            echo "   Looking for: $VAR_KEY"
+
+            # Find the environment variable ID by key
+            # Handle null .data array gracefully
+            ENV_ID=$(jq -r --arg key "$VAR_KEY" '(.data // []) | .[] | select(.key == $key) | .id' /tmp/vercel-env-list.json 2>/dev/null || echo "")
+
+            if [ -z "$ENV_ID" ] || [ "$ENV_ID" = "null" ]; then
+              echo "   ⚠️  Warning: Shared env var '$VAR_KEY' not found - skipping"
+              continue
+            fi
+
+            echo "   ✅ Found: $VAR_KEY (ID: $ENV_ID)"
+
+            # Add to updates JSON
+            UPDATES_JSON=$(echo "$UPDATES_JSON" | jq --arg id "$ENV_ID" --arg projectId "$VERCEL_PROJECT_ID" \
+              '.updates[$id] = {"projectIdUpdates": {"link": [$projectId]}}')
+          done < /tmp/vercel-env-keys.txt
+
+          # Check if we have any updates to apply
+          UPDATE_COUNT=$(echo "$UPDATES_JSON" | jq '.updates | length')
+
+          if [ "$UPDATE_COUNT" -eq 0 ]; then
+            echo ""
+            echo "⚠️  No valid shared environment variables found to link"
+            echo ""
+          else
+            echo ""
+            echo "📤 Linking $UPDATE_COUNT environment variable(s) to project..."
+
+            # Build PATCH API URL
+            PATCH_API_URL="https://api.vercel.com/v1/env"
+            if [ -n "$VERCEL_ORG_ID" ]; then
+              PATCH_API_URL="$PATCH_API_URL?teamId=$VERCEL_ORG_ID"
+            fi
+
+            # Apply updates
+            HTTP_CODE=$(curl -X PATCH "$PATCH_API_URL" \
+              -H "Authorization: Bearer $VERCEL_TOKEN" \
+              -H "Content-Type: application/json" \
+              -d "$UPDATES_JSON" \
+              --silent --show-error \
+              --write-out "%{http_code}" \
+              --output /tmp/vercel-env-patch-response.json)
+
+            if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
+              echo "✅ Environment variables linked successfully (HTTP $HTTP_CODE)"
+
+              # Show results
+              UPDATED_COUNT=$(jq '.updated | length' /tmp/vercel-env-patch-response.json 2>/dev/null || echo "0")
+              FAILED_COUNT=$(jq '.failed | length' /tmp/vercel-env-patch-response.json 2>/dev/null || echo "0")
+
+              echo "   Updated: $UPDATED_COUNT"
+              if [ "$FAILED_COUNT" -gt 0 ]; then
+                echo "   Failed: $FAILED_COUNT"
+                echo ""
+                echo "Failed variables:"
+                jq -r '.failed[] | "   - \(.envId): \(.error.message)"' /tmp/vercel-env-patch-response.json 2>/dev/null
+              fi
+            else
+              echo "❌ Environment variables linking failed (HTTP $HTTP_CODE)"
+              echo ""
+              echo "Response:"
+              cat /tmp/vercel-env-patch-response.json 2>/dev/null || echo "(no response body)"
+              echo ""
+              exit 1
+            fi
+            echo ""
+          fi
+        fi
+
         echo "✅ Project configuration complete"
         echo "=================================================="
         echo ""
