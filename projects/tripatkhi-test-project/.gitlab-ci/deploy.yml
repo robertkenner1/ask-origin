@@ -1,0 +1,21 @@
+# Vercel deployment for tripatkhi-test-project
+# This file is auto-generated from template during project creation
+# Triggers only when files in this project change
+
+include:
+  - local: .gitlab-ci/components/vercel-deploy/template.yml
+    inputs:
+      vercel-token: $VERCEL_TOKEN
+      project-name: "tripatkhi-test-project"
+      project-path: "projects/tripatkhi-test-project"
+      team-slug: $VERCEL_TEAM_SLUG
+      environment: "production"
+      sso-protection: "all"
+      shared-env-vars: "CLAUDE_API_KEY"
+      rules:
+        # Only deploy on non-main branches when this project has changes
+        - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
+          changes:
+            paths:
+              - projects/tripatkhi-test-project/**/*
+            compare_to: refs/heads/main
