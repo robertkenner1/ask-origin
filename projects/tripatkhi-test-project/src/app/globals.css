@@ -1,0 +1,599 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "@grammarly/design-system";
+
+@custom-variant dark (&:is(.dark *));
+
+@dark (&:is(.dark *));
+
+@layer base {
+  :root {
+    --font-size: 14px;
+    --background: #ffffff;
+    --foreground: oklch(0.145 0 0);
+    --card: #ffffff;
+    --card-foreground: oklch(0.145 0 0);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.145 0 0);
+    --primary: #030213;
+    --primary-foreground: oklch(1 0 0);
+    --secondary: oklch(0.95 0.0058 264.53);
+    --secondary-foreground: #030213;
+    --muted: #ececf0;
+    --muted-foreground: #717182;
+    --accent: #e9ebef;
+    --accent-foreground: #030213;
+    --destructive: #d4183d;
+    --destructive-foreground: #ffffff;
+    --border: rgba(0, 0, 0, 0.1);
+    --input: transparent;
+    --input-background: #f3f3f5;
+    --switch-background: #cbced4;
+    --font-weight-medium: 500;
+    --font-weight-normal: 400;
+    --ring: oklch(0.708 0 0);
+    --chart-1: oklch(0.646 0.222 41.116);
+    --chart-2: oklch(0.6 0.118 184.704);
+    --chart-3: oklch(0.398 0.07 227.392);
+    --chart-4: oklch(0.828 0.189 84.429);
+    --chart-5: oklch(0.769 0.188 70.08);
+    --radius: 0.625rem;
+    --sidebar: oklch(0.985 0 0);
+    --sidebar-foreground: oklch(0.145 0 0);
+    --sidebar-primary: #030213;
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.97 0 0);
+    --sidebar-accent-foreground: oklch(0.205 0 0);
+    --sidebar-border: oklch(0.922 0 0);
+    --sidebar-ring: oklch(0.708 0 0);
+
+    /* Editor content width and padding variables */
+    /* Base case: non-responsive editor with readable width */
+    --editor-max-width: 68ch; /* About 68 characters wide - good readable line length */
+    --editor-padding: 2rem;
+  }
+
+  .dark {
+    --background: oklch(0.145 0 0);
+    --foreground: oklch(0.985 0 0);
+    --card: oklch(0.145 0 0);
+    --card-foreground: oklch(0.985 0 0);
+    --popover: oklch(0.145 0 0);
+    --popover-foreground: oklch(0.985 0 0);
+    --primary: oklch(0.985 0 0);
+    --primary-foreground: oklch(0.205 0 0);
+    --secondary: oklch(0.269 0 0);
+    --secondary-foreground: oklch(0.985 0 0);
+    --muted: oklch(0.269 0 0);
+    --muted-foreground: oklch(0.708 0 0);
+    --accent: oklch(0.269 0 0);
+    --accent-foreground: oklch(0.985 0 0);
+    --destructive: oklch(0.396 0.141 25.723);
+    --destructive-foreground: oklch(0.637 0.237 25.331);
+    --border: oklch(0.269 0 0);
+    --input: oklch(0.269 0 0);
+    --ring: oklch(0.439 0 0);
+    --font-weight-medium: 500;
+    --font-weight-normal: 400;
+    --chart-1: oklch(0.488 0.243 264.376);
+    --chart-2: oklch(0.696 0.17 162.48);
+    --chart-3: oklch(0.769 0.188 70.08);
+    --chart-4: oklch(0.627 0.265 303.9);
+    --chart-5: oklch(0.645 0.246 16.439);
+    --sidebar: oklch(0.205 0 0);
+    --sidebar-foreground: oklch(0.985 0 0);
+    --sidebar-primary: oklch(0.488 0.243 264.376);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.269 0 0);
+    --sidebar-accent-foreground: oklch(0.985 0 0);
+    --sidebar-border: oklch(0.269 0 0);
+    --sidebar-ring: oklch(0.439 0 0);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html,
+  body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-size: var(--font-size);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* Fixed height layout with proper scrolling */
+  .editor-wrapper {
+    overflow-y: auto;
+    height: 100vh;
+  }
+
+  /* Orchestra pane layout */
+  .orchestra-pane {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* Responsive adjustments for different screen sizes */
+
+  /* For screens 1024px and wider (default) */
+  @media (min-width: 1024px) {
+    :root {
+      --editor-max-width: 85ch; /* Wider reading column */
+    }
+  }
+
+  /* For smaller screens below 1024px */
+  @media (max-width: 1023px) {
+    :root {
+      --editor-max-width: 90%; /* Use percentage for smaller screens */
+      --editor-padding: 1.5rem;
+    }
+  }
+
+  /* Adjust when orchestra pane is open - only affects variable values */
+  html.has-orchestra-pane {
+    --editor-max-width: 70ch; /* Still wide enough for comfortable reading */
+    --editor-padding: 1.5rem; /* Less padding when pane is open */
+  }
+
+  /* For small screens with orchestra pane open, prevent extremely narrow content */
+  @media (max-width: 1023px) {
+    html.has-orchestra-pane {
+      --editor-max-width: 90%; /* Use more screen space on small screens with pane */
+      --editor-padding: 1rem;
+    }
+  }
+
+  .sidebar-container {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+  }
+
+  /* Improved sidebar animations for smooth label transitions */
+  .sidebar-main {
+    /* Force GPU acceleration for smoother animations */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    /* Ensure smooth width transitions without content jumping */
+    overflow: hidden;
+  }
+
+  .agent-bench {
+    /* Ensure smooth layout transitions */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  /* ComposeBar positioning now handled by parent container */
+
+  /* Simple bounce animation for AgentBench icons only */
+  @keyframes icon-bounce {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-4px);
+    }
+    75% {
+      transform: translateY(-2px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  /* Base style for all icon buttons */
+  .icon-hover {
+    transform: translateY(0);
+    cursor: pointer;
+  }
+
+  /* Bounce animation only for AgentBench icons (not active ones) */
+  .agent-bench .icon-hover:hover:not(.bg-gray-200) {
+    animation: icon-bounce 0.4s ease;
+  }
+
+  /* Just cursor pointer for active icons */
+  .bg-gray-200:hover {
+    cursor: pointer;
+  }
+
+  /* Custom styles for LLM response formatting */
+  .llm-response {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+  }
+
+  .llm-response p {
+    margin-bottom: 1rem;
+    font-size: 14px;
+  }
+
+  .llm-response ul {
+    list-style-type: disc;
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+    padding-left: 0;
+  }
+
+  .llm-response ol {
+    list-style-type: decimal;
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+    padding-left: 0;
+  }
+
+  .llm-response li {
+    margin-bottom: 0.5rem;
+    font-size: 14px;
+  }
+
+  .llm-response li:last-child {
+    margin-bottom: 0;
+  }
+
+  .llm-response code {
+    font-family: monospace;
+    background-color: #f0f0f0;
+    padding: 0.1rem 0.2rem;
+    border-radius: 3px;
+    font-size: 13px;
+  }
+
+  .llm-response pre {
+    background-color: #f6f8fa;
+    border-radius: 6px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin-bottom: 1rem;
+  }
+
+  .llm-response pre code {
+    background-color: transparent;
+    padding: 0;
+    font-size: 13px;
+    white-space: pre;
+  }
+
+  .llm-response strong {
+    font-weight: 600;
+  }
+
+  #__next,
+  main {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  /* Drag handle styles - simple is better */
+  .custom-drag-handle {
+    opacity: 0.6;
+    cursor: grab;
+    transition: opacity 0.2s ease;
+    padding: 4px;
+    border-radius: 4px;
+  }
+
+  .custom-drag-handle:hover,
+  .custom-drag-handle.handle-locked {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .custom-drag-handle:active {
+    cursor: grabbing;
+  }
+
+  h1 {
+    @apply text-2xl leading-normal font-medium;
+  }
+
+  h2 {
+    @apply text-xl leading-normal font-medium;
+  }
+
+  h3 {
+    @apply text-lg leading-normal font-medium;
+  }
+
+  h4 {
+    @apply text-base leading-normal font-medium;
+  }
+
+  p {
+    @apply text-base leading-normal font-normal;
+  }
+
+  label {
+    @apply text-base leading-normal font-medium;
+  }
+
+  button {
+    @apply cursor-pointer text-base leading-normal font-medium;
+  }
+
+  input {
+    @apply text-base leading-normal font-normal;
+  }
+
+  /* Editor placeholder */
+  [contenteditable]:empty:before {
+    content: attr(data-placeholder);
+    color: var(--muted-foreground);
+    font-style: italic;
+    cursor: text;
+    pointer-events: none;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.guidance-node {
+  display: block;
+  position: relative;
+  width: calc(100% - 40px);
+  margin: 0;
+  margin-left: 1rem;
+  padding: 1rem;
+  background-color: rgb(240, 240, 240);
+  border-radius: 12px;
+  font-size: 0.825rem;
+  white-space: pre-wrap;
+}
+
+.guidance-dismiss {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: #555;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.guidance-dismiss:hover {
+  opacity: 1;
+  background-color: rgb(220, 220, 220);
+}
+
+.placeholder-block {
+  font-style: italic;
+  color: #6b7280; /* Gray-500 in Tailwind */
+  background-color: #f3f4f6; /* Gray-100 in Tailwind */
+  border-radius: 4px;
+  padding: 1px 4px;
+  cursor: text;
+  transition: background-color 0.2s ease;
+  user-select: none;
+}
+
+.placeholder-block:hover {
+  background-color: #e5e7eb; /* Gray-200 in Tailwind */
+}
+
+/* Base toggle list styles */
+ul[data-type="toggleList"] {
+  list-style: none;
+  padding-left: 0;
+  margin: 0.5rem 0;
+}
+
+/* Toggle list item positioning */
+li[data-type="toggleListItem"] {
+  position: relative;
+  padding-left: 24px;
+  margin: 0.3rem 0;
+}
+
+/* Toggle arrow styling */
+.toggle-arrow {
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 16px;
+  height: 16px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Create arrow shape using CSS */
+.toggle-arrow::before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 5px 0 5px 8px;
+  border-color: transparent transparent transparent currentColor;
+  transition: transform 0.2s ease;
+}
+
+/* Rotation for expanded state - arrow points down */
+li[data-type="toggleListItem"]:not([collapsed="true"]) .toggle-arrow::before {
+  transform: rotate(90deg);
+}
+
+/* Filled vs outlined arrow states */
+li[data-type="toggleListItem"][data-empty="true"] .toggle-arrow::before {
+  border-color: transparent transparent transparent #ccc;
+  opacity: 0.5;
+}
+
+li[data-type="toggleListItem"][data-empty="false"] .toggle-arrow::before {
+  border-color: transparent transparent transparent #000;
+  opacity: 1;
+}
+
+/* Disabled arrow when no content */
+.toggle-arrow[disabled] {
+  cursor: default;
+  opacity: 0.5;
+}
+
+/* Nested toggle list indentation */
+li[data-type="toggleListItem"] ul[data-type="toggleList"] {
+  padding-left: 1rem;
+}
+
+/* Animation for content visibility */
+.toggle-content {
+  transition:
+    height 0.2s ease,
+    opacity 0.2s ease;
+  overflow: hidden;
+}
+
+/* Focus styles for accessibility */
+.toggle-arrow:focus {
+  outline: 2px solid #0078d7;
+  outline-offset: 2px;
+}
