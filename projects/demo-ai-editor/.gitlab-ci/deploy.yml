@@ -16,4 +16,6 @@ include:
         # Only deploy on non-main branches when this project has changes
         - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
           changes:
-            - projects/demo-ai-editor/**/*
+            paths:
+              - projects/demo-ai-editor/**/*
+            compare_to: refs/heads/main
