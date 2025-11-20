@@ -15,4 +15,6 @@ include:
         # Only deploy on non-main branches when this project has changes
         - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
           changes:
-            - projects/{{PROJECT_NAME}}/**/*
+            paths:
+              - projects/{{PROJECT_NAME}}/**/*
+            compare_to: refs/heads/main
