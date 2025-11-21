@@ -11,7 +11,6 @@ include:
       team-slug: $VERCEL_TEAM_SLUG
       environment: "preview"
       sso-protection: "all"
-      vercel-cli-version: "48.10.4"
       rules:
         # Only deploy on non-main branches when this project has changes
         - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
