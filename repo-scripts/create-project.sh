@@ -197,15 +197,15 @@ if [ "$TEMPLATE_NAME" = "other-vercel" ]; then
     log_info "📦 Copying Vercel template to project directory..."
 
     # Copy vercel template contents to project directory
-    exec_with_status "Copying Vercel template files" "cp -r '$VERCEL_TEMPLATE_DIR'/* '$PROJECTS_DIR/$PROJECT_NAME/'"
+    exec_with_status "Copying Vercel template files" "cp -r '$VERCEL_TEMPLATE_DIR'/. '$PROJECTS_DIR/$PROJECT_NAME/'"
 
     # Now overlay monorepo template files on top
-    exec_with_status "Overlaying monorepo files" "cp -r '$TEMPLATE_DIR'/* '$PROJECTS_DIR/$PROJECT_NAME/'"
+    exec_with_status "Overlaying monorepo files" "cp -r '$TEMPLATE_DIR'/. '$PROJECTS_DIR/$PROJECT_NAME/'"
 
     echo ""
 else
     # Standard template copy for non-Vercel templates
-    exec_with_status "Copying template files" "cp -r '$TEMPLATE_DIR'/* '$PROJECTS_DIR/$PROJECT_NAME/'"
+    exec_with_status "Copying template files" "cp -r '$TEMPLATE_DIR'/. '$PROJECTS_DIR/$PROJECT_NAME/'"
 fi
 
 # Create symlinks to shared resources
