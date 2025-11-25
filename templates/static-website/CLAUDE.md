@@ -1,5 +1,9 @@
 # {{PROJECT_TITLE}} - Static Website Project
 
+> **⚠️ IMPORTANT: GDS Decommissioned**
+> **Grammarly Design System (GDS)** has been decommissioned in favor of **Origin Design System**.
+> If users request GDS or `@grammarly/design-system`, notify them to use **Origin Design System** (`@superhuman/origin`) instead.
+
 ## Architecture Note
 
 This project uses **symlinked resources** from the monorepo:
@@ -36,34 +40,36 @@ npm start       # Serve production build
 Located at: `./.claude/` → `../../.shared/claude/`
 
 This symlink provides access to:
-- **Skills** - Claude Code skills (including GDS skill)
+- **Skills** - Claude Code skills (including Origin Design System skill)
 - **Commands** - Custom slash commands
 - **Settings** - Claude configuration templates
 
-#### Grammarly Design System (GDS) Skill
+#### Origin Design System Skill
 
-The **GDS Skill automatically activates** when you work on UI components, forms, layouts, or any interface implementation. You don't need to explicitly reference documentation.
+The **Origin Design System Skill automatically activates** when you work on UI components, forms, layouts, or any interface implementation. You don't need to explicitly reference documentation.
 
-**Available through GDS Skill:**
+> **Note:** Origin Design System replaces the deprecated Grammarly Design System (GDS).
+
+**Available through Origin Design System Skill:**
 - 40+ React components (Button, TextField, Modal, Flex, Text, etc.)
 - Design tokens (colors, spacing, typography, elevation)
 - Design foundations and accessibility guidelines
 - UI patterns and best practices
 - Content guidelines (voice, tone, terminology)
 
-**How to use GDS in this project:**
+**How to use Origin Design System in this project:**
 
 1. **For HTML/CSS prototypes** (this template):
-   - Claude automatically accesses GDS documentation as needed
+   - Claude automatically accesses Origin Design System documentation as needed
    - Design tokens, patterns, and components are available on demand
    - Simply describe what you want to build, Claude handles the rest
 
-   Example: "Create a primary button with GDS styling"
-   → Claude automatically references GDS button docs and design tokens
+   Example: "Create a primary button with Origin Design System styling"
+   → Claude automatically references Origin button docs and design tokens
 
 2. **For React projects** (if migrating to React):
    ```typescript
-   import { Button, Text, Flex } from '@grammarly/design-system';
+   import { Button, Text, Flex } from '@superhuman/origin';
 
    <Flex direction="column" gap="medium">
      <Text variant="heading-large">Title</Text>
@@ -73,14 +79,14 @@ The **GDS Skill automatically activates** when you work on UI components, forms,
    </Flex>
    ```
 
-**GDS Design Tokens Reference:**
+**Origin Design Tokens Reference:**
 - **Colors:** Primary green (#15C39A), semantic colors (success, error, warning)
 - **Typography:** Inter font family, heading scales (xs-xxxlarge)
 - **Spacing:** 4px base unit, scale from xs (4px) to xxl (48px)
 - **Shadows:** Elevation system for depth
 - **Breakpoints:** Responsive design breakpoints
 
-The GDS Skill provides this information automatically when you build components.
+The Origin Design System Skill provides this information automatically when you build components.
 
 ## Development Workflow
 
@@ -199,9 +205,9 @@ vim .mcp.json
 
 When building Grammarly-style or Superhuman-style clean, modern interfaces:
 
-1. **Use Grammarly Design System:**
-   - The GDS Skill automatically activates
-   - Simply describe what you want: "Create a modal with GDS styling"
+1. **Use Origin Design System:**
+   - The Origin Design System Skill automatically activates
+   - Simply describe what you want: "Create a modal with Origin Design System styling"
    - Claude handles the documentation lookup automatically
 
 2. **Reference design patterns:**
@@ -209,8 +215,8 @@ When building Grammarly-style or Superhuman-style clean, modern interfaces:
    - No need to explicitly reference files
 
 3. **Access logos and assets:**
-   - GDS provides Icon, Illustration, Logo, and Sticker components
-   - Available automatically through the GDS Skill
+   - Origin Design System provides Icon, Illustration, Logo, and Sticker components
+   - Available automatically through the Origin Design System Skill
 
 ## Common Issues
 
@@ -230,8 +236,8 @@ ln -s ../../.shared/claude .claude
 chmod +x scripts/*.sh
 ```
 
-### "GDS Skill not activating"
-The GDS Skill activates automatically when working with UI components. If you need to explicitly trigger it, mention GDS, components, or interface implementation in your request.
+### "Origin Design System Skill not activating"
+The Origin Design System Skill activates automatically when working with UI components. If you need to explicitly trigger it, mention Origin Design System, components, or interface implementation in your request.
 
 ## See Also
 

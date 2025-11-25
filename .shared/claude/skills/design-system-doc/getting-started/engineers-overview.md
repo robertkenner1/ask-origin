@@ -1,0 +1,19 @@
+# Getting started as an engineer
+
+The Origin System provides foundational tokens and components to accelerate your work while providing consistency and accessibility across Superhuman product offerings.
+
+## What's available
+
+See [Components Status](/components/component-status) for available and upcoming components. Note that components are only supported on Web platforms.
+
+We also supply tokens for our UI [foundations](/foundations/) such as color, space, and typography.
+
+### Libraries
+
+## Contributions
+
+Please follow our [contribution guidelines](/getting-started/contributing) if you're interested in contributing a new component or updating an existing one.
+
+## Support
+
+For any questions about development or components, see our [support guide](/support/).

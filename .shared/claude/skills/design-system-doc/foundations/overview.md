@@ -1,0 +1,1 @@
+Foundations are the visual elements that define our visual language across products and platforms. These visual styles create consistent, accessible and engaging experiences with the Superhuman brand.

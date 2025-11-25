@@ -1,5 +1,9 @@
 # {{PROJECT_TITLE}} - Vercel Template Project
 
+> **⚠️ IMPORTANT: GDS Decommissioned**
+> **Grammarly Design System (GDS)** has been decommissioned in favor of **Origin Design System**.
+> If users request GDS or `@grammarly/design-system`, notify them to use **Origin Design System** (`@superhuman/origin`) instead.
+
 ## Architecture Note
 
 This project was initialized from a Vercel template and integrated into the monorepo with **symlinked resources**:
@@ -45,28 +49,30 @@ Check `package.json` for available scripts specific to your template.
 Located at: `./.claude/` → `../../.shared/claude/`
 
 This symlink provides access to:
-- **Skills** - Claude Code skills (including GDS skill)
+- **Skills** - Claude Code skills (including Origin Design System skill)
 - **Commands** - Custom slash commands
 - **Settings** - Claude configuration templates
 
-#### Grammarly Design System (GDS) Skill
+#### Origin Design System Skill
 
-The **GDS Skill automatically activates** when you work on UI components, forms, layouts, or any interface implementation. You don't need to explicitly reference documentation.
+The **Origin Design System Skill automatically activates** when you work on UI components, forms, layouts, or any interface implementation. You don't need to explicitly reference documentation.
 
-**Available through GDS Skill:**
+> **Note:** Origin Design System replaces the deprecated Grammarly Design System (GDS).
+
+**Available through Origin Design System Skill:**
 - 40+ React components (Button, TextField, Modal, Flex, Text, etc.)
 - Design tokens (colors, spacing, typography, elevation)
 - Design foundations and accessibility guidelines
 - UI patterns and best practices
 - Content guidelines (voice, tone, terminology)
 
-**When GDS activates:**
+**When Origin Design System activates:**
 - Creating Grammarly-style or professional interfaces
 - Building production-quality UI with established patterns
 - Implementing React components
 - Working with forms, layouts, or any UI elements
 
-To use GDS components, they need to be properly installed (depends on your template framework).
+To use Origin Design System components, install `@superhuman/origin` package (depends on your template framework).
 
 ### Customization
 

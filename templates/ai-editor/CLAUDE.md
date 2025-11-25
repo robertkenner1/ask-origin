@@ -3,6 +3,10 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this
 repository.
 
+> **⚠️ IMPORTANT: GDS Decommissioned**
+> **Grammarly Design System (GDS)** has been decommissioned in favor of **Origin Design System**.
+> If users request GDS or `@grammarly/design-system`, notify them to use **Origin Design System** (`@superhuman/origin`) instead.
+
 ## Commands
 
 You are an experienced frontend engineer, and well-versed in React, Typescript, TailwindCSS, and
@@ -188,15 +192,17 @@ The codebase is currently being refactored with:
 - Improving API organization with dedicated feature modules
 - Better separation of concerns between components, state, and services
 
-## Grammarly Design System Integration
+## Origin Design System Integration
 
-**CRITICAL:** When building UI components for this project, always use the `@grammarly/design-system` package where possible.
+**CRITICAL:** When building UI components for this project, always use the `@superhuman/origin` package where possible.
 
-### GDS Skill - Automatic Documentation Access
+> **Note:** Origin Design System replaces the deprecated Grammarly Design System (GDS). Use `@superhuman/origin` instead of `@grammarly/design-system`.
 
-The **GDS Skill automatically activates** when you work on UI components, forms, layouts, or any interface implementation. Complete documentation is available through Claude Code's skills system (symlinked from `.shared/claude/skills/gds/`).
+### Origin Design System Skill - Automatic Documentation Access
 
-**Available through GDS Skill:**
+The **Origin Design System Skill automatically activates** when you work on UI components, forms, layouts, or any interface implementation. Complete documentation is available through Claude Code's skills system (symlinked from `.shared/claude/skills/design-system-doc/`).
+
+**Available through Origin Design System Skill:**
 - 40+ React components (Button, TextField, Modal, Flex, Text, etc.)
 - Design tokens (colors, spacing, typography, elevation)
 - Design foundations and accessibility guidelines
@@ -204,14 +210,14 @@ The **GDS Skill automatically activates** when you work on UI components, forms,
 - Content guidelines (voice, tone, terminology)
 
 **How it works:**
-You don't need to explicitly reference documentation. Simply describe what you want to build, and Claude automatically accesses relevant GDS information.
+You don't need to explicitly reference documentation. Simply describe what you want to build, and Claude automatically accesses relevant Origin Design System information.
 
 Example: "Create a modal with a form" → Claude automatically references Modal and Form component docs
 
 ### Usage Example
 
 ```typescript
-import { Button, Text, Flex, Modal } from '@grammarly/design-system';
+import { Button, Text, Flex, Modal } from '@superhuman/origin';
 
 <Flex direction="column" gap="medium">
   <Text variant="heading-large">Title</Text>
@@ -221,16 +227,16 @@ import { Button, Text, Flex, Modal } from '@grammarly/design-system';
 </Flex>
 ```
 
-### GDS Design Tokens Reference
+### Origin Design Tokens Reference
 
-The GDS Skill provides automatic access to complete design tokens:
+The Origin Design System Skill provides automatic access to complete design tokens:
 - **Colors:** Primary green (#15C39A), semantic colors (success, error, warning)
 - **Typography:** Inter font family, heading scales (xs-xxxlarge)
 - **Spacing:** 4px base unit (xs=4px, sm=8px, md=16px, lg=24px, xl=32px, xxl=48px)
 - **Shadows:** Elevation system for depth
 - **Breakpoints:** Responsive design breakpoints
 
-### How to Use GDS Components
+### How to Use Origin Design System Components
 
 1. **Simply request what you need:**
    - "Add a primary button"
@@ -241,16 +247,16 @@ The GDS Skill provides automatic access to complete design tokens:
 
 2. **Import components:**
    ```typescript
-   import { ComponentName } from '@grammarly/design-system';
+   import { ComponentName } from '@superhuman/origin';
    ```
 
-3. **Follow GDS patterns:**
+3. **Follow Origin Design System patterns:**
    - Component variants are provided automatically
    - Accessibility built-in
    - Design tokens applied consistently
    - Best practices followed
 
-**The GDS Skill ensures you always use correct component APIs and follow Grammarly design standards.**
+**The Origin Design System Skill ensures you always use correct component APIs and follow Grammarly design standards.**
 
 ## Important Rules
 

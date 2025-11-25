@@ -1,0 +1,180 @@
+# Disabled, hidden, and read-only states
+
+Related states that display or hide UI elements that would usually be interactive—but are currently not.
+
+The organization that manages this user’s account has set the dialect of English they want writing corrections to follow. A lock icon and an inline message convey why the input is disabled.
+
+## At a glance
+
+:::caution A note on terminology:
+Inclusive language is mission-critical for the Origin team, as well as the Content Designers and Standards Editors at Superhuman. The term “disabled,” as used in this pattern documentation, is within the technical context of HTML engineering. To learn about our stance on its use in the product, [review the term list entry for “disabled”](/content/terminology/#d).
+:::
+
+There are a few options for how to make a UI element noninteractive or otherwise unavailable.
+
+| State                                    | Description                                    |
+| --------------------------------------   | --------------------------------------         |
+| Disabled                  | Communicates that a UI element cannot be focused, changed, or interacted with.     |
+| Hidden                   | Removes an irrelevant option from the UI.     |
+| Read-only                 | Communicates relevant but not editable information in the context of an input.     |
+| Text                      | Entirely replaces an interactive input to communicate information using static text.     |
+
+**Do not apply a disabled or hidden state to:**
+
+* Large sections of UI
+* Primary navigation
+* Critical actions or controls
+* Filters
+
+## Disabled state
+
+### Usage
+
+Use a default disabled state when:
+
+* A feature or action is unavailable while UI is loading
+* There is a temporary restriction preventing usage
+
+There may be zero, one, or many disabled UI elements or components within a surface.
+
+!\[A verification code input prompts the user to enter a Facebook security code and connect the account. The 6-digit code has been entered and the user has already chosen to connect the account by activating the primary Button. In the state shown, the “Connect” Button and the 6-digit input are disabled because the system is already processing and checking for a match. Then, a confirmation screen tells the user that they’ll be taken back to Grammarly with a link to try again if they aren’t automatically redirected.]\(/img/patterns/disabled\_state1.svg)
+
+*After a user submits their code, all of the interactive elements become temporarily disabled to prevent introducing new errors. Meanwhile, the system checks if the code is a match and then displays either a success message or an error message.*
+
+#### Pitfalls of disabled states
+
+Displaying UI elements in a disabled state can create significant barriers for users, especially those who rely on assistive technologies. Because of this, the Web Content Accessibility Guidelines (WCAG) recommend avoiding disabled states whenever possible.
+
+There are four key criticisms of disabled states:
+
+* **Lack of feedback:** Disabled controls aren’t built to provide feedback by default when a user tries to interact with them. This often creates confusion and frustration without further customization.
+* **Missing context:** On their own, disabled controls won’t inform a user about what must happen to enable them. Users need clear instructions about why something is unresponsive and how to fix it.
+* **Insufficient visual contrast:** Unlike most other UI, disabled controls do not have contrast requirements. Because of this, disabled states frequently lead to reduced readability, especially for individuals with visual impairments.
+* **Accessibility barriers:** Screen readers and other assistive technologies will struggle to identify or interact with disabled controls. Assume that text in a disabled UI element or component will be invisible and unannounced to people navigating using a screen reader.
+
+#### Alternatives to consider
+
+Disabled states, in particular, can often be avoided—providing a better user experience in the process. Instead of disabling controls, prioritize clear communication about why a control might not perform its usual action.
+
+* **Inline messages and visual cues:**
+  * Add a brief explanation about its current state near the control. For example, a form could display "Fill in all fields to continue" when any required fields are empty.
+  * Use visual cues like icons, colors, or borders to reinforce the message and draw attention to relevant areas. Do not use color alone as a cue. For more information, review Accessibility 101—Color training.
+* **Contextual feedback upon interaction:** Allow a user to interact with a control and provide immediate feedback explaining why it cannot perform its action. For instance, pressing a **Save** Button with incomplete form fields could prompt an error message highlighting the missing information.
+* **Progress indicators and loading states:** If a control's action requires time to complete, such as when submitting a form, use a progress indicator to visually communicate that the process is underway. [View Loader component options](/components/loaders).
+* **Alternative controls or actions:** In situations where a control's primary action is not available, consider offering alternative actions or controls that can still be performed. For example, a **Buy now** Button in the disabled state could be replaced with an active **Add to wishlist** Button when an item is out of stock.
+
+### Style
+
+Many components offer a built-in option to disable all or part of the component UI. This flexibility is available to prevent detaching components or overriding code.
+
+If you’re creating a new component and need to apply a disabled state, Origin disabled states follow this visual styling and interaction pattern:
+
+| Attribute                                    | Style                                    |
+| --------------------------------------   | --------------------------------------         |
+| Opacity                  | 40%                                     |
+| Elevation                   | None                                 |
+| Hover                 | None                                       |
+| Cursor                      | `not-allowed`                        |
+
+### Behavior
+
+Disabled components or component parts don’t change when clicked, tapped, or hovered over. They are also not focusable, with the exception of disabled Menu items and Tabs.
+
+A typical design flaw is a Tooltip that appears while hovering over a disabled element. Because the disabled element is not focusable, the Tooltip would not be accessible by keyboard navigation. Instead, consider adding context with an inline message using plain text.
+
+| Do | Don't |
+|----|-------|
+| ![Use an inline message in plain text to add context about why something is disabled.](/img/patterns/disabled_state_behavior_do.svg)<br/>Use an inline message in plain text to add context about why something is disabled. | ![Do not rely on a Tooltip on hover to explain why something is disabled.](/img/patterns/disabled_state_behavior_dont.svg)<br/>Do not rely on a Tooltip on hover to explain why something is disabled. |
+
+#### Additional context
+
+It can be important for feature discovery to display all of a user’s options, even if some are disabled. Additional guidance is usually necessary to explain why something is disabled in this kind of situation.
+
+Display an inline message or alert to provide the additional context necessary for users to understand how to enable the control or otherwise achieve their goal. There are multiple ways to deliver messages in product UI, so consider carefully which best meets your needs.
+
+If you want to discuss your use case, send a message in #ask-origin-design-system or #ama-content-design on Slack.
+
+!\[A step in the checkout process shows choices to customize the billing cycle and members. 151 additional members are selected, which is above the 149-member limit. A banner alert appears above a disabled “Continue” Button and the alert reads: “For teams of 150 or more, contact our Sales team to discuss our Enterprise pricing.” The words “contact our Sales team” function as a link to an email address.]\(/img/patterns/disabled\_state\_add\_context.svg)
+
+*A user can choose to exceed the 149-member limit for Pro plans; however, the **Continue** Button will transition to a disabled state and redirect the user down a different purchase path. An inline message explains how to proceed and provides a link to connect with a human for Enterprise pricing.*
+
+#### Form submission
+
+It’s tempting to block form submission by disabling the primary Button until all fields are complete; however, this causes accessibility issues. Notably, the most critical action on the page will not be announced to screen reader users.
+
+In this case, the disabled Button prevents vital feedback about what's wrong with the current form entry. The reason for the disabled state is undefined, making it difficult to know how to proceed. A user is likely to wonder: "Is something wrong with the input, the data connection, the back-end system, or something else?"
+
+| Do | Don't |
+|----|-------|
+| ![Maintain the active state for Buttons in a form. Display inline error messages to indicate issues like empty information or incorrect format.](/img/patterns/disabled_state_form_do.svg)<br/>Maintain the active state for Buttons in a form. Display inline error messages to indicate issues like empty information or incorrect format. | ![Do not disable Buttons for incomplete forms. This makes it unclear how to proceed by removing content about what is required or must change.](/img/patterns/disabled_state_form_dont.svg)<br/>Do not disable Buttons for incomplete forms. This makes it unclear how to proceed by removing content about what is required or must change. |
+
+## Hidden items
+
+### Usage
+
+It usually provides a better experience to hide UI elements when an item, feature, or action is unavailable based on:
+
+* A user’s role or permissions
+* Conditional logic
+* Situational context
+
+### Behavior
+
+Add enough context so that it’s obvious how to reveal any hidden items or fields. For example, a Checkbox or Switch is often used to reveal additional options that are only relevant to a specific subset of users.
+
+When hidden items are revealed, communicate what’s changed to screen reader users who lack the visual context. This can be achieved with an announcement if the revealed items are complex or by focusing the first of the revealed items, as in the example of a billing and shipping address below.
+
+!\[The billing address has been entered as “548 Market St., San Francisco, CA 94104.” A cursor is shown clicking a Checkbox labeled “Ship to a different address.”]\(/img/patterns/disabled\_hidden\_state\_add\_context.svg)
+
+*In the case of billing and shipping addresses, it makes sense to hide redundant fields until a user decides to use separate information. A duplicate, disabled version of the address fields would unnecessarily take up space and appear more challenging to complete.*
+
+## Read-only state
+
+### Usage
+
+Use a read-only state when:
+
+* It’s beneficial to prevent accidental changes
+* A user’s permissions allow them to view a setting but not change it
+* A UI element or control is locked because another user is editing it
+* The system is processing a task, and the user can’t change a setting until the process is finished
+
+### Style
+
+A read-only state can usually maintain the visual styling of the underlying, interactive input—only the selection needs to be locked or otherwise made uneditable. Because of this, Origin components do not have a “read-only” state in Figma or a corresponding prop in code.
+
+If you choose to add additional emphasis, follow this pattern for customizations to maintain a consistent look and feel:
+
+| Attribute                                    | Style                                    |
+| --------------------------------------   | --------------------------------------         |
+| Label color                  | text/base/default                                     |
+| Read-only text color                  | text/base/subdued                                     |
+| Icon end                  | InterfaceLockIcon                                     |
+| Icon end color                  | icon/base/subdued                                     |
+| Background                   | background/base/default                                 |
+| Hover                 | None                                       |
+| Cursor                      | `not-allowed` or `text`                        |
+
+### Behavior
+
+A user can still click on and focus an input in a read-only state so that, for example, they can select and copy the information. Only the value of the input cannot be changed.
+
+!\[Completed fields for a first name, last name, and email address are shown. The first and last names are editable. The email address displays text in a subdued gray color with a lock ending icon. Beneath the email field, text reads: “This has been set by your organization.”]\(img/patterns/disabled\_read\_only\_state\_usage.svg)
+
+*The user’s email address is locked in a read-only state because their organization controls this choice. However, a user is still able to reach and copy the field’s text, which is displayed in a subdued color to emphasize its inability to be changed.*
+
+### Text as an alternative
+
+Sometimes, all you need is plain text on the page to indicate locked content. This can often achieve the same effect as a read-only state.
+
+Use the `text/base/default` color for locked content presented as text.
+
+!\[An email address is labeled and reads “kai.williams@grammarly.com” with a Button to update the entry. Beneath that is a label for a password with dots indicating the password alongside a Button to update the entry.]\(/img/patterns/disabled\_state\_text\_usage.svg)
+
+*The underlying inputs for a user’s email address and password are Text Fields, yet here, their plain text replacements protect the user from making accidental changes. Any edits require the intentional activation of an Update Button.*
+
+## Related components
+
+- [Button](/components/button)
+- [Forms](/patterns/forms)
+- [Loaders](/components/loaders)

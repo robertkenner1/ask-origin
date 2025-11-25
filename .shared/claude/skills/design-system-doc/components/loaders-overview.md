@@ -1,0 +1,14 @@
+# Loaders
+
+A loader can take different visual styles based on context.
+
+## Usage
+
+* Skeleton Loader provides a visual presentation of the expected information hierarchy.
+* Circular Loader indicates loading content or an action in progress when an approximation of visual presentation is unhelpful.
+* Branded Loader enhances a full-page loading experience with a branded element.
+* Dotted Loader (not planned) represents typing in progress, like in the context of a chatbot.
+
+## Loader options
+
+Further guidance is available in each doc.

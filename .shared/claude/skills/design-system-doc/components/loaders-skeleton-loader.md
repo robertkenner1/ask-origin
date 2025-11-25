@@ -1,0 +1,400 @@
+# Skeleton Loader
+
+A Skeleton Loader displays an abstract preview of loading content.
+
+```tsx
+
+<Flex 
+  direction="column"
+  elevation="high" 
+  borderRadius={2} 
+  bgColor="background-base-default" 
+  width={400} 
+  height={250} 
+  align="center" 
+  justify="start"
+  padding={4}
+  gap={6}
+>
+  <Flex justify="space-between" width="100%">
+    <Flex gap={2}>
+      <Logo accessibilityLabel="superhuman mark logo" brand="superhuman" height={20} />
+        <Text variant="text-xsmall" color="base-subdued" as="p">DeepL Translate</Text>
+    </Flex>
+    <Flex>
+      <Icon accessibilityLabel="" icon={InterfaceCloseIcon} size="small"/>
+    </Flex>
+  </Flex>
+  <SkeletonLoader width="100%" accessibilityLabel="Loading" label="Loading suggestions">
+    <Flex
+      direction="column"
+      gap={5}
+      width="100%"
+    >
+      <Flex justify="space-between" align="center">
+        <SkeletonLoader.Heading width="40%" />
+        <SkeletonLoader.Button variant="tertiary" width={70} />
+      </Flex>
+      <Flex gap={1} direction="column">
+        <Flex gap={2} align="center">
+          <SkeletonLoader.Icon />
+          <SkeletonLoader.Text variant="text-small" width="40%" />
+        </Flex>
+        <SkeletonLoader.Text variant="text-small" width="95%" />
+        <SkeletonLoader.Text variant="text-small" width="95%" />
+      </Flex>
+      <Flex gap={2} align="center">
+        <SkeletonLoader.Button variant="primary" width={70} />
+        <SkeletonLoader.Button variant="tertiary" width={70} />
+      </Flex>
+    </Flex>
+  </SkeletonLoader>
+</Flex>
+
+```
+
+*A Skeleton Loader appears briefly while content is loading in the assistant card. This indicates that writing suggestions will appear soon.*
+
+## Usage
+
+A Skeleton Loader helps a user build a mental model of what will be on a page after loading is complete. Learn about perceived performance on MDN.
+
+**Use when:**
+
+* Content is loading in a section of a page or in an entire, small surface.
+* You are providing a visual presentation of the expected information hierarchy.
+* The underlying content takes longer than one but less than ten seconds to load.
+
+**Do not use when:**
+
+* You want to indicate that a user’s request is being acted on or processed, as you would with a loading status inside a Button. Instead, use a [Circular Loader](/components/circular-loader).
+* You want to represent a loading element, such as video content, that lacks context as an abstract shape. Instead, use a [Circular Loader](/components/circular-loader).
+* Underlying content reliably takes less than one second to load. Instead, allow the content to load directly.
+* Underlying content often takes longer than ten seconds to load. Instead, use a progress bar to indicate loading.
+
+## Anatomy
+
+!\[Anatomy diagram of a Skeleton Loader.]\(/img/components/skeleton\_anatomy.svg)
+
+ContainerSkeleton shapesSkeleton label
+
+## Examples
+
+### Variants
+
+Some semantically named variants are available for common use cases. There are also generic circle and rectangle options to compose your own skeleton shapes.
+
+#### Semantic shapes
+
+Use these premade options to replace the corresponding UI elements.
+
+* `heading` and `text` have multiple heights to represent the matching components.
+* `icon` represents Icons as a circle in a single size of 20px.
+* `button` represents where actions will be available.
+
+```tsx
+
+<Flex padding={4} gap={5} width={500} justify="space-between">
+<Flex direction="column" width={200}>
+  <SkeletonLoader accessibilityLabel="Loading">
+    <SkeletonLoader.Heading variant="heading-large" width="40%" />
+    <SkeletonLoader.Text variant="text-large" width="90%" />
+    <SkeletonLoader.Heading variant="heading-small" width="40%" />
+    <SkeletonLoader.Text variant="text-small" width="90%" />
+  </SkeletonLoader>
+</Flex>
+<SkeletonLoader accessibilityLabel="Loading">
+  <Flex direction="column" gap={4}>
+    <SkeletonLoader.Icon />
+    <Flex gap={2}>
+      <SkeletonLoader.Button variant="primary" width={70} />
+      <SkeletonLoader.Button variant="tertiary" width={70} />
+    </Flex>
+    <SkeletonLoader.Button variant="primary" size="small" width={70} />
+    <SkeletonLoader.Button variant="primary" size="xlarge" width={90} />
+  </Flex>
+
+</SkeletonLoader>
+</Flex>
+
+```
+
+#### Custom shapes
+
+Use the generic `circle` or `rectangle` variants to represent other elements in the UI, including but not limited to:
+
+* Avatars
+* Illustrations and images
+* Form fields
+* Large blocks of dynamic content
+
+The code example demonstrates what images and GIFs look like while they load within the Giphy app action.
+
+```tsx
+
+<Flex padding={4} gap={5} width={500} justify="space-between">
+<SkeletonLoader accessibilityLabel="Loading">
+    <Flex gap={2}>
+      <SkeletonLoader.Rectangle width={220} height={250}/>
+      <Flex direction="column" gap={2}>
+        <SkeletonLoader.Rectangle width={170} height={70}/>
+        <SkeletonLoader.Rectangle width={170} height={100}/>
+      </Flex>
+    </Flex>
+
+</SkeletonLoader>
+</Flex>
+
+```
+
+### Size
+
+Try to size skeleton components similar to the underlying UI elements. The `width` and `height` props can be either:
+
+* A number, which is converted to a pixel value
+* A string, like `width="50%"`
+
+For semantic shapes:
+
+* `width` is adjustable and defaults to the full width of the container.
+* `height` is a predefined value based on the underlying UI element. For example, several text and heading sizes that account for varying line height and padding are available.
+
+A custom circle has only a `width` prop that defines its diameter—you cannot stretch a circle into an oval. For a custom rectangle, you must specify both a `width` and `height`.
+
+```tsx
+
+<SkeletonLoader accessibilityLabel="Loading">
+  <Flex padding={4} gap={5} width={500} justify="space-between">
+    <Flex gap={2} width="100%">
+      <SkeletonLoader.Rectangle width="40%" height={300}/>
+      <Flex direction="column" gap={2} width="100%">
+        <SkeletonLoader.Rectangle width={170} height={70}/>
+        <SkeletonLoader.Circle width={70} />
+        <SkeletonLoader.Rectangle width={220}/>
+        <SkeletonLoader.Rectangle height={32} width="100%"/>
+      </Flex>
+    </Flex>
+  </Flex>
+
+</SkeletonLoader>
+
+```
+
+### Label offset
+
+Use `labelOffset` to adjust how far below the top of the container the “Loading” label appears. It is always centered on a horizontal axis within the container.
+
+```tsx
+
+<SkeletonLoader accessibilityLabel="Loading" labelOffset={150} label="Loading suggestions">
+  <Flex padding={4} gap={5} width={500} justify="space-between">
+    <Flex gap={2} width="100%">
+      <SkeletonLoader.Rectangle width="50%" height={300}/>
+      <Flex direction="column" gap={2} width="100%">
+        <SkeletonLoader.Rectangle width={170} height={70}/>
+        <SkeletonLoader.Circle width={70} />
+        <SkeletonLoader.Rectangle width={220}/>
+        <SkeletonLoader.Rectangle height={32} width="100%"/>
+      </Flex>
+    </Flex>
+  </Flex>
+
+</SkeletonLoader>
+
+```
+
+### Sample compositions
+
+To help you get started, here are a few examples that you can reuse or remix. [Flex](/components/flex) holds everything together in each one. Be imaginative in how you build on these templates! Share what you create with Grammarly team members in #ask-origin-design-system on Slack.
+
+#### Short-form assistant card
+
+A Skeleton Loader appears briefly while suggestions load in the assistant card. This gives the system time to identify, count, and order suggestions for a user.
+
+!\[The short-form assistant card is shown in one image as a set of Skeleton Loader components, then as the fully loaded form in a second image.]\(/img/components/Skeleton\_Composition\_Assistant.svg)
+
+```tsx
+
+  <SkeletonLoader accessibilityLabel="Loading" label="Loading suggestions">
+   <Flex borderColor="base-subdued" padding={4} direction="column" gap={5} width={432}>
+      <Flex justify="space-between" align="center">
+        <SkeletonLoader.Heading width="40%" />
+        <SkeletonLoader.Button variant="tertiary" width={70} />
+      </Flex>
+      <Flex gap={2} direction="column">
+        <Flex gap={2} align="center">
+          <SkeletonLoader.Icon />
+          <SkeletonLoader.Text variant="text-small" width="40%" />
+        </Flex>
+        <SkeletonLoader.Text variant="text-small" width="95%" />
+      </Flex>
+    <Flex gap={2} align="center">
+    <SkeletonLoader.Button variant="primary" width={70} />
+    <SkeletonLoader.Button variant="tertiary" width={70} />
+    </Flex>
+  </Flex>
+</SkeletonLoader>
+
+```
+
+#### Form
+
+This Form skeleton comes from a specific example in app actions. The Select and Text Field components are represented by a small `text` and a custom `rectangle` skeleton composed together and repeated vertically.
+
+!\[An Asana form inside app actions is shown in one image as a set of loading form fields, then as the fully loaded form in a second image.]\(/img/components/Skeleton\_Composition\_Form.svg)
+
+#### List
+
+In the account chooser, a Skeleton Loader appears while the list of a user’s signed-in and saved accounts is loading.
+
+!\[The account chooser list is shown as a set of skeleton elements in one image, then as a set of loaded email addresses in a second image.]\(/img/components/Skeleton\_Composition\_List.svg)
+
+## Best practices
+
+Apply these principles when building a Skeleton Loader.
+
+### Number of skeleton components
+
+Compose a simplified imitation of UI with skeleton components. The primary goal is to prevent the page or other content from jumping around visually.
+
+**Do:** Keep the underlying UI simple when creating a Skeleton Loader. Ignore small or decorative details.
+
+![Keep the underlying UI simple when creating a Skeleton Loader. Ignore small or decorative details.](/img/components/Skeleton_Do_1.svg)
+
+**Don't:** Do not add too much detail by representing every visible UI element or simplify the UI so much that it becomes unrecognizable.
+
+![Do not add too much detail by representing every visible UI element or simplify the UI so much that it becomes unrecognizable.](/img/components/Skeleton_Dont_1.svg)
+
+### Static text and navigation elements
+
+You can likely load at least part of a page without a Skeleton Loader—especially static elements like Headings. Reserve skeleton components for dynamic content that would take longer than one second to load.
+
+| Do ✅ | Don't ❌ |
+|-------|----------|
+| Immediately show static headings and text that don't change. Likewise, prioritize displaying navigation elements vital to taking action and moving around the product. | Do not use skeleton components unnecessarily. Display any UI that has been loaded so a user can interact with it as soon as possible. |
+
+### Dynamic text
+
+Be sure not to confuse users by displaying placeholder or example text where their own writing should be.
+
+| Do ✅ | Don't ❌ |
+|-------|----------|
+| Use Skeleton Loaders for dynamic headings or text, such as the title and content of a user's document. | Do not use placeholder text as a loading element, as it can potentially confuse a user and also flashes as it transitions to the user's actual text—an undesirable outcome comparable to the page jumping visually. |
+
+## Behavior
+
+### Animation timeline
+
+Adding animation to a Skeleton Loader when it appears and transitions to content helps soften the loading effect. Implementation teams are responsible for adding this functionality, and these specs are recommended when animating a Skeleton Loader:
+
+```animation
+Curve: Ease in and out;
+Duration: 300ms
+```
+
+!\[A timeline of events is shown where a blank screen appears, then skeleton components load after 1 second, then a label that says “Loading” appears after 3 seconds.]\(/img/components/Skeleton\_sequencing.svg)
+
+| Time               | Recommended loading element                                          |
+| ------------------ | -------------------------------------------------------------------- |
+| Less than 1 second | Blank screen animation                                               |
+| 1 second           | Skeleton shapes fade in                                              |
+| 3 seconds          | “Loading” text fades in (`delay` built into component)               |
+| 2–9 seconds        | Fade out to actual content. Can occur before “Loading” text appears. |
+
+## Accessibility
+
+There are both a `label` and an `accessibilityLabel` prop for flexibility in various use cases. The visible label displays “Loading” by default.
+
+If no other context is available during the loading state, you **must** include text in the visible `label` that describes what is loading. Aspire to summarize the subject of loading content in one to two words. For example, use “Loading suggestions” in the case where all visible content based on a user’s text in the assistant card is dynamic.
+
+It’s also important to consider how machine or AI translations by third-party apps and browser extensions could affect our product. Autotranslations are not possible for screen reader–only text. For this reason, it’s recommended to include the specific content that is loading in the visible `label` whenever possible.
+
+If a nearby heading communicates the content’s subject, you can keep the default “Loading” text in the label by itself. However, an `accessibilityLabel` is required to add context about what is loading for people who use a screen reader. For example, use “Loading accounts” in the example of a list of a user’s signed-in and saved accounts.
+
+### User settings for contrast and motion
+
+Skeleton Loader accounts for a user’s browser and system settings.
+
+| User setting                     | Skeleton Loader response                                     |
+| -------------------------------- | ------------------------------------------------------------ |
+| No preferences set               | Show the gradient animation                                  |
+| Reduced motion                   | Turn off the gradient animation                              |
+| High contrast                    | Add a transparent border                                     |
+| Reduced motion and high contrast | Turn off the gradient animation and add a transparent border |
+
+## Installation
+
+1. Import the CSS (if not done already).
+
+```css
+@import "@superhuman/origin";
+```
+
+2. Import the Skeleton Loader component in JS.
+
+```tsx
+import { SkeletonLoader } from "@superhuman/origin";
+```
+
+## API
+
+### SkeletonLoader props
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `children` | `React.ReactNode` | - | Content that is either one of the SkeletonLoader subcomponents or loaded content. |
+| `accessibilityLabel` | `string` | Loading | Label to read aloud immediately for screen reader users. |
+| `delay` | `number` | 2500 | Delay in milliseconds before showing the label visually. |
+| `label` | `string` | - | Displays visible text on top of skeleton components. |
+| `labelOffset` | `number` | 20 | Defines the offset in pixels from the top of the container to the visible “Loading” label. |
+| `width` | `string | number` | - | Defines the width of the skeleton container. Defaults to the full width of its container. |
+
+
+### Custom shapes
+
+#### SkeletonLoader.Circle props
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `width` | `string | number` | - | Defines the diameter of the skeleton circle. Defaults to the full width of its container. |
+
+
+#### SkeletonLoader.Rectangle props
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `height` | `string | number` | 12 | Defines the height of the skeleton item. |
+| `width` | `string | number` | - | Defines the width of the skeleton item. Defaults to the full width of its container. |
+
+
+### Semantic shapes
+
+#### SkeletonLoader.Button props
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `width` | `string | number` | - | Defines the width of the skeleton item. Defaults to the full width of its container. |
+
+
+#### SkeletonLoader.Heading props
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `width` | `string | number` | - | Defines the width of the skeleton item. Defaults to the full width of its container. |
+
+
+#### SkeletonLoader.Icon props
+
+No props needed
+
+#### SkeletonLoader.Text props
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `width` | `string | number` | - | Defines the width of the skeleton item. Defaults to the full width of its container. |
+
+
+## Related components
+
+- [Branded Loader](/components/branded-loader)
+- [Circular Loader](/components/circular-loader)
