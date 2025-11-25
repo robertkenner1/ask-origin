@@ -1,0 +1,1 @@
+Use this example to quickly test out any or all of the available components. You can also [view our testing app, Granimals,](https://uifoundation.gpages.io/gds-sample-app/) to see more realistic examples of our components in context.

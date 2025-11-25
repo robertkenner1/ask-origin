@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import DocumentList from "./components/DocumentList";
 import { DocumentListHeader } from "./components/DocumentListHeader";
 import { X } from "lucide-react";
-import { Button } from "@grammarly/design-system";
+import { Button } from "@superhuman/origin";
 
 // Separate component to use searchParams inside Suspense
 function PageContent() {

@@ -3,6 +3,10 @@
 This guide helps Claude assist users in creating pixel-perfect frontend prototypes from websites, screenshots, or Figma designs in this monorepo.
 You are experienced Frontend Developer and mature designer.
 
+> **⚠️ IMPORTANT: GDS Decommissioned**
+> **Grammarly Design System (GDS)** has been decommissioned in favor of **Origin Design System**.
+> If users request GDS or `@grammarly/design-system`, notify them to use **Origin Design System** and the `design-system-doc` skill instead.
+
 ## Architecture
 
 **IMPORTANT:** This monorepo uses **symlinks** for shared resources.
@@ -26,7 +30,7 @@ ai-frontend-prototypes/
 │   └── claude/                  # Claude Code configuration (no dot prefix)
 │       ├── commands/            # Custom slash commands
 │       ├── skills/              # Claude Code skills
-│       │   └── gds/             # Grammarly Design System skill
+│       │   └── design-system-doc/  # Origin Design System skill
 │       └── settings.local.json
 │
 ├── repo-scripts/                 # 📦 Repository management
@@ -62,13 +66,13 @@ ai-frontend-prototypes/
 **Key Rules:**
 - **Work from project directory:** `cd projects/[project-name]/` before starting
 - **Symlinked resources:** `scripts/`, `.claude/commands/`, and `.claude/skills/` are symlinks
-- **GDS Skill auto-activates:** No need to explicitly reference GDS documentation
+- **Origin Design System Skill auto-activates:** No need to explicitly reference design system documentation
 - **Don't edit symlinks:** To customize, remove symlink and create real directory
 - **Settings are per-project:** `.claude/settings.local.json` is a real file, safe to customize
 - Run `make build` from project dir to build
 - Built projects auto-appear in `public/` and main directory listing
 - Edit source files in `projects/*/src/`, not `public/`
-- If user asked to build prototype in Grammarly style, check logo and style in Grammarly Design System
+- If user asked to build prototype in Grammarly style, check logo and style in Origin Design System
 - Always double check if something looks wrong in size or colors
 - Better iterate more times with Playwright but provide better result
 - If user ask to publish - do `make deploy` and provide links for creating MR in GitLab and link for preview https://ai-frontend-prototypes-c8939b.gpages.io/
@@ -132,12 +136,15 @@ Use: mcp__playwright__browser_snapshot
 - Testing responsive behavior
 - Pixel-perfect validation
 
-### 3. Grammarly Design System (GDS) Skill
-**Documentation:** https://uifoundation.gpages.io/grammarly-design-system
-**Source:** https://gitlab.grammarly.io/uifoundation/grammarly-design-system
-**Skill Location:** `.shared/claude/skills/gds/`
+### 3. Origin Design System Skill
+**Documentation:** https://uifoundation.gpages.io/origin
+**Source:** https://gitlab.grammarly.io/uifoundation/origin
+**Skill Location:** `.shared/claude/skills/design-system-doc/`
+**Package:** `@superhuman/origin`
 
-**Available through GDS Skill:**
+> **Note:** Origin Design System replaces the deprecated Grammarly Design System (GDS).
+
+**Available through Origin Design System Skill:**
 - 40+ React components with complete documentation
 - Design tokens (colors, spacing, typography, elevation)
 - Design foundations and accessibility guidelines
@@ -145,7 +152,7 @@ Use: mcp__playwright__browser_snapshot
 - Content guidelines (voice, tone, terminology)
 
 **How it works:**
-The GDS Skill **automatically activates** when you work on UI components, forms, layouts, or any interface implementation. You don't need to explicitly reference documentation - Claude will load relevant GDS information as needed.
+The Origin Design System Skill **automatically activates** when you work on UI components, forms, layouts, or any interface implementation. You don't need to explicitly reference documentation - Claude will load relevant Origin Design System information as needed.
 
 **The skill provides:**
 - Component selection guidance

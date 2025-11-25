@@ -1,0 +1,425 @@
+# Modal
+
+A Modal allows for completing tasks or displaying information without navigating to a new page.
+
+This Modal contains Text Fields that give a user a way to update their first and last names.
+
+## Usage
+
+Modals create friction in order to focus a user’s attention. You can use this friction to intentionally slow a user down. However, employ this tactic in moderation, taking care to avoid unnecessary disruptions.
+
+**Use when:**
+
+* Displaying urgent information
+* Communicating that an immediate action is required
+* Collecting simple data without requiring a user to navigate to a new page
+* Preventing unexpected errors or context changes that may occur through a user’s accidental selection
+* Confirming an action that can’t be undone
+
+**Do not use when:**
+
+* Displaying low- to medium-priority information. Instead, use a [Popover](/components/popover).
+* Displaying an overlay that a user didn’t summon. Instead, use a [Popover](/components/popover).
+* Providing quick feedback or confirmation of a user’s action. Instead, use a [Toast](/components/toast).
+* Displaying large amounts of information or Forms with more than three rows of inputs. Instead, use a full page.
+* A Modal would be activated from within another Modal. Instead, try making the first Modal a full, standalone page.
+
+## Anatomy
+
+!\[Anatomy diagram of a Modal.]\(/img/components/modal\_anatomy.svg)
+
+OverlayTitleDescription (optional)BodyFooterClose Icon Button (optional)Scroll bar (automatic)Tertiary and primary Buttons
+
+## Examples
+
+### Default
+
+By default, a Modal includes an overlay, a title, body content, and a footer.
+
+```tsx
+
+function Example() {
+const [open, setOpen] = React.useState(false);
+  return (
+    <div>
+      <Button variant="primary" text="Open example" onClick={() => setOpen(true)} />
+      <Modal width="small" title="Example" isOpen={open} onClose={() => setOpen(false) }>
+        <Modal.Body>
+          <Text as="p" variant="text-small">
+            Text or components go in the body of a Modal.
+          </Text>
+        </Modal.Body>
+        <Modal.Footer>
+          <Flex gap={{ column: 3 }} justify="end" width="100%">
+            <Button variant="tertiary" text="Cancel" onClick={() => setOpen(false)} />
+            <Button variant="primary" text="Save" onClick={() => setOpen(false)} />
+          </Flex>
+        </Modal.Footer>
+      </Modal>
+    </div>
+  )
+}
+
+```
+
+### With description
+
+Use `description` to provide additional information beyond the title to assist a user in successful task completion. [Learn how to write effective descriptions](/components/modal#description).
+
+```tsx
+
+function Example() {
+const [open, setOpen] = React.useState(false);
+  return (
+    <div>
+      <Button variant="primary" text="Open example" onClick={() => setOpen(true)} />
+      <Modal width="small" title="Add rule" description="When your team writes, Grammarly will use your rule to suggest changes to the text they enter." isOpen={open} onClose={() => setOpen(false) }>
+        <Modal.Body>
+          <Form>
+            <FormRow>
+              <TextField isRequired label="Original text"/>
+            </FormRow>
+            <FormRow>
+              <TextField label="Rule"/>
+            </FormRow>
+            <FormRow>
+              <Textarea label="Explanation" helperMessage="Add context or an example for your team."/>
+            </FormRow>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Flex gap={{ column: 3 }} justify="end" width="100%">
+            <Button variant="tertiary" text="Cancel" onClick={() => setOpen(false)} />
+            <Button variant="primary" text="Save" onClick={() => setOpen(false)} />
+          </Flex>
+        </Modal.Footer>
+      </Modal>
+    </div>
+  )
+}
+
+```
+
+### Scrolling
+
+Content should fit within a Modal. If a scroll bar is needed, consider whether the content would be better placed on a full page.
+
+```tsx
+
+function Example() {
+const [open, setOpen] = React.useState(false);
+const exampleText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed tellus lorem.';
+  return (
+    <div>
+      <Button variant="primary" text="Open example" onClick={() => setOpen(true)} />
+      <Modal width="small" title="A lot of lorem ipsum" isOpen={open} onClose={() => setOpen(false) }>
+        <Modal.Body>
+          <Text as="p" variant="text-small">{exampleText.repeat(50)}</Text>
+        </Modal.Body>
+        <Modal.Footer>
+          <Flex gap={{ column: 3 }} justify="end" width="100%">
+            <Button variant="tertiary" text="Cancel" onClick={() => setOpen(false)} />
+            <Button variant="primary" text="OK" onClick={() => setOpen(false)} />
+          </Flex>
+        </Modal.Footer>
+      </Modal>
+    </div>
+  )
+}
+
+```
+
+### Required acknowledgement
+
+Set `dismissOnOutsideClick` and `hasCloseButton` to `false` if users are required to acknowledge the content of the Modal. [Learn about types of Modals.](/components/modal#closing-modals)
+
+```tsx
+
+function Example() {
+const [open, setOpen] = React.useState(false);
+  return (
+    <div>
+      <Button variant="primary" text="Open example" onClick={() => setOpen(true)} />
+      <Modal hasCloseButton={false} dismissOnOutsideClick={false} role="alertdialog" title="Discard changes?" isOpen={open} onClose={() => setOpen(false) }>
+        <Modal.Body>
+          <Text as="p" variant="text-small">
+            If you leave, your unsaved changes will be discarded.
+          </Text>
+        </Modal.Body>
+        <Modal.Footer>
+          <Flex gap={{ column: 3 }} justify="end" width="100%">
+            <Button variant="tertiary" text="Cancel" onClick={() => setOpen(false)} />
+            <Button variant="primary" text="Discard changes" onClick={() => setOpen(false)} />
+          </Flex>
+        </Modal.Footer>
+      </Modal>
+    </div>
+  )
+}
+
+```
+
+### Footer options
+
+#### Actions​
+
+Use action Buttons to allow a user to complete a task or dismiss information. This variant includes a tertiary Button to dismiss or cancel without saving changes and a primary Button to save or progress forward.
+
+```tsx
+
+    <div style={{width: "400px"}}>
+        <Modal.Footer>
+          <Flex gap={{ column: 3 }} justify="end" width="100%">
+            <Button variant="tertiary" text="Cancel" onClick={() => {}} />
+            <Button variant="primary" text="Save" onClick={() => {}} />
+          </Flex>
+        </Modal.Footer>
+    </div>
+
+```
+
+#### Control
+
+Use a Checkbox in the footer when a specific control needs to be emphasized and presented as a standalone option.
+
+```tsx
+
+  <div style={{width: "400px"}}>
+      <Modal.Footer>
+        <Flex justify="space-between" align="center" width="100%">
+          <Checkbox>Don't ask me again</Checkbox>
+          <Flex gap={{ column: 3 }} justify="end">
+            <Button variant="tertiary" text="Cancel" onClick={() => {}} />
+            <Button variant="primary" text="Save" onClick={() => {}} />
+          </Flex>
+        </Flex>
+      </Modal.Footer>
+  </div>
+
+```
+
+#### Multistep
+
+Use a multistep footer when a user can navigate among a set of Modals, such as in an onboarding experience. This variant includes a step counter and **Back** and **Next** Buttons.
+
+```tsx
+
+  <div style={{width: "400px"}}>
+    <Modal.Footer>
+      <Flex justify="space-between" align="center" width="100%">
+        <Button variant="tertiary" text="Back" onClick={() => {}} />
+        <Text as="span" color="base-subdued">2 of 3</Text>
+        <Button variant="primary" text="Next" onClick={() => {}} />
+      </Flex>
+    </Modal.Footer>
+  </div>
+
+```
+
+## Behavior
+
+### Modal on top of another Modal
+
+Do not allow a Modal to open on top of or at the same time as another Modal.
+
+Instead, consider if the content in the initial Modal could be placed directly on a full page. This allows the second Modal to open correctly on top of a full page instead of on top of another Modal.
+
+You might also try another design component, such as a [Popover](/components/popover) or [Toast](/components/toast), to present the information. Or break the interactions into multiple steps across separate Modals to provide users with a more linear experience.
+
+### Background content
+
+When a Modal is open, a user can’t interact with or scroll through background content.
+
+!\[Modal displaying with a semi-opaque overlay obscuring the background content]\(/img/components/modal\_scrim.svg)
+
+A user can’t scroll through their document while a Modal is open. This Modal asks users to set
+their goals.
+
+### Overlay
+
+The overlay is a temporary, semitransparent layer behind a Modal that obscures the background so a user can focus on the Modal’s content.
+
+A user can click the overlay to dismiss a Modal if the content is considered passive. However, if the Modal requires acknowledgment or collects data from a user, clicking on the overlay should not close the Modal. [Learn about closing Modals](/components/modal#closing-modals).
+
+### Position
+
+A Modal should be centered on the page and remain in focus until a user dismisses it or takes an action. Other elements, such as another Modal, cannot obscure a Modal or appear partially onscreen.
+
+### Size
+
+#### Width
+
+Modals have two fixed widths you can choose from: 480px and 640px. These widths don’t change regardless of the size of the viewport.
+
+#### Height
+
+The height of a Modal depends on the length of the content inside it. When the Modal height reaches 75% of the viewport height, a scroll bar is required. When the content scrolls, the header and footer are fixed so that the title and Buttons are always visible.
+
+!\[Diagram showing that 75% of the viewport height is scrollable when enough content is present.]\(/img/components/modal\_height-scroll.svg)
+
+### Opening
+
+A user’s action, such as activating a Button, opens a Modal. Keep in mind that a Modal shouldn’t open on top of or at the same time as another Modal.
+
+### Closing Modals
+
+The properties `dismissOnOutsideClick` and `hasCloseButton` can be configured depending on the type of Modal. Add a note in your design file indicating if a user can close a Modal by clicking outside of it or not and whether the Modal should have a Close Icon Button.
+
+#### Transactional or required acknowledgement
+
+A user must take deliberate action to close a Modal that is transactional, collects data, or requires acknowledgment. This helps prevent a user from erasing their entries or breaking a workflow. For example, an accidental click could erase a user’s work in multiple Text Field inputs inside a Modal.
+
+There is no **Close** Icon Button in the upper-right corner for transactional or required acknowledgment Modals.
+
+Here are ways to close a transactional or required acknowledgment Modal:
+
+* **Complete task:** Complete the task and activate the primary Button.
+* **Esc:** Press the Esc key on the keyboard.
+* **Cancel:** Activate the tertiary Button to go back without saving or acknowledgment.
+
+#### Passive
+
+Content in a passive Modal is considered supplementary, and dismissing it intentionally or accidentally doesn’t negatively impact a user’s experience. Examples include a sign-in window or a Modal to read through a comment thread.
+
+Here are ways to close a passive Modal:
+
+* **Complete task:** Complete the task and activate the primary Button.
+* **Esc:** Press the Esc key on the keyboard.
+* **Close Icon Button:** Activate the **Close** Icon Button in the upper-right corner.
+* **Click or tap elsewhere:** Click or tap anywhere on the overlay outside of the Modal.
+
+## Accessibility
+
+### Focus order
+
+The Modal container will itself receive focus on open, and communicate the title of the Modal. If necessary, use the `autofocus` or `ref` prop to control focus when a Modal opens. When overriding the default focus, the focus should move to an element that a user is expected to interact with immediately, such as a Text Field or **Close** Icon Button, and provide enough context on the action that should be taken.
+
+The focus order is locked to the modal so that Tab and Shift+Tab keep the focus inside of a Modal. When a Modal is open, a user can’t interact with or scroll through background content.
+
+When a Modal is closed, the focus returns to the element that activated the Modal.
+
+### Role
+
+If the Modal requires a user’s immediate attention because it presents an error or requires confirmation, set `role="alertdialog"`. Otherwise, informational or data-collecting Modals will use the default `role="dialog"`. [Learn about the alertdialog role at MDN.](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/alertdialog_role)
+
+### Keyboard interaction
+
+| Key                                  | Expected result                                                                                                                                       |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Esc                       | Closes the Modal.                                                                                                                                     |
+| Tab                       | Moves focus through any focusable elements within the Modal. Once the end of a Modal is reached, the focus loops to the beginning of the Modal again. |
+| Space or Enter | Activates any actions within the Modal, including the **Close** Icon Button.                                                                          |
+
+## Writing
+
+### Header
+
+#### Title
+
+A title helps a user quickly understand what they’ll find in the body below.
+
+| Do ✅ | Don't ❌ |
+|-------|----------|
+| Use a directive [verb]+[noun] structure to highlight the key concept. ![A title in a Modal says "Create snippet".](/img/components/Modal_writing_do_1.svg) | Do not use "New [item]" when creating or adding something. ![A title in a Modal says "New snippet".](/img/components/Modal_writing_dont_1.svg) |
+| Use a question that directly identifies the consequence of a destructive or potentially accidental action. ![A title in a Modal says "Discard changes?".](/img/components/Modal_writing_do_2.svg) | Do not use ambiguous phrases like "Are you sure?" that may increase user anxiety while failing to explain the consequence of the proceeding. ![A title in a Modal says "Are you sure?".](/img/components/Modal_writing_dont_2.svg) |
+| Use short fragments without articles (examples: a, the) to boost readability and focus. ![A title in a Modal says "Create collection".](/img/components/Modal_writing_do_3.svg) | Do not use articles unless unavoidable. ![A title in a Modal says "Create a collection".](/img/components/Modal_writing_dont_3.svg) |
+| Use sentence case. ![A title in a Modal says "Add term" and only the first letter is capitalized.](/img/components/Modal_writing_do_4.svg) | Do not use Title Case or ALL CAPS. ![A title in a Modal says "ADD TERM" and all letters are capitalized.](/img/components/Modal_writing_dont_4.svg) |
+| Use a question mark for a title framed as a question. ![A title in a Modal says "Remove account?".](/img/components/Modal_writing_do_5.svg) | Do not use a period or an exclamation point at the end of a title, whether it's a fragment or full sentence. ![A title in a Modal says "Update email." and includes a period.](/img/components/Modal_writing_dont_5.svg) |
+| Use a single line whenever possible. Text can wrap, but a shorter rewrite or adding description text is preferable. ![A title in a Modal says "Add preset terms" and there is a description below that letting a user know they'll browse a list of terms provided by Grammarly.](/img/components/Modal_writing_do_6.svg) | Do not truncate a title. ![A title in a Modal says "Browse lists of preset …" so it's clear that there is unfinished text that a user might wonder about.](/img/components/Modal_writing_dont_6.svg) |
+
+#### Description
+
+A description in a Modal's header functions similarly to helper text for an input. It provides additional information beyond the title to assist a user in successful task completion. [Learn how to write helper text](/patterns/forms-pattern/forms#helper-text).
+
+| Do ✅ | Don't ❌ |
+|-------|----------|
+| Use a description when a Modal's purpose isn't obvious or to aid the successful completion of a task. ![](/img/components/Modal_description_do.svg) | Do not use a description when a Modal is for basic, common actions. ![](/img/components/Modal_description_dont.svg) |
+
+### Body
+
+The body is where a user finds information and fills in data. It is a flexible space between the header and the footer. Remember these guidelines when writing body content:
+
+* Prioritize the most vital information first.
+* When placing a Form inside a Modal, follow the writing guidelines for [Forms](/patterns/forms).
+* Write all text in sentence case. This means capitalizing only the first letter of the first word and any proper nouns in a fragment or sentence.
+* Include end punctuation in a complete sentence or to distinguish between two fragments.
+
+### Footer
+
+#### Actions
+
+Follow the Button documentation for actions in a Modal. [Learn how to write a Button](/components/button#writing).
+
+When presenting information, offering both a **Close** Icon Button in the upper-right corner and a **Close** primary Button can make it easier for a user to dismiss the Modal.
+
+#### Control
+
+Follow the Checkbox documentation for a control in a footer. [Learn how to write a Checkbox label](/components/checkbox#writing).
+
+#### Multistep
+
+* Use **Back** and **Next** as labels for the tertiary and primary Buttons to navigate between steps.
+* When presenting only information, use **OK** as the primary Button in the last Modal of the series.
+* When collecting data or completing a task, use an appropriate action verb, such as **Create** or **Save**, as the primary Button in the last Modal of the series.
+
+## Installation
+
+1. Import the CSS (if not done already).
+
+```css
+@import "@superhuman/origin";
+```
+
+2. Import the Modal component in JS.
+
+```tsx
+import { Modal } from "@superhuman/origin";
+```
+
+## API
+
+### Modal props
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `children` | `ReactNode` | - | The content of the Modal should be contained in ModalBody and ModalFooter subcomponents. |
+| `title` | `string` | - | Used for the title of the Modal, displayed in the header. |
+| `accessibilityLabelCloseButton` | `string` | Close | Used to override the default label on the **Close** Icon Button. |
+| `description` | `string` | - | Displays a description beneath the title with details about the Modal. |
+| `dismissOnOutsideClick` | `boolean` | true | Determines whether you can click outside the Modal container to close the Modal window. |
+| `hasCloseButton` | `boolean` | true | Determines if the Modal contains a **Close** Icon Button in the top corner. |
+| `isOpen` | `boolean` | - | Determines whether the Modal is visible |
+| `role` | `'dialog' | 'alertdialog'` | dialog | Used by screen readers to communicate importance. \`dialog\` is for data input or information, while \`alertdialog\` is for alerts and errors. |
+| `target` | `Element | DocumentFragment` | - | If set, the modal is rendered into the provided element; otherwise, it renders in place |
+| `width` | `'small' | 'medium'` | medium | Defines the width of the Modal. Small is 480px and Medium is 640px. |
+| `onClose` | `( ) => void` | - | Event handler that is called when the Modal is about to close. Use this to manually control the \`isOpen\`. |
+| `onHide` | `( ) => void` | - | Event handler that is automatically called when the Modal has closed. |
+| `onShow` | `( ) => void` | - | Event handler that is automatically called when the Modal has opened. |
+
+
+### Modal.Body props
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `children` | `ReactNode` | - | Used for the main content of the Modal, often text or a small form. |
+
+
+### Modal.Footer props
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `children` | `ReactNode` | - | Contains the actions of the Modal, such as **Save** and **Cancel** Buttons. |
+
+
+### Modal.Provider props
+
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `value` | `Element | DocumentFragment` | - | Provides the \`target\` property to all descendant Modals. |
+
+
+## Related components
+
+- [Form](/components/form)
+- [Popover](/components/popover)
+- [Toast](/components/toast)

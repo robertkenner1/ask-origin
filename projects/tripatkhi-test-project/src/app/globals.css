@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "@grammarly/design-system";
+@import "@superhuman/origin";
 
 @custom-variant dark (&:is(.dark *));
 

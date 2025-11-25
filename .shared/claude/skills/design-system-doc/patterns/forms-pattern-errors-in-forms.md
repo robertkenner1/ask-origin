@@ -1,0 +1,98 @@
+# Error in forms
+
+Errors mistakes, and issues can arise throughout the user experience. It is essential to alert users of these blockers so they can make the necessary adjustments and proceed with their intended actions.
+
+## Usage
+
+### When to use
+
+Error validation should appear `onSubmit` when a form contains incorrect or invalid information submitted by a user. It is important to explain what went wrong and how to fix it within the error message itself.
+
+### Where to use
+
+Error messages in forms must present themselves noticeably and recognizably to users. Display an error message directly below the form field where the error has occurred.
+
+### Best practices in Form design for limiting errors
+
+Lessen the likelihood errors occur through thoughtful form design practices by helping guide a user towards a successful form submission:
+
+* Keep forms as short as possible – ideally with the CTA above the fold
+* Only fields that are absolutely needed should be set as required
+* Use “(Required)” for required fields, and “(Optional)” for non-required fields when most fields in the form are required. Learn more in [Required or Optional indicator](/patterns/forms-pattern/forms#required-or-optional-indicator-1)
+* Consider adding formatting instructions or helper text above an input if it’s likely to reduce the chance of submission errors
+
+Learn more about [Forms](/patterns/forms-pattern/forms).
+
+## Anatomy
+
+!\[Anatomy diagram of erros in form]\(/img/patterns/formsErrors\_anatomy.svg)
+
+Error summaryError itemError message
+
+## Error summary
+
+* Group errors at the top of the fieldset: In addition to the error summary, continue to display individual error messages directly near the field where the error has occurred
+* The error summary message must match the error message below the corresponding form fields. Learn more in the [Writing](/patterns/forms-pattern/errors-in-forms#writing) guidelines.
+
+### Fewer than 3 errors
+
+When there are fewer than 3 errors, display an error message directly below the field where there has been an error and specify the number of errors in an error summary.
+
+!\[A form fields with error on name and email. An error summary on top with the sum of all errors.]\(/img/patterns/formsErrors\_less\_than\_3.svg)
+
+### 3 or more errors
+
+When there are 3 or more errors, display an error message directly below the field where there has been an error and call out each individual error in an error summary.
+
+**Link the error items in the error summary to their related fields.**
+If there is an error where a user has to enter data into multiple fields – such as the day, month, and year fields in a date input component – link to the first field containing an error.
+
+!\[A form fields with 4 errors. An error summary on top with the sum of all errors with link to individual error field.]\(/img/patterns/formsErrors\_more\_than\_3.svg)
+
+## Behavior
+
+### Validation logic
+
+Once a form has been validated with an error, direct the user to the form fields with the error and provide instructions on how to resolve them
+
+* Do not clear any form fields when showing the error message – keep both valid and invalid user inputs
+* Error summary is triggered when an error is returned after form validation
+* If there is an error summary present, focus should move to the [error summary](/patterns/forms-pattern/errors-in-forms#error-summary)
+
+### onSubmit vs. onBlur
+
+Error validation on form submission is preferable to onBlur because it respects how users typically fill out forms – jumping around, copy-pasting, and clicking elsewhere accidentally.
+Using `onBlur` assumes a user is "done" with a field the moment they leave it, which will trigger an error message while a user could still be working on completing a field.
+Conversely, `onSubmit` only validates when a user clicks the submit Button, giving them more control over when to get feedback rather than through bothersome notifications.
+
+### Clearing error messages
+
+Error messages should be cleared on form validation when corrected inputs are submitted by the user.
+When all errors have been addressed, the user should be informed that their form has been successfully submitted.
+
+## Writing​
+
+A user’s action activates an error, so we are careful to avoid language that could make them feel blamed for the issue. Error messages should be empathetic (though not apologetic), informational, and action-oriented.
+
+## Accessibility
+
+* Use helper text to clearly and concisely inform the user of any formatting requirements.
+  * `helperMessage` is available as a prop for [Checkbox](/components/checkbox), [Combobox](/components/combobox), [RadioGroup](/components/radio-group), [Select](/components/select), [Switch](/components/switch), [Textarea](/components/textarea), and [TextField](/components/text-field).
+* Provide text conveying the field is required for assistive technology.
+  * Add required prop to input, select and textarea elements, if not using Origin components.
+  * `isOptional` and `isRequired` are props for [Checkbox](/components/checkbox), [Combobox](/components/combobox), [RadioGroup](/components/radio-group), [Select](/components/select), [Textarea](/components/textarea), and [TextField](/components/text-field).
+* Include a hidden `Error` before the error message.
+* Connect the notification's id to the input using `aria-describedby`.
+* Add `aria-live role=”status"` or `role=”alert"` to the [error summary](/patterns/forms-pattern/errors-in-forms#error-summary).
+* In an error summary, move focus to the container of the error list every time after validation so that screen reader users can find it.
+
+## Related components
+
+- [Checkbox](/components/checkbox)
+- [Combobox](/components/combobox)
+- [Form](/components/form)
+- [Radio Group](/components/radio-group)
+- [Select](/components/select)
+- [Switch](/components/switch)
+- [Textarea](/components/textarea)
+- [TextField](/components/text-field)

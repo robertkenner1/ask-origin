@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { GdsHeader } from "./components/GdsHeader";
+import { Header } from "./components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +21,7 @@ export default function RootLayout({
       <body
         className={`${inter.className} bg-background text-foreground antialiased`}
       >
-        <GdsHeader />
+        <Header />
         <div className="pt-[51px]">{children}</div>
       </body>
     </html>
