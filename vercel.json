@@ -1,9 +1,15 @@
 {
   "version": 2,
-  "buildCommand": "cd projects/design-system-chat && npm install && npm run build",
-  "devCommand": "cd projects/design-system-chat && npm run dev",
-  "installCommand": "cd projects/design-system-chat && npm install",
-  "outputDirectory": "projects/design-system-chat/.next",
-  "framework": "nextjs",
-  "rootDirectory": "projects/design-system-chat"
+  "builds": [
+    {
+      "src": "projects/design-system-chat/package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "projects/design-system-chat/$1"
+    }
+  ]
 }
