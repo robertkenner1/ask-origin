@@ -1,0 +1,126 @@
+{
+  "generated": "2025-10-29T09:30:27.150Z",
+  "count": 8,
+  "projects": [
+    {
+      "name": "customer-support-agent",
+      "title": "Customer Support AI Agent",
+      "description": "No description available",
+      "path": "./customer-support-agent/",
+      "files": [
+        "index.html",
+        "styles.css",
+        "script.js"
+      ],
+      "icon": "C",
+      "lastModified": "2025-10-29T09:30:27.142Z",
+      "type": "JavaScript App",
+      "deployment": "gitlab-pages"
+    },
+    {
+      "name": "fancy-ai-editor",
+      "title": "Fancy Ai Editor",
+      "description": "Next.js application deployed on Vercel",
+      "path": "./fancy-ai-editor/",
+      "files": [
+        "package.json",
+        "tsconfig.json"
+      ],
+      "icon": "F",
+      "lastModified": "2025-10-29T09:30:11.199Z",
+      "type": "Next.js App",
+      "deployment": "vercel",
+      "url": "https://fancy-ai-editor-grammarly-0ad4c188.vercel.app"
+    },
+    {
+      "name": "figma-farheen",
+      "title": "Figma Farheen",
+      "description": "Frontend prototype for figma-farheen",
+      "path": "./figma-farheen/",
+      "files": [
+        "index.html",
+        "styles.css",
+        "script.js"
+      ],
+      "icon": "F",
+      "lastModified": "2025-10-29T09:30:27.142Z",
+      "type": "JavaScript App",
+      "deployment": "gitlab-pages"
+    },
+    {
+      "name": "golden-path-redesign",
+      "title": "Golden Path - Step 2",
+      "description": "Grammarly Golden Path redesign prototype - multi-step form interface",
+      "path": "./golden-path-redesign/",
+      "files": [
+        "index.html",
+        "styles.css",
+        "script.js"
+      ],
+      "icon": "G",
+      "lastModified": "2025-10-29T09:30:27.143Z",
+      "type": "UI Component",
+      "deployment": "gitlab-pages"
+    },
+    {
+      "name": "grammarly-ping-pong",
+      "title": "Grammarly Ping Pong",
+      "description": "Interactive ping pong game with Grammarly design system styling",
+      "path": "./grammarly-ping-pong/",
+      "files": [
+        "index.html",
+        "styles.css",
+        "script.js"
+      ],
+      "icon": "G",
+      "lastModified": "2025-10-29T09:30:27.144Z",
+      "type": "UI Component",
+      "deployment": "gitlab-pages"
+    },
+    {
+      "name": "mobile-flashcard-app",
+      "title": "Mobile Flashcard App",
+      "description": "Interactive mobile flashcard app prototype with swipe gestures and animations",
+      "path": "./mobile-flashcard-app/",
+      "files": [
+        "index.html",
+        "styles.css",
+        "script.js"
+      ],
+      "icon": "M",
+      "lastModified": "2025-10-29T09:30:27.145Z",
+      "type": "JavaScript App",
+      "deployment": "gitlab-pages"
+    },
+    {
+      "name": "my-first-gr-design",
+      "title": "Grammarly Style Text Interaction",
+      "description": "No description available",
+      "path": "./my-first-gr-design/",
+      "files": [
+        "index.html",
+        "styles.css",
+        "script.js"
+      ],
+      "icon": "G",
+      "lastModified": "2025-10-29T09:30:27.145Z",
+      "type": "UI Component",
+      "deployment": "gitlab-pages"
+    },
+    {
+      "name": "thinking-grammarly",
+      "title": "Thinking Grammarly Prototype",
+      "description": "Prototype showing Grammarly-style popup with hover interaction",
+      "path": "./thinking-grammarly/",
+      "files": [
+        "index.html",
+        "styles.css",
+        "script.js"
+      ],
+      "icon": "T",
+      "lastModified": "2025-10-29T09:30:27.146Z",
+      "type": "UI Component",
+      "deployment": "gitlab-pages"
+    }
+  ]
+}
