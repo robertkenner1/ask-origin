@@ -1,0 +1,18 @@
+{
+  "name": "{{PROJECT_NAME}}",
+  "description": "{{PROJECT_DESCRIPTION}}",
+  "deployments": ["vercel"],
+  "created": "{{CREATED_DATE}}",
+  "template": {
+    "name": "ai-editor",
+    "description": "Grammarly style AI editor",
+    "version": "1.0.0"
+  },
+  "variables": [
+    {
+      "name": "CLAUDE_API_KEY",
+      "description": "Used for make calls to Anthrpoic LLM. Please follow this guide to generate it: https://gitlab.grammarly.io/sandbox/ai-frontend-prototypes/-/blob/main/docs/generate_anthropic_api_key.md"
+    }
+  ]
+}
+
