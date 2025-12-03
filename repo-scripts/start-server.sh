@@ -33,4 +33,4 @@ log_success "🌐 Server: http://localhost:$PORT"
 log_info "Press Ctrl+C to stop"
 echo "────────────────────────────────────"
 
-npm run dev
+npm run dev -- -p $PORT

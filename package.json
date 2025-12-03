@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --port 3000",
+    "dev": "next dev",
     "build": "next build",
+    "build:sitemap": "node build-sitemap.js",
     "start": "next start",
     "lint": "eslint src/ --ext .ts,.tsx",
     "format": "prettier --write ."

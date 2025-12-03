@@ -1,21 +1,38 @@
 {
-  "generated": "2025-10-29T09:30:27.150Z",
-  "count": 8,
+  "generated": "2025-12-03T23:55:29.595Z",
+  "count": 10,
   "projects": [
     {
-      "name": "customer-support-agent",
-      "title": "Customer Support AI Agent",
-      "description": "No description available",
-      "path": "./customer-support-agent/",
+      "name": "demo-ai-editor",
+      "title": "Demo Ai Editor",
+      "description": "Next.js application deployed on Vercel",
+      "path": "./demo-ai-editor/",
       "files": [
-        "index.html",
-        "styles.css",
-        "script.js"
+        "package.json",
+        "tsconfig.json"
       ],
-      "icon": "C",
-      "lastModified": "2025-10-29T09:30:27.142Z",
-      "type": "JavaScript App",
-      "deployment": "gitlab-pages"
+      "icon": "D",
+      "lastModified": "2025-12-03T23:40:44.126Z",
+      "type": "Next.js App",
+      "deployments": [
+        "vercel"
+      ]
+    },
+    {
+      "name": "design-system-chat",
+      "title": "Design System Chat",
+      "description": "Next.js application deployed on Vercel",
+      "path": "./design-system-chat/",
+      "files": [
+        "package.json",
+        "tsconfig.json"
+      ],
+      "icon": "D",
+      "lastModified": "2025-12-03T23:41:00.854Z",
+      "type": "Next.js App",
+      "deployments": [
+        "vercel"
+      ]
     },
     {
       "name": "fancy-ai-editor",
@@ -27,10 +44,11 @@
         "tsconfig.json"
       ],
       "icon": "F",
-      "lastModified": "2025-10-29T09:30:11.199Z",
+      "lastModified": "2025-12-03T23:40:44.254Z",
       "type": "Next.js App",
-      "deployment": "vercel",
-      "url": "https://fancy-ai-editor-grammarly-0ad4c188.vercel.app"
+      "deployments": [
+        "vercel"
+      ]
     },
     {
       "name": "figma-farheen",
@@ -43,9 +61,11 @@
         "script.js"
       ],
       "icon": "F",
-      "lastModified": "2025-10-29T09:30:27.142Z",
+      "lastModified": "2025-12-03T23:40:44.257Z",
       "type": "JavaScript App",
-      "deployment": "gitlab-pages"
+      "deployments": [
+        "gitlab-pages"
+      ]
     },
     {
       "name": "golden-path-redesign",
@@ -58,9 +78,11 @@
         "script.js"
       ],
       "icon": "G",
-      "lastModified": "2025-10-29T09:30:27.143Z",
+      "lastModified": "2025-12-03T23:40:44.261Z",
       "type": "UI Component",
-      "deployment": "gitlab-pages"
+      "deployments": [
+        "gitlab-pages"
+      ]
     },
     {
       "name": "grammarly-ping-pong",
@@ -73,9 +95,11 @@
         "script.js"
       ],
       "icon": "G",
-      "lastModified": "2025-10-29T09:30:27.144Z",
+      "lastModified": "2025-12-03T23:40:44.263Z",
       "type": "UI Component",
-      "deployment": "gitlab-pages"
+      "deployments": [
+        "gitlab-pages"
+      ]
     },
     {
       "name": "mobile-flashcard-app",
@@ -88,9 +112,11 @@
         "script.js"
       ],
       "icon": "M",
-      "lastModified": "2025-10-29T09:30:27.145Z",
+      "lastModified": "2025-12-03T23:40:44.267Z",
       "type": "JavaScript App",
-      "deployment": "gitlab-pages"
+      "deployments": [
+        "gitlab-pages"
+      ]
     },
     {
       "name": "my-first-gr-design",
@@ -103,9 +129,11 @@
         "script.js"
       ],
       "icon": "G",
-      "lastModified": "2025-10-29T09:30:27.145Z",
+      "lastModified": "2025-12-03T23:40:44.280Z",
       "type": "UI Component",
-      "deployment": "gitlab-pages"
+      "deployments": [
+        "gitlab-pages"
+      ]
     },
     {
       "name": "thinking-grammarly",
@@ -118,9 +146,27 @@
         "script.js"
       ],
       "icon": "T",
-      "lastModified": "2025-10-29T09:30:27.146Z",
+      "lastModified": "2025-12-03T23:40:44.282Z",
       "type": "UI Component",
-      "deployment": "gitlab-pages"
+      "deployments": [
+        "gitlab-pages"
+      ]
+    },
+    {
+      "name": "tripatkhi-test-project",
+      "title": "Tripatkhi Test Project",
+      "description": "Next.js application deployed on Vercel",
+      "path": "./tripatkhi-test-project/",
+      "files": [
+        "package.json",
+        "tsconfig.json"
+      ],
+      "icon": "T",
+      "lastModified": "2025-12-03T23:40:44.391Z",
+      "type": "Next.js App",
+      "deployments": [
+        "vercel"
+      ]
     }
   ]
 }

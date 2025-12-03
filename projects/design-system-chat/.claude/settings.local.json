@@ -28,11 +28,11 @@
     ],
     "deny": []
   },
+  "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "playwright",
     "sourcegraph",
-    "figma-dev-mode-mcp-server",
+    "figma",
     "next-devtools"
-  ],
-  "enableAllProjectMcpServers": true
+  ]
 }
