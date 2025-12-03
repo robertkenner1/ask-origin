@@ -1398,6 +1398,44 @@ export default function OriginAgent() {
           </div>
         )}
       </div>
+      
+      {/* Footer - Made with Playground */}
+      <footer 
+        style={{
+          position: 'fixed',
+          bottom: '16px',
+          left: '16px',
+          zIndex: 1000,
+          pointerEvents: 'auto'
+        }}
+      >
+        <a
+          href="https://playground-site-iota.vercel.app/playground"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            fontSize: '12px',
+            color: Tokens.Color.NeutralGray60,
+            textDecoration: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '4px',
+            transition: 'color 0.2s ease',
+            fontFamily: 'var(--font-stack-inter, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif)'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.color = Tokens.Color.NeutralGray80;
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.color = Tokens.Color.NeutralGray60;
+          }}
+        >
+          Made with{" "}
+          <span style={{ fontWeight: 600, color: Tokens.Color.NeutralGray80 }}>
+            Playground
+          </span>
+        </a>
+      </footer>
     </div>
     </>
   );
